@@ -2,10 +2,10 @@
   <div id="app">
     <Navbar></Navbar>
     <div class="ui-row">
-      <div class="col-sm-2 col-md-2 col-lg-2 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>
-      <div class="col-sm-6 col-md-7 col-lg-7 root-container " >
+      <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
+      <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
         <Navigation class="y-style-30"></Navigation>
-        <Comparision class="y-style-70"></Comparision>
+        <CompContainer class="y-style-70"></CompContainer>
       </div>
       <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><Analysis class="bstyle"></Analysis></div>
     </div>
@@ -16,7 +16,7 @@
   import Navbar from './components/Navbar.vue'
   import ControlPanel from './components/ControlPanel.vue'
   import Navigation from './components/Navigation.vue'
-  import Comparision from './components/Comparision.vue'
+  import CompContainer from './components/ComparisionContainer.vue'
   import Analysis from './components/Analysis.vue'
   import 'bootstrap/dist/css/bootstrap.css'
 
@@ -26,11 +26,11 @@
       Navbar,
       ControlPanel,
       Navigation,
-      Comparision,
+      CompContainer,
       Analysis
     },
     data () {
-      return{
+      return {
 
       }
     }
