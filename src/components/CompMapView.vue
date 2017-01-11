@@ -13,7 +13,6 @@
       }
     },
     mounted(){
-      console.log('this', this.cityInfo, this.$el);
       this.createMap();
     },
     computed:{

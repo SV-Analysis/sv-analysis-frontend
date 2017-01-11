@@ -9,8 +9,13 @@
       <!--Navbar right or left -->
       <div class="navbar-collapse collapse navbar-right" >
         <ul class="nav navbar-nav">
+          <li>
+            <a  v-on:click = "clcTest">Test</a>
+          </li>
+            <li>
+            <a  v-on:click = "clcTest2">Test2</a>
+          </li>
           <li v-for="item in buttons" >
-
             <a v-bind:href= "item.link">{{ item.name }}</a>
           </li>
           <li class="dropdown">
@@ -37,6 +42,7 @@
 
 
 <script>
+  import dataService from '../service/dataService.js'
   export default {
     name: 'navbar',
     data(){
@@ -45,7 +51,17 @@
         buttons: [
           {'name': 'Start', 'link': "http://www.huamin.org/"},
 
-        ]
+        ],
+        data: null
+      }
+    },
+    methods:{
+      clcTest(){
+        let _this = this;
+        dataService.getTestData(function(promise){
+          console.log('promise', promise);
+          _this.data = promise.data;
+        })
       }
     }
   }
@@ -60,6 +76,5 @@
   }
   .navbar-default .navbar-nav > li > a {
     color: #fff;
-}
-
+  }
 </style>
