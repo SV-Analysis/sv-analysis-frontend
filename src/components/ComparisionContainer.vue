@@ -3,7 +3,7 @@
     <div>{{ title }}</div>
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
-      <PointsView class="points-view"></PointsView>
+      <PointsView class="points-view" v-bind:cityInfo="cityInfo"></PointsView>
     </div>
   </div>
 </template>
@@ -12,6 +12,7 @@
   import CompMap from './CompMapView.vue'
   import PointsView from './PointsView.vue'
   import pipeService from '../service/pipeService'
+
 
   export default {
     name: 'comparision-container',

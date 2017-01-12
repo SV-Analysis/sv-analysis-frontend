@@ -13,7 +13,7 @@
             <a  v-on:click = "clcTest">Test</a>
           </li>
             <li>
-            <a  v-on:click = "clcTest2">Test2</a>
+            <a  v-on:click = "testGetAllCity">getall</a>
           </li>
           <li v-for="item in buttons" >
             <a v-bind:href= "item.link">{{ item.name }}</a>
@@ -64,8 +64,10 @@
           _this.data = promise.data;
         })
       },
-      clcTest2(){
-        let _this = this;
+      testGetAllCity(){
+        dataService.getAllRecordsForOneCity('hk', function(data){
+          console.log('promise', data);
+        })
       }
     }
   }

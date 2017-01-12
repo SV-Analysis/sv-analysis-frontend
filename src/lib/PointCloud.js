@@ -21,12 +21,26 @@ PointCloud.prototype.init = function(){
 
   this.geometry = new THREE.Geometry();
 
-  for (let i = 0; i < 160000; i ++ ) {
-    var vertex = new THREE.Vector3();
-    vertex.x = Math.random() * 1000 - 500;
-    vertex.y = Math.random() * 1000 - 500;
-    vertex.z = 0;
+  // let data = generateData();
 
+  this.initRender();
+  this.setData([]);
+};
+function generateData(){
+  let arr = [];
+  for (let i = 0; i < 16000; i ++ ) {
+    arr.push({
+      x: Math.random() * 1000 - 500,
+      y: Math.random() * 1000 - 500,
+
+    })
+  }
+  return arr;
+}
+PointCloud.prototype.setData = function(arr){
+  this.geometry.vertices = [];
+  for (let i = 0; i < arr.length; i ++ ) {
+    var vertex = new THREE.Vector3(arr[i]['x'], arr[i]['y'], 0);
     this.geometry.vertices.push( vertex );
   }
   this.parameters = [
@@ -42,11 +56,15 @@ PointCloud.prototype.init = function(){
     let color = this.parameters[i][0];
     let size  = this.parameters[i][1];
 
-    this.materials[i] = new THREE.PointsMaterial( { size: 3, opacity: 0.3 } );
+    this.materials[i] = new THREE.PointsMaterial( { size: 10, opacity: 0.3 } );
 
     let particles = new THREE.Points( this.geometry, this.materials[i] );
     this.scene.add( particles );
   }
+}
+
+PointCloud.prototype.initRender = function(){
+
 
   this.renderer = new THREE.WebGLRenderer({ alpha: true });
   this.renderer.setPixelRatio( window.devicePixelRatio );
@@ -71,6 +89,13 @@ PointCloud.prototype.render = function() {
     this.materials[i].color.setHSL( h, color[1], color[2] );
   }
   this.renderer.render( this.scene, this.camera );
+};
+
+PointCloud.prototype.updatePointCloud = function(data) {
+  console.log('update', data);
+  this.setData(data);
+  //如何在animate 的同时添加数据， 我觉得可以尝试使用正交摄像头来做，省了一步映射的过程
+  this.animate()
 };
 
 export default PointCloud

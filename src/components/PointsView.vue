@@ -1,19 +1,26 @@
 <template>
-  <div class="pointview">
-
+  <div class="point-view">
   </div>
 </template>
 
 <script>
   import PointCloud from '../lib/PointCloud'
+  import pipeService from '../service/pipeService'
   export default {
     name: 'pointsview',
+    props: ['cityInfo'],
     data () {
       return {
         title: 'Points View'
       }
     },
     mounted(){
+      let _this = this;
+      pipeService.onUpdateAllResultData(function(msg){
+        if(msg.cityId == _this.cityInfo.id){
+          _this.pointView.updatePointCloud(msg.data);
+        }
+      });
       this.createPointsView();
     },
     computed:{
@@ -22,7 +29,7 @@
       createPointsView(){
         this.pointView = new PointCloud(this.$el);
         this.pointView.init();
-        this.pointView.animate()
+//        this.pointView.animate()
       }
     }
   }
@@ -30,7 +37,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .pointview{
+  .point-view{
     float: left;
     width: 100%;
     height: 100%;

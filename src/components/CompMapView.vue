@@ -6,6 +6,8 @@
 <script>
   import pipeService from '../service/pipeService'
   import DetailMap from '../lib/DetailMap'
+  import dataService from '../service/dataService'
+
 
   export default {
     name: 'comp-mapview',
@@ -17,8 +19,15 @@
     },
     mounted(){
       let _this = this;
-      console.log('mounted', this.cityInfo.id);
       this.createMap();
+
+      dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
+        console.log('getData');
+        let transform_data = _this.mapObj.worldToContaierPoints(data);
+        pipeService.emitUpdateAllResultData({
+          'cityId': _this.cityInfo['id'],
+          'data': transform_data});
+      })
     },
     computed:{
       cityId(){

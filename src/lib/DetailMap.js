@@ -57,7 +57,20 @@ DetailMap.prototype.distableAllInteraction = function(){
 DetailMap.prototype.getBounds = function(){
   let bound = this.map.getBounds();
   // console.log('lsss', this.map.latLngToContainerPoint(bound._southWest), this.map.latLngToContainerPoint(bound._northEast));
+  // console.log('bound', bound);
   return bound;
+};
+
+DetailMap.prototype.worldToContaierPoints = function(arr){
+  let outArr = [];
+  let time = new Date();
+  for(var i = 0, ilen = arr.length; i < ilen; i++){
+    let newPoint = L.latLng(arr[i][0],arr[i][1]);
+    outArr.push(this.map.latLngToContainerPoint(newPoint))
+  }
+  console.log('time', new Date() - time);
+  // console.log('result', outArr);
+  return outArr
 };
 
 export default DetailMap

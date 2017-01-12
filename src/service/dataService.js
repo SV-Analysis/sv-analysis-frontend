@@ -14,12 +14,21 @@ function getTestData (callback) {
 
   const url = `${dataServerUrl}/test`
   $http.get(url).then(response => {
-    callback(response)
+    callback(JSON.parse(response.data))
   }, errResponse => {
     console.log(errResponse)
   })
 }
 
+function getAllRecordsForOneCity(cityId, callback) {
+  const url = `${dataServerUrl}/getallrecords`
+  $http.post(url, {'cityId': cityId}).then(response => {
+    callback(JSON.parse(response.data))
+  }, errResponse => {
+    console.log(errResponse)
+  })
+}
 export default{
-  getTestData
+  getTestData,
+  getAllRecordsForOneCity
 }
