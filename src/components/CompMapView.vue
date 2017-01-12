@@ -7,7 +7,6 @@
   import pipeService from '../service/pipeService'
 
   export default {
-
     name: 'comp-mapview',
     props: ['cityInfo'],
     data () {
@@ -18,15 +17,16 @@
     mounted(){
       let _this = this;
       this.createMap();
-      pipeService.onUpdateMapBound(function(para){
-        console.log('cc');
-        if(_this.cityId == para['id'])
-          _this.map.fitBounds(para['region']);
-      })
     },
     computed:{
       cityId(){
         return this.cityInfo.id;
+      }
+    },
+    watch:{
+      'cityInfo.bound': function(newData, oldData){
+        if(newData == null) return
+        this.map.fitBounds(newData);
       }
     },
     methods:{
@@ -56,9 +56,9 @@
         var overlays = {
           "Cities": cities
         };
+        if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
 
         L.control.layers(baseLayers, overlays).addTo(this.map);
-
         this.map.dragging.disable();
         this.map.touchZoom.disable();
         this.map.doubleClickZoom.disable();

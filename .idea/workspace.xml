@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0dfc707-ef18-4fd7-a814-96b3dd8b90f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/CompMapView.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" afterPath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ControlPanel.vue" afterPath="$PROJECT_DIR$/src/components/ControlPanel.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/NavMapView.vue" afterPath="$PROJECT_DIR$/src/components/NavMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Navbar.vue" afterPath="$PROJECT_DIR$/src/components/Navbar.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Navigation.vue" afterPath="$PROJECT_DIR$/src/components/Navigation.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
     </list>
     <ignored path="vs-analysis-frontend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,10 +30,22 @@
       <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/CompMapView.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1417">
-              <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+            <state relative-caret-position="261">
+              <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
               <folding>
-                <marker date="1484202135129" expanded="true" signature="696:702" ph="©" />
+                <marker date="1484210866180" expanded="true" signature="673:679" ph="©" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NavMapView.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/NavMapView.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+              <folding>
+                <marker date="1484210876568" expanded="true" signature="733:739" ph="©" />
               </folding>
             </state>
           </provider>
@@ -45,43 +54,20 @@
       <file leaf-file-name="ComparisionContainer.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NavMapView.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/NavMapView.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state relative-caret-position="207">
+              <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
               <folding>
-                <marker date="1484201823254" expanded="true" signature="541:547" ph="©" />
+                <element signature="e#187#226#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Navigation.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#255#288#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="26" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="323">
+              <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -117,11 +103,11 @@
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
         <option value="$PROJECT_DIR$/src/components/ControlPanel.vue" />
         <option value="$PROJECT_DIR$/src/components/Navbar.vue" />
-        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
         <option value="$PROJECT_DIR$/src/components/Navigation.vue" />
-        <option value="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
-        <option value="$PROJECT_DIR$/src/components/NavMapView.vue" />
         <option value="$PROJECT_DIR$/src/components/CompMapView.vue" />
+        <option value="$PROJECT_DIR$/src/components/NavMapView.vue" />
+        <option value="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
+        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
       </list>
     </option>
   </component>
@@ -134,7 +120,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1616" />
+    <option name="width" value="1593" />
     <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -265,7 +251,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.quicklists" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../vs-analysis-webserver" />
     <property name="nodejs_interpreter_path" value="F:/nodejs/node" />
@@ -518,10 +504,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
+    <frame x="-8" y="-8" width="1593" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.213125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21623336" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -564,7 +550,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1484202135129" expanded="true" signature="696:702" ph="©" />
+            <marker date="1484210866180" expanded="true" signature="673:679" ph="©" />
           </folding>
         </state>
       </provider>
@@ -581,6 +567,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -624,7 +613,7 @@
         <state relative-caret-position="399">
           <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
           <folding>
-            <marker date="1484201823254" expanded="true" signature="541:547" ph="©" />
+            <marker date="1484210876568" expanded="true" signature="733:739" ph="©" />
           </folding>
         </state>
       </provider>
@@ -633,6 +622,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="58" selection-start-line="7" selection-start-column="58" selection-end-line="7" selection-end-column="58" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -650,7 +642,9 @@
           <caret line="4" column="71" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="71" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#255#288#0" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#631#664#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -660,7 +654,7 @@
         <state relative-caret-position="1102">
           <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding>
-            <marker date="1484202135129" expanded="true" signature="696:702" ph="©" />
+            <marker date="1484210866180" expanded="true" signature="673:679" ph="©" />
           </folding>
         </state>
       </provider>
@@ -686,7 +680,7 @@
         <state relative-caret-position="1026">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <marker date="1484201823254" expanded="true" signature="541:547" ph="©" />
+            <marker date="1484210876568" expanded="true" signature="733:739" ph="©" />
           </folding>
         </state>
       </provider>
@@ -695,6 +689,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -704,7 +701,9 @@
           <caret line="26" column="13" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#255#288#0" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#631#664#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,6 +728,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -745,6 +745,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -760,6 +763,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -809,6 +815,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#533#577#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -824,6 +833,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -853,51 +863,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+    <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="26" />
+        <state relative-caret-position="703">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#631#664#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/CompMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1417">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+        <state relative-caret-position="261">
+          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
           <folding>
-            <marker date="1484202135129" expanded="true" signature="696:702" ph="©" />
+            <marker date="1484210866180" expanded="true" signature="673:679" ph="©" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/NavMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state relative-caret-position="207">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
           <folding>
-            <marker date="1484201823254" expanded="true" signature="541:547" ph="©" />
+            <marker date="1484210876568" expanded="true" signature="733:739" ph="©" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="207">
+          <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#255#288#0" expanded="true" />
+            <element signature="e#187#226#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

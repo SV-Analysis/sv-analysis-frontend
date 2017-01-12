@@ -1,4 +1,5 @@
 <template>
+
   <div class="nav-mapview">
   </div>
 </template>
@@ -17,12 +18,19 @@
     },
     mounted(){
       this.createMap();
+      this.sendMapRegion();
     },
     computed:{
     },
     methods:{
-      sendMapRegion(region){
-        pipeService.emitUpdateMapBound(region)
+      sendMapRegion(){
+        let _this = this;
+        if(!this.map) return;
+        let region = this.map.getBounds();
+        pipeService.emitUpdateMapBound({
+          'region': region,
+          'id': _this.cityInfo['id']
+        })
       },
       createMap(){
         let _this = this;
@@ -51,22 +59,13 @@
           "Cities": cities
         };
 
-
         L.control.layers(baseLayers, overlays).addTo(this.map);
         this.map.on('zoomend', function(event) {
-          let region = this.getBounds();
-          _this.sendMapRegion({
-            'region': region,
-            'id': _this.cityInfo['id']
-          })
+          _this.sendMapRegion();
         });
 
         this.map.on('dragend', function(event) {
-          let region = this.getBounds();
-          _this.sendMapRegion({
-            'region': region,
-            'id': _this.cityInfo['id']
-          })
+          _this.sendMapRegion();
         });
       }
 
@@ -79,10 +78,10 @@
   .nav-mapview{
     float: left;
     /*position: absolute;*/
-    margin-left: 20px;
+
     width: 300px;
 
     background: rgba(13,13,13,0.1);
-    height: 88%
+    height: 100%
   }
 </style>
