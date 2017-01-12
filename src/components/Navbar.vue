@@ -43,6 +43,7 @@
 
 <script>
   import dataService from '../service/dataService.js'
+
   export default {
     name: 'navbar',
     data(){
@@ -62,6 +63,9 @@
           console.log('promise', promise);
           _this.data = promise.data;
         })
+      },
+      clcTest2(){
+        let _this = this;
       }
     }
   }

@@ -4,6 +4,9 @@
 </template>
 
 <script>
+  import pipeService from '../service/pipeService'
+
+
   export default {
     name: 'mapview',
     props: ['cityInfo'],
@@ -18,7 +21,11 @@
     computed:{
     },
     methods:{
+      sendMapRegion(region){
+        pipeService.emitUpdateMapBound(region)
+      },
       createMap(){
+        let _this = this;
         var cities = new L.LayerGroup();
         var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
             '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -28,7 +35,7 @@
         let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
         let streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: null});
 
-        var map = L.map(this.$el, {
+        this.map = L.map(this.$el, {
           center: this.cityInfo.gps,
           zoom: 9,
           layers: [grayscale, cities],
@@ -44,7 +51,23 @@
           "Cities": cities
         };
 
-        L.control.layers(baseLayers, overlays).addTo(map);
+
+        L.control.layers(baseLayers, overlays).addTo(this.map);
+        this.map.on('zoomend', function(event) {
+          let region = this.getBounds();
+          _this.sendMapRegion({
+            'region': region,
+            'id': _this.cityInfo['id']
+          })
+        });
+
+        this.map.on('dragend', function(event) {
+          let region = this.getBounds();
+          _this.sendMapRegion({
+            'region': region,
+            'id': _this.cityInfo['id']
+          })
+        });
       }
 
     }

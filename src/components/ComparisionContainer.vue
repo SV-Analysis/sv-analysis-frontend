@@ -14,11 +14,13 @@
       return {
         title: 'Comparision View',
         cities: [{
-          'name': 'Hong Kong',
-          'gps':[22.365354, 114.105228]
+          'name': 'New York',
+          'gps':[40.7058253, -74.1180861],
+          'id': 'nyc'
         },{
           'name': 'Singapore',
-          'gps':[1.3149014, 103.7769792]
+          'gps':[1.3149014, 103.7769792],
+          'id': 'singapore'
         }]
       }
     },

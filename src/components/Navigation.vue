@@ -20,16 +20,20 @@
         // City configuration should be loaded from the backend configuration files
         cities: [{
           'name': 'New York',
-          'gps':[40.7058253, -74.1180861]
+          'gps':[40.7058253, -74.1180861],
+          'id': 'nyc'
         },{
           'name': 'Singapore',
-          'gps':[1.3149014, 103.7769792]
+          'gps':[1.3149014, 103.7769792],
+          'id': 'singapore'
         },{
           'name': 'Hong Kong',
-          'gps':[22.365354, 114.105228]
+          'gps':[22.365354, 114.105228],
+          'id':'hk'
         },{
           'name': 'London',
-          'gps':[51.528308,-0.3817765]
+          'gps':[51.528308,-0.3817765],
+          'id': 'london'
         }
         ]
       }

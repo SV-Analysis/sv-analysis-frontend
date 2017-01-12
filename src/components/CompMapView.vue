@@ -4,7 +4,10 @@
 </template>
 
 <script>
+  import pipeService from '../service/pipeService'
+
   export default {
+
     name: 'comp-mapview',
     props: ['cityInfo'],
     data () {
@@ -13,9 +16,18 @@
       }
     },
     mounted(){
+      let _this = this;
       this.createMap();
+      pipeService.onUpdateMapBound(function(para){
+        console.log('cc');
+        if(_this.cityId == para['id'])
+          _this.map.fitBounds(para['region']);
+      })
     },
     computed:{
+      cityId(){
+        return this.cityInfo.id;
+      }
     },
     methods:{
       createMap(){
@@ -29,7 +41,7 @@
         let grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
         let streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: null});
 
-        var map = L.map(this.$el, {
+        this.map = L.map(this.$el, {
           center: this.cityInfo.gps,
           zoom: 10.5,
           layers: [grayscale, cities],
@@ -44,66 +56,13 @@
         var overlays = {
           "Cities": cities
         };
-        L.control.layers(baseLayers, overlays).addTo(map);
-        var features = []
-        for(var i = 0; i < 2; i++){
-          features.push({
-            "type": "Feature",
-            "properties": {
-              "name": "Coors Field",
-              "show_on_map": true
-            },
-            "geometry": {
-              "type": "Point",
-              "coordinates": [Math.random() * 100 - 50, Math.random() * 100 - 50]
-            }
-          })
-        }
-        var someFeatures = [{
-          "type": "Feature",
-          "properties": {
-            "name": "Coors Field",
-            "show_on_map": true
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [-104.99404, 39.75621]
-          }
-        }, {
-          "type": "Feature",
-          "properties": {
-            "name": "Busch Field",
-            "show_on_map": true
-          },
-          "geometry": {
-            "type": "Point",
-            "coordinates": [114.105228, 22.365354]
-          }
-        }];
 
-//        hack
-        var color = ['#F00', '#0F0', '#00F'];
+        L.control.layers(baseLayers, overlays).addTo(this.map);
 
-        var generate_style = function(num){
-          return {
-            radius: 3,
-            fillColor: color[num % 3],
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 1
-          };
-        };
-        var geojsonMarkerOptions =
-          L.geoJSON(features, {
-            pointToLayer: function (feature, latlng) {
-              let _id = Math.floor(Math.random() * 3);
-              console.log('let', _id);
-              let style = generate_style(_id);
-              console.log('style', style);
-              return L.circleMarker(latlng, style);
-            }
-          }).addTo(map);
+        this.map.dragging.disable();
+        this.map.touchZoom.disable();
+        this.map.doubleClickZoom.disable();
+        this.map.scrollWheelZoom.disable();
       }
     }
   }
