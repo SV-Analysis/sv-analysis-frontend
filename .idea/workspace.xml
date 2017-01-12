@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0dfc707-ef18-4fd7-a814-96b3dd8b90f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/CompMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" afterPath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/NavMapView.vue" afterPath="$PROJECT_DIR$/src/components/NavMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Navigation.vue" afterPath="$PROJECT_DIR$/src/components/Navigation.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
-    </list>
+    <list default="true" id="f0dfc707-ef18-4fd7-a814-96b3dd8b90f5" name="Default" comment="" />
     <ignored path="vs-analysis-frontend.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -66,8 +60,8 @@
       <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+            <state relative-caret-position="551">
+              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -908,8 +902,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+        <state relative-caret-position="551">
+          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
