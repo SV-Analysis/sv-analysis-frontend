@@ -60,6 +60,8 @@
         };
 
         L.control.layers(baseLayers, overlays).addTo(this.map);
+
+
         this.map.on('zoomend', function(event) {
           _this.sendMapRegion();
         });
@@ -68,7 +70,6 @@
           _this.sendMapRegion();
         });
       }
-
     }
   }
 </script>
@@ -77,10 +78,7 @@
 <style scoped>
   .nav-mapview{
     float: left;
-    /*position: absolute;*/
-
     width: 300px;
-
     background: rgba(13,13,13,0.1);
     height: 100%
   }

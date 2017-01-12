@@ -19,6 +19,7 @@
   import L from 'leaflet'
   import NavMapView from './NavMapView.vue'
   import pipeService from '../service/pipeService'
+
   export default {
     name: 'navigation',
     watch:{

@@ -20,7 +20,7 @@
             'gps':[40.7058253, -74.1180861],
             'id': 'nyc',
             'bound': null},
-          'singapore':{
+          'singapore': {
             'name': 'Singapore',
             'gps':[1.3149014, 103.7769792],
             'id': 'singapore',
@@ -34,8 +34,8 @@
             'name': 'London',
             'gps':[51.528308,-0.3817765],
             'id': 'london',
-            'bound': null
-          }}
+            'bound': null}
+        }
       }
     },
     mounted(){
@@ -44,7 +44,7 @@
         _this.cities = [];
         for(var i = 0, ilen = city_id_arr.length; i < ilen; i++){
           let city_id = city_id_arr[i];
-          _this.cities.push(_this.candidates[city_id])
+          _this.cities.push(_this.candidates[city_id]);
         }
       });
     },
