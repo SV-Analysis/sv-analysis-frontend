@@ -1,13 +1,18 @@
 <template>
   <div class="comparision-container">
     <div>{{ title }}</div>
-    <CompMap v-for="cityInfo in cities" v-bind:cityInfo="cityInfo"></CompMap>
+    <div v-for="cityInfo in cities" class = "compmap-container">
+      <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
+      <PointsView class="points-view"></PointsView>
+    </div>
   </div>
 </template>
 
 <script>
   import CompMap from './CompMapView.vue'
+  import PointsView from './PointsView.vue'
   import pipeService from '../service/pipeService'
+
   export default {
     name: 'comparision-container',
     data () {
@@ -60,12 +65,25 @@
 
     },
     components:{
-      CompMap
+      CompMap,
+      PointsView
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .compmap-container{
+    float: left;
+    margin-left: 3%;
+    width: 45%;
+    background: rgba(13,13,13,0.1);
+    height: 88%
+  }
+  .points-view{
+    position:relative;
+    bottom: 100%;
+    left: 0px;
 
+  }
 </style>

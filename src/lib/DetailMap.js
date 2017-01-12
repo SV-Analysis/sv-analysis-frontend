@@ -35,7 +35,6 @@ DetailMap.prototype.init = function(){
   if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
   L.control.layers(baseLayers, overlays).addTo(this.map);
 
-
 };
 
 DetailMap.prototype.fitBounds = function(bound){
@@ -56,8 +55,10 @@ DetailMap.prototype.distableAllInteraction = function(){
 };
 
 DetailMap.prototype.getBounds = function(){
-  return this.map.getBounds();
-}
+  let bound = this.map.getBounds();
+  // console.log('lsss', this.map.latLngToContainerPoint(bound._southWest), this.map.latLngToContainerPoint(bound._northEast));
+  return bound;
+};
 
 export default DetailMap
 

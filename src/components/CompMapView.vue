@@ -17,6 +17,7 @@
     },
     mounted(){
       let _this = this;
+      console.log('mounted', this.cityInfo.id);
       this.createMap();
     },
     computed:{
@@ -44,10 +45,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .comp-mapview{
-    float: left;
-    margin-left: 3%;
-    width: 45%;
+    /*float: left;*/
+    /*margin-left: 3%;*/
+    width: 100%;
     background: rgba(13,13,13,0.1);
-    height: 88%
+    height: 100%
   }
 </style>

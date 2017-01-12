@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "leaflet": "^1.0.2",
+    "three.js": "^0.77.1",
     "vue": "^2.1.0",
     "vue-resource": "^1.0.3"
   },
