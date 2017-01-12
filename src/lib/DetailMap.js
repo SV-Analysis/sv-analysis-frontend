@@ -34,16 +34,30 @@ DetailMap.prototype.init = function(){
 
   if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
   L.control.layers(baseLayers, overlays).addTo(this.map);
-  this.map.dragging.disable();
-  this.map.touchZoom.disable();
-  this.map.doubleClickZoom.disable();
-  this.map.scrollWheelZoom.disable();
+
 
 };
 
 DetailMap.prototype.fitBounds = function(bound){
-   this.map.fitBounds(bound);
+  this.map.fitBounds(bound);
 };
+
+
+DetailMap.prototype.onEvent = function(eventName, handler){
+  this.map.on(eventName, function(){
+    handler(eventName);
+  });
+};
+DetailMap.prototype.distableAllInteraction = function(){
+  this.map.dragging.disable();
+  this.map.touchZoom.disable();
+  this.map.doubleClickZoom.disable();
+  this.map.scrollWheelZoom.disable();
+};
+
+DetailMap.prototype.getBounds = function(){
+  return this.map.getBounds();
+}
 
 export default DetailMap
 

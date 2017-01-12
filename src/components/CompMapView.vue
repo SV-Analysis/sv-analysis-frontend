@@ -34,7 +34,8 @@
       createMap(){
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
-        console.log('this', this.mapObj);
+        this.mapObj.distableAllInteraction();
+
       }
     }
   }
