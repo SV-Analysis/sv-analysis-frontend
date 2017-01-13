@@ -26,7 +26,6 @@
           setTimeout(function(){
             _this.pointView.updatePointCloud(msg.data);
           }, 200)
-
         }
       })
       this.createPointsView();

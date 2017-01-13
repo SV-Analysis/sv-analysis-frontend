@@ -24,7 +24,6 @@
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
         _this.points_world = data;
         let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
-        console.log('current222', _this.mapObj.getBounds()._southWest, current_points[0]);
         pipeService.emitUpdateAllResultData({
           'cityId': _this.cityInfo['id'],
           'data': current_points});
@@ -45,7 +44,6 @@
         if(this.points_world && this.points_world.length != 0){
           setTimeout(function(){
             let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
-            console.log('current111', _this.mapObj.getBounds()._southWest, current_points[0]);
             pipeService.emitUpdateAllResultData({
               'cityId': _this.cityInfo['id'],
               'data': current_points});

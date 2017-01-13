@@ -63,26 +63,43 @@ function generateAnotherWorldData(width, total){
   return arr;
 }
 PointCloud.prototype.setData = function(arr){
+
   var _this = this;
   _this.scene.children.forEach(function(object){
     _this.scene.remove(object);
   });
   var geometry = new THREE.Geometry();
-
+  var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
-    var vertex = new THREE.Vector3(arr[i]['x'], arr[i]['y'], 0);
+    var item = arr[i].pos;
+    var type = arr[i].type;
+    var vertex = new THREE.Vector3(item['x'], item['y'], 0);
     var world_vertex = this.screenToWorldOrth(vertex);
+    colors.push(new THREE.Color(getColor(type)));
     geometry.vertices.push(world_vertex);
   }
+  geometry.colors = colors;
   this.parameters = [ [1, 1, 0.5], 5 ];
 
-  this.materials = new THREE.PointsMaterial( { size: 3, opacity: 0.1 } );
+  this.materials = new THREE.PointsMaterial( {
+    size: 5,
+    transparent: true,
+    opacity: 0.7,
+    vertexColors: THREE.VertexColors
+  } );
 
   let particles = new THREE.Points( geometry, this.materials );
   this.scene.add( particles );
 
 };
+//Hack TT
+function getColor(type){
+  if(type == 'green') return '#2ca02c';
+  else if(type == 'sky') return '#17becf';
+  else if(type == 'road') return '#8c564b';
+  else if(type == 'building') return '#ff7f0e';
 
+}
 PointCloud.prototype.clearAll = function(){
   let _this = this;
   _this.scene.children.forEach(function(object){
@@ -109,10 +126,10 @@ PointCloud.prototype.animate = function(){
 PointCloud.prototype.render = function() {
 
   if(!this.materials) return
-  var time = Date.now() * 0.00005;
-  var color = this.parameters[0];
-  var h = ( 360 * ( color[0] + time ) % 360 ) / 360;
-  this.materials.color.setHSL( h, color[1], color[2] );
+  // var time = Date.now() * 0.00005;
+  // var color = this.parameters[0];
+  // var h = ( 360 * ( color[0] + time ) % 360 ) / 360;
+  // this.materials.color.setHSL( h, color[1], color[2] );
   this.renderer.render( this.scene, this.camera );
 };
 
