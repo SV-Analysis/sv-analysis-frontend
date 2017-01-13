@@ -14,19 +14,20 @@
     props: ['cityInfo'],
     data () {
       return {
-        title: 'comp-mapview'
+        title: 'comp-mapview',
+        points_world: []
       }
     },
     mounted(){
       let _this = this;
       this.createMap();
-
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
-        console.log('getData');
-        let transform_data = _this.mapObj.worldToContaierPoints(data);
+        _this.points_world = data;
+        let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
+        console.log('current222', _this.mapObj.getBounds()._southWest, current_points[0]);
         pipeService.emitUpdateAllResultData({
           'cityId': _this.cityInfo['id'],
-          'data': transform_data});
+          'data': current_points});
       })
     },
     computed:{
@@ -36,8 +37,23 @@
     },
     watch:{
       'cityInfo.bound': function(newData, oldData){
+        let _this = this;
         if(newData == null) return;
+        if(!this.mapObj) return;
         this.mapObj.fitBounds(newData);
+
+        if(this.points_world && this.points_world.length != 0){
+          setTimeout(function(){
+            let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
+            console.log('current111', _this.mapObj.getBounds()._southWest, current_points[0]);
+            pipeService.emitUpdateAllResultData({
+              'cityId': _this.cityInfo['id'],
+              'data': current_points});
+
+          }, 500);
+
+        }
+
       }
     },
     methods:{

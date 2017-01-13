@@ -7,7 +7,8 @@ var pipeService = new Vue({
   data:{
     UPDATEMAPBOUNDARY: 'update_map_bound',
     UPDATEMAPVIEWSELECTION: 'update_select_map_view_selection',
-    ALLRESULTDATAREADYL: 'all_result_data_ready'
+    ALLRESULTDATAREADYL: 'all_result_data_ready',
+    UPDATEALLRESULTBYINTERACTION: 'update_all_result_by_interaction'
   },
 
   methods:{
@@ -37,6 +38,16 @@ var pipeService = new Vue({
         callback(msg);
       })
     },
+    //------------------------------------------------------------
+    emitUpdateResultByInteraction: function(msg){
+      this.$emit(this.UPDATEALLRESULTBYINTERACTION, msg);
+    },
+    onUpdateResultByInteraction: function(callback){
+      this.$on(this.UPDATEALLRESULTBYINTERACTION,function(msg){
+        callback(msg);
+      })
+    }
+
   }
 })
 

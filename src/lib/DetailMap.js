@@ -69,7 +69,6 @@ DetailMap.prototype.worldToContaierPoints = function(arr){
     outArr.push(this.map.latLngToContainerPoint(newPoint))
   }
   console.log('time', new Date() - time);
-  // console.log('result', outArr);
   return outArr
 };
 

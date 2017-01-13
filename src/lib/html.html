@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src = '../../node_modules/three/three.js'></script>
+  <script src = 'PointCloud.js'></script>
+
+</head>
+<body>
+<div id = 'test' style="width: 500px; height: 500px"> cha</div>
+<button onclick="myFunction()">Click me</button>
+<script>
+  function myFunction() {
+    console.log('click');
+  }
+  var container = document.getElementById('test');
+  var pointcloud = new PointCloud(container);
+  pointcloud.init();
+  var data = generateWorldData(100,150000);
+  pointcloud.animate();
+  pointcloud.updatePointCloud(data);
+
+  console.log('pointcloud', pointcloud);
+  setTimeout(function(){
+    console.log('clear')
+    pointcloud.clearAll();
+    setTimeout(function(){
+      console.log('Add')
+      var data = generateAnotherWorldData(200,15000);
+      pointcloud.updatePointCloud(data);
+    }, 3000);
+  }, 3000);
+
+</script>
+</body>
+</html>
