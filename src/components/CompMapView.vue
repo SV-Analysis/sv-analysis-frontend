@@ -55,11 +55,8 @@
             pipeService.emitUpdateAllResultData({
               'cityId': _this.cityInfo['id'],
               'data': current_points});
-
           }, 500);
-
         }
-
       }
     },
     methods:{
@@ -67,7 +64,6 @@
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
         this.mapObj.distableAllInteraction();
-
       }
     }
   }

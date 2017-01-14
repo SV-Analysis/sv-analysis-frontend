@@ -56,8 +56,6 @@ DetailMap.prototype.distableAllInteraction = function(){
 
 DetailMap.prototype.getBounds = function(){
   let bound = this.map.getBounds();
-  // console.log('lsss', this.map.latLngToContainerPoint(bound._southWest), this.map.latLngToContainerPoint(bound._northEast));
-  // console.log('bound', bound);
   return bound;
 };
 
@@ -82,8 +80,6 @@ DetailMap.prototype.contaierPointsToWorld = function(arr){
   console.log('time', new Date() - time);
   return outArr
 };
-
-
 
 export default DetailMap
 
