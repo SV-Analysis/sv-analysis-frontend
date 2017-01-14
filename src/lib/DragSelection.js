@@ -48,7 +48,6 @@ let DragSelection = function(el) {
       else d[d.length - 1] = [x1, y1];
       active_select.attr("d", line).attr('fill-opacity', 0.3).attr('fill', 'white')
     });
-
   }
 };
 

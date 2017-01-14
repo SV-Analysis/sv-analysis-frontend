@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0dfc707-ef18-4fd7-a814-96b3dd8b90f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/DragSelection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/CompMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/SelectionLayer.vue" afterPath="$PROJECT_DIR$/src/components/SelectionLayer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/dataService.js" afterPath="$PROJECT_DIR$/src/service/dataService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/DragSelection.js" afterPath="$PROJECT_DIR$/src/lib/DragSelection.js" />
     </list>
     <ignored path="vs-analysis-frontend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/src/lib/DragSelection.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="494">
-              <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -133,10 +129,10 @@
         <option value="$PROJECT_DIR$/src/components/PointsView.vue" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
         <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
-        <option value="$PROJECT_DIR$/src/lib/DragSelection.js" />
         <option value="$PROJECT_DIR$/src/components/SelectionLayer.vue" />
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
         <option value="$PROJECT_DIR$/src/components/CompMapView.vue" />
+        <option value="$PROJECT_DIR$/src/lib/DragSelection.js" />
       </list>
     </option>
   </component>
@@ -957,7 +953,7 @@
     <entry file="file://$PROJECT_DIR$/src/lib/DragSelection.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
-          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
