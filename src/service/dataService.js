@@ -31,6 +31,7 @@ function getAllRecordsForOneCity(cityId, callback) {
 
 function queryRegionFromBackground(cityId, positions, callback) {
   const url = `${dataServerUrl}/regionquery`
+  console.log('post')
   $http.post(url, {'cityId': cityId, 'positions': positions}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {
