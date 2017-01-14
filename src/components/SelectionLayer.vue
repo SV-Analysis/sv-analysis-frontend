@@ -24,11 +24,13 @@
     },
     methods:{
       createSelectLayer(){
+        let _this = this;
         this.dragSelection = new DragSelection(this.$el);
         this.dragSelection.registerDragEnd(function(event){
           let selectionRegion = event.subject;
-          pipeService.emitInteractiveSelection(selectionRegion);
-          console.log('select', selectionRegion);
+          pipeService.emitInteractiveSelection({
+            'cityId': _this.cityInfo.id, 'region': selectionRegion
+          });
         });
       }
     }
@@ -41,8 +43,6 @@
     float: left;
     width: 100%;
     height: 100%;
-
-
     z-index: 1001
   }
 
