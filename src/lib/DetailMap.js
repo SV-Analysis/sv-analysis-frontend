@@ -72,5 +72,18 @@ DetailMap.prototype.worldToContaierPoints = function(arr){
   return outArr
 };
 
+DetailMap.prototype.contaierPointsToWorld = function(arr){
+  let outArr = [];
+  let time = new Date();
+  for(var i = 0, ilen = arr.length; i < ilen; i++){
+    let newPoint = L.point(arr[i][0],arr[i][1]);
+    outArr.push(this.map.containerPointToLatLng(newPoint));
+  }
+  console.log('time', new Date() - time);
+  return outArr
+};
+
+
+
 export default DetailMap
 

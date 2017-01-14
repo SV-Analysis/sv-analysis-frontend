@@ -3,15 +3,19 @@
     <div>{{ title }}</div>
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
-      <PointsView class="points-view" v-bind:cityInfo="cityInfo"></PointsView>
+      <div class="render_container">
+        <PointsView class="points-view" v-bind:cityInfo="cityInfo"></PointsView>
+        <SelectionLayer class="points-view2" v-bind:cityInfo="cityInfo"> </SelectionLayer>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import pipeService from '../service/pipeService'
   import CompMap from './CompMapView.vue'
   import PointsView from './PointsView.vue'
-  import pipeService from '../service/pipeService'
+  import SelectionLayer from './SelectionLayer.vue'
 
 
   export default {
@@ -67,7 +71,8 @@
     },
     components:{
       CompMap,
-      PointsView
+      PointsView,
+      SelectionLayer
     }
   }
 </script>
@@ -81,10 +86,21 @@
     background: rgba(13,13,13,0.1);
     height: 88%
   }
+  .render_container{
+    position: relative;
+    height: 100%;
+    width: 100%
+  }
   .points-view{
-    position:relative;
+    position: absolute;
     bottom: 100%;
+    height: 100%;
     left: 0px;
-
+  }
+  .points-view2{
+    position: absolute;
+    bottom: 100%;
+    /*height: 100%;*/
+    left: 0px;
   }
 </style>

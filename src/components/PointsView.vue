@@ -21,13 +21,7 @@
           _this.pointView.updatePointCloud(msg.data);
         }
       });
-      pipeService.onUpdateResultByInteraction(function(msg){
-        if(msg.cityId == _this.cityInfo.id){
-          setTimeout(function(){
-            _this.pointView.updatePointCloud(msg.data);
-          }, 200)
-        }
-      })
+
       this.createPointsView();
     },
     computed:{

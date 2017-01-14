@@ -28,6 +28,14 @@
           'cityId': _this.cityInfo['id'],
           'data': current_points});
       })
+      pipeService.onInteractiveSelection(function(positions){
+        var world_position = _this.mapObj.contaierPointsToWorld(positions);
+        dataService.queryRegionFromBackground( _this.cityInfo['id'], world_position, function(data){
+          console.log('interactivily query', data);
+        })
+//        console.log('msg,sg', msg);
+//        Query data form the webserver
+      })
     },
     computed:{
       cityId(){
