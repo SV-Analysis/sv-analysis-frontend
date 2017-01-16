@@ -36,11 +36,19 @@
         let _this = this;
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
+        this.mapObj.enableControlLayer();
         this.mapObj.onEvent('zoomend', function(event){
           _this.sendMapRegion();
         });
         this.mapObj.onEvent('dragend', function(event){
           _this.sendMapRegion();
+        });
+        this.mapObj.onBaseLayerChange(function(event){
+          console.log('msg','send');
+          pipeService.emitUpdateMapLayer({
+            'cityId': _this.cityInfo['id'],
+            'layerName': event.name
+          });
         })
       }
     }

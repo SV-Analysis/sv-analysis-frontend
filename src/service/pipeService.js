@@ -8,7 +8,8 @@ var pipeService = new Vue({
         UPDATEMAPBOUNDARY: 'update_map_bound',
         UPDATEMAPVIEWSELECTION: 'update_select_map_view_selection',
         ALLRESULTDATAREADYL: 'all_result_data_ready',
-        INTERACTIVESELECTION: 'interactive_select'
+        INTERACTIVESELECTION: 'interactive_select',
+        UPDATELAYER: 'update_layer'
     },
 
     methods:{
@@ -46,7 +47,18 @@ var pipeService = new Vue({
             this.$on(this.INTERACTIVESELECTION,function(msg){
                 callback(msg);
             })
+        },
+
+        //------------------------------------------------------------
+        emitUpdateMapLayer: function(msg){
+            this.$emit(this.UPDATELAYER, msg);
+        },
+        onUpdateMapLayer: function(callback){
+            this.$on(this.UPDATELAYER,function(msg){
+                callback(msg);
+            })
         }
+
 
     }
 })

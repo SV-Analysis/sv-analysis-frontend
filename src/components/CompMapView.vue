@@ -37,6 +37,12 @@
         dataService.queryRegionFromBackground( _this.cityInfo['id'], world_position, function(data){
           console.log('interactivily query', data);
         });
+      });
+      pipeService.onUpdateMapLayer(function(msg){
+
+        let cityId = msg['cityId'];
+        if(cityId !=  _this.cityInfo.id) return;
+        _this.mapObj.updateLayer(msg['layerName']);
       })
     },
     computed:{
@@ -52,6 +58,7 @@
         this.mapObj.fitBounds(newData);
 
         if(this.points_world && this.points_world.length != 0){
+//          HACK
           setTimeout(function(){
             let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
             pipeService.emitUpdateAllResultData({
