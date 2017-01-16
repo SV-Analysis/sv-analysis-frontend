@@ -10,6 +10,10 @@ let PointCloud = function(el){
 
 };
 
+PointCloud.prototype.setColorStyle = function(colorStyle){
+  this.colorStyle = colorStyle;
+};
+
 PointCloud.prototype.init = function(){
   this.container = document.createElement( 'div' );
 
@@ -75,7 +79,7 @@ PointCloud.prototype.setData = function(arr){
     var type = arr[i].type;
     var vertex = new THREE.Vector3(item['x'], item['y'], 0);
     var world_vertex = this.screenToWorldOrth(vertex);
-    colors.push(new THREE.Color(getColor(type)));
+    colors.push(new THREE.Color(this.getColor(type)));
     geometry.vertices.push(world_vertex);
   }
   geometry.colors = colors;
@@ -93,12 +97,18 @@ PointCloud.prototype.setData = function(arr){
 
 };
 //Hack TT
-function getColor(type){
-  if(type == 'green') return '#2ca02c';
-  else if(type == 'sky') return '#17becf';
-  else if(type == 'road') return '#8c564b';
-  else if(type == 'building') return '#ff7f0e';
-
+PointCloud.prototype.getColor = function(type){
+  if(this.colorStyle == undefined){
+    if(type == 'green') return '#2ca02c';
+    else if(type == 'sky') return '#17becf';
+    else if(type == 'road') return '#8c564b';
+    else if(type == 'building') return '#ff7f0e';
+  }else{
+    if(this.colorStyle[type] == undefined){
+      console.log('Error in color style');
+    }
+    return this.colorStyle[type];
+  }
 }
 PointCloud.prototype.clearAll = function(){
   let _this = this;

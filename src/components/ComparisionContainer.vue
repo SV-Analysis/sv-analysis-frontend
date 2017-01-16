@@ -4,7 +4,7 @@
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
       <div class="render_container">
-        <PointsView class="points-view" v-bind:cityInfo="cityInfo"></PointsView>
+        <PointsView class="points-view" v-bind:cityInfo="cityInfo" v-bind:svFeatures2Color="svFeatures2Color"></PointsView>
         <SelectionLayer class="points-view2" v-bind:cityInfo="cityInfo"> </SelectionLayer>
       </div>
     </div>
@@ -20,6 +20,7 @@
 
   export default {
     name: 'comparision-container',
+    props:['svFeatures2Color'],
     data () {
       return {
         title: 'Comparision View',

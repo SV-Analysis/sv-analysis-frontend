@@ -13,22 +13,24 @@ DetailMap.prototype.init = function(){
       'Imagery © <a href="http://mapbox.com">Mapbox</a>',
     mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw';
 
-  this.grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
+  this.grayscaleDark   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
+  this.grayscaleLight   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: null});
   this.streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: null});
 
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
     zoom: 10.5,
-    layers: [this.grayscale, this.cities],
+    layers: [this.grayscaleLight, this.cities],
     zoomControl: false
   });
 
   this.baseLayers = {
-    "Grayscale": this.grayscale,
+    "GrayScaleLight": this.grayscaleLight,
+    "GrayscaleDark": this.grayscaleDark,
     "Streets": this.streets
   };
 
-  this.currentLayer = this.grayscale;
+  this.currentLayer = this.grayscaleLight;
   // this.overlays = {
   //   "Cities": this.cities
   // };
@@ -69,7 +71,7 @@ DetailMap.prototype.onEvent = function(eventName, handler){
     handler(eventName);
   });
 };
-DetailMap.prototype.distableAllInteraction = function(){
+DetailMap.prototype.disableAllInteraction = function(){
   this.map.dragging.disable();
   this.map.touchZoom.disable();
   this.map.doubleClickZoom.disable();

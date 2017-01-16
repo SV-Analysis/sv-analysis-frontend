@@ -5,9 +5,9 @@
       <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
       <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
         <Navigation class="y-style-30"></Navigation>
-        <CompContainer class="y-style-70"></CompContainer>
+        <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-70"></CompContainer>
       </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><Analysis class="bstyle"></Analysis></div>
+      <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><Analysis v-bind:svFeatures2Color="svFeatures2Color" class="bstyle"></Analysis></div>
     </div>
   </div>
 </template>
@@ -31,8 +31,19 @@
     },
     data () {
       return {
-
+        svFeatures2Color: {
+          'green': '#2ca02c',
+          'sky': '#17becf',
+          'road': '#8c564b',
+          'building' : '#ff7f0e',
+          'car': '#ff9896',
+          'others': '#c7c7c7',
+          'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
+        }
       }
+    },
+    mounted(){
+
     }
   }
 </script>

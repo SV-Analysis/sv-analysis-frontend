@@ -8,7 +8,7 @@
   import pipeService from '../service/pipeService'
   export default {
     name: 'pointsview',
-    props: ['cityInfo'],
+    props: ['cityInfo', 'svFeatures2Color'],
     data () {
       return {
         title: 'Points View'
@@ -31,6 +31,7 @@
         this.pointView = new PointCloud(this.$el);
         this.pointView.init();
         this.pointView.animate();
+        this.pointView.setColorStyle(this.svFeatures2Color)
       }
     }
   }
