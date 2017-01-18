@@ -59,8 +59,8 @@
 <style scoped>
   .nav-mapview{
     float: left;
-    width: 300px;
+    width: 100%;
     background: rgba(13,13,13,0.1);
-    height: 100%
+    height: 90%
   }
 </style>

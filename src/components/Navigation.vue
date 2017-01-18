@@ -98,6 +98,7 @@
     max-width: 100%;
     minwidth: 100%;
     overflow-x: auto;
+
   }
   .navmap-container{
     float: left;

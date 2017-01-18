@@ -21,6 +21,7 @@
     mounted(){
       let _this = this;
       this.createMap();
+//      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
         _this.points_world = data;
         let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
@@ -31,11 +32,12 @@
       pipeService.onInteractiveSelection(function(msg){
         let cityId = msg['cityId'];
         let positions = msg['region'];
-        console.log('cc', cityId , _this.cityInfo.id,msg)
+        if(positions.length <= 2) return  //position <= 2 means a single click
+        console.log('positions', positions);
         if(cityId !=  _this.cityInfo.id) return;
         var world_position = _this.mapObj.contaierPointsToWorld(positions);
         dataService.queryRegionFromBackground( _this.cityInfo['id'], world_position, function(data){
-          console.log('interactivily query', data);
+          pipeService.emitRegionQueryDataRecieved(data);
         });
       });
       pipeService.onUpdateMapLayer(function(msg){
@@ -72,7 +74,7 @@
       createMap(){
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
-        this.mapObj.distableAllInteraction();
+        this.mapObj.disableAllInteraction();
       }
     }
   }
