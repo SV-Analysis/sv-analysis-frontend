@@ -26,7 +26,7 @@ DetailMap.prototype.init = function(){
 
   this.baseLayers = {
     "GrayScaleLight": this.grayscaleLight,
-    "GrayscaleDark": this.grayscaleDark,
+    "GrayScaleDark": this.grayscaleDark,
     "Streets": this.streets
   };
 
@@ -51,7 +51,6 @@ DetailMap.prototype.onBaseLayerChange = function(callback){
 DetailMap.prototype.updateLayer = function(layerName){
   if( this.baseLayers[layerName]!= undefined ){
     this.map.removeLayer(this.currentLayer);
-    console.log('receved', layerName);
     this.currentLayer = this.baseLayers[layerName]
     this.map.addLayer(this.currentLayer);
   }
@@ -71,6 +70,7 @@ DetailMap.prototype.onEvent = function(eventName, handler){
     handler(eventName);
   });
 };
+
 DetailMap.prototype.disableAllInteraction = function(){
   this.map.dragging.disable();
   this.map.touchZoom.disable();

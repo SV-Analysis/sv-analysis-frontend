@@ -32,6 +32,8 @@
       pipeService.onInteractiveSelection(function(msg){
         let cityId = msg['cityId'];
         let positions = msg['region'];
+        if(positions.length <= 2) return  //position <= 2 means a single click
+        console.log('positions', positions);
         if(cityId !=  _this.cityInfo.id) return;
         var world_position = _this.mapObj.contaierPointsToWorld(positions);
         dataService.queryRegionFromBackground( _this.cityInfo['id'], world_position, function(data){
