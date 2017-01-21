@@ -3,6 +3,8 @@
  */
 import THREE from "Three.js"
 
+
+
 let PointCloud = function(el){
   this.$el = el;
   this.width = this.$el.clientWidth;
@@ -194,6 +196,25 @@ PointCloud.prototype.switchCoordinate = function(position){
   pos.z = pMouse.z + ( cam.z - pMouse.z ) * m;
 
   return pos;
+};
+
+PointCloud.prototype.getCanvas = function(){
+  return this.renderer.domElement;
+};
+
+PointCloud.prototype.setCanvasToMap = function(callback){
+  callback(this.renderer.domElement);
+
+//   var MyLayer = L.CanvasLayer.extend({
+//     render: function() {
+//       var canvas = this.getCanvas();
+//       var ctx = canvas.getContext('2d');
+//       // render
+//     }
+//   });
+// // create and add to the map
+//   var layer = new MyLayer();
+//   layer.addTo(map);
 }
 
 export default PointCloud

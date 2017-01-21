@@ -105,5 +105,17 @@ DetailMap.prototype.contaierPointsToWorld = function(arr){
   return outArr
 };
 
+DetailMap.prototype.addCanvasLayer = function(callback){
+  callback(this.map);
+};
+
+DetailMap.prototype.getMapInstance = function(){
+  return this.map;
+};
+
+DetailMap.prototype.getZoomLevel = function(){
+  return this.map.getZoom();
+};
+
 export default DetailMap
 

@@ -10,7 +10,8 @@ var pipeService = new Vue({
     ALLRESULTDATAREADYL: 'all_result_data_ready',
     INTERACTIVESELECTION: 'interactive_select',
     UPDATELAYER: 'update_layer',
-    REGIONQUERYDATARECIEVED: 'region_query_data_recieved'
+    REGIONQUERYDATARECIEVED: 'region_query_data_recieved',
+    MAPINSTANCE: 'map_instance'
   },
 
   methods:{
@@ -69,9 +70,17 @@ var pipeService = new Vue({
       this.$on(this.REGIONQUERYDATARECIEVED,function(msg){
         callback(msg);
       })
-    }
+    },
 
-
+    //-------------------------------------------------------------
+    emitMapInstance: function(msg){
+      this.$emit(this.MAPINSTANCE, msg);
+    },
+    onMapInstance: function(callback){
+      this.$on(this.MAPINSTANCE,function(msg){
+        callback(msg);
+      })
+    },
 
   }
 })
