@@ -43,8 +43,14 @@
         this.mapObj.onEvent('dragend', function(event){
           _this.sendMapRegion();
         });
+        this.mapObj.onEvent('zoomstart', function(event){
+          pipeService.emitCompMapZoomStart({'cityId': _this.cityInfo['id']});
+        });
+        this.mapObj.onEvent('movestart', function(event){
+          pipeService.emitCompMapDragStart({'cityId': _this.cityInfo['id']});
+        });
+
         this.mapObj.onBaseLayerChange(function(event){
-          console.log('msg','send');
           pipeService.emitUpdateMapLayer({
             'cityId': _this.cityInfo['id'],
             'layerName': event.name

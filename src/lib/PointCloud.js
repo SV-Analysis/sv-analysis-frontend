@@ -68,12 +68,15 @@ function generateAnotherWorldData(width, total){
   }
   return arr;
 }
+
 PointCloud.prototype.setData = function(arr){
 
   var _this = this;
   _this.scene.children.forEach(function(object){
     _this.scene.remove(object);
   });
+  if(!arr || arr.length == 0) return;
+
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
@@ -136,12 +139,7 @@ PointCloud.prototype.animate = function(){
 };
 
 PointCloud.prototype.render = function() {
-
   if(!this.materials) return
-  // var time = Date.now() * 0.00005;
-  // var color = this.parameters[0];
-  // var h = ( 360 * ( color[0] + time ) % 360 ) / 360;
-  // this.materials.color.setHSL( h, color[1], color[2] );
   this.renderer.render( this.scene, this.camera );
 };
 
@@ -151,7 +149,6 @@ PointCloud.prototype.updatePointCloud = function(data) {
 };
 
 PointCloud.prototype.screenToWorld = function(position){
-
   var vector = new THREE.Vector3();
   vector.set( ( position.x / this.width ) * 2 - 1, - ( position.y / this.height ) * 2 + 1, 0.5 );
   vector.unproject( this.camera );

@@ -21,7 +21,16 @@
           _this.pointView.updatePointCloud(msg.data);
         }
       });
-
+      pipeService.onCompMapZoomStart(function(msg){
+        if(msg.cityId == _this.cityInfo.id){
+          _this.pointView.updatePointCloud([]);
+        }
+      });
+      pipeService.onCompMapDragStart(function(msg){
+        if(msg.cityId == _this.cityInfo.id){
+          _this.pointView.updatePointCloud([]);
+        }
+      });
       this.createPointsView();
     },
     computed:{

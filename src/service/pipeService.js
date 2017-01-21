@@ -11,7 +11,9 @@ var pipeService = new Vue({
     INTERACTIVESELECTION: 'interactive_select',
     UPDATELAYER: 'update_layer',
     REGIONQUERYDATARECIEVED: 'region_query_data_recieved',
-    MAPINSTANCE: 'map_instance'
+    MAPINSTANCE: 'map_instance',
+    ZOOMSTART: 'zoom_start',
+    DRAGSTAET: 'drag_start'
   },
 
   methods:{
@@ -78,6 +80,26 @@ var pipeService = new Vue({
     },
     onMapInstance: function(callback){
       this.$on(this.MAPINSTANCE,function(msg){
+        callback(msg);
+      })
+    },
+
+    //-------------------------------------------------------------
+    emitCompMapZoomStart: function(msg){
+      this.$emit(this.ZOOMSTART, msg);
+    },
+    onCompMapZoomStart: function(callback){
+      this.$on(this.ZOOMSTART,function(msg){
+        callback(msg);
+      })
+    },
+
+    //-------------------------------------------------------------
+    emitCompMapDragStart: function(msg){
+      this.$emit(this.DRAGSTAET, msg);
+    },
+    onCompMapDragStart: function(callback){
+      this.$on(this.DRAGSTAET,function(msg){
         callback(msg);
       })
     },

@@ -26,7 +26,7 @@
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
         _this.points_world = data;
-        let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
+        let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
         pipeService.emitUpdateAllResultData({
           'cityId': _this.cityInfo['id'],
           'data': current_points});
@@ -66,14 +66,29 @@
 
         if(this.points_world && this.points_world.length != 0){
 //          HACK
-
-
           setTimeout(function(){
-            console.log('result', _this.mapObj.getZoomLevel());
-            let current_points = _this.mapObj.worldToContaierPoints(_this.points_world);
-            pipeService.emitUpdateAllResultData({
-              'cityId': _this.cityInfo['id'],
-              'data': current_points});
+            let zoomLevel = _this.mapObj.getZoomLevel();
+            console.log('level', zoomLevel);
+            if(zoomLevel >= 13){
+              let regions = _this.mapObj.getBoundsRegion();
+              let positions = [
+                regions.getSouthWest(), regions.getSouthEast(),
+                regions.getNorthEast(), regions.getNorthWest()
+              ];
+
+              dataService.queryRegionFromBackground( _this.cityInfo['id'], positions, function(data){
+                console.log('here')
+                let current_points = _this.mapObj.worldToContaierPointsObj(data);
+                pipeService.emitUpdateAllResultData({
+                'cityId': _this.cityInfo['id'],
+                'data': current_points});
+              })
+            }else{
+              let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
+              pipeService.emitUpdateAllResultData({
+                'cityId': _this.cityInfo['id'],
+                'data': current_points});
+            }
           }, 400);
         }
       }

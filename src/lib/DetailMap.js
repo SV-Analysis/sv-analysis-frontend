@@ -20,7 +20,7 @@ DetailMap.prototype.init = function(){
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
     zoom: 9,
-    layers: [this.grayscaleLight, this.cities],
+    layers: [this.grayscaleDark, this.cities],
     zoomControl: false
   });
 
@@ -59,11 +59,9 @@ DetailMap.prototype.updateLayer = function(layerName){
   }
 };
 
-
 DetailMap.prototype.fitBounds = function(bound){
   this.map.fitBounds(bound);
 };
-
 
 DetailMap.prototype.onEvent = function(eventName, handler){
   this.map.on(eventName, function(){
@@ -83,12 +81,34 @@ DetailMap.prototype.getBounds = function(){
   return bound;
 };
 
-DetailMap.prototype.worldToContaierPoints = function(arr){
+DetailMap.prototype.getBoundsRegion = function(){
+  let bound = this.map.getBounds();
+  return bound;
+};
+
+DetailMap.prototype.worldToContaierPointsArr = function(arr){
   let outArr = [];
   let time = new Date();
   for(var i = 0, ilen = arr.length; i < ilen; i++){
     let newPoint = L.latLng(arr[i][0],arr[i][1]);
     outArr.push({pos: this.map.latLngToContainerPoint(newPoint), 'type': arr[i][2]});
+  }
+  console.log('time', new Date() - time);
+  return outArr
+};
+
+DetailMap.prototype.worldToContaierPointsObj = function(data){
+  let arr = data.records;
+  let outArr = [];
+  let time = new Date();
+  for(var i = 0, ilen = arr.length; i < ilen; i++){
+    let location = arr[i]['location']
+    // Location[longtitude, latitude]
+    let newPoint = L.latLng(location[1], location[0]);
+    outArr.push({
+      'pos': this.map.latLngToContainerPoint(newPoint),
+      'rawdata': arr[i],
+      'type': arr[i]['max_attr']['attr']});
   }
   console.log('time', new Date() - time);
   return outArr
