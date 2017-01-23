@@ -80,14 +80,16 @@
                 console.log('here')
                 let current_points = _this.mapObj.worldToContaierPointsObj(data);
                 pipeService.emitUpdateAllResultData({
-                'cityId': _this.cityInfo['id'],
-                'data': current_points});
+                  'cityId': _this.cityInfo['id'],
+                  'data': current_points,
+                  'zoomLevel': zoomLevel});
               })
             }else{
               let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
               pipeService.emitUpdateAllResultData({
                 'cityId': _this.cityInfo['id'],
-                'data': current_points});
+                'data': current_points,
+                'zoomLevel': zoomLevel});
             }
           }, 400);
         }

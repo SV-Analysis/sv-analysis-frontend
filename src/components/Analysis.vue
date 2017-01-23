@@ -2,7 +2,7 @@
   <div class="statistic-list">
     <div>{{ title }}</div>
     <div v-for="query in queryList" class="barChartContainer-container">
-      <label> {{query.cityId}}</label>
+      <label> {{query.cityId}} {{query.number}}</label>
       <BarChart v-bind:regionQueryData="query" v-bind:svFeatures2Color="svFeatures2Color"></BarChart>
     </div>
   </div>

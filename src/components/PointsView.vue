@@ -18,7 +18,7 @@
       let _this = this;
       pipeService.onUpdateAllResultData(function(msg){
         if(msg.cityId == _this.cityInfo.id){
-          _this.pointView.updatePointCloud(msg.data);
+          _this.pointView.updatePointCloud(msg.data, msg.zoomLevel);
         }
       });
       pipeService.onCompMapZoomStart(function(msg){

@@ -69,14 +69,18 @@ function generateAnotherWorldData(width, total){
   return arr;
 }
 
-PointCloud.prototype.setData = function(arr){
+PointCloud.prototype.setData = function(arr, level){
 
   var _this = this;
   _this.scene.children.forEach(function(object){
     _this.scene.remove(object);
   });
+  let point_size = 1;
   if(!arr || arr.length == 0) return;
-
+  if(level > 14){
+    point_size = 1 + 50 / Math.abs(level - 19) * Math.abs(14 - level)
+  }
+  console.log('pointsize', point_size);
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
@@ -91,7 +95,7 @@ PointCloud.prototype.setData = function(arr){
   this.parameters = [ [1, 1, 0.5], 5 ];
 
   this.materials = new THREE.PointsMaterial( {
-    size: 5,
+    size: point_size,
     transparent: true,
     opacity: 0.7,
     vertexColors: THREE.VertexColors
@@ -143,9 +147,9 @@ PointCloud.prototype.render = function() {
   this.renderer.render( this.scene, this.camera );
 };
 
-PointCloud.prototype.updatePointCloud = function(data) {
+PointCloud.prototype.updatePointCloud = function(data, level) {
   //如何在animate 的同时添加数据， 我觉得可以尝试使用正交摄像头来做，省了一步映射的过程
-  this.setData(data);
+  this.setData(data, level);
 };
 
 PointCloud.prototype.screenToWorld = function(position){

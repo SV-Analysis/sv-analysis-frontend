@@ -21,7 +21,8 @@ DetailMap.prototype.init = function(){
     center: this.cityInfo.gps,
     zoom: 9,
     layers: [this.grayscaleDark, this.cities],
-    zoomControl: false
+    zoomControl: false,
+    maxZoom: 18
   });
 
   this.baseLayers = {
