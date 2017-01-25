@@ -1,13 +1,13 @@
 /**
- * Created by yiding on 2017/1/25.
+ * Created by yiding on 2017/1/10.
  */
 
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
-// const dataServerUrl = "http://127.0.0.1:9930";
-const dataServerUrl = "sv-analysis";
+const dataServerUrl = "http://127.0.0.1:9930";
+// const dataServerUrl = "/sv-analysis";
 const $http = Vue.http
 
 function getTestData (callback) {
@@ -21,8 +21,9 @@ function getTestData (callback) {
 }
 
 function getAllRecordsForOneCity(cityId, callback) {
+
   const url = `${dataServerUrl}/getallrecords`
-  console.log("Get all, ", url);
+  console.log('get all data', url);
   $http.post(url, {'cityId': cityId}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {

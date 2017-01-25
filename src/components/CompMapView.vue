@@ -25,6 +25,7 @@
 
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
+        console.log('constant send');
         _this.points_world = data;
         let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
         pipeService.emitUpdateAllResultData({
