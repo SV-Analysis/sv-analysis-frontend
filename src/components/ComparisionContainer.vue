@@ -45,7 +45,9 @@
             'name': 'London',
             'gps':[51.528308,-0.3817765],
             'id': 'london',
-            'bound': null}
+            'bound': null},
+
+
         }
       }
     },
@@ -81,6 +83,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .compmap-container{
+    position: relative;
     float: left;
     margin-left: 3%;
     width: 45%;
@@ -88,20 +91,18 @@
     height: 88%
   }
   .render_container{
-    position: relative;
+    position: absolute;
     height: 100%;
-    width: 100%
+    width: 100%;
+    top:0;
   }
   .points-view{
     position: absolute;
-    bottom: 100%;
     height: 100%;
     left: 0px;
   }
   .points-view2{
     position: absolute;
-    bottom: 100%;
-    /*height: 100%;*/
     left: 0px;
   }
 </style>
