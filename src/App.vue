@@ -4,8 +4,8 @@
     <div class="ui-row">
       <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
       <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
-        <Navigation class="y-style-30"></Navigation>
-        <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-70"></CompContainer>
+        <Navigation class="y-style-top"></Navigation>
+        <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
       </div>
       <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><Analysis v-bind:svFeatures2Color="svFeatures2Color" class="bstyle"></Analysis></div>
     </div>
@@ -62,8 +62,8 @@
   }
   .ui-row{
     margin-top: -10px;
-    height:90vh;
-    min-height:90vh;
+    height:93vh;
+    min-height:93vh;
   }
   .root-container{
     height: 100%;
@@ -78,18 +78,25 @@
     margin-left: 0px;
     height:100%;
   }
-  .y-style-30{
+  .y-style-top{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     height:30%;
   }
-  .y-style-70{
+  .y-style-middle{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
     height:69%;
+  }
+  .y-style-botton{
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px grey;
+    background: #FFF;
+    margin-top: 10px;
+    height:18%;
   }
 
 </style>
