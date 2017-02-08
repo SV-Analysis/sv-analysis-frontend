@@ -6,8 +6,9 @@
       <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
         <Navigation class="y-style-top"></Navigation>
         <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
+        <Analysis v-bind:svFeatures2Color="svFeatures2Color" class="y-style-botton"></Analysis>
       </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><Analysis v-bind:svFeatures2Color="svFeatures2Color" class="bstyle"></Analysis></div>
+      <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" class="bstyle"></RegionList></div>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@
   import Navigation from './components/Navigation.vue'
   import CompContainer from './components/ComparisionContainer.vue'
   import Analysis from './components/Analysis.vue'
+  import RegionList from './components/RegionList.vue'
   import 'bootstrap/dist/css/bootstrap.css'
 
   export default {
@@ -27,7 +29,8 @@
       ControlPanel,
       Navigation,
       CompContainer,
-      Analysis
+      Analysis,
+      RegionList
     },
     data () {
       return {
@@ -71,32 +74,33 @@
     padding-left: 5px
   }
 
-  .bstyle {
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px grey;
-    background: #FFF;
-    margin-left: 0px;
-    height:100%;
-  }
+
   .y-style-top{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
-    height:30%;
+    height:25%;
   }
   .y-style-middle{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
-    height:69%;
+    height:54%;
   }
   .y-style-botton{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
-    height:18%;
+    height:19%;
+  }
+  .bstyle {
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px grey;
+    background: #FFF;
+    margin-left: 0px;
+    height:100%;
   }
 
 </style>

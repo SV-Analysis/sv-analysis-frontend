@@ -30,8 +30,6 @@
         let featureArr = this.svFeatures2Color['allFeatures'];
         let barNum = featureArr.length;
         let featureTextLength = 60;
-        console.log('width', width, height, this.svFeatures2Color);
-
         let svgContainer = d3.select(this.$el).append('g')
         let barsContainer = svgContainer.selectAll('.bar')
           .data(featureArr)
@@ -39,7 +37,7 @@
           .append('g')
           .attr('class','bar')
           .attr('transform', function(d, i){
-            return 'translate(' + 0 + ',' + (i * height / (barNum + 1)) + ')';
+            return 'translate(' + 0 + ',' + (i * height / (barNum + 1) + 10) + ')';
           })
         let bars = barsContainer.append('rect')
           .attr('x', featureTextLength)
@@ -62,8 +60,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .barChart{
-    margin-top: 20px;
-    width: 100%;
-    height: 120px
+    margin-top: 0px;
+    width: 150px;
+    height: 90%
   }
 </style>

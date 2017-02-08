@@ -1,8 +1,8 @@
 <template>
   <div class="statistic-list">
-    <div>{{ title }}</div>
-    <div v-for="query in queryList" class="barChartContainer-container">
-      <label> {{query.cityId}} {{query.number}}</label>
+    <!--<div>{{ title }}</div>-->
+    <div style="display: inline-block; float: left" v-for="query in queryList" class="barChartContainer-container">
+      <div> {{query.cityId}} {{query.number}}</div>
       <BarChart v-bind:regionQueryData="query" v-bind:svFeatures2Color="svFeatures2Color"></BarChart>
     </div>
   </div>
@@ -75,13 +75,13 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .statistic-list{
-    max-height: 100%;
-    overflow-y: auto;
+    max-height: 99%;
+    overflow-x: auto;
   }
   .barChartContainer-container{
     /*background: rgba(13,13,13,0.1);*/
 
-    width: 100%
-
+    /*width: 100%*/
+    padding-left: 15px
   }
 </style>
