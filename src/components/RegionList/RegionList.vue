@@ -47,7 +47,7 @@
 
 <script>
 
-  import dataService from "../service/dataService"
+  import dataService from "../../service/dataService"
 
   export default {
     name: 'streetlist',

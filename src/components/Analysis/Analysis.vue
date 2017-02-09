@@ -9,8 +9,8 @@
 </template>
 
 <script>
-  import pipeService from '../service/pipeService'
-  import BarChart from './visChart/BarChart.vue'
+  import pipeService from '../../service/pipeService'
+  import BarChart from '../visChart/BarChart.vue'
   export default {
     name: 'analysis',
     props: ['svFeatures2Color'],
@@ -79,9 +79,6 @@
     overflow-x: auto;
   }
   .barChartContainer-container{
-    /*background: rgba(13,13,13,0.1);*/
-
-    /*width: 100%*/
     padding-left: 15px
   }
 </style>

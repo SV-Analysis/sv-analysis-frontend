@@ -18,8 +18,8 @@
   import ControlPanel from './components/ControlPanel.vue'
   import Navigation from './components/Navigation.vue'
   import CompContainer from './components/ComparisionContainer.vue'
-  import Analysis from './components/Analysis.vue'
-  import RegionList from './components/RegionList.vue'
+  import Analysis from './components/Analysis/Analysis.vue'
+  import RegionList from './components/RegionList/RegionList.vue'
   import 'bootstrap/dist/css/bootstrap.css'
 
   export default {
