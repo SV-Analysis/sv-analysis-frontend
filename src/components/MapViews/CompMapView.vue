@@ -4,9 +4,9 @@
 </template>
 
 <script>
-  import pipeService from '../service/pipeService'
-  import DetailMap from '../lib/DetailMap'
-  import dataService from '../service/dataService'
+  import pipeService from '../../service/pipeService'
+  import DetailMap from '../../lib/DetailMap'
+  import dataService from '../../service/dataService'
 
 
   export default {

@@ -16,7 +16,7 @@
 
 <script>
   import 'leaflet/dist/leaflet.css'
-  import NavMapView from './NavMapView.vue'
+  import NavMapView from './MapViews/NavMapView.vue'
   import pipeService from '../service/pipeService'
 
   export default {

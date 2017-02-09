@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/Analysis.vue" afterPath="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" afterPath="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" afterPath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Navigation.vue" afterPath="$PROJECT_DIR$/src/components/Navigation.vue" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/NavMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/PointsView.vue" afterPath="$PROJECT_DIR$/src/components/visView/PointsView.vue" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/visChart/BarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/BarChart.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,7 +42,7 @@
           <file leaf-file-name="Navigation.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
+                <state relative-caret-position="1012">
                   <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
                   <folding>
                     <element signature="e#631#664#0" expanded="true" />
@@ -47,10 +51,22 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="NavMapView.vue" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/MapViews/NavMapView.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="682">
+                  <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+                  <folding>
+                    <element signature="e#73#124#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/App.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
+                <state relative-caret-position="132">
                   <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
                   <folding />
                 </state>
@@ -71,11 +87,45 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Analysis.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ComparisionContainer.vue" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="572">
+                  <caret line="26" column="19" lean-forward="false" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+                  <folding>
+                    <element signature="e#504#552#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SelectionLayer.vue" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/SelectionLayer.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="308">
+                  <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+                  <folding>
+                    <element signature="e#107#155#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-330">
+                  <caret line="38" column="9" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="38" selection-end-column="9" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Analysis.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="986">
-                  <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+                <state relative-caret-position="1254">
+                  <caret line="58" column="68" lean-forward="false" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
                   <folding />
                 </state>
               </provider>
@@ -141,6 +191,7 @@
         <option value="$PROJECT_DIR$/src/components/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
+        <option value="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
       </list>
     </option>
   </component>
@@ -268,7 +319,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RegionList" />
+              <option name="myItemId" value="visView" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -290,7 +341,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Analysis" />
+              <option name="myItemId" value="MapViews" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -353,6 +404,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\vis2017\sv-analysis-frontend\src\components\visChart" />
+      <recent name="G:\vis2017\sv-analysis-frontend\src\components\MapViews" />
       <recent name="G:\vis2017\sv-analysis-frontend\src\components\Analysis" />
       <recent name="G:\vis2017\sv-analysis-frontend\src\components\RegionList" />
     </key>
@@ -648,7 +701,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#504#552#0" expanded="false" />
+            <element signature="e#504#552#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -709,7 +762,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#504#552#0" expanded="false" />
+            <element signature="e#504#552#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -931,7 +984,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/visChart/BarChart.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/visView/BarChart.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="46" column="69" lean-forward="false" selection-start-line="46" selection-start-column="69" selection-end-line="46" selection-end-column="69" />
@@ -947,29 +1000,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SelectionLayer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PointsView.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/visView/PointsView.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="22" />
           <folding>
-            <element signature="e#71#113#0" expanded="false" />
+            <element signature="e#71#116#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/NavMapView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -977,24 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-          <folding>
-            <element signature="e#504#552#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/CompMapView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="38" column="9" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="38" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1010,20 +1029,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
-          <folding>
-            <element signature="e#631#664#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="1254">
+          <caret line="58" column="68" lean-forward="false" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -1036,11 +1045,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+        <state relative-caret-position="-330">
+          <caret line="38" column="9" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="38" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1012">
+          <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="e#631#664#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="26" column="19" lean-forward="false" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
+          <folding>
+            <element signature="e#504#552#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SelectionLayer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="e#107#155#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MapViews/NavMapView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding>
+            <element signature="e#73#124#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

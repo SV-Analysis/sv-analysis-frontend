@@ -10,7 +10,7 @@
 
 <script>
   import pipeService from '../../service/pipeService'
-  import BarChart from '../visChart/BarChart.vue'
+  import BarChart from '../visView/BarChart.vue'
   export default {
     name: 'analysis',
     props: ['svFeatures2Color'],

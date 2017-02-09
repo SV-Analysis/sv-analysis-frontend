@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import pipeService from '../service/pipeService'
-  import DetailMap from '../lib/DetailMap'
+  import pipeService from '../../service/pipeService'
+  import DetailMap from '../../lib/DetailMap'
 
   export default {
     name: 'mapview',

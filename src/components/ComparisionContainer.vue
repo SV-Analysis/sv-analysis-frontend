@@ -13,8 +13,8 @@
 
 <script>
   import pipeService from '../service/pipeService'
-  import CompMap from './CompMapView.vue'
-  import PointsView from './PointsView.vue'
+  import CompMap from './MapViews/CompMapView.vue'
+  import PointsView from './visView/PointsView.vue'
   import SelectionLayer from './SelectionLayer.vue'
 
 

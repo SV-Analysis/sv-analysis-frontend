@@ -4,8 +4,8 @@
 </template>
 
 <script>
-  import PointCloud from '../lib/PointCloud'
-  import pipeService from '../service/pipeService'
+  import PointCloud from '../../lib/PointCloud'
+  import pipeService from '../../service/pipeService'
   export default {
     name: 'pointsview',
     props: ['cityInfo', 'svFeatures2Color'],
