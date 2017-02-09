@@ -20,7 +20,7 @@ DetailMap.prototype.init = function(){
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
     zoom: 9,
-    layers: [this.grayscaleDark, this.cities],
+    layers: [this.streets, this.cities],
     zoomControl: false,
     maxZoom: 18
   });
@@ -137,6 +137,22 @@ DetailMap.prototype.getMapInstance = function(){
 DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
+DetailMap.prototype.drawPolygon = function(streetInfo){
+  let node_list = streetInfo['node_list'];
+  let pointList = [];
+  for(var i = 0; i < node_list.length; i ++){
+    let node = node_list[i]['location'];
+    pointList.push(new L.LatLng(node[1], node[0]))
+  }
+
+  var firstpolyline = new L.Polyline(pointList, {
+    color: 'red',
+    weight: 2,
+    opacity: 0.5,
+    smoothFactor: 1
+  });
+  firstpolyline.addTo(this.map);
+}
 
 export default DetailMap
 

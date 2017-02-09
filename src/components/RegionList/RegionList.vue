@@ -11,20 +11,25 @@
 
       <div class="table-container">
         <table class="street-table">
-          <col width="33%">
-          <col width="33%">
-          <col width="33%">
+          <col width="25%">
+          <col width="25%">
+          <col width="25%">
+          <col width="25%">
           <thead >
           <tr>
-            <!--<th class="head-style expand"> option </th>-->
             <th v-for="attr in attrs" class="head-style">{{attr}}</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="record in data" v-if="record['dataType']">
+          <!--Street Record-->
+          <tr v-for="record in data" v-if="record['dataType']=='street'">
             <td v-on:click='rowClick(record)' v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
           </tr>
-          <tr  class="extent_tr" v-else><td colspan="3" ><div v-for="con in record['context']">{{con}}</div></td></tr>
+          <!--Map Record-->
+          <!--<tr  class="extent_tr" v-else-if="record['dataType']=='map'"><td colspan="3" ><div v-for="con in record['context']">{{con}}</div></td></tr>-->
+          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="4">
+            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']"></RegionMap>
+          </td></tr>
           </tbody>
         </table>
       </div>
@@ -48,11 +53,13 @@
 <script>
 
   import dataService from "../../service/dataService"
+  import RegionMap from "../MapViews/RegionMap.vue"
 
   export default {
     name: 'streetlist',
     props: ['svFeatures2Color'],
     components:{
+      RegionMap
     },
     data () {
       return {
@@ -60,7 +67,7 @@
         selected:'',
         data:[],
         nav_button:[1,2,3,'...',5],
-        attrs:['id','tag','len'],
+        attrs:['id','tag','len', 'streetType'],
         cityOptions:[
           {
             'name': 'New York',
@@ -86,7 +93,8 @@
         ],
         startIndex: 'Start',
         endIndex: 'End',
-        currentLen: 30
+        currentLen: 30,
+        currentCity: null
       }
     },
     mounted(){
@@ -103,9 +111,14 @@
     },
     watch:{
       selected: function(newdata, olddata){
-        this.initPaginationInput()
+        let _this = this;
+        this.cityOptions.forEach(function(city){
+          if(city['id'] == _this.selected){
+            _this.currentCity = city;
+          }
+        });
+        this.initPaginationInput();
         this._queryStreet();
-
       },
       listNumber: function(newData, oldData){
         if(newData > 50){
@@ -131,7 +144,7 @@
         let _this = this;
         let udpateData = [];
         records.forEach(function(record){
-          record['dataType'] = true;
+          record['dataType'] = 'street';
           record['clicked'] = false;
           record['attr']['id'] = record['id'];
           record['attr']['tag'] = record['tag'];
@@ -150,14 +163,16 @@
         if(index != -1 && this.data[index]['clicked'] == false){
           // Insert a new element at index
           this.data.splice(index + 1, 0, {
-            dataType: false,
-            context: ['a','b','c','d']
+            dataType: 'map',
+            context: this.data[index]
           });
+          console.log('test', this.data[index])
           this.data[index]['clicked'] = true;
         }else if(index != -1 && this.data[index]['clicked'] == true){
           console.log('clicked index', index);
           this.data.splice(index + 1, 1);
           this.data[index]['clicked'] = false;
+
         }
       },
       confirmNum(){
@@ -221,8 +236,9 @@
     font-weight: bold;
     /*color: #fff;*/
   }
-  .extent_tr{
-    background-color: #ff345a;
+  .extand_map{
+
+    height: 200px
   }
   .pagination_container{
     background-color: #5bc0de;
