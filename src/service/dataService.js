@@ -22,9 +22,7 @@ function getTestData (callback) {
 }
 
 function getAllRecordsForOneCity(cityId, callback) {
-
   const url = `${dataServerUrl}/getallrecords`
-  console.log('get all data', url);
   $http.post(url, {'cityId': cityId}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {
@@ -34,8 +32,16 @@ function getAllRecordsForOneCity(cityId, callback) {
 
 function queryRegionFromBackground(cityId, positions, callback) {
   const url = `${dataServerUrl}/regionquery`
-  console.log('post')
   $http.post(url, {'cityId': cityId, 'positions': positions}).then(response => {
+    callback(JSON.parse(response.data))
+  }, errResponse => {
+    console.log(errResponse)
+  })
+}
+
+function queryStreetCollections(cityId, startIndex, number, callback){
+  const url = `${dataServerUrl}/streetsetquery`
+  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {
     console.log(errResponse)
@@ -45,5 +51,6 @@ function queryRegionFromBackground(cityId, positions, callback) {
 export default{
   getTestData,
   getAllRecordsForOneCity,
-  queryRegionFromBackground
+  queryRegionFromBackground,
+  queryStreetCollections
 }

@@ -1,43 +1,16 @@
 <template>
-  <nav class="navbar navbar-default navbar-custom">
-    <!-- container to make the display of navbar to be centered -->
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand hidden-sm" href="http://vis.cse.ust.hk/" >Navbar head</a>
-      </div>
+  <ul class="navbar-container">
+    <li class="navbar-button"><a class="active" href="#home">Street View Analysis</a></li>
 
-      <!--Navbar right or left -->
-      <div class="navbar-collapse collapse navbar-right" >
-        <ul class="nav navbar-nav">
-          <li>
-            <a  v-on:click = "clcTest">Test</a>
-          </li>
-            <li>
-            <a  v-on:click = "testGetAllCity">getall</a>
-          </li>
-          <li v-for="item in buttons" >
-            <a v-bind:href= "item.link">{{ item.name }}</a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Choose Data <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Button</a></li>
-              <li><a href="#">Button</a></li>
-              <li><a href="#">Button</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Description</li>
-              <li><a href="#">Button</a></li>
-              <li><a href="#">Button</a></li>
-            </ul>
-          </li>
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right hidden-sm">
-          <li><a href="">About</a></li>
-        </ul>
+    <div class="dropdown">
+      <!--<a href="#" class="dropbtn">drop down</a>-->
+      <div class="dropdown-content">
+        <a href="#">链接 1</a>
+        <a href="#">链接 2</a>
+        <a href="#">链接 3</a>
       </div>
     </div>
-  </nav>
+  </ul>
 </template>
 
 
@@ -74,13 +47,52 @@
 </script>
 
 <style scoped>
-  .navbar-default{
-    background: rgb(0,153,218);
+  ul.navbar-container {
+    list-style-type: none;
+    margin-bottom: 15px;
+
+    overflow: hidden;
+    background-color: #333;
   }
-  .navbar-default .navbar-brand {
-    color: #fff;
+
+  li.navbar-button {
+    float: left;
   }
-  .navbar-default .navbar-nav > li > a {
-    color: #fff;
+
+  li.navbar-button a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li.navbar-button a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+  }
+
+  .dropdown {
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: #f1f1f1}
+
+  .dropdown:hover .dropdown-content {
+    display: block;
   }
 </style>

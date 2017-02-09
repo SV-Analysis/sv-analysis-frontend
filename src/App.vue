@@ -8,7 +8,7 @@
         <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
         <Analysis v-bind:svFeatures2Color="svFeatures2Color" class="y-style-botton"></Analysis>
       </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" class="bstyle"></RegionList></div>
+      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" ></RegionList></div>
     </div>
   </div>
 </template>
