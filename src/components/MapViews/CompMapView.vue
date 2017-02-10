@@ -21,8 +21,6 @@
     mounted(){
       let _this = this;
       this.createMap();
-
-
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
         console.log('constant send');
@@ -51,7 +49,19 @@
         let cityId = msg['cityId'];
         if(cityId !=  _this.cityInfo.id) return;
         _this.mapObj.updateLayer(msg['layerName']);
-      })
+      });
+
+      pipeService.onDrawPolyLine(function(msg){
+        let cityId = msg['cityId'];
+        let polylineObj = msg['polylineObj'];
+        _this.mapObj.drawPolygon(polylineObj);
+      });
+
+      pipeService.onDestroyPolyLine(function(msg){
+        let cityId = msg['cityId'];
+        let polylineObj = msg['polylineObj'];
+        _this.mapObj.deletePolyline(polylineObj);
+      });
     },
     computed:{
       cityId(){

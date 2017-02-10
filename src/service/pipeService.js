@@ -13,7 +13,9 @@ var pipeService = new Vue({
     REGIONQUERYDATARECIEVED: 'region_query_data_recieved',
     MAPINSTANCE: 'map_instance',
     ZOOMSTART: 'zoom_start',
-    DRAGSTAET: 'drag_start'
+    DRAGSTAET: 'drag_start',
+    MAPPOLYLINE: 'map_polyline',
+    DESTROYPOLYLINE: 'destroy_polyline'
   },
 
   methods:{
@@ -100,6 +102,26 @@ var pipeService = new Vue({
     },
     onCompMapDragStart: function(callback){
       this.$on(this.DRAGSTAET,function(msg){
+        callback(msg);
+      })
+    },
+
+    //-------------------------------------------------------------
+    emitPolyLine: function(msg){
+      this.$emit(this.MAPPOLYLINE, msg);
+    },
+    onDrawPolyLine: function(callback){
+      this.$on(this.MAPPOLYLINE,function(msg){
+        callback(msg);
+      })
+    },
+
+    //-------------------------------------------------------------
+    emitDestroyPolyLine: function(msg){
+      this.$emit(this.DESTROYPOLYLINE, msg);
+    },
+    onDestroyPolyLine: function(callback){
+      this.$on(this.DESTROYPOLYLINE,function(msg){
         callback(msg);
       })
     },

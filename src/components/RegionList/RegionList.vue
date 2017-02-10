@@ -166,10 +166,9 @@
             dataType: 'map',
             context: this.data[index]
           });
-          console.log('test', this.data[index])
+
           this.data[index]['clicked'] = true;
         }else if(index != -1 && this.data[index]['clicked'] == true){
-          console.log('clicked index', index);
           this.data.splice(index + 1, 1);
           this.data[index]['clicked'] = false;
 
@@ -188,7 +187,7 @@
         if(isNaN(this.startIndex) || isNaN(this.endIndex)) return
         this.startIndex = parseInt(this.startIndex);
         this.endIndex = parseInt(this.endIndex);
-        console.log('next', this.startIndex, this.endIndex, this.currentLen);
+//        console.log('next', this.startIndex, this.endIndex, this.currentLen);
         this.startIndex = (this.startIndex - this.currentLen) < 0? 0 :(this.startIndex - this.currentLen);
         this.endIndex = this.startIndex + this.currentLen - 1;
         this.confirmNum();
@@ -197,7 +196,7 @@
         if(isNaN(this.startIndex) || isNaN(this.endIndex)) return
         this.startIndex = parseInt(this.startIndex);
         this.endIndex = parseInt(this.endIndex);
-        console.log('next', this.startIndex, this.endIndex, this.currentLen);
+//        console.log('next', this.startIndex, this.endIndex, this.currentLen);
         this.startIndex += this.currentLen;
         this.endIndex += this.currentLen;
         this.confirmNum();

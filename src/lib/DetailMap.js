@@ -2,7 +2,8 @@ import L from 'leafLet'
 
 let DetailMap = function(el, cityInfo){
   this.$el = el;
-  this.cityInfo = cityInfo
+  this.cityInfo = cityInfo;
+  this.kvPolylines = {};
 };
 
 DetailMap.prototype.init = function(){
@@ -20,7 +21,7 @@ DetailMap.prototype.init = function(){
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
     zoom: 9,
-    layers: [this.streets, this.cities],
+    layers: [this.grayscaleDark, this.cities],
     zoomControl: false,
     maxZoom: 18
   });
@@ -137,7 +138,13 @@ DetailMap.prototype.getMapInstance = function(){
 DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
+
+DetailMap.prototype.addPolyline = function(polylineObj){
+
+};
+
 DetailMap.prototype.drawPolygon = function(streetInfo){
+  console.log('draw', streetInfo);
   let node_list = streetInfo['node_list'];
   let pointList = [];
   for(var i = 0; i < node_list.length; i ++){
@@ -151,8 +158,29 @@ DetailMap.prototype.drawPolygon = function(streetInfo){
     opacity: 0.5,
     smoothFactor: 1
   });
+
+  // this.addPolyline(firstpolyline);
+  // this.polylines.push({
+  //   streetInfo.id: firstpolyline
+  // });
+  this.kvPolylines[streetInfo['id']] = firstpolyline;
   firstpolyline.addTo(this.map);
-}
+  return streetInfo;
+};
+
+DetailMap.prototype.deletePolyline = function(streetInfo){
+  let polylineId = streetInfo['id'];
+  // for(var i = 0; i < this.polylines.length; i++){
+  //   if(polylineObj == this.polylines[i]){
+  //     this.polylines.splice(i,1);
+  //     this.map.removeLayer(polylineObj);
+  //     return;
+  //   }
+  // }
+  if(this.kvPolylines[polylineId] != undefined){
+    this.map.removeLayer(this.kvPolylines[polylineId]);
+  }
+};
 
 export default DetailMap
 
