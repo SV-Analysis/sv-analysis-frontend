@@ -4,6 +4,7 @@ let DetailMap = function(el, cityInfo){
   this.$el = el;
   this.cityInfo = cityInfo;
   this.kvPolylines = {};
+  this.keyPoints = {};
 };
 
 DetailMap.prototype.init = function(){
@@ -40,6 +41,10 @@ DetailMap.prototype.init = function(){
   if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
 };
 
+DetailMap.prototype.setColorStyle = function(colorStyle){
+  this.colorStyle = colorStyle;
+  console.log('color style', colorStyle);
+};
 DetailMap.prototype.enableControlLayer = function(){
   L.control.layers(this.baseLayers).addTo(this.map);
 };
@@ -139,12 +144,10 @@ DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
 
-DetailMap.prototype.addPolyline = function(polylineObj){
 
-};
 
 DetailMap.prototype.drawPolygon = function(streetInfo){
-  console.log('draw', streetInfo);
+  // Hack: the parameter should be points list
   let node_list = streetInfo['node_list'];
   let pointList = [];
   for(var i = 0; i < node_list.length; i ++){
@@ -169,6 +172,7 @@ DetailMap.prototype.drawPolygon = function(streetInfo){
 };
 
 DetailMap.prototype.deletePolyline = function(streetInfo){
+  // Hack: the parameter should be points list
   let polylineId = streetInfo['id'];
   // for(var i = 0; i < this.polylines.length; i++){
   //   if(polylineObj == this.polylines[i]){
@@ -180,6 +184,90 @@ DetailMap.prototype.deletePolyline = function(streetInfo){
   if(this.kvPolylines[polylineId] != undefined){
     this.map.removeLayer(this.kvPolylines[polylineId]);
   }
+};
+
+DetailMap.prototype.getColor = function(type){
+  if(this.colorStyle == undefined){
+    if(type == 'green') return '#2ca02c';
+    else if(type == 'sky') return '#17becf';
+    else if(type == 'road') return '#8c564b';
+    else if(type == 'building') return '#ff7f0e';
+  }else{
+    if(this.colorStyle[type] == undefined){
+      console.log('Error in color style');
+    }
+    return this.colorStyle[type];
+  }
+}
+DetailMap.prototype.drawPointsToMap = function(streetInfo){
+  // Hack: the parameter should be points list
+  let _this = this;
+  let pointsId = streetInfo['id'];
+  let img_list = streetInfo['image_list'];
+  let render_img_list = [];
+  for(var i = 0, ilen = img_list.length; i < ilen; i++){
+    render_img_list.push({
+      "type": "Feature",
+      "properties": {
+        "maxAttr": img_list[i]['max_attr']['attr']
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": img_list[i]['location']
+      }
+    })
+  }
+  let points_layer = L.geoJSON(render_img_list, {
+    pointToLayer: function (feature, latlng) {
+      let maxAttr = feature['properties'].maxAttr;
+      let _color = _this.getColor(maxAttr)
+      return L.circleMarker(latlng, {
+        radius: 1,
+        fillColor: _color,
+        color: _color,
+        // weight: 1,
+        opacity: 0.8,
+        fillOpacity: 0.3
+      });
+    }
+  });
+  points_layer.addTo(this.map)
+  if(this.keyPoints[pointsId] == undefined){
+    this.keyPoints[pointsId] = points_layer;
+  }else{
+    console.log('Points exited!')
+  }
+  return streetInfo;
+};
+
+DetailMap.prototype.deletePoints = function(streetInfo) {
+  let pointsId = streetInfo['id'];
+  if(this.keyPoints[pointsId] != undefined){
+    this.map.removeLayer(this.keyPoints[pointsId]);
+  }
+};
+
+DetailMap.prototype.fitBoundByStreet = function(streetInfo){
+  let node_list = streetInfo['node_list'];
+  let max_lat = -180;
+  let max_lon = -180;
+  let min_lat = 180;
+  let min_lon = 180;
+  for(var i = 0; i < node_list.length; i ++){
+    let node = node_list[i]['location'];
+    // pointList.push(new L.LatLng(node[1], node[0]))
+    max_lat = max_lat < node[0]?node[0]: max_lat;
+    max_lon = max_lon < node[1]?node[1]: max_lon;
+    min_lat = min_lat > node[0]?node[0]: min_lat;
+    min_lon = min_lon > node[1]?node[1]: min_lon;
+  }
+
+  min_lat -= 0.01;
+  min_lon -= 0.01;
+  max_lat += 0.01;
+  min_lon += 0.01;
+
+  this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
 };
 
 export default DetailMap

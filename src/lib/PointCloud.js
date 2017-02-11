@@ -3,8 +3,6 @@
  */
 import THREE from "Three.js"
 
-
-
 let PointCloud = function(el){
   this.$el = el;
   this.width = this.$el.clientWidth;
@@ -80,7 +78,7 @@ PointCloud.prototype.setData = function(arr, level){
   if(level > 14){
     point_size = 1 + 50 / Math.abs(level - 19) * Math.abs(14 - level)
   }
-  console.log('pointsize', point_size);
+
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {

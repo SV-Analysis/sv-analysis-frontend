@@ -11,7 +11,7 @@
 
   export default {
     name: 'mapview',
-    props: ['cityInfo', 'streetData'],
+    props: ['cityInfo', 'streetData', 'svFeatures2Color'],
     data () {
       return {
         title: 'mapview'
@@ -25,7 +25,7 @@
       let _this = this;
       pipeService.emitDestroyPolyLine({
         'cityId': _this.cityInfo['id'],
-        'polylineObj': _this.polylineObj
+        'streetInfo': _this.streetData
       })
     },
     beforeDestroyed(){
@@ -42,29 +42,16 @@
         let _this = this;
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
+        this.mapObj.setColorStyle(this.svFeatures2Color)
         this.mapObj.enableControlLayer();
-        this.mapObj.onEvent('zoomend', function(event){
+        this.mapObj.drawPolygon(this.streetData);
+        this.mapObj.drawPointsToMap(this.streetData);
 
-        });
-        this.mapObj.onEvent('dragend', function(event){
-
-        });
-        this.mapObj.onEvent('zoomstart', function(event){
-
-        });
-        this.mapObj.onEvent('movestart', function(event){
-
-        });
-
-        this.mapObj.onBaseLayerChange(function(event){
-
-        })
-        let polylineObj = this.mapObj.drawPolygon(this.streetData);
-        this.polylineObj = polylineObj;
+        this.mapObj.fitBoundByStreet(this.streetData);
         pipeService.emitPolyLine({
           'cityId': _this.cityInfo['id'],
-          'polylineObj': polylineObj
-        })
+          'streetInfo': _this.streetData
+        });
       }
     }
   }

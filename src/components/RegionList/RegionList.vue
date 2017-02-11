@@ -11,10 +11,11 @@
 
       <div class="table-container">
         <table class="street-table">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
-          <col width="25%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
+          <col width="20%">
           <thead >
           <tr>
             <th v-for="attr in attrs" class="head-style">{{attr}}</th>
@@ -27,8 +28,8 @@
           </tr>
           <!--Map Record-->
           <!--<tr  class="extent_tr" v-else-if="record['dataType']=='map'"><td colspan="3" ><div v-for="con in record['context']">{{con}}</div></td></tr>-->
-          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="4">
-            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']"></RegionMap>
+          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="5">
+            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap>
           </td></tr>
           </tbody>
         </table>
@@ -67,7 +68,7 @@
         selected:'',
         data:[],
         nav_button:[1,2,3,'...',5],
-        attrs:['id','tag','len', 'streetType'],
+        attrs:['id','tag','len', 'streetType','img_len'],
         cityOptions:[
           {
             'name': 'New York',

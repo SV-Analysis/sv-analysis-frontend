@@ -8,7 +8,7 @@ Vue.use(VueResource)
 
 const dataServerUrl = "http://127.0.0.1:9930";
 // const dataServerUrl = "/sv-analysis";
-// const dataServerUrl = ""
+
 const $http = Vue.http
 
 function getTestData (callback) {

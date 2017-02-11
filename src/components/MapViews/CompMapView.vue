@@ -23,7 +23,7 @@
       this.createMap();
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
-        console.log('constant send');
+
         _this.points_world = data;
         let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
         pipeService.emitUpdateAllResultData({
@@ -53,14 +53,16 @@
 
       pipeService.onDrawPolyLine(function(msg){
         let cityId = msg['cityId'];
-        let polylineObj = msg['polylineObj'];
-        _this.mapObj.drawPolygon(polylineObj);
+        let streetInfo = msg['streetInfo'];
+        _this.mapObj.drawPolygon(streetInfo);
+        _this.mapObj.drawPointsToMap(streetInfo);
       });
 
       pipeService.onDestroyPolyLine(function(msg){
         let cityId = msg['cityId'];
-        let polylineObj = msg['polylineObj'];
-        _this.mapObj.deletePolyline(polylineObj);
+        let streetInfo = msg['streetInfo'];
+        _this.mapObj.deletePolyline(streetInfo);
+        _this.mapObj.deletePoints(streetInfo);
       });
     },
     computed:{
@@ -79,7 +81,7 @@
 //          HACK
           setTimeout(function(){
             let zoomLevel = _this.mapObj.getZoomLevel();
-            console.log('level', zoomLevel);
+
             if(zoomLevel >= 13){
               let regions = _this.mapObj.getBoundsRegion();
               let positions = [
@@ -88,7 +90,7 @@
               ];
 
               dataService.queryRegionFromBackground( _this.cityInfo['id'], positions, function(data){
-                console.log('here')
+
                 let current_points = _this.mapObj.worldToContaierPointsObj(data);
                 pipeService.emitUpdateAllResultData({
                   'cityId': _this.cityInfo['id'],
