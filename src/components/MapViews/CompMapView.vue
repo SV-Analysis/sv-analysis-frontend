@@ -113,6 +113,7 @@
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
         this.mapObj.disableAllInteraction();
+        this.mapObj.addMapScale();
       }
     }
   }

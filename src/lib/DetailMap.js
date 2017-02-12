@@ -270,5 +270,9 @@ DetailMap.prototype.fitBoundByStreet = function(streetInfo){
   this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
 };
 
+DetailMap.prototype.addMapScale = function(){
+  L.control.scale().addTo(this.map)
+}
+
 export default DetailMap
 
