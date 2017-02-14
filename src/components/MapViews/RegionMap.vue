@@ -15,6 +15,7 @@
   import DetailMap from '../../lib/DetailMap'
   import * as d3 from 'd3'
 
+
   export default {
     name: 'mapview',
     props: ['cityInfo', 'streetData', 'svFeatures2Color'],
@@ -41,6 +42,9 @@
 
     },
     computed:{
+    },
+    components:{
+
     },
     methods:{
       vbuttonClick(){

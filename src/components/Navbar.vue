@@ -4,12 +4,15 @@
 
     <div class="dropdown">
       <!--<a href="#" class="dropbtn">drop down</a>-->
-      <div class="dropdown-content">
-        <a href="#">链接 1</a>
-        <a href="#">链接 2</a>
-        <a href="#">链接 3</a>
-      </div>
+      <!--<div class="dropdown-content">-->
+      <!--<a href="#">链接 1</a>-->
+      <!--<a href="#">链接 2</a>-->
+      <!--<a href="#">链接 3</a>-->
+      <!--</div>-->
     </div>
+    <slot name="header">
+
+    </slot>
   </ul>
 </template>
 

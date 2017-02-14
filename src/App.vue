@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
+    <Navbar><button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button></Navbar>
     <div class="ui-row">
       <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
       <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
@@ -10,7 +10,11 @@
       </div>
       <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" ></RegionList></div>
     </div>
+    <ModalView v-if="showModal" @close="showModal = false">
+      <div slot="header">Compare Header</div>
+    </ModalView>
   </div>
+
 </template>
 
 <script>
@@ -20,6 +24,7 @@
   import CompContainer from './components/ComparisionContainer.vue'
   import Analysis from './components/Analysis/Analysis.vue'
   import RegionList from './components/RegionList/RegionList.vue'
+  import ModalView from './components/ModalView.vue'
   import 'bootstrap/dist/css/bootstrap.css'
 
   export default {
@@ -30,7 +35,8 @@
       Navigation,
       CompContainer,
       Analysis,
-      RegionList
+      RegionList,
+      ModalView
     },
     data () {
       return {
@@ -42,7 +48,8 @@
           'car': '#ff9896',
           'others': '#c7c7c7',
           'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
-        }
+        },
+        showModal: false
       }
     },
     mounted(){
@@ -102,5 +109,6 @@
     margin-left: 0px;
     height:100%;
   }
+
 
 </style>
