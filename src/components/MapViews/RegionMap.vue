@@ -28,7 +28,7 @@
     },
     mounted(){
       this.createMap();
-      this.drawBarChart()
+//      this.drawBarChart()
 
     },
     destroyed(){
