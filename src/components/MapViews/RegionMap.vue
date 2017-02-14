@@ -29,7 +29,6 @@
     mounted(){
       this.createMap();
 //      this.drawBarChart()
-
     },
     destroyed(){
       let _this = this;
@@ -45,6 +44,7 @@
     },
     methods:{
       vbuttonClick(){
+        if (event) event.stopPropagation()
         this.drawBarChart();
       },
       createMap(){
@@ -110,44 +110,76 @@
 
         let width = this.$el.clientWidth;
         let height = this.$el.clientHeight;
-        let eachHeight = this.$el.clientHeight / this.attrs.length;
+
         let featureArr = this.svFeatures2Color['allFeatures'];
         let barNum = featureArr.length;
-        let featureTextLength = 60;
+
         let svgContainer = d3.select(this.$el).select('svg');
         this.svgContainer = svgContainer;
-        svgContainer.append('rect').attr('width', width).attr('height', height).attr('fill', 'white')
-          .attr('opacity', 0.9)
-        let feature_Obj = 0;
-        let chartContainer = svgContainer.append('g').selectAll('.attrs').data(this.attrs)
-          .enter()
-          .append('g')
-          .attr('class', 'attrs')
-          .attr('transform', function(d, i){
-            return 'translate(0,' + i * eachHeight + ')';
+        svgContainer.append('rect')
+          .attr('width', width).attr('height', height).attr('fill', 'white').attr('opacity', 0.9)
+        var x = d3.scalePoint().range([60, width - 30]),
+          y = {},
+          dragging = {};
+
+        var line = d3.line(),
+          axis = d3.axisLeft(),
+          background;
+        var margin = {top: 0, right: 0, bottom: 0, left: 0};
+        var svg = svgContainer
+          .attr("width", width * 0.8 + margin.left + margin.right)
+          .attr("height", height * 0.8 + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        this.attrs.forEach(function(attr){
+          y[attr] = d3.scaleLinear().domain([0, 1]).range([height - 40, 20]);
+        });
+
+        x.domain(this.attrs);
+        var g = svg.selectAll(".dimension")
+          .data(this.attrs)
+          .enter().append("g")
+          .attr("class", "dimension")
+          .attr("transform", function(d) {
+            return "translate(" + x(d) + ")";
           })
+        g.append("g")
+          .attr("class", "axis")
+          .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+          .append("text")
+          .style("text-anchor", "middle")
+          .attr("y", -9)
+          .text(function(d) { return d; });
 
-        let perHeight = height / 6;
-        let realIndex = largestIndex;
-        realIndex = 20;
-        let perWidth = (width - bar_marginLeft) * 0.9 / realIndex;
-        chartContainer.each(function(attr){
-          let data = ratioBarData[attr].slice(0, realIndex);
-          d3.select(this).selectAll('attr_bar')
-            .data(data)
-            .enter()
-            .append('rect')
-            .attr('class', 'attr_bar')
+        g.append('text')
+          .text(function(d) {return d})
+          .attr('y', height - 20)
+          .attr('x', -20)
 
-            .attr('x', (d,i) => bar_marginLeft + i * perWidth)
-            .attr('y', (d,i) => perHeight - (perHeight * d / largestRatio * 0.9))
-            .attr('fill', _this.svFeatures2Color[attr])
-            .attr('width', perWidth)
-            .attr('height', (d,i) => perHeight * d / largestRatio * 0.9)
-            .attr('stroke', 'white')
-            .attr('opacity', 0.7)
 
-        })
+        var foreground = svg.append("g")
+          .attr("class", "background")
+          .selectAll("path")
+          .data(imageList)
+          .enter().append("path")
+          .attr("d", path)
+          .attr('class', 'parallel-path')
+          .attr('stroke', '#6b6ecf')
+          .attr('fill', 'none')
+          .attr('opacity', '0.05')
+
+
+        function position(d) {
+          var v = dragging[d];
+          return v == null ? x(d) : v;
+        }
+        function path(d) {
+          var _arrs = _this.attrs.map(function(p){
+            return [position(p), y[p](d[p] / 100)];
+          })
+          return line(_arrs);
+        }
       }
     }
   }
@@ -178,4 +210,35 @@
     left:0px;
     z-index: 1002;
   }
+
+  .parallel-path {
+    fill: none;
+    stroke: #273fdd;
+    stroke-width:1px;
+    shape-rendering: crispEdges;
+    opacity: 0.2
+  }
+
+  /*.foreground path {*/
+  /*fill: none;*/
+  /*stroke: steelblue;*/
+  /*}*/
+
+  /*.brush .extent {*/
+  /*fill-opacity: .3;*/
+  /*stroke: #fff;*/
+  /*shape-rendering: crispEdges;*/
+  /*}*/
+
+  /*.axis line,*/
+  /*.axis path {*/
+  /*fill: none;*/
+  /*stroke: #000;*/
+  /*shape-rendering: crispEdges;*/
+  /*}*/
+
+  /*.axis text {*/
+  /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;*/
+  /*cursor: move;*/
+  /*}*/
 </style>

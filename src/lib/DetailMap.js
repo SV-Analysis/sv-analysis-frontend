@@ -43,7 +43,6 @@ DetailMap.prototype.init = function(){
 
 DetailMap.prototype.setColorStyle = function(colorStyle){
   this.colorStyle = colorStyle;
-  console.log('color style', colorStyle);
 };
 DetailMap.prototype.enableControlLayer = function(){
   L.control.layers(this.baseLayers).addTo(this.map);
