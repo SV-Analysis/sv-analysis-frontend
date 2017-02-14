@@ -15,7 +15,8 @@
     data () {
       return {
         title: 'comp-mapview',
-        points_world: []
+        points_world: [],
+        disablePoint: false
       }
     },
     mounted(){
@@ -64,6 +65,15 @@
         _this.mapObj.deletePolyline(streetInfo);
         _this.mapObj.deletePoints(streetInfo);
       });
+
+      pipeService.onDisplayPointCloud(function(msg){
+        if(msg.cityId == _this.cityInfo.id){
+          //  Duplicated id 0110021
+          console.log('msg', msg);
+          _this.disablePoint = msg['disablePoints']
+          _this.updatePointCloud();
+        }
+      })
     },
     computed:{
       cityId(){
@@ -80,30 +90,7 @@
         if(this.points_world && this.points_world.length != 0){
 //          HACK
           setTimeout(function(){
-            let zoomLevel = _this.mapObj.getZoomLevel();
-
-            if(zoomLevel >= 13){
-              let regions = _this.mapObj.getBoundsRegion();
-              let positions = [
-                regions.getSouthWest(), regions.getSouthEast(),
-                regions.getNorthEast(), regions.getNorthWest()
-              ];
-
-              dataService.queryRegionFromBackground( _this.cityInfo['id'], positions, function(data){
-
-                let current_points = _this.mapObj.worldToContaierPointsObj(data);
-                pipeService.emitUpdateAllResultData({
-                  'cityId': _this.cityInfo['id'],
-                  'data': current_points,
-                  'zoomLevel': zoomLevel});
-              })
-            }else{
-              let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
-              pipeService.emitUpdateAllResultData({
-                'cityId': _this.cityInfo['id'],
-                'data': current_points,
-                'zoomLevel': zoomLevel});
-            }
+            _this.updatePointCloud()
           }, 400);
         }
       }
@@ -114,6 +101,41 @@
         this.mapObj.init();
         this.mapObj.disableAllInteraction();
         this.mapObj.addMapScale();
+      },
+      updatePointCloud(){
+        let _this = this;
+        let zoomLevel = this.mapObj.getZoomLevel();
+//  Duplicated id 0110021
+        if(this.disablePoint == true){
+          console.log('disable',this.disablePoint);
+          pipeService.emitUpdateAllResultData({
+            'cityId': _this.cityInfo['id'],
+            'data': [],
+            'zoomLevel': zoomLevel});
+        }else{
+          if(zoomLevel >= 12){
+            let regions = _this.mapObj.getBoundsRegion();
+            let positions = [
+              regions.getSouthWest(), regions.getSouthEast(),
+              regions.getNorthEast(), regions.getNorthWest()
+            ];
+
+            dataService.queryRegionFromBackground( this.cityInfo['id'], positions, function(data){
+              let current_points = _this.mapObj.worldToContaierPointsObj(data);
+              pipeService.emitUpdateAllResultData({
+                'cityId': _this.cityInfo['id'],
+                'data': current_points,
+                'zoomLevel': zoomLevel});
+            })
+          }else{
+            let current_points = this.mapObj.worldToContaierPointsArr(this.points_world);
+            pipeService.emitUpdateAllResultData({
+              'cityId': _this.cityInfo['id'],
+              'data': current_points,
+              'zoomLevel': zoomLevel});
+          }
+        }
+
       }
     }
   }

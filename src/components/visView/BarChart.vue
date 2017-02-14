@@ -16,7 +16,6 @@
       }
     },
     mounted(){
-//      console.log('this', this.regionQueryData, this.svFeatures2Color)
       this.drawBarChart();
     },
     computed:{
@@ -24,6 +23,7 @@
     },
     methods:{
       drawBarChart(){
+        console.log('query', this.regionQueryData);
         let _this = this;
         let width = this.$el.clientWidth;
         let height = this.$el.clientHeight;

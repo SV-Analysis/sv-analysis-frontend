@@ -3,11 +3,12 @@
  */
 import THREE from "Three.js"
 
-let PointCloud = function(el){
+let PointCloud = function(el, platform){
   this.$el = el;
   this.width = this.$el.clientWidth;
   this.height = this.$el.clientHeight;
-
+  this.disablePoint = false;
+  this.platform = platform;
 };
 
 PointCloud.prototype.setColorStyle = function(colorStyle){
@@ -73,12 +74,12 @@ PointCloud.prototype.setData = function(arr, level){
   _this.scene.children.forEach(function(object){
     _this.scene.remove(object);
   });
-  let point_size = 1;
-  if(!arr || arr.length == 0) return;
-  if(level > 14){
-    point_size = 1 + 50 / Math.abs(level - 19) * Math.abs(14 - level)
-  }
+  let point_size = this.platform == 'MacIntel' ? 10: 1;
 
+  if(!arr || arr.length == 0) return;
+  if(level > 12){
+    point_size = point_size + 20 / Math.abs(level - 19) * Math.abs(12 - level)
+  }
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
@@ -90,7 +91,6 @@ PointCloud.prototype.setData = function(arr, level){
     geometry.vertices.push(world_vertex);
   }
   geometry.colors = colors;
-  this.parameters = [ [1, 1, 0.5], 5 ];
 
   this.materials = new THREE.PointsMaterial( {
     size: point_size,
@@ -203,17 +203,9 @@ PointCloud.prototype.getCanvas = function(){
 
 PointCloud.prototype.setCanvasToMap = function(callback){
   callback(this.renderer.domElement);
+};
 
-//   var MyLayer = L.CanvasLayer.extend({
-//     render: function() {
-//       var canvas = this.getCanvas();
-//       var ctx = canvas.getContext('2d');
-//       // render
-//     }
-//   });
-// // create and add to the map
-//   var layer = new MyLayer();
-//   layer.addTo(map);
-}
+PointCloud.prototype.disablePointCloud = function(callback){
 
+};
 export default PointCloud

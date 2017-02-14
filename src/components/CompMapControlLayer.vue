@@ -1,11 +1,17 @@
 <template>
   <div class="selection-layer">
+    <div class="control-buttons">
+      <button v-on:click="changeDisplay()" id="display-points" type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
+        <span class="glyphicon " aria-hidden="true">D</span>
+      </button>
 
+
+    </div>
   </div>
 </template>
 
 <script>
-//  import * as d3 from 'd3';
+
   import DragSelection from '../lib/DragSelection'
   import pipeService from '../service/pipeService'
 
@@ -14,11 +20,12 @@
     props: ['cityInfo'],
     data () {
       return {
-        title: 'Points View'
+        title: 'Points View',
+        disablePoint: false
       }
     },
     mounted(){
-      this.createSelectLayer()
+      this.createSelectLayer();
     },
     computed:{
     },
@@ -32,7 +39,14 @@
             'cityId': _this.cityInfo.id, 'region': selectionRegion
           });
         });
+      },
+      changeDisplay(){
+        this.disablePoint = !this.disablePoint;
+        pipeService.emitDisplayPointCloud({'cityId': this.cityInfo.id, 'disablePoints': this.disablePoint})
       }
+    },
+    watch:{
+
     }
   }
 </script>
@@ -45,5 +59,13 @@
     height: 100%;
     z-index: 1001
   }
-
+  .control-buttons{
+    position: absolute;
+    width: 20px;
+    left: 5px;
+    top: 5px;
+  }
+  .self-button{
+    margin-top: 3px
+  }
 </style>

@@ -5,7 +5,7 @@
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
       <div class="render_container">
         <PointsView class="points-view" v-bind:cityInfo="cityInfo" v-bind:svFeatures2Color="svFeatures2Color"></PointsView>
-        <SelectionLayer class="points-view2" v-bind:cityInfo="cityInfo"> </SelectionLayer>
+        <ControlLayer class="points-view2" v-bind:cityInfo="cityInfo"> </ControlLayer>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
   import pipeService from '../service/pipeService'
   import CompMap from './MapViews/CompMapView.vue'
   import PointsView from './visView/PointsView.vue'
-  import SelectionLayer from './SelectionLayer.vue'
+  import ControlLayer from './CompMapControlLayer.vue'
 
 
   export default {
@@ -75,7 +75,7 @@
     components:{
       CompMap,
       PointsView,
-      SelectionLayer
+      ControlLayer
     }
   }
 </script>

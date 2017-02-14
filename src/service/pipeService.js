@@ -15,7 +15,8 @@ var pipeService = new Vue({
     ZOOMSTART: 'zoom_start',
     DRAGSTAET: 'drag_start',
     MAPPOLYLINE: 'map_polyline',
-    DESTROYPOLYLINE: 'destroy_polyline'
+    DESTROYPOLYLINE: 'destroy_polyline',
+    DISPLAYPOINTCHANGED: 'display_point_updated'
   },
 
   methods:{
@@ -126,6 +127,15 @@ var pipeService = new Vue({
       })
     },
 
+    //--------------------------------------------------------------
+    emitDisplayPointCloud: function(msg){
+      this.$emit(this.DISPLAYPOINTCHANGED, msg);
+    },
+    onDisplayPointCloud: function(callback){
+      this.$on(this.DISPLAYPOINTCHANGED,function(msg){
+        callback(msg);
+      })
+    },
   }
 })
 

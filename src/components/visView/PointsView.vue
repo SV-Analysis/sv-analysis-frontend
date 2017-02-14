@@ -31,13 +31,15 @@
           _this.pointView.updatePointCloud([]);
         }
       });
+
       this.createPointsView();
     },
     computed:{
     },
     methods:{
       createPointsView(){
-        this.pointView = new PointCloud(this.$el);
+        let platform = window.navigator.platform;
+        this.pointView = new PointCloud(this.$el, platform);
         this.pointView.init();
         this.pointView.animate();
         this.pointView.setColorStyle(this.svFeatures2Color)
