@@ -271,7 +271,21 @@ DetailMap.prototype.fitBoundByStreet = function(streetInfo){
 
 DetailMap.prototype.addMapScale = function(){
   L.control.scale().addTo(this.map)
-}
+};
 
+DetailMap.prototype.boundContainSinglePoint = function(point){
+  var bounds = this.getBounds();
+  return bounds.contains(point);
+};
+DetailMap.prototype.filterPointsArrInBounds = function(points){
+  let bounds = this.getBounds();
+  let newArrs = [];
+  points.forEach(function(d){
+    if(bounds.contains(d)){
+      newArrs.push(d)
+    }
+  });
+  return newArrs;
+};
 export default DetailMap
 

@@ -11,7 +11,7 @@
       <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" ></RegionList></div>
     </div>
     <ModalView v-if="showModal" @close="showModal = false">
-      <div slot="header">Compare Header</div>
+      <div slot="header">Comparision</div>
     </ModalView>
   </div>
 

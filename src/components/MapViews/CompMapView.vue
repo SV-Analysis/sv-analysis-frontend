@@ -25,8 +25,12 @@
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
 
+
         _this.points_world = data;
-        let current_points = _this.mapObj.worldToContaierPointsArr(_this.points_world);
+        let _temp_points = _this.generateSample(_this.points_world, 10);
+        console.log('init', _temp_points);
+        let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
+
         pipeService.emitUpdateAllResultData({
           'cityId': _this.cityInfo['id'],
           'data': current_points});
@@ -96,6 +100,15 @@
       }
     },
     methods:{
+      generateSample(array, n){
+        var result = [];
+        for(var i = 0; i < array.length; i += n){
+
+          result.push(array[parseInt(i)]);
+        }
+        return result;
+      },
+
       createMap(){
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
@@ -107,13 +120,14 @@
         let zoomLevel = this.mapObj.getZoomLevel();
 //  Duplicated id 0110021
         if(this.disablePoint == true){
-          console.log('disable',this.disablePoint);
+
           pipeService.emitUpdateAllResultData({
             'cityId': _this.cityInfo['id'],
             'data': [],
             'zoomLevel': zoomLevel});
         }else{
-          if(zoomLevel >= 12){
+          if(zoomLevel >= 13){
+
             let regions = _this.mapObj.getBoundsRegion();
             let positions = [
               regions.getSouthWest(), regions.getSouthEast(),
@@ -128,7 +142,12 @@
                 'zoomLevel': zoomLevel});
             })
           }else{
-            let current_points = this.mapObj.worldToContaierPointsArr(this.points_world);
+
+            console.log('here', _this.mapObj.getZoomLevel());
+            let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
+            _temp_points = _this.generateSample(_temp_points,3)
+            let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
+
             pipeService.emitUpdateAllResultData({
               'cityId': _this.cityInfo['id'],
               'data': current_points,
