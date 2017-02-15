@@ -27,8 +27,8 @@
 
 
         _this.points_world = data;
-        let _temp_points = _this.generateSample(_this.points_world, 10);
-        console.log('init', _temp_points);
+        let level = _this.mapObj.getZoomLevel();
+        let _temp_points = _this.generateSample(_this.points_world, 14 - level);
         let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
 
         pipeService.emitUpdateAllResultData({
@@ -73,7 +73,6 @@
       pipeService.onDisplayPointCloud(function(msg){
         if(msg.cityId == _this.cityInfo.id){
           //  Duplicated id 0110021
-          console.log('msg', msg);
           _this.disablePoint = msg['disablePoints']
           _this.updatePointCloud();
         }
@@ -142,10 +141,11 @@
                 'zoomLevel': zoomLevel});
             })
           }else{
-
-            console.log('here', _this.mapObj.getZoomLevel());
+            let level = _this.mapObj.getZoomLevel()
+//            console.log('here', level);
             let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
-            _temp_points = _this.generateSample(_temp_points,3)
+
+            _temp_points = _this.generateSample(_temp_points,14 - level)
             let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
 
             pipeService.emitUpdateAllResultData({
