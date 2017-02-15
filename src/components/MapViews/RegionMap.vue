@@ -103,7 +103,7 @@
     left: 5px;
     top: 5px;
     position: absolute;
-    z-index:10001;
+    z-index:1002;
   }
   .regionmap-svg{
     position: absolute;
@@ -111,7 +111,7 @@
     height: 200px;
     top: 0px;
     left:0px;
-    z-index: 1002;
+    z-index: 1001;
   }
 
   .parallel-path {
