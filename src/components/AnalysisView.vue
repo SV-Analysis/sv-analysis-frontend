@@ -4,11 +4,26 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            Head
+            Analysis
           </div>
 
-          <div class="modal-body">
-              Comparision Body
+          <div class="modal-body-top">
+            <div class="ui-row modal-body">
+
+              <div class="col-sm-2 col-md-2 col-lg-2 " >
+                a
+              </div>
+
+              <div class="col-sm-8 col-md-8 col-lg-8 vis-container" >
+                <ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems">
+
+                </ScatterBarChart>
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 " >
+                c
+              </div>
+
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -23,6 +38,7 @@
 </template>
 
 <script>
+  import ScatterBarChart from './visView/ScatterBarChart.vue'
 
   export default {
     name: 'modalview',
@@ -41,6 +57,9 @@
     },
     methods:{
 
+    },
+    components:{
+        ScatterBarChart
     }
   }
 </script>
@@ -79,11 +98,17 @@
   }
 
   .modal-header{
-    margin-top: 0;
+
     color: #42b983;
+
+  }
+  .modal-body-top{
+    height: 100%;
   }
   .modal-body {
-    margin: 20px 0;
+    /*margin: 20px 0;*/
+    height: 90%;
+    /*background-color: #5bc0de;*/
   }
 
   .modal-default-button {
@@ -117,6 +142,11 @@
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+
+  .vis-container{
+    height: 100%;
+    /*background-color: rgba(170, 229, 231, 0.84);*/
   }
 
 </style>

@@ -181,7 +181,9 @@
 
           this.data[index]['clicked'] = true;
         }else if(index != -1 && this.data[index]['clicked'] == true){
+          this.data[index]['clicked'] = false;
           this.data.splice(index + 1, 1);
+
         }
       },
       rightClick(record){

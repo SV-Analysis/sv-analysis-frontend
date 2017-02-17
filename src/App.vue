@@ -10,7 +10,9 @@
       </div>
       <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectIdMap="selectIdMap"></RegionList></div>
     </div>
-    <ModalView v-if="showModal" @close="showModal = false" v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectItems="selectItems"></ModalView>
+    <ModalView v-if="showModal" @close="showModal = false" v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectItems="selectItems">
+
+    </ModalView>
   </div>
 
 </template>
