@@ -102,7 +102,6 @@
       generateSample(array, n){
         var result = [];
         for(var i = 0; i < array.length; i += n){
-
           result.push(array[parseInt(i)]);
         }
         return result;
@@ -117,9 +116,8 @@
       updatePointCloud(){
         let _this = this;
         let zoomLevel = this.mapObj.getZoomLevel();
-//  Duplicated id 0110021
-        if(this.disablePoint == true){
 
+        if(this.disablePoint == true){
           pipeService.emitUpdateAllResultData({
             'cityId': _this.cityInfo['id'],
             'data': [],
@@ -141,11 +139,11 @@
                 'zoomLevel': zoomLevel});
             })
           }else{
-            let level = _this.mapObj.getZoomLevel()
+            let level = _this.mapObj.getZoomLevel();
 //            console.log('here', level);
             let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
 
-            _temp_points = _this.generateSample(_temp_points,14 - level)
+            _temp_points = _this.generateSample(_temp_points,14 - level);
             let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
 
             pipeService.emitUpdateAllResultData({

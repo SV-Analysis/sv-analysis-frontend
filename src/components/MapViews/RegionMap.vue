@@ -29,7 +29,7 @@
     },
     mounted(){
       this.createMap();
-//      this.drawBarChart()
+      this.drawParallelCoordinate()
     },
     destroyed(){
       let _this = this;
@@ -49,7 +49,7 @@
     methods:{
       vbuttonClick(){
         if (event) event.stopPropagation()
-        this.drawBarChart();
+        this.drawParallelCoordinate();
       },
       createMap(){
         let _this = this;
@@ -66,7 +66,7 @@
           'streetInfo': _this.streetData
         });
       },
-      drawBarChart(){
+      drawParallelCoordinate(){
         if(this.isRendered == true && this.isChartDisplayed== true){
           this.parallelHanlder.updateDisplay(true)
           this.isChartDisplayed = false;
@@ -112,6 +112,7 @@
     top: 0px;
     left:0px;
     z-index: 1001;
+    pointer-events: auto;
   }
 
   .parallel-path {
@@ -121,27 +122,4 @@
     shape-rendering: crispEdges;
     opacity: 0.2
   }
-
-  /*.foreground path {*/
-  /*fill: none;*/
-  /*stroke: steelblue;*/
-  /*}*/
-
-  /*.brush .extent {*/
-  /*fill-opacity: .3;*/
-  /*stroke: #fff;*/
-  /*shape-rendering: crispEdges;*/
-  /*}*/
-
-  /*.axis line,*/
-  /*.axis path {*/
-  /*fill: none;*/
-  /*stroke: #000;*/
-  /*shape-rendering: crispEdges;*/
-  /*}*/
-
-  /*.axis text {*/
-  /*text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;*/
-  /*cursor: move;*/
-  /*}*/
 </style>

@@ -208,7 +208,9 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
     render_img_list.push({
       "type": "Feature",
       "properties": {
-        "maxAttr": img_list[i]['max_attr']['attr']
+        "maxAttr": img_list[i]['max_attr']['attr'],
+        'img_id': img_list[i]['index'],
+        'img_path': img_list[i]['img_path']
       },
       "geometry": {
         "type": "Point",
@@ -219,15 +221,23 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
   let points_layer = L.geoJSON(render_img_list, {
     pointToLayer: function (feature, latlng) {
       let maxAttr = feature['properties'].maxAttr;
-      let _color = _this.getColor(maxAttr)
-      return L.circleMarker(latlng, {
+      let _color = _this.getColor(maxAttr);
+      let circleMarder = L.circleMarker(latlng, {
         radius: 1,
         fillColor: _color,
         color: _color,
-        // weight: 1,
         opacity: 0.8,
         fillOpacity: 0.3
       });
+      let imageId = feature['properties']['img_id'];
+      let imgPath = feature['properties']['img_path'];
+      let imgitems = imgPath.split('/');
+      let cityname = imgitems[0];
+      let cid = imgitems[2];
+      let iid = imgitems[3];
+      //HongKong/images/159542800/img1.jpeg
+      circleMarder.bindPopup( '<img src=http://127.0.0.1:9931/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:200px;height:100px;">' );
+      return circleMarder;
     }
   });
   points_layer.addTo(this.map)
@@ -236,6 +246,7 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
   }else{
     console.log('Points exited!')
   }
+  L.popup();
   return streetInfo;
 };
 

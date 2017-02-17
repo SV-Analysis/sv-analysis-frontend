@@ -16,7 +16,8 @@ var pipeService = new Vue({
     DRAGSTAET: 'drag_start',
     MAPPOLYLINE: 'map_polyline',
     DESTROYPOLYLINE: 'destroy_polyline',
-    DISPLAYPOINTCHANGED: 'display_point_updated'
+    DISPLAYPOINTCHANGED: 'display_point_updated',
+    UPDATESELECTITEMS: 'update_selected_item'
   },
 
   methods:{
@@ -133,6 +134,16 @@ var pipeService = new Vue({
     },
     onDisplayPointCloud: function(callback){
       this.$on(this.DISPLAYPOINTCHANGED,function(msg){
+        callback(msg);
+      })
+    },
+
+    //--------------------------------------------------------------
+    emitUpdateSelectItems: function(msg){
+      this.$emit(this.UPDATESELECTITEMS, msg);
+    },
+    onUpdateSelectItems: function(callback){
+      this.$on(this.UPDATESELECTITEMS,function(msg){
         callback(msg);
       })
     },

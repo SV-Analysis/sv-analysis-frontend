@@ -57,13 +57,15 @@
     float: left;
     width: 100%;
     height: 100%;
-    z-index: 1001
+    z-index: 1001;
+
   }
   .control-buttons{
     position: absolute;
     width: 20px;
     left: 5px;
     top: 5px;
+    pointer-events: auto;
   }
   .self-button{
     margin-top: 3px

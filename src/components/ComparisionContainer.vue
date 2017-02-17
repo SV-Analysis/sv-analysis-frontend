@@ -3,7 +3,7 @@
     <div>{{ title }}</div>
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
-      <div class="render_container">
+      <div class="render_container" v-bind:class="cityInfo.isActive ">
         <PointsView class="points-view" v-bind:cityInfo="cityInfo" v-bind:svFeatures2Color="svFeatures2Color"></PointsView>
         <ControlLayer class="points-view2" v-bind:cityInfo="cityInfo"> </ControlLayer>
       </div>
@@ -30,22 +30,26 @@
             'name': 'New York',
             'gps':[40.7058253, -74.1180861],
             'id': 'nyc',
-            'bound': null},
+            'bound': null,
+            'isActive': 'contaienr-display'},
           'singapore': {
             'name': 'Singapore',
             'gps':[1.3149014, 103.7769792],
             'id': 'singapore',
-            'bound': null},
+            'bound': null,
+            'isActive': 'contaienr-display'},
           'hk': {
             'name': 'Hong Kong',
             'gps':[22.365354, 114.105228],
             'id':'hk',
-            'bound': null},
+            'bound': null,
+            'isActive': 'contaienr-display'},
           'london': {
             'name': 'London',
             'gps':[51.528308,-0.3817765],
             'id': 'london',
-            'bound': null},
+            'bound': null,
+            'isActive': 'contaienr-display'},
 
 
         }
@@ -58,8 +62,21 @@
         for(var i = 0, ilen = city_id_arr.length; i < ilen; i++){
           let city_id = city_id_arr[i];
           _this.cities.push(_this.candidates[city_id]);
+
         }
       });
+      pipeService.onDisplayPointCloud(function(msg){
+        _this.cities.forEach(function(cityObj){
+          if(cityObj['id'] == msg['cityId']){
+            if(msg['disablePoints'] == true){
+              cityObj['isActive'] = 'contaienr-hide';
+            }else{
+              cityObj['isActive'] = 'contaienr-display'
+            }
+          }
+        });
+        console.log('msg', msg);
+      })
     },
     created(){
       let _this = this;
@@ -95,6 +112,7 @@
     height: 100%;
     width: 100%;
     top:0;
+    /*pointer-events: none*/
   }
   .points-view{
     position: absolute;
@@ -104,5 +122,11 @@
   .points-view2{
     position: absolute;
     left: 0px;
+  }
+  .contaienr-hide{
+    pointer-events: none;
+  }
+  .contaienr-display{
+    pointer-events: auto;
   }
 </style>

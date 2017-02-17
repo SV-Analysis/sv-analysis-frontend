@@ -4,24 +4,17 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
-            <slot name="header">
-
-            </slot>
+            Head
           </div>
 
           <div class="modal-body">
-            <slot name="body">
               Comparision Body
-            </slot>
           </div>
 
           <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                Close
-              </button>
-            </slot>
+            <button class="modal-default-button" @click="$emit('close')">
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -31,9 +24,9 @@
 
 <script>
 
- export default {
+  export default {
     name: 'modalview',
-//    props:['regionQueryData', 'svFeatures2Color'],
+    props:['svFeatures2Color', 'selectItems'],
     data () {
       return {
         title: 'ModalView',
@@ -41,7 +34,7 @@
       }
     },
     mounted(){
-
+      console.log('mount', this.selectItems);
     },
     computed:{
 
@@ -69,11 +62,12 @@
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+    position: relative;
   }
 
   .modal-container {
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 95%;
     margin: 0px auto;
     padding: 20px 30px;
     background-color: #fff;
@@ -81,19 +75,20 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
+    position: relative;
   }
 
-  .modal-header h3 {
+  .modal-header{
     margin-top: 0;
     color: #42b983;
   }
-
   .modal-body {
     margin: 20px 0;
   }
 
   .modal-default-button {
-    float: right;
+    /*float: right;*/
+
   }
 
   /*
@@ -117,6 +112,11 @@
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+  }
+  .modal-footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
 </style>

@@ -11,11 +11,12 @@
 
       <div class="table-container">
         <table class="street-table">
-          <col width="20%">
-          <col width="20%">
-          <col width="20%">
-          <col width="20%">
-          <col width="20%">
+          <!--<col width="16.67%">-->
+          <!--<col width="16.67%">-->
+          <!--<col width="16.67%">-->
+          <!--<col width="16.67%">-->
+          <!--<col width="16.67%">-->
+          <!--<col width="16.67%">-->
           <thead >
           <tr>
             <th v-for="attr in attrs" class="head-style">{{attr}}</th>
@@ -24,11 +25,10 @@
           <tbody>
           <!--Street Record-->
           <tr v-for="record in data" v-if="record['dataType']=='street'">
-            <td v-on:click='rowClick(record)' v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
+            <td  oncontextmenu="return false;" v-on:click='rowClick(record)' v-on:contextmenu="rightClick(record)" v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
           </tr>
-          <!--Map Record-->
-          <!--<tr  class="extent_tr" v-else-if="record['dataType']=='map'"><td colspan="3" ><div v-for="con in record['context']">{{con}}</div></td></tr>-->
-          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="5">
+
+          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="6">
             <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap>
           </td></tr>
           </tbody>
@@ -55,10 +55,11 @@
 
   import dataService from "../../service/dataService"
   import RegionMap from "../MapViews/RegionMap.vue"
+  import pipeService from "../../service/pipeService"
 
   export default {
     name: 'streetlist',
-    props: ['svFeatures2Color'],
+    props: ['svFeatures2Color', 'selectIdMap'],
     components:{
       RegionMap
     },
@@ -68,7 +69,7 @@
         selected:'',
         data:[],
         nav_button:[1,2,3,'...',5],
-        attrs:['id','tag','len', 'streetType','img_len'],
+        attrs:['SL','id','tag','len', 'streetType','img_len'],
         cityOptions:[
           {
             'name': 'New York',
@@ -138,17 +139,27 @@
       _queryStreet(){
         let _this = this;
         dataService.queryStreetCollections(this.selected, this.startIndex, this.currentLen, function(records){
-          _this._parseRecords(records)
+          _this._parseRecords(records, _this.selected)
         })
       },
-      _parseRecords(records){
+      _parseRecords(records, city){
         let _this = this;
         let udpateData = [];
         records.forEach(function(record){
+//        City is somehow hack
           record['dataType'] = 'street';
           record['clicked'] = false;
           record['attr']['id'] = record['id'];
           record['attr']['tag'] = record['tag'];
+
+          record['city'] = city;
+          let record_id = record['city'] + '_' + record['dataType'] + '_' + record['id'];
+          if(_this.selectIdMap[record_id]){
+            record['attr']['SL'] = true;
+          }
+          else{
+            record['attr']['SL'] = false;
+          }
           udpateData.push(record);
         });
         _this.data = udpateData;
@@ -171,9 +182,20 @@
           this.data[index]['clicked'] = true;
         }else if(index != -1 && this.data[index]['clicked'] == true){
           this.data.splice(index + 1, 1);
-          this.data[index]['clicked'] = false;
-
         }
+      },
+      rightClick(record){
+
+        record['attr']['SL'] = !record['attr']['SL'];
+        let updateSign = record['attr']['SL'];
+        let item = {
+          id: record['city'] + '_' + record['dataType'] + '_' + record['id'],
+          city: record['city'],
+          type: record['dataType'],
+          record: record,
+          updateSign: record['attr']['SL']
+        };
+        pipeService.emitUpdateSelectItems(item);
       },
       confirmNum(){
         if(isNaN(this.endIndex)||isNaN(this.startIndex)||isNaN(this.listNumber)){
@@ -188,7 +210,6 @@
         if(isNaN(this.startIndex) || isNaN(this.endIndex)) return
         this.startIndex = parseInt(this.startIndex);
         this.endIndex = parseInt(this.endIndex);
-//        console.log('next', this.startIndex, this.endIndex, this.currentLen);
         this.startIndex = (this.startIndex - this.currentLen) < 0? 0 :(this.startIndex - this.currentLen);
         this.endIndex = this.startIndex + this.currentLen - 1;
         this.confirmNum();
@@ -197,7 +218,6 @@
         if(isNaN(this.startIndex) || isNaN(this.endIndex)) return
         this.startIndex = parseInt(this.startIndex);
         this.endIndex = parseInt(this.endIndex);
-//        console.log('next', this.startIndex, this.endIndex, this.currentLen);
         this.startIndex += this.currentLen;
         this.endIndex += this.currentLen;
         this.confirmNum();

@@ -37,8 +37,10 @@ ParallelCoordinate.prototype.init = function(){
   }
   let imageNumber = imageList.length;
   let largestRatio = -1;
+  largestIndex = 20;
   this.attrs.forEach(function(attr){
-    for(var i = 0; i < imageNumber; i++){
+
+    for(var i = 0, ilen = ratioBarData[attr].length; i < ilen; i++){
       let ratio = ratioBarData[attr][i] / imageNumber;
       ratioBarData[attr][i] = ratio;
       largestRatio = largestRatio < ratio? ratio: largestRatio;
@@ -47,9 +49,6 @@ ParallelCoordinate.prototype.init = function(){
 
   let width = this.$el.clientWidth;
   let height = this.$el.clientHeight;
-
-  // let featureArr = this.svFeatures2Color['allFeatures'];
-  // let barNum = featureArr.length;
 
   let svgContainer = d3.select(this.$el).select('svg');
   this.svgContainer = svgContainer;
@@ -64,7 +63,6 @@ ParallelCoordinate.prototype.init = function(){
     background;
   var margin = {top: 0, right: 0, bottom: 0, left: 0};
   var svg = svgContainer
-
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -73,22 +71,45 @@ ParallelCoordinate.prototype.init = function(){
   });
 
   x.domain(this.attrs);
-  var g = svg.selectAll(".dimension")
+  var axisContainer = svg.selectAll(".dimension")
     .data(this.attrs)
     .enter().append("g")
     .attr("class", "dimension")
     .attr("transform", function(d) {
       return "translate(" + x(d) + ")";
     })
-  g.append("g")
+  axisContainer.append("g")
     .attr("class", "axis")
     .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
     .append("text")
     .style("text-anchor", "middle")
     .attr("y", -9)
     .text(function(d) { return d; });
+  let barHeight = (height - 60) / 20;
+  axisContainer.each(function(d){
+    let barContainers = d3.select(this).append('g');
+    let dataArr = ratioBarData[d];
 
-  g.append('text')
+    barContainers.selectAll('.rationbar')
+      .data(dataArr)
+      .enter()
+      .append('rect').attr('class', 'rationbar')
+      .attr('x', (d, i) => - d * 50 / 2)
+      .attr('y', (r, i)=> {
+        return y[d](i / largestIndex) - barHeight})
+      .attr('fill', 'steelblue')
+      .attr('opacity', 0.9)
+      .attr('height',barHeight - 1)
+      // .attr('stroke', 'white')
+      .attr('width', (d, i) => d * 50)
+      .on('mouseover', function(ss){
+        d3.select(this).attr('opacity', 1)
+      })
+      .on('mouseout', function(){
+        d3.select(this).attr('opacity', 0.9)
+      })
+  });
+  axisContainer.append('text')
     .text(function(d) {return d})
     .attr('y', height - 20)
     .attr('x', -20)

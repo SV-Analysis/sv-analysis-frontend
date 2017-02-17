@@ -8,11 +8,9 @@
         <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
         <Analysis v-bind:svFeatures2Color="svFeatures2Color" class="y-style-botton"></Analysis>
       </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" ></RegionList></div>
+      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectIdMap="selectIdMap"></RegionList></div>
     </div>
-    <ModalView v-if="showModal" @close="showModal = false">
-      <div slot="header">Comparision</div>
-    </ModalView>
+    <ModalView v-if="showModal" @close="showModal = false" v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectItems="selectItems"></ModalView>
   </div>
 
 </template>
@@ -24,7 +22,8 @@
   import CompContainer from './components/ComparisionContainer.vue'
   import Analysis from './components/Analysis/Analysis.vue'
   import RegionList from './components/RegionList/RegionList.vue'
-  import ModalView from './components/ModalView.vue'
+  import ModalView from './components/AnalysisView.vue'
+  import pipeService from './service/pipeService'
   import 'bootstrap/dist/css/bootstrap.css'
 
   export default {
@@ -49,11 +48,50 @@
           'others': '#c7c7c7',
           'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
         },
-        showModal: false
-      }
+        showModal: false,
+        selectItems:[],
+        selectIdMap:{},
+      };
+
     },
     mounted(){
-
+      let _this = this;
+      pipeService.onUpdateSelectItems(function(data){
+        let updateSign = data['updateSign'];
+        if(updateSign == true) {
+          _this.addItem(data)
+        }
+        else{
+          _this.removeItem(data)
+        }
+      })
+    },
+    methods:{
+      addItem(data){
+        if(!this.selectIdMap[data['id']]){
+          this.selectIdMap[data['id']] = data;
+          this.selectItems.push(data);
+        }else{
+          console.log('item', data['id'], 'has been existed');
+        }
+      },
+      removeItem(data){
+        if(this.selectIdMap[data['id']]){
+          let index = -1;
+          for(var i = 0, ilen = this.selectItems.length; i < ilen; i++){
+            if(data['id'] == this.selectItems[i]['id']){
+              index = i;
+              break
+            }
+          }
+          if(index != -1){
+            this.selectItems.splice(index, 1);
+            delete this.selectIdMap[data['id']];
+          }
+        }else{
+          console.log('item', data['id'], 'is not existed');
+        }
+      }
     }
   }
 </script>
