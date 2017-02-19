@@ -78,6 +78,7 @@ ParallelCoordinate.prototype.init = function(){
     .attr("transform", function(d) {
       return "translate(" + x(d) + ")";
     })
+
   axisContainer.append("g")
     .attr("class", "axis")
     .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
@@ -85,6 +86,8 @@ ParallelCoordinate.prototype.init = function(){
     .style("text-anchor", "middle")
     .attr("y", -9)
     .text(function(d) { return d; });
+
+
   let barHeight = (height - 60) / 20;
   axisContainer.each(function(d){
     let barContainers = d3.select(this).append('g');

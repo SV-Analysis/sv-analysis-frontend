@@ -25,7 +25,7 @@
           <tbody>
           <!--Street Record-->
           <tr v-for="record in data" v-if="record['dataType']=='street'">
-            <td  oncontextmenu="return false;" v-on:click='rowClick(record)' v-on:contextmenu="rightClick(record)" v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
+            <td oncontextmenu="return false;" v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'" v-on:click='rowClick(record)' v-on:contextmenu="rightClick(record)" v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
           </tr>
 
           <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="6">
@@ -187,9 +187,7 @@
         }
       },
       rightClick(record){
-
         record['attr']['SL'] = !record['attr']['SL'];
-        let updateSign = record['attr']['SL'];
         let item = {
           id: record['city'] + '_' + record['dataType'] + '_' + record['id'],
           city: record['city'],
@@ -346,5 +344,13 @@
   /*nav buttons*/
   input.nav-btn-group{
     width: 60px
+  }
+
+  /**/
+  .selectRow{
+    background-color: #d6e9c6;
+  }
+  .notSelectRow{
+    background-color: white;
   }
 </style>

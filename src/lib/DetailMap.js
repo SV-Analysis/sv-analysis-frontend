@@ -13,7 +13,7 @@ DetailMap.prototype.init = function(){
   var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
       '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
       'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw';
+    mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoieWlkaW5neWlkaW4iLCJhIjoiY2lnajcwMjIxMDAyM3R0bHVsamh5M3B2diJ9.-ZvX8uRwCv4IdYSvzi7HPg';
 
   this.grayscaleDark   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
   this.grayscaleLight   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: null});
@@ -236,7 +236,7 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
       let cid = imgitems[2];
       let iid = imgitems[3];
       //HongKong/images/159542800/img1.jpeg
-      circleMarder.bindPopup( '<img src=http://127.0.0.1:9931/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:200px;height:100px;">' );
+      circleMarder.bindPopup( '<img src=http://127.0.0.1:9930/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:200px;height:100px;">' );
       return circleMarder;
     }
   });
