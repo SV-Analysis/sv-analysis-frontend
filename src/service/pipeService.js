@@ -17,7 +17,8 @@ var pipeService = new Vue({
     MAPPOLYLINE: 'map_polyline',
     DESTROYPOLYLINE: 'destroy_polyline',
     DISPLAYPOINTCHANGED: 'display_point_updated',
-    UPDATESELECTITEMS: 'update_selected_item'
+    UPDATESELECTITEMS: 'update_selected_item',
+    CONFIRMSELECTION:'confirm_selection'
   },
 
   methods:{
@@ -144,6 +145,16 @@ var pipeService = new Vue({
     },
     onUpdateSelectItems: function(callback){
       this.$on(this.UPDATESELECTITEMS,function(msg){
+        callback(msg);
+      })
+    },
+
+    //--------------------------------------------------------------
+    emitConfirmSelection: function(msg){
+      this.$emit(this.CONFIRMSELECTION, msg);
+    },
+    onConfirmSelection: function(callback){
+      this.$on(this.CONFIRMSELECTION,function(msg){
         callback(msg);
       })
     },

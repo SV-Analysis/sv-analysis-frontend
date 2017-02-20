@@ -13,6 +13,7 @@
     <ModalView v-if="showModal" @close="showModal = false" v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectItems="selectItems">
 
     </ModalView>
+
   </div>
 
 </template>
@@ -28,6 +29,7 @@
   import pipeService from './service/pipeService'
   import 'bootstrap/dist/css/bootstrap.css'
 
+
   export default {
     name: 'app',
     components: {
@@ -37,7 +39,8 @@
       CompContainer,
       Analysis,
       RegionList,
-      ModalView
+      ModalView,
+
     },
     data () {
       return {
@@ -53,6 +56,8 @@
         showModal: false,
         selectItems:[],
         selectIdMap:{},
+        value: null,
+        options: ['list', 'of', 'options']
       };
 
     },

@@ -7,7 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,47 +25,61 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5638196">
+    <splitter split-orientation="horizontal" split-proportion="0.7768714">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="AnalysisView.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1540">
-                  <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Analysis.vue" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="660">
-                  <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+                <state relative-caret-position="792">
+                  <caret line="75" column="78" lean-forward="false" selection-start-line="75" selection-start-column="78" selection-end-line="75" selection-end-column="78" />
                   <folding>
-                    <element signature="e#390#441#0" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#multiselect#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="e#1547#1606#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
+          <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="458">
-                  <caret line="141" column="52" lean-forward="false" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
+                <state relative-caret-position="924">
+                  <caret line="152" column="24" lean-forward="false" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ScatterBarChart.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="dataService.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="110">
+                  <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MSView.vue" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/MSView.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="176">
+                  <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="47" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ScatterBarChart.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="682">
-                  <caret line="127" column="30" lean-forward="false" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
-                  <folding />
+                <state relative-caret-position="704">
+                  <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#79#103#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -70,14 +88,23 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="DetailMap.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
+          <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1194">
-                  <caret line="263" column="0" lean-forward="false" selection-start-line="263" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+                <state relative-caret-position="-2508">
+                  <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/App.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="828">
+                  <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
                   <folding>
-                    <marker date="1487412445838" expanded="true" signature="263:269" ph="©" />
-                    <marker date="1487412445838" expanded="true" signature="7054:7079" ph="..." />
+                    <element signature="e#994#1038#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -96,13 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>border-top</find>
-      <find>modal-footer</find>
-      <find>.modal-header</find>
-      <find>modal-mask</find>
-      <find>modal-container</find>
-      <find>vis-container</find>
-      <find>0.5</find>
       <find>overallHeight</find>
       <find>data</find>
       <find>translate</find>
@@ -126,6 +146,13 @@
       <find>dsbChartWidth</find>
       <find>barGroup</find>
       <find>55</find>
+      <find>multi</find>
+      <find>.modal-header</find>
+      <find>modal-header</find>
+      <find>100</find>
+      <find>regionQueryData</find>
+      <find>svg</find>
+      <find>.def-modal-header</find>
     </findStrings>
     <dirStrings>
       <dir>G:\vis2017\sv-analysis-frontend\src\components</dir>
@@ -155,18 +182,19 @@
         <option value="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
         <option value="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" />
         <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
         <option value="$PROJECT_DIR$/src/components/ModalView.vue" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart" />
-        <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
-        <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/lib/ParallelCoordinate.js" />
-        <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
-        <option value="$PROJECT_DIR$/src/service/dataService.js" />
         <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
+        <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/src/components/MSView.vue" />
+        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
+        <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
+        <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
+        <option value="$PROJECT_DIR$/src/service/dataService.js" />
       </list>
     </option>
   </component>
@@ -701,13 +729,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build/webpack.prod.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/dev.env.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -872,6 +893,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1028">
           <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -905,13 +929,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="22" column="14" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/webpack.dev.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -932,14 +950,6 @@
           <folding>
             <element signature="e#382#433#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="131" column="41" lean-forward="false" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,23 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#44#65#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/ParallelCoordinate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="865">
@@ -1022,32 +1015,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1100">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="56" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="48" column="12" lean-forward="true" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1540">
-          <caret line="70" column="16" lean-forward="false" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1194">
-          <caret line="263" column="0" lean-forward="false" selection-start-line="263" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
+        <state relative-caret-position="1172">
+          <caret line="178" column="11" lean-forward="false" selection-start-line="178" selection-start-column="11" selection-end-line="178" selection-end-column="11" />
           <folding>
             <marker date="1487412445838" expanded="true" signature="263:269" ph="©" />
             <marker date="1487412445838" expanded="true" signature="7054:7079" ph="..." />
@@ -1057,26 +1036,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="141" column="52" lean-forward="false" selection-start-line="141" selection-start-column="52" selection-end-line="141" selection-end-column="52" />
+        <state relative-caret-position="-2508">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="66">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
           <folding>
-            <element signature="e#390#441#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#390#441#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MSView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="6" lean-forward="false" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="75" column="78" lean-forward="false" selection-start-line="75" selection-start-column="78" selection-end-line="75" selection-end-column="78" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#multiselect#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1547#1606#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="127" column="30" lean-forward="false" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
+        <state relative-caret-position="704">
+          <caret line="38" column="22" lean-forward="true" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+          <folding>
+            <element signature="e#79#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="152" column="24" lean-forward="false" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding>
+            <element signature="e#994#1038#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.dev.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="8" column="24" lean-forward="false" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
           <folding />
         </state>
       </provider>

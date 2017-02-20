@@ -6,16 +6,21 @@
 
 <script>
   import * as d3 from 'd3'
+  import pipeService from '../../service/pipeService'
   export default {
     name: 'scatterBarChart',
-    props:['regionQueryData', 'svFeatures2Color', 'selectItems'],
+    props:['svFeatures2Color', 'selectItems'],
     data () {
       return {
         title: 'BarChart',
       }
     },
     mounted(){
-      this.drawBarChart(this.selectItems[0], this.selectItems[1]);
+      let _this = this;
+      pipeService.onConfirmSelection(function(items){
+        _this.drawBarChart(items[0], items[1]);
+
+      })
     },
     computed:{
 
@@ -25,13 +30,20 @@
         let _this = this;
         let featureArray = this.svFeatures2Color['allFeatures'];
         if(sourceItem == undefined || targetItem == undefined){
-          console.log('Undefined item');
+          console.log('Undefined item',sourceItem, targetItem);
           return
         }
         let barColors = ['#fc4e2a', '#74c476'];
         let width = this.$el.clientWidth;
         let height = this.$el.clientHeight;
-        let svg = d3.select(this.$el);
+        if(this.svg) {
+            d3.selectAll('.pannel').remove();
+        }
+        console.log('sourceItem' ,sourceItem);
+
+        let svg = d3.select(this.$el).append('g').attr('class','pannel');
+        this.svg = svg;
+
         svg.append('rect')
           .attr('width', width)
           .attr('height', height)
@@ -334,13 +346,13 @@
             .append('text')
             .attr('class', 'ratio')
             .text(function(d){
-                return parseInt(d* 100) / 10000;
+              return parseInt(d) / 100;
             })
           texts.attr('y', function(d, i){
             let texts = d3.select(this);
             return regionWidth / 2 + i * texts.node().getBoundingClientRect().height - 2;
           })
-            .attr('x', d => x_groupbar_scale(d) + 3)
+            .attr('x', d => x_groupbar_scale(d) + 5)
         })
 
 

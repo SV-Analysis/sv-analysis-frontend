@@ -3,21 +3,31 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header">
-            Analysis
+          <div class="modal-header ui-row">
+            <div style="width: 300px">
+
+            </div>
+
+            <!--group-values="libs"-->
+            <!--group-label="language" -->
           </div>
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
 
               <div class="col-sm-2 col-md-2 col-lg-2 " >
-                a
+                <multiselect style="padding-bottom: 10px"
+                  v-model="selection" :options="options"
+                             :multiple="true"
+                             placeholder="Select"
+                             label="id" :max="2" :max-height="150" :option-height="5"
+                             select-label="">
+                </multiselect>
+                <button v-on:click="confirm()">Confirm</button>
               </div>
 
               <div class="col-sm-8 col-md-8 col-lg-8 vis-container" >
-                <ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems">
-
-                </ScatterBarChart>
+                <ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems"></ScatterBarChart>
               </div>
               <div class="col-sm-2 col-md-2 col-lg-2 " >
                 c
@@ -39,32 +49,42 @@
 
 <script>
   import ScatterBarChart from './visView/ScatterBarChart.vue'
+  import Multiselect from 'vue-multiselect'
+  import pipeService from '../service/pipeService'
 
   export default {
     name: 'modalview',
     props:['svFeatures2Color', 'selectItems'],
     data () {
       return {
+        SelectLabel:'',
         title: 'ModalView',
-        showModal: true
+        options: [],
+        selection: []
       }
     },
     mounted(){
       console.log('mount', this.selectItems);
+      this.options = this.selectItems;
     },
     computed:{
 
     },
     methods:{
-
+      confirm: function(){
+          console.log('collections',this.selection[0], this.selection[1])
+        pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
+      }
     },
+
     components:{
-        ScatterBarChart
+      ScatterBarChart,
+      Multiselect
     }
   }
 </script>
 
-<style scoped>
+<style >
 
   .modal-mask {
     position: fixed;
@@ -97,8 +117,7 @@
     position: relative;
   }
 
-  .modal-header{
-
+  ..def-modal-header{
     color: #42b983;
 
   }
@@ -148,5 +167,15 @@
     height: 100%;
     /*background-color: rgba(170, 229, 231, 0.84);*/
   }
+  /*.multiselect__tag {*/
+  /*background-color: #dddaff;;*/
+  /*color: black;*/
+
+  /*}*/
+  /*.multiselect__option--highlight:after {*/
+  /*content: attr(data-select);*/
+  /*background: #aae5e7;*/
+  /*color: #fff;*/
+  /*}*/
 
 </style>
