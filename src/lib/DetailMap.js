@@ -235,8 +235,7 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
       let cityname = imgitems[0];
       let cid = imgitems[2];
       let iid = imgitems[3];
-      //HongKong/images/159542800/img1.jpeg
-      circleMarder.bindPopup( '<img src=http://127.0.0.1:9930/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:200px;height:100px;">' );
+      circleMarder.bindPopup( '<img src=http://127.0.0.1:9930/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:120px;">' );
       return circleMarder;
     }
   });

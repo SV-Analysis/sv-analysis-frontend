@@ -4,25 +4,30 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header ui-row">
-            <div style="width: 300px">
 
-            </div>
-
-            <!--group-values="libs"-->
-            <!--group-label="language" -->
           </div>
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
 
               <div class="col-sm-2 col-md-2 col-lg-2 " >
-                <multiselect style="padding-bottom: 10px"
-                  v-model="selection" :options="options"
+                <multiselect v-model="selection"
+                             :options="options"
                              :multiple="true"
-                             placeholder="Select"
-                             label="id" :max="2" :max-height="150" :option-height="5"
-                             select-label="">
+                             placeholder="Type to search"
+                             track-by="id"
+                             label="id"
+                             :max="2"
+                >
+                  <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
                 </multiselect>
+                <!--<multiselect style="padding-bottom: 10px"-->
+                <!--v-model="selection" :options="options"-->
+                <!--:multiple="true"-->
+                <!--placeholder="Select"-->
+                <!--label="id" :max="2" :max-height="150" :option-height="5"-->
+                <!--select-label="">-->
+                <!--</multiselect>-->
                 <button v-on:click="confirm()">Confirm</button>
               </div>
 
@@ -64,15 +69,16 @@
       }
     },
     mounted(){
-      console.log('mount', this.selectItems);
-      this.options = this.selectItems;
+      let _this = this;
+      this.selectItems.forEach(function(d){
+          _this.options.push(d)
+      });
     },
     computed:{
 
     },
     methods:{
       confirm: function(){
-          console.log('collections',this.selection[0], this.selection[1])
         pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
       }
     },
