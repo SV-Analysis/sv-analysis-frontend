@@ -1,10 +1,17 @@
+<!--这个component没写好，应该再分成一些子模块-->
 <template>
   <div class="region-list">
     <div class="table-pagination-container">
       <div> {{title}}</div>
 
-      <select v-model="selected" class="dropbtn">
+      <select v-model="selectedCity" class="dropbtn">
         <option v-for="option in cityOptions" v-bind:value="option.id">
+          {{ option.name }}
+        </option>
+      </select>
+
+      <select v-model="selectedType" class="dropbtn">
+        <option v-for="option in typeOption" v-bind:value="option.id">
           {{ option.name }}
         </option>
       </select>
@@ -12,25 +19,37 @@
       <div class="table-container">
         <table class="street-table">
           <!--<col width="16.67%">-->
-          <!--<col width="16.67%">-->
-          <!--<col width="16.67%">-->
-          <!--<col width="16.67%">-->
-          <!--<col width="16.67%">-->
-          <!--<col width="16.67%">-->
           <thead >
           <tr>
-            <th v-for="attr in attrs" class="head-style">{{attr}}</th>
+            <th v-for="attr in attrObj[selectedType]" class="head-style">{{attr}}</th>
           </tr>
           </thead>
           <tbody>
           <!--Street Record-->
           <tr v-for="record in data" v-if="record['dataType']=='street'">
-            <td oncontextmenu="return false;" v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'" v-on:click='rowClick(record)' v-on:contextmenu="rightClick(record)" v-for="attr_name in attrs">{{record.attr[attr_name]}}</td>
+            <td oncontextmenu="return false;"
+                v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
+                v-on:click='rowClick(record)'
+                v-on:contextmenu="rightClick(record)"
+                v-for="attr_name in attrObj[selectedType]">
+              {{record.attr[attr_name]}}
+            </td>
           </tr>
-
-          <tr class="extand_map" v-else-if="record['dataType']=='map'"><td colspan="6">
-            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap>
-          </td></tr>
+          <tr v-else-if="record['dataType']=='adregion'">
+            <td oncontextmenu="return false;"
+                v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
+                v-on:click='rowClick(record)'
+                v-on:contextmenu="rightClick(record)"
+                v-for="attr_name in attrObj[selectedType]">
+              {{record.attr[attr_name]}}
+            </td>
+          </tr>
+          <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
+            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap></td>
+          </tr>
+          <tr class="extand_map" v-else-if="record['dataType']=='adregion_map'"><td colspan="6">
+            <RegionMap v-bind:cityInfo="currentCity" v-bind:adRegionData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap></td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -66,10 +85,15 @@
     data () {
       return {
         title: 'Street List',
-        selected:'',
+        selectedCity:'',
+        selectedType:'st',
         data:[],
         nav_button:[1,2,3,'...',5],
-        attrs:['SL','id','tag','len', 'streetType','img_len'],
+        attrs:['SL','id','tag', 'streetType','img_len'],
+        attrObj:{
+          'st': ['SL','id','tag', 'streetType','img_len'],
+          'ar': ['SL', 'id', 'area', 'img_len']
+        },
         cityOptions:[
           {
             'name': 'New York',
@@ -91,7 +115,16 @@
             'gps':[51.528308,-0.3817765],
             'id': 'london',
             'bound': null
-          },
+          }
+        ],
+        typeOption:[
+          {
+            'id': 'st',
+            'name':'street'
+          },{
+            'id': 'ar',
+            'name':'region'
+          }
         ],
         startIndex: 'Start',
         endIndex: 'End',
@@ -112,15 +145,12 @@
       }
     },
     watch:{
-      selected: function(newdata, olddata){
-        let _this = this;
-        this.cityOptions.forEach(function(city){
-          if(city['id'] == _this.selected){
-            _this.currentCity = city;
-          }
-        });
-        this.initPaginationInput();
-        this._queryStreet();
+      selectedCity: function(newdata, olddata){
+        this.selectedChanged();
+
+      },
+      selectedType: function(newdata, olddata){
+        this.selectedChanged();
       },
       listNumber: function(newData, oldData){
         if(newData > 50){
@@ -129,20 +159,42 @@
       }
     },
     methods:{
+      selectedChanged(){
+        let _this = this;
+        let selectedCity = this.selectedCity;
+        let selectedType = this.selectedType;
+        if(selectedCity == '' || selectedType == '') return;
+        this.cityOptions.forEach(function(city){
+          if(city['id'] == _this.selectedCity){
+            _this.currentCity = city;
+          }
+        });
+
+        this.initPaginationInput();
+        if(this.selectedType == 'st'){
+          this._queryStreet();
+        }else if(this.selectedType == 'ar'){
+          this._queryRegionSimp();
+        }
+
+      },
       initPaginationInput(){
         this.startIndex = 0;
         this.endIndex = this.startIndex + this.currentLen - 1;
       },
-      updatePaginationInput(start, end, number){
-
-      },
       _queryStreet(){
         let _this = this;
-        dataService.queryStreetCollections(this.selected, this.startIndex, this.currentLen, function(records){
-          _this._parseRecords(records, _this.selected)
+        dataService.queryStreetCollections(this.selectedCity, this.startIndex, this.currentLen, function(records){
+          _this._parseStreetRecords(records, _this.selectedCity)
         })
       },
-      _parseRecords(records, city){
+      _queryRegionSimp(){
+        let _this = this;
+        dataService.queryRegionCollections(this.selectedCity, this.startIndex, this.currentLen, function(records){
+          _this._parseRegionRecords(records, _this.selectedCity);
+        })
+      },
+      _parseStreetRecords(records, city){
         let _this = this;
         let udpateData = [];
         records.forEach(function(record){
@@ -151,7 +203,7 @@
           record['clicked'] = false;
           record['attr']['id'] = record['id'];
           record['attr']['tag'] = record['tag'];
-
+          record['attr']['img_len'] = record['image_list'].length;
           record['city'] = city;
           let record_id = record['city'] + '_' + record['dataType'] + '_' + record['id'];
           if(_this.selectIdMap[record_id]){
@@ -163,6 +215,32 @@
           udpateData.push(record);
         });
         _this.data = udpateData;
+        console.log('street', this.data)
+      },
+      _parseRegionRecords(records, city){
+        let _this = this;
+        let udpateData = [];
+        records.forEach(function(record){
+//        City is somehow hack
+          record['attr'] = record['attr'] == undefined ? {}: record['attr'];
+          record['attr']['id'] = record['rid'];
+          record['attr']['area'] = 21;
+          record['attr']['img_len'] = record['img_len'];
+
+          record['dataType'] = 'adregion';
+          record['clicked'] = false;
+          record['city'] = city;
+          let record_id = record['city'] + '_' + record['dataType'] + '_' + record['id'];
+          if(_this.selectIdMap[record_id]){
+            record['attr']['SL'] = true;
+          }
+          else{
+            record['attr']['SL'] = false;
+          }
+          udpateData.push(record);
+        });
+        _this.data = udpateData;
+        console.log('_this/data', this.data);
       },
       rowClick(record){
         let index = -1;
@@ -174,8 +252,15 @@
         }
         if(index != -1 && this.data[index]['clicked'] == false){
           // Insert a new element at index
+          let mapDataType = null;
+          if(record['dataType'] == 'street'){
+              mapDataType = 'street_map'
+          }else if(record['dataType'] == 'adregion'){
+              mapDataType = 'adregion_map'
+          }
+
           this.data.splice(index + 1, 0, {
-            dataType: 'map',
+            dataType: mapDataType,
             context: this.data[index]
           });
 
@@ -183,7 +268,6 @@
         }else if(index != -1 && this.data[index]['clicked'] == true){
           this.data[index]['clicked'] = false;
           this.data.splice(index + 1, 1);
-
         }
       },
       rightClick(record){
@@ -297,7 +381,9 @@
 
   /*Drop down box*/
   .dropbtn {
-    /*background-color: #ddd;*/
+
+    width: 100px;
+
     color: black;
     padding: 4px;
     font-size: 12px;
@@ -306,6 +392,11 @@
     float: left;
     margin-bottom: 5px;
     border: 1px solid #ddd;
+  }
+  .dropbtn:nth-child(odd){
+
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .dropdown {

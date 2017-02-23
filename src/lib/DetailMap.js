@@ -5,6 +5,9 @@ let DetailMap = function(el, cityInfo){
   this.cityInfo = cityInfo;
   this.kvPolylines = {};
   this.keyPoints = {};
+
+  this.serverLink = 'http://127.0.0.1:9930/';
+  // this.serverLink = '';
 };
 
 DetailMap.prototype.init = function(){
@@ -143,7 +146,22 @@ DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
 
+DetailMap.prototype.drawPolyLineByPositionArray = function(positions, lineId){
+  let pointList = [];
+  for(var i = 0; i < positions.length; i++){
+    pointList.push(new L.LatLng(positions[i][1], positions[i][0]))
+  }
+  var firstpolyline = new L.Polyline(pointList, {
+    color: 'red',
+    weight: 2,
+    opacity: 0.5,
+    smoothFactor: 1
+  });
+  this.kvPolylines[lineId] = firstpolyline;
+  firstpolyline.addTo(this.map);
+  return positions;
 
+};
 
 DetailMap.prototype.drawPolygon = function(streetInfo){
   // Hack: the parameter should be points list
@@ -218,6 +236,7 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
       }
     })
   }
+
   let points_layer = L.geoJSON(render_img_list, {
     pointToLayer: function (feature, latlng) {
       let maxAttr = feature['properties'].maxAttr;
@@ -235,7 +254,9 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
       let cityname = imgitems[0];
       let cid = imgitems[2];
       let iid = imgitems[3];
-      circleMarder.bindPopup( '<img src=http://127.0.0.1:9930/getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:120px;">' );
+
+      let imageLink = '<img src=' + _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:120px;">' ;
+      circleMarder.bindPopup(imageLink);
       return circleMarder;
     }
   });

@@ -40,9 +40,9 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
     .attr('stroke', '#7084f9')
     .attr('stroke-width', 3)
 
-  let margin_x = 30;
-  let margin_y = height * 2 / 10;
-  let matrixSize = height - margin_y * 2;
+  let margin_x = 80;
+  let margin_y = 50;//height * 1 / 10;
+  let matrixSize = width / 2 - margin_x ;// - margin_y * 2;
 
   let firstArray = sourceItem['record']['image_list'];
   let secondArray = targetItem['record']['image_list'];
@@ -116,7 +116,7 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
     let firstAttr = featureArray[attr['x']];
     let secondAttr = featureArray[attr['y']];
 
-    pointContainer.selectAll('.scatter-point-x')
+    pointContainer.append('g').selectAll('.scatter-point-x')
       .data(firstArray)
       .enter()
       .append('circle')
@@ -135,7 +135,7 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
       .attr('fill', barColors[0])
       .attr('opacity', 0.5)
 
-    pointContainer.selectAll('.scatter-point-y')
+    pointContainer.append('g').selectAll('.scatter-point-y')
       .data(secondArray)
       .enter()
       .append('circle')
@@ -153,6 +153,46 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
       .attr('r', 1)
       .attr('fill',barColors[1])
       .attr('opacity', 0.3)
+
+    if(attr['y'] == 0){
+      let regionXAxis = d3.axisTop()
+        .ticks(2);
+
+      let axisContainer = pointContainer.append('g').attr('class', '.xdimension')
+        .attr("transform", function(d) {
+          return "translate(" + regionMargin + ',' + (regionMargin) + ")";
+        });
+
+      axisContainer.append("g")
+        .attr("class", "axis")
+        .each(function(d) {
+          let ct = d3.select(this)
+            .call(regionXAxis.scale(xscale));
+          ct.selectAll('path').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('line').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('text').attr('fill', '#777')
+        })
+
+    }
+    if(attr['x'] == attr['y'] + 1) {
+      let regionYAxis = d3.axisLeft()
+        .ticks(2);
+
+      axisContainer = pointContainer.append('g').attr('class', '.ydimension')
+        .attr("transform", function (d) {
+          return "translate(" + regionMargin + ',' + (regionMargin) + ")";
+        });
+
+      axisContainer.append("g")
+        .attr("class", "axis")
+        .each(function (d) {
+          let ct = d3.select(this).call(regionYAxis.scale(yscale));
+          ct.selectAll('line').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('path').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('text').attr('fill', '#777')
+        })
+
+    }
   });
 
   // Draw barchart
@@ -332,7 +372,7 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
       .attr('class', 'ratio')
       .text(function(d){
         return parseInt(d) / 100;
-      })
+      });
     texts.attr('y', function(d, i){
       let texts = d3.select(this);
       return regionWidth / 2 + i * texts.node().getBoundingClientRect().height - 2;

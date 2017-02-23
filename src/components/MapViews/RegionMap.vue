@@ -18,7 +18,7 @@
 
   export default {
     name: 'mapview',
-    props: ['cityInfo', 'streetData', 'svFeatures2Color'],
+    props: ['cityInfo', 'streetData', 'svFeatures2Color','adRegionData'],
     data () {
       return {
         title: 'mapview',
@@ -28,8 +28,14 @@
       }
     },
     mounted(){
+      console.log('data', this.cityInfo, this.streetData, this.adRegionData);
+      if(this.streetData != undefined && this.adRegionData == undefined){
+        console.log('Street', this.streetData);
+      }else if(this.streetData == undefined && this.adRegionData != undefind){
+        console.log('region', this.adRegionData);
+      }
       this.createMap();
-      this.drawParallelCoordinate()
+
     },
     destroyed(){
       let _this = this;

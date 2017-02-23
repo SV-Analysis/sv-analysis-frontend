@@ -3,8 +3,10 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header ui-row">
-
+          <div class="">
+            <button class="modal-default-button" @click="$emit('close')">
+              X
+            </button>
           </div>
 
           <div class="modal-body-top">
@@ -17,24 +19,17 @@
                              placeholder="Type to search"
                              track-by="id"
                              label="id"
-                             :max="2"
-                >
-                  <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+                             :max="2">
+                  <span slot="noResult">No elements found.</span>
                 </multiselect>
-                <!--<multiselect style="padding-bottom: 10px"-->
-                <!--v-model="selection" :options="options"-->
-                <!--:multiple="true"-->
-                <!--placeholder="Select"-->
-                <!--label="id" :max="2" :max-height="150" :option-height="5"-->
-                <!--select-label="">-->
-                <!--</multiselect>-->
+
                 <button v-on:click="confirm()">Confirm</button>
               </div>
 
-              <div class="col-sm-8 col-md-8 col-lg-8 vis-container" >
+              <div class="col-sm-7 col-md-7 col-lg-7 vis-container" >
                 <ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems"></ScatterBarChart>
               </div>
-              <div class="col-sm-2 col-md-2 col-lg-2 " >
+              <div class="col-sm-3 col-md-3 col-lg-3 " >
                 c
               </div>
 
@@ -42,9 +37,7 @@
           </div>
 
           <div class="modal-footer">
-            <button class="modal-default-button" @click="$emit('close')">
-              Close
-            </button>
+
           </div>
         </div>
       </div>
@@ -71,7 +64,7 @@
     mounted(){
       let _this = this;
       this.selectItems.forEach(function(d){
-          _this.options.push(d)
+        _this.options.push(d)
       });
     },
     computed:{

@@ -48,9 +48,19 @@ function queryStreetCollections(cityId, startIndex, number, callback){
   })
 }
 
+function queryRegionCollections(cityId, startIndex, number, callback){
+  const url = `${dataServerUrl}/adregionsetquery`
+  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number}).then(response => {
+    callback(JSON.parse(response.data))
+  }, errResponse => {
+    console.log(errResponse)
+  })
+}
+
 export default{
   getTestData,
   getAllRecordsForOneCity,
   queryRegionFromBackground,
-  queryStreetCollections
+  queryStreetCollections,
+  queryRegionCollections
 }
