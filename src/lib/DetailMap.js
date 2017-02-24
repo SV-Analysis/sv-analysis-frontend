@@ -1,4 +1,4 @@
-import L from 'leafLet'
+import L from "leafLet";
 
 let DetailMap = function(el, cityInfo){
   this.$el = el;
@@ -146,62 +146,9 @@ DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
 
-DetailMap.prototype.drawPolyLineByPositionArray = function(positions, lineId){
-  let pointList = [];
-  for(var i = 0; i < positions.length; i++){
-    pointList.push(new L.LatLng(positions[i][1], positions[i][0]))
-  }
-  var firstpolyline = new L.Polyline(pointList, {
-    color: 'red',
-    weight: 2,
-    opacity: 0.5,
-    smoothFactor: 1
-  });
-  this.kvPolylines[lineId] = firstpolyline;
-  firstpolyline.addTo(this.map);
-  return positions;
 
-};
 
-DetailMap.prototype.drawPolygon = function(streetInfo){
-  // Hack: the parameter should be points list
-  let node_list = streetInfo['node_list'];
-  let pointList = [];
-  for(var i = 0; i < node_list.length; i ++){
-    let node = node_list[i]['location'];
-    pointList.push(new L.LatLng(node[1], node[0]))
-  }
 
-  var firstpolyline = new L.Polyline(pointList, {
-    color: 'red',
-    weight: 2,
-    opacity: 0.5,
-    smoothFactor: 1
-  });
-
-  // this.addPolyline(firstpolyline);
-  // this.polylines.push({
-  //   streetInfo.id: firstpolyline
-  // });
-  this.kvPolylines[streetInfo['id']] = firstpolyline;
-  firstpolyline.addTo(this.map);
-  return streetInfo;
-};
-
-DetailMap.prototype.deletePolyline = function(streetInfo){
-  // Hack: the parameter should be points list
-  let polylineId = streetInfo['id'];
-  // for(var i = 0; i < this.polylines.length; i++){
-  //   if(polylineObj == this.polylines[i]){
-  //     this.polylines.splice(i,1);
-  //     this.map.removeLayer(polylineObj);
-  //     return;
-  //   }
-  // }
-  if(this.kvPolylines[polylineId] != undefined){
-    this.map.removeLayer(this.kvPolylines[polylineId]);
-  }
-};
 
 DetailMap.prototype.getColor = function(type){
   if(this.colorStyle == undefined){
@@ -215,7 +162,152 @@ DetailMap.prototype.getColor = function(type){
     }
     return this.colorStyle[type];
   }
-}
+};
+
+DetailMap.prototype.fitBoundByStreet = function(streetInfo){
+  let node_list = streetInfo['node_list'];
+  let max_lat = -180;
+  let max_lon = -180;
+  let min_lat = 180;
+  let min_lon = 180;
+  for(var i = 0; i < node_list.length; i ++){
+    let node = node_list[i]['location'];
+    // pointList.push(new L.LatLng(node[1], node[0]))
+    max_lat = max_lat < node[0]?node[0]: max_lat;
+    max_lon = max_lon < node[1]?node[1]: max_lon;
+    min_lat = min_lat > node[0]?node[0]: min_lat;
+    min_lon = min_lon > node[1]?node[1]: min_lon;
+  }
+
+  min_lat -= 0.01;
+  min_lon -= 0.01;
+  max_lat += 0.01;
+  min_lon += 0.01;
+
+  this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
+};
+
+DetailMap.prototype.addMapScale = function(){
+  L.control.scale().addTo(this.map)
+};
+
+DetailMap.prototype.boundContainSinglePoint = function(point){
+  var bounds = this.getBounds();
+  return bounds.contains(point);
+};
+DetailMap.prototype.filterPointsArrInBounds = function(points){
+  let bounds = this.getBounds();
+  let newArrs = [];
+  points.forEach(function(d){
+    if(bounds.contains(d)){
+      newArrs.push(d)
+    }
+  });
+  return newArrs;
+};
+
+//Interaction among different views
+DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId){
+  let allPolyLines = [];
+  for(var i = 0, ilen = polylinePoints.length; i < ilen; i++){
+    allPolyLines.push({
+      "type": "LineString",
+      "coordinates": polylinePoints[i]
+    })
+  }
+  var myStyle = {
+    "color": "#ff7800",
+    "weight": 1,
+    "opacity": 0.65
+  };
+  let geoJsonObj = L.geoJSON(allPolyLines, {
+    style: myStyle
+  });
+  this.kvPolylines[lineId] = geoJsonObj;
+  geoJsonObj.addTo(this.map);
+};
+
+DetailMap.prototype.deletePolyline = function(id){
+  // Hack: the parameter should be points list
+  if(this.kvPolylines[id] != undefined){
+    this.map.removeLayer(this.kvPolylines[id]);
+  }
+};
+
+DetailMap.prototype.drawImagePoints = function(img_list, pointsId){
+  let render_img_list = [];
+  let _this = this;
+
+  for(var i = 0, ilen = img_list.length; i < ilen; i++){
+    render_img_list.push({
+      "type": "Feature",
+      "properties": {
+        "maxAttr": img_list[i]['max_attr']['attr'],
+        'img_id': img_list[i]['index'],
+        'img_path': img_list[i]['img_path']
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": img_list[i]['location']
+      }
+    })
+  }
+
+  let points_layer = L.geoJSON(render_img_list, {
+    pointToLayer: function (feature, latlng) {
+      let maxAttr = feature['properties'].maxAttr;
+      let _color = _this.getColor(maxAttr);
+      let circleMarder = L.circleMarker(latlng, {
+        radius: 1,
+        fillColor: _color,
+        color: _color,
+        opacity: 0.8,
+        fillOpacity: 0.3
+      });
+      let imageId = feature['properties']['img_id'];
+      let imgPath = feature['properties']['img_path'];
+      let imgitems = imgPath.split('/');
+      let cityname = imgitems[0];
+      let cid = imgitems[2];
+      let iid = imgitems[3];
+
+      let imageLink = '<img src=' + _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:120px;">' ;
+      circleMarder.bindPopup(imageLink);
+      return circleMarder;
+    }
+  });
+  points_layer.addTo(this.map)
+  if(this.keyPoints[pointsId] == undefined){
+    this.keyPoints[pointsId] = points_layer;
+  }else{
+    console.log('Points exited!')
+  }
+  L.popup();
+  return img_list;
+};
+
+DetailMap.prototype.deletePoints = function(id) {
+  if(this.keyPoints[id] != undefined){
+    this.map.removeLayer(this.keyPoints[id]);
+  }
+};
+///// will not be used
+// DetailMap.prototype.deletePolyline = function(streetInfo){
+//   // Hack: the parameter should be points list
+//   let polylineId = streetInfo['id'];
+//   // for(var i = 0; i < this.polylines.length; i++){
+//   //   if(polylineObj == this.polylines[i]){
+//   //     this.polylines.splice(i,1);
+//   //     this.map.removeLayer(polylineObj);
+//   //     return;
+//   //   }
+//   // }
+//   if(this.kvPolylines[polylineId] != undefined){
+//     this.map.removeLayer(this.kvPolylines[polylineId]);
+//   }
+// };
+
+// Old version
 DetailMap.prototype.drawPointsToMap = function(streetInfo){
   // Hack: the parameter should be points list
   let _this = this;
@@ -270,53 +362,36 @@ DetailMap.prototype.drawPointsToMap = function(streetInfo){
   return streetInfo;
 };
 
-DetailMap.prototype.deletePoints = function(streetInfo) {
-  let pointsId = streetInfo['id'];
-  if(this.keyPoints[pointsId] != undefined){
-    this.map.removeLayer(this.keyPoints[pointsId]);
-  }
-};
+// DetailMap.prototype.deletePoints = function(streetInfo) {
+//   let pointsId = streetInfo['id'];
+//   if(this.keyPoints[pointsId] != undefined){
+//     this.map.removeLayer(this.keyPoints[pointsId]);
+//   }
+// };
 
-DetailMap.prototype.fitBoundByStreet = function(streetInfo){
+DetailMap.prototype.drawPolygon = function(streetInfo){
+  // Hack: the parameter should be points list
   let node_list = streetInfo['node_list'];
-  let max_lat = -180;
-  let max_lon = -180;
-  let min_lat = 180;
-  let min_lon = 180;
+  let pointList = [];
   for(var i = 0; i < node_list.length; i ++){
     let node = node_list[i]['location'];
-    // pointList.push(new L.LatLng(node[1], node[0]))
-    max_lat = max_lat < node[0]?node[0]: max_lat;
-    max_lon = max_lon < node[1]?node[1]: max_lon;
-    min_lat = min_lat > node[0]?node[0]: min_lat;
-    min_lon = min_lon > node[1]?node[1]: min_lon;
+    pointList.push(new L.LatLng(node[1], node[0]))
   }
 
-  min_lat -= 0.01;
-  min_lon -= 0.01;
-  max_lat += 0.01;
-  min_lon += 0.01;
-
-  this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
-};
-
-DetailMap.prototype.addMapScale = function(){
-  L.control.scale().addTo(this.map)
-};
-
-DetailMap.prototype.boundContainSinglePoint = function(point){
-  var bounds = this.getBounds();
-  return bounds.contains(point);
-};
-DetailMap.prototype.filterPointsArrInBounds = function(points){
-  let bounds = this.getBounds();
-  let newArrs = [];
-  points.forEach(function(d){
-    if(bounds.contains(d)){
-      newArrs.push(d)
-    }
+  var firstpolyline = new L.Polyline(pointList, {
+    color: 'red',
+    weight: 2,
+    opacity: 0.5,
+    smoothFactor: 1
   });
-  return newArrs;
+
+  // this.addPolyline(firstpolyline);
+  // this.polylines.push({
+  //   streetInfo.id: firstpolyline
+  // });
+  this.kvPolylines[streetInfo['id']] = firstpolyline;
+  firstpolyline.addTo(this.map);
+  return streetInfo;
 };
 export default DetailMap
 

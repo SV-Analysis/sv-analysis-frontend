@@ -1,5 +1,6 @@
-<template>
+<!--耦合度太高，最好能够把propos里面的对象改成一些更加通用的数据结构，如单纯的polyline 以及 points等-->
 
+<template>
   <div class="region-mapview">
     <div class="regionmap-control">
       <button v-on:click="vbuttonClick()" id="display-points" type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
@@ -24,16 +25,43 @@
         title: 'mapview',
         attrs:['green', 'sky', 'road','building', 'car', 'others'],
         isRendered:false,
-        isChartDisplayed: false
+        isChartDisplayed: false,
+        imageList: null,
+        selectionId: null,
+        polyLinePoints: []
       }
     },
     mounted(){
       console.log('data', this.cityInfo, this.streetData, this.adRegionData);
+      let _this = this;
       if(this.streetData != undefined && this.adRegionData == undefined){
-        console.log('Street', this.streetData);
-      }else if(this.streetData == undefined && this.adRegionData != undefind){
-        console.log('region', this.adRegionData);
+        this.imageList = this.streetData['image_list'];
+
+        // Use an array for polyLinePoints because the streetData to consider the multipolygon case
+        let points = [];
+        this.streetData['node_list'].forEach(function(d){
+          points.push(d['location']);
+        });
+        this.polyLinePoints = [points];
+        this.selectionId = this.streetData['id'];
+
+
+      }else if(this.streetData == undefined && this.adRegionData != undefined){
+        this.imageList = [];
+        this.polyLinePoints = [];
+        this.adRegionData.subRegion.forEach(function(d){
+          let boundaryNodes = d['boundary'];
+          _this.polyLinePoints.push(boundaryNodes);
+        });
+        this.selectionId = this.adRegionData['rid'];
+        let imageList = [];
+        this.adRegionData['imageList'].forEach(function(d){
+          imageList = imageList.concat(d['images']);
+        });
+        this.imageList = imageList;
+        console.log('this.adReegionData', this.adRegionData)
       }
+
       this.createMap();
 
     },
@@ -41,7 +69,8 @@
       let _this = this;
       pipeService.emitDestroyPolyLine({
         'cityId': _this.cityInfo['id'],
-        'streetInfo': _this.streetData
+//        'streetInfo': _this.streetData
+        'selectionId': _this.selectionId
       })
     },
     beforeDestroyed(){
@@ -61,15 +90,19 @@
         let _this = this;
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
-        this.mapObj.setColorStyle(this.svFeatures2Color)
+        this.mapObj.setColorStyle(this.svFeatures2Color);
         this.mapObj.enableControlLayer();
-        this.mapObj.drawPolygon(this.streetData);
-        this.mapObj.drawPointsToMap(this.streetData);
-
-        this.mapObj.fitBoundByStreet(this.streetData);
+        this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId);
+        this.mapObj.drawImagePoints(this.imageList, this.selectionId);
+//        this.mapObj.drawPolygon(this.streetData);
+//        this.mapObj.drawPointsToMap(this.streetData);
+//
+//        this.mapObj.fitBoundByStreet(this.streetData);
         pipeService.emitPolyLine({
           'cityId': _this.cityInfo['id'],
-          'streetInfo': _this.streetData
+          'polyLinePoints': _this.polyLinePoints,
+          'imageList': _this.imageList,
+          'selectionId': _this.selectionId
         });
       },
       drawParallelCoordinate(){
@@ -86,7 +119,7 @@
         }
         this.isRendered = true;
         this.isChartDisplayed = true;
-        let parallelHandler = new ParallelCoordinate(this.$el, this.attrs, this.streetData['image_list'], this.svFeatures2Color);
+        let parallelHandler = new ParallelCoordinate(this.$el, this.attrs, this.imageList, this.svFeatures2Color);
         this.parallelHanlder = parallelHandler;
         parallelHandler.init();
       }

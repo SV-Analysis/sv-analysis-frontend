@@ -57,17 +57,30 @@
       });
 
       pipeService.onDrawPolyLine(function(msg){
+
         let cityId = msg['cityId'];
-        let streetInfo = msg['streetInfo'];
-        _this.mapObj.drawPolygon(streetInfo);
-        _this.mapObj.drawPointsToMap(streetInfo);
+        if(cityId !=  _this.cityInfo.id) return;
+
+        let polyLinePoints = msg['polyLinePoints'];
+        let imageList = msg['imageList'];
+        let selectionId = msg['selectionId'];
+        _this.mapObj.drawMultiplePolylines(polyLinePoints, selectionId);
+        _this.mapObj.drawImagePoints(imageList, selectionId);
+
+        //        let cityId = msg['cityId'];
+//        let streetInfo = msg['streetInfo'];
+//        _this.mapObj.drawPolygon(streetInfo);
+//        _this.mapObj.drawPointsToMap(streetInfo);
       });
 
       pipeService.onDestroyPolyLine(function(msg){
         let cityId = msg['cityId'];
-        let streetInfo = msg['streetInfo'];
-        _this.mapObj.deletePolyline(streetInfo);
-        _this.mapObj.deletePoints(streetInfo);
+        if(cityId !=  _this.cityInfo.id) return;
+
+
+
+        _this.mapObj.deletePolyline(msg['selectionId']);
+        _this.mapObj.deletePoints(msg['selectionId']);
       });
 
       pipeService.onDisplayPointCloud(function(msg){

@@ -2,18 +2,14 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/lib/DetailMap.js" />
-    <bookmark url="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" line="74" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" line="107" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/npm-debug.log" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/DetailMap.js" afterPath="$PROJECT_DIR$/src/lib/DetailMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/matrixBars.js" afterPath="$PROJECT_DIR$/src/lib/matrixBars.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/dataService.js" afterPath="$PROJECT_DIR$/src/service/dataService.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,16 +21,40 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="DetailMap.js" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="400">
+                    <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
+                    <folding>
+                      <marker date="1487867038549" expanded="true" signature="338:344" ph="©" />
+                      <marker date="1487867038549" expanded="true" signature="7701:7713" ph="..." />
+                      <marker date="1487867038549" expanded="true" signature="10046:10058" ph="..." />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5825427">
+    <splitter split-orientation="horizontal" split-proportion="0.30039063">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="530">
-                  <caret line="51" column="15" lean-forward="true" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
+                <state relative-caret-position="4481">
+                  <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
                   <folding>
                     <element signature="e#2858#2909#0" expanded="true" />
                   </folding>
@@ -42,13 +62,13 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RegionMap.vue" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
+          <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="418">
-                  <caret line="34" column="49" lean-forward="false" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+                <state relative-caret-position="1124">
+                  <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
                   <folding>
-                    <element signature="e#382#433#0" expanded="true" />
+                    <element signature="e#73#124#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -61,8 +81,8 @@
           <file leaf-file-name="ScatterBarChart.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="176">
-                  <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+                <state relative-caret-position="814">
+                  <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
                   <folding>
                     <element signature="e#79#103#0" expanded="true" />
                   </folding>
@@ -73,7 +93,7 @@
           <file leaf-file-name="dataService.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
+                <state relative-caret-position="468">
                   <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
                   <folding>
                     <element signature="e#44#65#0" expanded="true" />
@@ -82,14 +102,13 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="DetailMap.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
+          <file leaf-file-name="RegionMap.vue" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="290">
-                  <caret line="148" column="47" lean-forward="false" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="47" />
+                <state relative-caret-position="719">
+                  <caret line="121" column="89" lean-forward="false" selection-start-line="121" selection-start-column="89" selection-end-line="121" selection-end-column="89" />
                   <folding>
-                    <marker date="1487861327765" expanded="true" signature="337:343" ph="©" />
-                    <marker date="1487861327765" expanded="true" signature="7525:7537" ph="..." />
+                    <element signature="e#449#500#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -118,12 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>barChartWidth</find>
-      <find>barCollections</find>
-      <find>dsbChartWidth</find>
-      <find>barGroup</find>
-      <find>55</find>
-      <find>multi</find>
       <find>.modal-header</find>
       <find>modal-header</find>
       <find>100</find>
@@ -147,12 +160,18 @@
       <find>rowClick</find>
       <find>map</find>
       <find>adregion</find>
+      <find>remove</find>
+      <find>position</find>
+      <find>location</find>
+      <find>onDrawPolyLine</find>
       <find>context</find>
+      <find>drawPointsToMap</find>
+      <find>pointsId</find>
     </findStrings>
     <dirStrings>
       <dir>G:\vis2017\sv-analysis-frontend\src\components</dir>
-      <dir>G:\vis2017\sv-analysis-frontend\src</dir>
       <dir>G:\vis2017\sv-analysis-frontend</dir>
+      <dir>G:\vis2017\sv-analysis-frontend\src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -179,7 +198,6 @@
         <option value="$PROJECT_DIR$/src/components/ModalView.vue" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart" />
         <option value="$PROJECT_DIR$/src/lib/ParallelCoordinate.js" />
-        <option value="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/MSView.vue" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
@@ -188,8 +206,9 @@
         <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
         <option value="$PROJECT_DIR$/src/lib/matrixBars.js" />
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
-        <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
+        <option value="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
+        <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
       </list>
     </option>
@@ -665,10 +684,11 @@
     <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1765625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12460937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -680,10 +700,29 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12460937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -936,14 +975,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Analysis/Analysis.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -972,28 +1003,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="152" column="24" lean-forward="false" selection-start-line="152" selection-start-column="4" selection-end-line="152" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/ParallelCoordinate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1348">
           <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#79#103#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1045,9 +1058,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="115" column="18" lean-forward="false" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4481">
+          <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
+          <folding>
+            <element signature="e#2858#2909#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="468">
           <caret line="37" column="28" lean-forward="true" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
           <folding>
             <element signature="e#44#65#0" expanded="true" />
@@ -1055,33 +1086,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding>
+            <element signature="e#79#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1124">
+          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding>
+            <element signature="e#73#124#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="148" column="47" lean-forward="false" selection-start-line="148" selection-start-column="20" selection-end-line="148" selection-end-column="47" />
+        <state relative-caret-position="400">
+          <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="0" selection-end-line="236" selection-end-column="0" />
           <folding>
-            <marker date="1487861327765" expanded="true" signature="337:343" ph="©" />
-            <marker date="1487861327765" expanded="true" signature="7525:7537" ph="..." />
+            <marker date="1487867038549" expanded="true" signature="338:344" ph="©" />
+            <marker date="1487867038549" expanded="true" signature="7701:7713" ph="..." />
+            <marker date="1487867038549" expanded="true" signature="10046:10058" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="34" column="49" lean-forward="false" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+        <state relative-caret-position="719">
+          <caret line="121" column="89" lean-forward="false" selection-start-line="121" selection-start-column="89" selection-end-line="121" selection-end-column="89" />
           <folding>
-            <element signature="e#382#433#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="51" column="15" lean-forward="true" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
-          <folding>
-            <element signature="e#2858#2909#0" expanded="true" />
+            <element signature="e#449#500#0" expanded="true" />
           </folding>
         </state>
       </provider>
