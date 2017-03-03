@@ -190,15 +190,21 @@
       },
       _queryRegionSimp(){
         let _this = this;
+        let startTime = new Date();
         dataService.queryRegionCollections(this.selectedCity, this.startIndex, this.currentLen, function(records){
+          let endTime = new Date();
+          console.log('Time1 ', endTime - startTime);
           _this._parseRegionRecords(records, _this.selectedCity);
+          console.log('Time2 ', new Date() - endTime);
         })
       },
       _parseStreetRecords(records, city){
         let _this = this;
         let udpateData = [];
+        let number  = 0;
         records.forEach(function(record){
 //        City is somehow hack
+          number++;
           record['dataType'] = 'street';
           record['clicked'] = false;
           record['attr']['id'] = record['id'];
@@ -215,7 +221,7 @@
           udpateData.push(record);
         });
         _this.data = udpateData;
-        console.log('street', this.data)
+        console.log(number, 'street', this.data)
       },
       _parseRegionRecords(records, city){
         let _this = this;
@@ -254,9 +260,9 @@
           // Insert a new element at index
           let mapDataType = null;
           if(record['dataType'] == 'street'){
-              mapDataType = 'street_map'
+            mapDataType = 'street_map'
           }else if(record['dataType'] == 'adregion'){
-              mapDataType = 'adregion_map'
+            mapDataType = 'adregion_map'
           }
 
           this.data.splice(index + 1, 0, {
