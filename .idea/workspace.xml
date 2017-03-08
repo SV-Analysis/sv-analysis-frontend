@@ -5,28 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" line="107" mnemonic="8" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Config.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/SparkPCP.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/_lib/leaflet.distortableimage.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/_lib/leaflet.distortableimage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/DetailMap.js" afterPath="$PROJECT_DIR$/src/lib/DetailMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/dataService.js" afterPath="$PROJECT_DIR$/src/service/dataService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
-    </list>
+    <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -109,8 +88,8 @@
           <file leaf-file-name="webpack.base.conf.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+                <state relative-caret-position="550">
+                  <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -1264,8 +1243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="33" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        <state relative-caret-position="550">
+          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding />
         </state>
       </provider>
