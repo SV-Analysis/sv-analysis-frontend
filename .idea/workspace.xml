@@ -7,14 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SparkPCP.js" afterPath="$PROJECT_DIR$/src/lib/SparkPCP.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" afterPath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,8 +38,8 @@
           <file leaf-file-name="ImgLayer.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="376">
-                  <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+                <state relative-caret-position="640">
+                  <caret line="41" column="7" lean-forward="false" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
                   <folding>
                     <element signature="e#71#122#0" expanded="true" />
                   </folding>
@@ -56,8 +50,8 @@
           <file leaf-file-name="TrendView.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/StreetVis/TrendView.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1306">
-                  <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+                <state relative-caret-position="1130">
+                  <caret line="200" column="55" lean-forward="true" selection-start-line="200" selection-start-column="55" selection-end-line="200" selection-end-column="55" />
                   <folding>
                     <element signature="e#72#123#0" expanded="true" />
                   </folding>
@@ -68,8 +62,8 @@
           <file leaf-file-name="SvgImgLayer.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/lib/SvgImgLayer.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="650">
-                  <caret line="271" column="37" lean-forward="false" selection-start-line="271" selection-start-column="37" selection-end-line="271" selection-end-column="37" />
+                <state relative-caret-position="760">
+                  <caret line="272" column="90" lean-forward="false" selection-start-line="272" selection-start-column="90" selection-end-line="272" selection-end-column="90" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -143,7 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aggregatedImages</find>
       <find>rightClick</find>
       <find>colorScales</find>
       <find>calculateImgLocations</find>
@@ -170,9 +163,10 @@
       <find>opacity</find>
       <find>iel</find>
       <find>id2Data[iid]</find>
+      <find>circ;e</find>
+      <find>0.5</find>
       <find>id2Data</find>
       <find>circle</find>
-      <find>circ;e</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -225,11 +219,11 @@
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
         <option value="$PROJECT_DIR$/src/lib/SparkPCP.js" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
         <option value="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
       </list>
     </option>
@@ -1126,16 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/TrendView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1306">
-          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding>
-            <element signature="e#72#123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1169,18 +1153,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="640">
+          <caret line="41" column="7" lean-forward="false" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
           <folding>
             <element signature="e#71#122#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/TrendView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1130">
+          <caret line="200" column="55" lean-forward="true" selection-start-line="200" selection-start-column="55" selection-end-line="200" selection-end-column="55" />
+          <folding>
+            <element signature="e#72#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/SvgImgLayer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="271" column="37" lean-forward="false" selection-start-line="271" selection-start-column="37" selection-end-line="271" selection-end-column="37" />
+        <state relative-caret-position="760">
+          <caret line="272" column="90" lean-forward="false" selection-start-line="272" selection-start-column="90" selection-end-line="272" selection-end-column="90" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

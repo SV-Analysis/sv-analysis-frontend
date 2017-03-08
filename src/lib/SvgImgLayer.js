@@ -270,7 +270,7 @@ SvgImgLayer.prototype.removeHighlightSelected = function(selectedImages){
   let aid = selectedImages['aid'];
 
   if(_this.id2Data[aid]!= undefined){
-    d3.select(_this.id2Data[aid]['el']).selectAll('circle').attr('stroke-width', 1).attr('fill-opacity', '0.2')
+    d3.select(_this.id2Data[aid]['el']).selectAll('circle').attr('stroke-width', 1).attr('opacity', '0.2')
   }
 
 };

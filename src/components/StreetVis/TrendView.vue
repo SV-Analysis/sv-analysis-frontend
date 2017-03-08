@@ -190,11 +190,11 @@
           })
 
 
-//        let svgImages = imgContainer.append('image')
-//          .attr('xlink:href', function(d){
-//            return generateImageLink(d, _this.serverLink)
-//          })
-//          .attr('height', overAllHeight / 3 - 10)
+        let svgImages = imgContainer.append('image')
+          .attr('xlink:href', function(d){
+            return generateImageLink(d, _this.serverLink)
+          })
+          .attr('height', overAllHeight / 3 - 10)
 //        console.log('images', images);
 
 
