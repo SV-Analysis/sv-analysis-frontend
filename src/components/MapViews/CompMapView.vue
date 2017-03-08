@@ -153,6 +153,7 @@
             })
           }else{
             let level = _this.mapObj.getZoomLevel();
+
             let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
 
             _temp_points = _this.generateSample(_temp_points,14 - level);

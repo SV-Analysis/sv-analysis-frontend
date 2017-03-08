@@ -26,18 +26,22 @@
                 <button v-on:click="confirm()">Confirm</button>
               </div>
 
+              <!--<div class="col-sm-7 col-md-7 col-lg-7 vis-container" >-->
+              <!--<ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems"></ScatterBarChart>-->
+              <!--</div>-->
               <div class="col-sm-7 col-md-7 col-lg-7 vis-container" >
-                <ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems"></ScatterBarChart>
+                <StreetVis
+                  v-bind:svFeatures2Color='svFeatures2Color'
+                  v-bind:selectItems="selectItems"
+
+                ></StreetVis>
               </div>
               <div class="col-sm-3 col-md-3 col-lg-3 " >
                 c
               </div>
-
             </div>
           </div>
-
           <div class="modal-footer">
-
           </div>
         </div>
       </div>
@@ -46,9 +50,10 @@
 </template>
 
 <script>
-  import ScatterBarChart from './visView/ScatterBarChart.vue'
+  //  import ScatterBarChart from './visView/ScatterBarChart.vue'
   import Multiselect from 'vue-multiselect'
   import pipeService from '../service/pipeService'
+  import StreetVis from './StreetVis/StreetVis.vue'
 
   export default {
     name: 'modalview',
@@ -77,8 +82,9 @@
     },
 
     components:{
-      ScatterBarChart,
-      Multiselect
+//      ScatterBarChart,
+      Multiselect,
+      StreetVis
     }
   }
 </script>
@@ -116,7 +122,7 @@
     position: relative;
   }
 
-  ..def-modal-header{
+  .def-modal-header{
     color: #42b983;
 
   }

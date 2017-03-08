@@ -4,11 +4,12 @@
 
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import * as Config from '../Config'
 Vue.use(VueResource)
 
-const dataServerUrl = "http://127.0.0.1:9930";
+// const dataServerUrl = "http://127.0.0.1:9930";
 // const dataServerUrl = "/sv-analysis";
-
+const dataServerUrl = Config.serverLink == ""? "" : Config.serverLink.substring(0,  Config.serverLink.length - 1);;
 const $http = Vue.http
 
 function getTestData (callback) {

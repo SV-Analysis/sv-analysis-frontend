@@ -75,6 +75,7 @@
   import dataService from "../../service/dataService"
   import RegionMap from "../MapViews/RegionMap.vue"
   import pipeService from "../../service/pipeService"
+  import  * as Config from "../../Config"
 
   export default {
     name: 'streetlist',
@@ -85,6 +86,7 @@
     data () {
       return {
         title: 'Street List',
+        serverLink: Config.serverLink,
         selectedCity:'',
         selectedType:'st',
         data:[],
@@ -221,7 +223,7 @@
           udpateData.push(record);
         });
         _this.data = udpateData;
-        console.log(number, 'street', this.data)
+
       },
       _parseRegionRecords(records, city){
         let _this = this;
@@ -285,7 +287,76 @@
           record: record,
           updateSign: record['attr']['SL']
         };
+
+        if(record['aggregatedImages'] == undefined){
+            let agImgList = this._createAggregatedImglist(record['image_list']);
+            record['aggregatedImages'] = agImgList;
+        }
         pipeService.emitUpdateSelectItems(item);
+      },
+      _createAggregatedImglist(imgList){
+        let _this = this;
+
+        let features = this.svFeatures2Color['allFeatures'];
+        let locationMap = {};
+        let aggregateImgList = [];
+        for(let i = 0, ilen = imgList.length; i < ilen; i++){
+          let imgObj = imgList[i];
+          let [x, y] = imgObj['location'];
+
+          if(locationMap[x] == undefined){
+            locationMap[x] = {};
+          }
+          if(locationMap[x][y] == undefined){
+            locationMap[x][y] = {
+              imgList:[],
+              location: [x,y],
+              attrObj:{}
+            };
+            aggregateImgList.push(locationMap[x][y])
+          }
+          locationMap[x][y]['imgList'].push(imgObj);
+        }
+        aggregateImgList.forEach(function(agImg, i){
+          // Init attrs in the AggregateImgOb
+          features.forEach(function(attr){
+            agImg['attrObj'][attr] = 0;
+          });
+          //  Calculate Attr
+          agImg['imgList'].forEach(function(imgObj){
+            features.forEach(function(attr){
+              agImg['attrObj'][attr] += (imgObj[attr] / agImg['imgList'].length);
+            })
+          });
+          let largestValue = 0;
+          let largestAttr = null;
+          features.forEach(function(attr){
+            if(largestValue < agImg['attrObj'][attr]){
+              largestValue = agImg['attrObj'][attr]
+              largestAttr = attr;
+            }
+          });
+          agImg['max_attr'] = {
+            attr: largestAttr,
+            value: largestValue
+          }
+          agImg['img_path'] = agImg['imgList'][0]['img_path'];
+          agImg['id'] = 'aggregate_' + agImg['imgList'][0]['index'];
+
+
+          let imgPath = agImg['img_path']
+          let imgitems = imgPath.split('/');
+          let cityname = imgitems[0];
+          let cid = imgitems[2];
+          let iid = imgitems[3];
+
+          let imgLink = _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+          agImg['formatImgPath'] = imgLink;
+          agImg['aggregateIndex'] = i;
+        });
+
+        return aggregateImgList;
+
       },
       confirmNum(){
         if(isNaN(this.endIndex)||isNaN(this.startIndex)||isNaN(this.listNumber)){

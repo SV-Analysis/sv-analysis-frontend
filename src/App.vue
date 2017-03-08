@@ -8,10 +8,17 @@
         <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
         <Analysis v-bind:svFeatures2Color="svFeatures2Color" class="y-style-botton"></Analysis>
       </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" ><RegionList v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectIdMap="selectIdMap"></RegionList></div>
+      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" >
+        <RegionList v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectIdMap="selectIdMap"></RegionList>
+      </div>
     </div>
-    <ModalView v-if="showModal" @close="showModal = false" v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectItems="selectItems">
-
+    <ModalView
+      v-if="showModal"
+      @close="showModal = false"
+      v-bind:svFeatures2Color="svFeatures2Color"
+      v-bind:selectItems="selectItems"
+      v-bind:cityOptions="cityOptions"
+    >
     </ModalView>
 
   </div>
@@ -39,8 +46,7 @@
       CompContainer,
       Analysis,
       RegionList,
-      ModalView,
-
+      ModalView
     },
     data () {
       return {
@@ -53,11 +59,35 @@
           'others': '#c7c7c7',
           'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
         },
+        serverLink: '',
         showModal: false,
         selectItems:[],
         selectIdMap:{},
         value: null,
-        options: ['list', 'of', 'options']
+        options: ['list', 'of', 'options'],
+        cityOptions:[
+          {
+            'name': 'New York',
+            'gps':[40.7058253, -74.1180861],
+            'id': 'nyc',
+            'bound': null
+          },{
+            'name': 'Singapore',
+            'gps':[1.3149014, 103.7769792],
+            'id': 'singapore',
+            'bound': null
+          },{
+            'name': 'Hong Kong',
+            'gps':[22.365354, 114.105228],
+            'id':'hk',
+            'bound': null
+          },{
+            'name': 'London',
+            'gps':[51.528308,-0.3817765],
+            'id': 'london',
+            'bound': null
+          }
+        ],
       };
 
     },
@@ -77,6 +107,12 @@
       addItem(data){
         if(!this.selectIdMap[data['id']]){
           this.selectIdMap[data['id']] = data;
+          for(let i = 0, ilen = this.cityOptions.length; i < ilen; i++){
+            if(this.cityOptions[i]['id'] == data['city']){
+              data['cityObj'] = this.cityOptions[i];
+              break;
+            }
+          }
           this.selectItems.push(data);
         }else{
           console.log('item', data['id'], 'has been existed');

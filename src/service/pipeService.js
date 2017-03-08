@@ -18,7 +18,8 @@ var pipeService = new Vue({
     DESTROYPOLYLINE: 'destroy_polyline',
     DISPLAYPOINTCHANGED: 'display_point_updated',
     UPDATESELECTITEMS: 'update_selected_item',
-    CONFIRMSELECTION:'confirm_selection'
+    CONFIRMSELECTION:'confirm_selection',
+    UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer'
   },
 
   methods:{
@@ -158,6 +159,17 @@ var pipeService = new Vue({
         callback(msg);
       })
     },
+
+    //--------------------------------------------------------------
+    emitUpdateImagesFromImgMap2ImgLayer: function(msg){
+      this.$emit(this.UPDATEIMGFROMIMGMAP2IMGLAYER, msg);
+    },
+    onUpdateImagesFromImgMap2ImgLayer: function(callback){
+      this.$on(this.UPDATEIMGFROMIMGMAP2IMGLAYER,function(msg){
+        callback(msg);
+      })
+    },
+
   }
 })
 

@@ -1,13 +1,12 @@
 import L from "leafLet";
+import * as Config from '../Config'
 
 let DetailMap = function(el, cityInfo){
   this.$el = el;
   this.cityInfo = cityInfo;
   this.kvPolylines = {};
   this.keyPoints = {};
-
-  this.serverLink = 'http://127.0.0.1:9930/';
-  // this.serverLink = '';
+  this.serverLink = Config.serverLink;
 };
 
 DetailMap.prototype.init = function(){
@@ -27,7 +26,9 @@ DetailMap.prototype.init = function(){
     zoom: 9,
     layers: [this.grayscaleDark, this.cities],
     zoomControl: false,
-    maxZoom: 18
+    maxZoom: 18,
+    rotate: true,
+    touchRotate: true
   });
 
   this.baseLayers = {
@@ -42,6 +43,12 @@ DetailMap.prototype.init = function(){
   // };
 
   if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
+
+
+
+  // var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+  //   imageBounds = [[40.712216, -74.22655], [40.873941, -74.12544]];
+  // L.imageOverlay(imageUrl, imageBounds).addTo(this.map);
 };
 
 DetailMap.prototype.setColorStyle = function(colorStyle){
@@ -146,10 +153,6 @@ DetailMap.prototype.getZoomLevel = function(){
   return this.map.getZoom();
 };
 
-
-
-
-
 DetailMap.prototype.getColor = function(type){
   if(this.colorStyle == undefined){
     if(type == 'green') return '#2ca02c';
@@ -187,6 +190,30 @@ DetailMap.prototype.fitBoundByStreet = function(streetInfo){
   this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
 };
 
+DetailMap.prototype.fitBoundByImgList = function(imgList){
+  let node_list = imgList;
+  let max_lat = -180;
+  let max_lon = -180;
+  let min_lat = 180;
+  let min_lon = 180;
+  for(var i = 0; i < node_list.length; i ++){
+    let node = node_list[i]['location'];
+    // pointList.push(new L.LatLng(node[1], node[0]))
+    max_lat = max_lat < node[0]?node[0]: max_lat;
+    max_lon = max_lon < node[1]?node[1]: max_lon;
+    min_lat = min_lat > node[0]?node[0]: min_lat;
+    min_lon = min_lon > node[1]?node[1]: min_lon;
+  }
+
+  min_lat -= 0.005;
+  min_lon -= 0.005;
+  max_lat += 0.005;
+  min_lon += 0.005;
+
+  this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
+};
+
+
 DetailMap.prototype.addMapScale = function(){
   L.control.scale().addTo(this.map)
 };
@@ -198,6 +225,7 @@ DetailMap.prototype.boundContainSinglePoint = function(point){
 DetailMap.prototype.filterPointsArrInBounds = function(points){
   let bounds = this.getBounds();
   let newArrs = [];
+
   points.forEach(function(d){
     if(bounds.contains(d)){
       newArrs.push(d)
@@ -291,6 +319,149 @@ DetailMap.prototype.deletePoints = function(id) {
     this.map.removeLayer(this.keyPoints[id]);
   }
 };
+
+DetailMap.prototype.calculateImgLocations = function(imgList){
+  this.aggregatedImages = imgList;
+  this.drawImagePoints(this.aggregatedImages, 'temp_id');
+};
+// DetailMap.prototype.calculateImgLocations = function(imgList){
+//   let _this = this;
+//   this.imgList = imgList;
+//   let locationMap = {};
+//
+//   let aggregateImgList = [];
+//
+//   for(let i = 0, ilen = imgList.length; i < ilen; i++){
+//     let imgObj = imgList[i];
+//     let [x, y] = imgObj['location'];
+//
+//     if(locationMap[x] == undefined){
+//       locationMap[x] = {};
+//     }
+//     if(locationMap[x][y] == undefined){
+//       locationMap[x][y] = {
+//         imgList:[],
+//         location: [x,y],
+//         attrObj:{}
+//       };
+//       aggregateImgList.push(locationMap[x][y])
+//     }
+//     locationMap[x][y]['imgList'].push(imgObj);
+//   }
+//   let features = this.colorStyle['allFeatures'];
+//   aggregateImgList.forEach(function(agImg, i){
+//     // Init attrs in the AggregateImgOb
+//     features.forEach(function(attr){
+//       agImg['attrObj'][attr] = 0;
+//     });
+//     //  Calculate Attr
+//     agImg['imgList'].forEach(function(imgObj){
+//       features.forEach(function(attr){
+//         agImg['attrObj'][attr] += (imgObj[attr] / agImg['imgList'].length);
+//       })
+//     });
+//     let largestValue = 0;
+//     let largestAttr = null;
+//     features.forEach(function(attr){
+//       if(largestValue < agImg['attrObj'][attr]){
+//         largestValue = agImg['attrObj'][attr]
+//         largestAttr = attr;
+//       }
+//     });
+//     agImg['max_attr'] = {
+//       attr: largestAttr,
+//       value: largestValue
+//     }
+//     agImg['img_path'] = agImg['imgList'][0]['img_path'];
+//     agImg['id'] = 'aggregate_' + agImg['imgList'][0]['index'];
+//
+//
+//     let imgPath = agImg['img_path']
+//     let imgitems = imgPath.split('/');
+//     let cityname = imgitems[0];
+//     let cid = imgitems[2];
+//     let iid = imgitems[3];
+//
+//     let imgLink = _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+//     agImg['formatImgPath'] = imgLink;
+//     agImg['aggregateIndex'] = i;
+//   });
+//   this.drawImagePoints(aggregateImgList, 'temp_id');
+//   for(var i = 1, ilen = aggregateImgList.length; i < ilen; i++){
+//     let fpos = aggregateImgList[i - 1]['location'];
+//     var firstLatlng = L.latLng(fpos[0], fpos[1]);
+//     let spos = aggregateImgList[i]['location'];
+//     var secondLatlng = L.latLng(spos[0], spos[1]);
+//     let distance = firstLatlng.distanceTo(secondLatlng);
+//   }
+//   this.aggregatedImages = aggregateImgList;
+//   // this.displayAllImages(aggregateImgList)
+// };
+
+//No using.
+DetailMap.prototype.displayAllImages = function(imgList){
+
+  for(let i = 0, ilen = imgList.length; i < ilen; i++){
+    if(i % 20 != 0) continue
+    console.log('here');
+    let imgObj = imgList[i];
+    let location = imgObj['location'];
+    location[0] += 0.001;
+
+    let imgPath = imgObj['img_path']
+    let imgitems = imgPath.split('/');
+    let cityname = imgitems[0];
+    let cid = imgitems[2];
+    let iid = imgitems[3];
+
+    let imgLink = this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+
+    let firstImgObj = imgList[0];
+    let lastImgObj = imgList[imgList.length - 1];
+
+    let streetVectorY = lastImgObj['location'][1] - firstImgObj['location'][1];
+    let streetVectorX = lastImgObj['location'][0] - firstImgObj['location'][0];
+    let renderRatio = - streetVectorY / streetVectorX;
+    let distance = 0.1;
+    let dy = distance * distance / (1 + renderRatio * renderRatio);
+    let dx = dy / renderRatio;
+    let newPosition = [location[0] + dx, location[1] + dy];
+    let imageBounds = [[newPosition[1], newPosition[0]], [newPosition[1] + 0.003, newPosition[0]+ 0.004]];
+
+    // imageBounds = [location, [40.773941, -74.12544]];
+
+    L.imageOverlay(imgLink, imageBounds).addTo(this.map);
+  }
+};
+
+DetailMap.prototype.sampleImagesInTheBound = function(){
+  let _this = this;
+  // return Images sampled in the bound, return the scale
+  let bounds = this.getBounds();
+
+  let imagesObj = {
+    imgList: [], // Each img object with a position of screen x and y;
+    mapScale: this.getZoomLevel(),
+  };
+  let newImages = [];
+  this.aggregatedImages.forEach(function(d){
+    let location = [d['location'][1],d['location'][0]]
+    if(bounds.contains(location)){
+      d['screenLocation'] = _this.map.latLngToContainerPoint(location)
+      newImages.push(d);
+    }
+  });
+  imagesObj['newImages'] = newImages;
+  return newImages;
+};
+
+
+
+
+
+
+
+
 ///// will not be used
 // DetailMap.prototype.deletePolyline = function(streetInfo){
 //   // Hack: the parameter should be points list

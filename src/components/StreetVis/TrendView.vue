@@ -1,0 +1,172 @@
+<template>
+  <svg class="trend-view">
+
+  </svg>
+</template>
+
+<script>
+  import pipeService from '../../service/pipeService'
+  import * as d3 from 'd3'
+  import * as Config from '../../Config'
+
+
+  export default {
+    name: 'TrendView',
+    props:['svFeatures2Color', 'selectItems'],
+    data () {
+      return {
+        title: 'TrendView',
+        serverLink: Config.serverLink
+      }
+    },
+    mounted(){
+      let _this = this;
+      this.features = this.svFeatures2Color['allFeatures'];
+
+      this.colors = [];
+      this.features.forEach(function(attr){
+        _this.colors.push(_this.svFeatures2Color[attr])
+      });
+
+
+
+      pipeService.onConfirmSelection(function(items){
+
+        _this.createTrend(items);
+      })
+
+    },
+    computed:{
+
+    },
+    methods:{
+      initContainer(){
+
+      },
+      createTrend(items){
+        let firstSet = items[0];
+        let secondSet = items[1];
+        let overAllHeight = this.$el.clientHeight;
+        let overAllWidth = this.$el.clientWidth;
+
+        let firstContainer = d3.select(this.$el).append('g');
+        let secondContainer = d3.select(this.$el).append('g')
+          .attr('transform','translate(0,' + overAllHeight / 2 + ')');
+
+        this.renderTrend(firstContainer, firstSet)
+        this.renderTrend(secondContainer,secondSet)
+      },
+      renderTrend(el, trendData){
+        let _this = this;
+        let overAllHeight = this.$el.clientHeight;
+        let overAllWidth = this.$el.clientWidth;
+        let trendContainer = el;
+        let margin = {left: 10, right: 10, top: 10, bottom: 10};
+        let tagHeight = overAllHeight / 6;
+        let imageData = trendData['record']['aggregatedImages'];
+        let imgNumber = imageData.length;
+        let avgWidth = overAllWidth / imgNumber;
+        let tagContainer = trendContainer.append('g').selectAll('.tagContainer')
+          .data(imageData)
+          .enter()
+          .append('g')
+          .attr('class', 'tagContainer')
+          .attr('transform',function(d, i){
+            return 'translate(' + (i * avgWidth) + ',0)';
+          });
+
+        tagContainer.each(function(d){
+          let barContainer = d3.select(this).append('g').attr('class', 'barContainer')
+
+          let barData = [];
+          _this.features.forEach(function(attr){
+            barData.push(d['attrObj'][attr])
+          })
+          let offsetY = 0;
+          barContainer.selectAll('.bar')
+            .data(_this.features)
+            .enter()
+            .append('rect').attr('class','bar')
+            .attr('height', function(feature, i){
+              return d['attrObj'][feature] / 100 * tagHeight;
+            })
+            .attr('y', function(feature, i) {
+              let tempY = offsetY;
+              offsetY += (d['attrObj'][feature] / 100 * tagHeight);
+              return tempY;
+            })
+            .attr('width', avgWidth)
+            .attr('fill', function(feature, i) {return _this.svFeatures2Color[feature]})
+
+
+          barContainer.attr('stroke', 'white')
+            .attr('stroke-width', 0.1)
+            .attr('opacity', 0.5)
+            .on('mouseover', function(d){
+              d3.select(this).attr('opacity', 1)
+            })
+            .on('mouseout', function(d){
+              d3.select(this).attr('opacity', 0.5)
+            })
+
+        })
+
+        let images = [];
+
+        imageData.forEach(function(aggImgObj){
+          let _imgs = aggImgObj['imgList'];
+          _imgs.forEach(function(imgObj){
+            imgObj['aggregateObj'] = aggImgObj;
+            images.push(imgObj);
+          })
+        });
+
+        let imgWidth = 100, height = imgWidth / 4 * 3;
+        let gap = (overAllWidth - imgWidth) / images.length;
+        let offsetX = 0;
+        let imgContainer = trendContainer.append('g')
+          .attr('transform','translate(0,' + overAllHeight / 6  + ')')
+          .selectAll('.imgContainer')
+          .data(images)
+          .enter()
+          .append('g')
+          .attr('class', 'imgContainer')
+          .attr('transform', function(d){
+            let _offsetX = offsetX;
+            offsetX += gap;
+            return 'translate(' + _offsetX + ', 0)';
+          })
+
+
+        let svgImages = imgContainer.append('image')
+          .attr('xlink:href', function(d){
+            return generateImageLink(d, _this.serverLink)
+          })
+          .attr('height', overAllHeight / 3 - 10)
+//        console.log('images', images);
+
+
+        function generateImageLink(imgObj, serverLink){
+          let imgPath = imgObj['img_path']
+          let imgitems = imgPath.split('/');
+          let cityname = imgitems[0];
+          let cid = imgitems[2];
+          let iid = imgitems[3];
+
+          let imgLink = serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+          return imgLink
+        }
+      }
+
+    }
+  }
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+  .trend-view{
+    margin-top: 0px;
+    width: 100%;
+
+  }
+</style>

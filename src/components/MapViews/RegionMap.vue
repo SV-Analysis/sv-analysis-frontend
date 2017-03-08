@@ -97,7 +97,7 @@
 //        this.mapObj.drawPolygon(this.streetData);
 //        this.mapObj.drawPointsToMap(this.streetData);
 //
-//        this.mapObj.fitBoundByStreet(this.streetData);
+        this.mapObj.fitBoundByStreet(this.streetData);
         pipeService.emitPolyLine({
           'cityId': _this.cityInfo['id'],
           'polyLinePoints': _this.polyLinePoints,
