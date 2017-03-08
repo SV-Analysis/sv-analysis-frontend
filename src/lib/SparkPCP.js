@@ -5,6 +5,7 @@
 import * as d3 from 'd3'
 
 let SparkPCP = function(el, attrs, data, featureColor ){
+  console.log('data', data);
   this.$el = el;
   d3.select(this.$el).selectAll('g').remove();
   this.attrs = attrs;
@@ -13,24 +14,32 @@ let SparkPCP = function(el, attrs, data, featureColor ){
   this.isRendered = false;
   this.isChartDisplayed = false;
   this.pcpColor = ['#fdae61', '#66c2a5']
-
+  this.id2Data = {};
 };
 
 SparkPCP.prototype.initRender = function(){
   let _this = this;
   this.width = this.$el.clientWidth;
   this.height = this.$el.clientHeight;
-  this.margin = {top: 40, right: this.width / 5, bottom: 40, left: this.width / 5};
+  this.margin = {top: 40, right: this.width / 5, bottom: 40, left: 100};
+  this.pcpRegion = {
+    areaHeight: 40,
+    pcpWidth: (this.width - this.margin.right - this.margin.left) / 2,
+    pcpHeight: this.height - this.margin.bottom - this.margin.top,
+    overallHeight: this.height,
+    overallWidth: this.width
+  };
 
-  this.x = d3.scalePoint().range([0, this.width - this.margin.right - this.margin.left]);
+  this.x = d3.scalePoint().range([0, this.pcpRegion.pcpWidth]);
   this.x.domain(this.attrs);
 
   this.y = {};
-  console.log('ratio', _this.largestRatio);
   this.attrs.forEach(function(attr){
     _this.y[attr] = d3.scaleLinear().domain([0, _this.largestRatio]).range([_this.height - _this.margin.bottom,  _this.margin.top]);
   });
+
   this.svgContainer = d3.select(this.$el);
+
   this.pcpContainer = this.svgContainer
     .append("g")
     .attr("transform", "translate(" + this.margin.left + "," + 0 + ")");
@@ -45,12 +54,20 @@ SparkPCP.prototype.initRender = function(){
 };
 
 SparkPCP.prototype.initData = function(){
+  let _this = this;
   this.data.forEach(function(d, i){
     d.forEach(function(e, j){
       e['group'] = i;
     })
   });
   this.imageList = this.data[0].concat(this.data[1]);
+  let largestRatio = -1;
+  this.imageList.forEach(function(d){
+    let ratio = d['max_attr']['value'] / 100;
+    largestRatio = largestRatio < ratio ? ratio : largestRatio
+  });
+  this.largestRatio = largestRatio;
+
   // ratio bar data
   let ratioBarData = {};
   for(var i = 0, ilen = this.attrs.length; i < ilen; i++){
@@ -71,21 +88,18 @@ SparkPCP.prototype.initData = function(){
     })
   }
   let imageNumber = this.imageList.length;
-  let largestRatio = -1;
+
   largestIndex = 20;
   this.attrs.forEach(function(attr){
-
     for(var i = 0, ilen = ratioBarData[attr].length; i < ilen; i++){
       let ratio = ratioBarData[attr][i] / imageNumber;
       ratioBarData[attr][i] = ratio;
-      largestRatio = largestRatio < ratio? ratio: largestRatio;
+
     }
   });
 
   this.ratioBarData = ratioBarData;
-  this.largestRatio = largestRatio;
   this.largestIndex = largestIndex;
-
   let areaData = [];
   for(var i = 0, ilen = this.data.length; i < ilen; i++){
     let areaObj = {};
@@ -151,7 +165,7 @@ SparkPCP.prototype.drawPCPLines = function(){
   let _this = this;
   let line = d3.line();
 
-  var foreground = this.pcpContainer
+  var lines = this.pcpContainer
     .attr("class", "background")
     .selectAll("path")
     .data(this.imageList)
@@ -163,6 +177,14 @@ SparkPCP.prototype.drawPCPLines = function(){
     })
     .attr('fill', 'none')
     .attr('opacity', '0.05');
+  lines.each(function(d){
+    let iid = d['index']
+    if(_this.id2Data[iid] == undefined){
+      _this.id2Data[iid] = {}
+    }
+    _this.id2Data[iid]['data'] = d;
+    _this.id2Data[iid]['iel'] = this;
+  })
 
   function position(d) {
     return _this.x(d);
@@ -175,9 +197,35 @@ SparkPCP.prototype.drawPCPLines = function(){
   }
 };
 
+SparkPCP.prototype.onSelectedImages = function(selectedImages){
+  if(selectedImages['sign'] == true){
+    this.highlightSelected(selectedImages);
+  }else if(selectedImages['sign'] == false){
+    this.removeHighlightSelected(selectedImages);
+  }
+};
+
+SparkPCP.prototype.highlightSelected = function(selectedImages){
+  let _this = this;
+  let iids = selectedImages['iids'];
+  iids.forEach(function(iid){
+    if(_this.id2Data[iid]!= undefined){
+      d3.select(_this.id2Data[iid]['iel']).attr('stroke-width', 2).attr('opacity', '1')
+    }
+  })
+};
+SparkPCP.prototype.removeHighlightSelected = function(selectedImages){
+  let _this = this;
+  let iids = selectedImages['iids'];
+  iids.forEach(function(iid){
+    if(_this.id2Data[iid]!= undefined){
+      d3.select(_this.id2Data[iid]['iel']).attr('stroke-width', 1).attr('opacity', '0.05')
+    }
+  })
+};
 SparkPCP.prototype.drawLineArea = function(){
   let _this = this;
-  let areaChartWidth = (this.width - this.margin.right - this.margin.left) / 6;
+  let areaChartWidth = (this.pcpRegion.pcpWidth) / 6;
   let areaChartHeight = this.margin.top * 2 / 3;
 
   let lineAreaContainer = this.dimensionContainer.append('g');
@@ -203,7 +251,6 @@ SparkPCP.prototype.drawLineArea = function(){
         .y1(function(d, j) {
           return _areay(d);
         });
-
     });
   }
 
@@ -251,10 +298,6 @@ SparkPCP.prototype.drawLineArea = function(){
     //   .attr("d", area);
 
   })
-
-
-
-
 };
 
 SparkPCP.prototype.init = function(){
@@ -266,6 +309,7 @@ SparkPCP.prototype.init = function(){
   this.drawPCPLines();
   this.drawLineArea();
   this.drawPCPBars();
+  this.drawRemarkIcon();
 };
 
 SparkPCP.prototype.updateDisplay = function(sign){
@@ -279,6 +323,37 @@ SparkPCP.prototype.updateDisplay = function(sign){
   }else if(this.isRendered == false){
 
   }
+};
+
+SparkPCP.prototype.drawRemarkIcon = function(){
+  let _this = this;
+
+  let remarkPanel = d3.select(this.$el).append('g').attr('class', 'remarkIconContainer')
+    .attr('transform', 'translate(' + (this.pcpRegion.pcpWidth  * 7 / 6 + this.margin.left) + ',' + this.margin.top + ')')
+  let remarkContainers = remarkPanel.selectAll('.remarkIcon')
+    .data(this.attrs)
+    .enter()
+    .append('g')
+    .attr('class', 'remarkIcon')
+
+  remarkContainers.append('rect')
+    .attr('width', 10)
+    .attr('height', 10)
+    .attr('fill', function(attr){
+      return _this.svFeatures2Color[attr];
+
+    })
+    .attr('x', 0)
+    .attr('y', function(d, i){return i * 15})
+    .attr('opacity', 0.8)
+
+  remarkContainers.append('text')
+    .text(function(attr) {return attr})
+    .attr('x', 20)
+    .attr('y' ,function(d, i){
+      return i * 15 + 10;
+    })
+
 };
 
 export default SparkPCP

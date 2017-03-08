@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
   import pipeService from '../../service/pipeService'
   import * as d3 from 'd3'
   import SvgImgLayer from '../../lib/SvgImgLayer'
@@ -14,7 +13,7 @@
     props:['svFeatures2Color', 'selectItems'],
     data () {
       return {
-        title: 'ImageMap',
+        title: 'ImageLayer',
       }
     },
     mounted(){
@@ -24,6 +23,9 @@
       pipeService.onUpdateImagesFromImgMap2ImgLayer(function(images){
         _this.updateImages(images);
       });
+      pipeService.onImageGroupSelected(function(selectedImgs){
+        _this.svgImgLayer.onSelectedImages(selectedImgs);
+      })
     },
     computed:{
     },

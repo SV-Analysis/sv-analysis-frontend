@@ -19,7 +19,8 @@ var pipeService = new Vue({
     DISPLAYPOINTCHANGED: 'display_point_updated',
     UPDATESELECTITEMS: 'update_selected_item',
     CONFIRMSELECTION:'confirm_selection',
-    UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer'
+    UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer',
+    IMAGESELECTED:'image_selected'
   },
 
   methods:{
@@ -170,6 +171,16 @@ var pipeService = new Vue({
       })
     },
 
+    //--------------------------------------------------------------
+    //These message are shared among all the component under the StreetVis
+    emitImageGroupSelected: function(msg){
+      this.$emit(this.IMAGESELECTED, msg);
+    },
+    onImageGroupSelected: function(callback){
+      this.$on(this.IMAGESELECTED,function(msg){
+        callback(msg);
+      })
+    },
   }
 })
 

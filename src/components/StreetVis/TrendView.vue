@@ -16,7 +16,8 @@
     data () {
       return {
         title: 'TrendView',
-        serverLink: Config.serverLink
+        serverLink: Config.serverLink,
+        id2Data:{}
       }
     },
     mounted(){
@@ -28,13 +29,16 @@
         _this.colors.push(_this.svFeatures2Color[attr])
       });
 
-
-
       pipeService.onConfirmSelection(function(items){
-
         _this.createTrend(items);
+      });
+      pipeService.onImageGroupSelected(function(selectedImgs){
+        if(selectedImgs['sign'] == true){
+          _this.highlightImg(selectedImgs);
+        }else if(selectedImgs['sign'] == false){
+          _this.removeHighlightImg(selectedImgs);
+        }
       })
-
     },
     computed:{
 
@@ -44,22 +48,42 @@
 
       },
       createTrend(items){
+        this.id2Data = {};
         let firstSet = items[0];
         let secondSet = items[1];
         let overAllHeight = this.$el.clientHeight;
         let overAllWidth = this.$el.clientWidth;
 
+        if(overAllHeight < 10) return;
+
         let firstContainer = d3.select(this.$el).append('g');
         let secondContainer = d3.select(this.$el).append('g')
           .attr('transform','translate(0,' + overAllHeight / 2 + ')');
 
-        this.renderTrend(firstContainer, firstSet)
-        this.renderTrend(secondContainer,secondSet)
+        this.renderTrend(firstContainer, firstSet);
+        this.renderTrend(secondContainer,secondSet);
+      },
+      highlightImg(selectedImages){
+        let aid = selectedImages['aid'];
+
+        if(this.id2Data[aid] != undefined){
+            //Why opacity doesn't work?
+          d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 1)
+        }
+      },
+      removeHighlightImg(selectedImages){
+        let aid = selectedImages['aid'];
+        if(this.id2Data[aid] != undefined){
+          d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 0)
+        }
       },
       renderTrend(el, trendData){
         let _this = this;
         let overAllHeight = this.$el.clientHeight;
         let overAllWidth = this.$el.clientWidth;
+        if(overAllHeight == 0){
+          console.log('is 0');
+        }
         let trendContainer = el;
         let margin = {left: 10, right: 10, top: 10, bottom: 10};
         let tagHeight = overAllHeight / 6;
@@ -96,20 +120,48 @@
               return tempY;
             })
             .attr('width', avgWidth)
+            .attr('stroke', 'red')
+            .attr('stroke-width', 0)
             .attr('fill', function(feature, i) {return _this.svFeatures2Color[feature]})
 
-
+          function generateMessage(d, sign){
+            let aid = d['id']
+            let iids = []
+            d['imgList'].forEach(function(img){
+              iids.push(img['index'])
+            });
+            let imgsMessage = {
+              'sign': sign,
+              'aid': aid,
+              'iids': iids
+            };
+            return imgsMessage;
+          }
           barContainer.attr('stroke', 'white')
             .attr('stroke-width', 0.1)
             .attr('opacity', 0.5)
             .on('mouseover', function(d){
-              d3.select(this).attr('opacity', 1)
+              let imgsMessage = generateMessage(d, true);
+              pipeService.emitImageGroupSelected(imgsMessage);
+//              d3.select(this).attr('opacity', 1)
             })
             .on('mouseout', function(d){
-              d3.select(this).attr('opacity', 0.5)
+              let imgsMessage = generateMessage(d, false)
+              pipeService.emitImageGroupSelected(imgsMessage, false);
+//              d3.select(this).attr('opacity', 0.5)
             })
-
         })
+
+        tagContainer.each(function(d){
+          let aid = d['id'];
+          if(_this.id2Data[aid] == undefined){
+            _this.id2Data[aid] = {}
+          }
+          if(_this.id2Data[aid]['ael'] == undefined){
+            _this.id2Data[aid]['ael'] = this;
+            _this.id2Data[aid]['data'] = d;
+          }
+        });
 
         let images = [];
 
@@ -138,11 +190,11 @@
           })
 
 
-        let svgImages = imgContainer.append('image')
-          .attr('xlink:href', function(d){
-            return generateImageLink(d, _this.serverLink)
-          })
-          .attr('height', overAllHeight / 3 - 10)
+//        let svgImages = imgContainer.append('image')
+//          .attr('xlink:href', function(d){
+//            return generateImageLink(d, _this.serverLink)
+//          })
+//          .attr('height', overAllHeight / 3 - 10)
 //        console.log('images', images);
 
 

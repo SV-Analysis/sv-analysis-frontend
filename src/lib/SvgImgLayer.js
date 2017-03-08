@@ -10,6 +10,7 @@ let SvgImgLayer = function(el, svFeatures2Color){
   this.disablePoint = false;
   this.svFeatures2Color = svFeatures2Color;
   this.container = d3.select(this.$el).append('g').attr('class', 'imagecontainer');
+  this.id2Data = {}
 };
 
 SvgImgLayer.prototype.setColorStyle = function(colorStyle){
@@ -130,7 +131,7 @@ SvgImgLayer.prototype.updateImages = function(){
     .attr('r', 0)
     .attr('stroke', 'red')
     .attr('fill', 'red')
-    .attr('fill-opacity', 0.5)
+    .attr('opacity', 0.2)
     .transition()
     .attr('r', 5)
     .duration(500);
@@ -225,6 +226,15 @@ SvgImgLayer.prototype.updateImages = function(){
     }
   });
 
+
+  new_images.each(function(d){
+    let aid = d['id']
+    if(_this.id2Data[aid] == undefined){
+      _this.id2Data[aid] = {}
+    }
+    _this.id2Data[aid]['data'] = d;
+    _this.id2Data[aid]['el'] = this
+  })
   images.exit()
     .transition(1000)
     .attr('opacity', 0)
@@ -237,4 +247,31 @@ SvgImgLayer.prototype.init = function(){
 
 };
 
+SvgImgLayer.prototype.onSelectedImages = function(selectedImages){
+  if(selectedImages['sign'] == true){
+    this.highlightSelected(selectedImages);
+  }else if(selectedImages['sign'] == false){
+    this.removeHighlightSelected(selectedImages);
+  }
+};
+
+SvgImgLayer.prototype.highlightSelected = function(selectedImages){
+  let _this = this;
+  let aid = selectedImages['aid'];
+
+  if(_this.id2Data[aid]!= undefined){
+
+    d3.select(_this.id2Data[aid]['el']).selectAll('circle').attr('stroke-width', 2).attr('opacity', '1')
+  }
+
+};
+SvgImgLayer.prototype.removeHighlightSelected = function(selectedImages){
+  let _this = this;
+  let aid = selectedImages['aid'];
+
+  if(_this.id2Data[aid]!= undefined){
+    d3.select(_this.id2Data[aid]['el']).selectAll('circle').attr('stroke-width', 1).attr('fill-opacity', '0.2')
+  }
+
+};
 export default SvgImgLayer

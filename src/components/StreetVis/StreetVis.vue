@@ -25,15 +25,6 @@
       }
     },
     mounted(){
-
-      let _this = this;
-//      pipeService.onConfirmSelection(function(items){
-//        matrixBarHandler.draw(items[0], items[1], _this.svFeatures2Color['allFeatures']);
-//
-//      })
-    },
-    beforeDestroy(){
-
     },
     computed:{
 
@@ -46,7 +37,6 @@
       ImgMap,
       ImgLayer
     }
-
   }
 </script>
 

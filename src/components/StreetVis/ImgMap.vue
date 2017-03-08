@@ -21,6 +21,10 @@
       let _this = this;
       pipeService.onConfirmSelection(function(items){
         _this.createMap(items[0]['cityObj'], items[0]['record']['aggregatedImages'])
+      });
+
+      pipeService.onImageGroupSelected(function(selectedImgs){
+//        console.log('On ImageMap', selectedImgs)
       })
     },
     computed:{

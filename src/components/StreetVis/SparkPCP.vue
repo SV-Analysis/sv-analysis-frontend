@@ -21,11 +21,12 @@
       let _this = this;
       pipeService.onConfirmSelection(function(items){
         _this.drawSpartPCP(items);
+      });
+      pipeService.onImageGroupSelected(function(selectedImgs){
+        _this.handler.onSelectedImages(selectedImgs);
       })
     },
-    computed:{
-
-    },
+    computed:{},
     methods:{
       drawSpartPCP(items){
         let images = items[0]['record']['image_list'];
@@ -33,6 +34,7 @@
         if(this.$el.clientWidth < 10) return
         let handler = new SparkPCP(this.$el, this.attrs, [items[0]['record']['image_list'], items[1]['record']['image_list']], this.svFeatures2Color);
         handler.init();
+        this.handler = handler;
       }
     }
   }
