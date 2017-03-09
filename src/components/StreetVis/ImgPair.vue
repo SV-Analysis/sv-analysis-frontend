@@ -203,7 +203,6 @@
           })
 
 
-
         function generateImageLink(imgObj, serverLink){
           let imgPath = imgObj['img_path']
           let imgitems = imgPath.split('/');
