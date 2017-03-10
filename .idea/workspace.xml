@@ -8,16 +8,8 @@
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/webpack.base.conf.js" afterPath="$PROJECT_DIR$/build/webpack.base.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Config.js" afterPath="$PROJECT_DIR$/src/Config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" afterPath="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +24,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.48862115">
+    <splitter split-orientation="horizontal" split-proportion="0.66755915">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="false">
@@ -72,11 +64,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TrendView.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="TrendView.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/StreetVis/TrendView.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="316">
-                  <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="8" selection-end-line="205" selection-end-column="17" />
+                <state relative-caret-position="330">
+                  <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
                   <folding>
                     <element signature="e#72#123#0" expanded="true" />
                   </folding>
@@ -84,15 +76,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="StreetVis.vue" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
+          <file leaf-file-name="webpack.base.conf.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="638">
-                  <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-                  <folding>
-                    <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                  </folding>
+                <state relative-caret-position="396">
+                  <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -100,8 +89,8 @@
           <file leaf-file-name="Config.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Config.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="132">
-                  <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="29" />
+                <state relative-caret-position="88">
+                  <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
                   <folding />
                 </state>
               </provider>
@@ -138,8 +127,8 @@
           <file leaf-file-name="ImgMap.vue" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="656">
-                  <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+                <state relative-caret-position="876">
+                  <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
                   <folding>
                     <element signature="e#104#147#0" expanded="true" />
                   </folding>
@@ -233,10 +222,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setT</find>
-      <find>sampleImagesInTheBound</find>
-      <find>path</find>
-      <find>setImgList</find>
       <find>console</find>
       <find>serverLink</find>
       <find>el</find>
@@ -249,7 +234,6 @@
       <find>10</find>
       <find>attr</find>
       <find>mouseover</find>
-      <find>image</find>
       <find>renderTrend</find>
       <find>opacity</find>
       <find>iel</find>
@@ -261,8 +245,13 @@
       <find>generateMessage</find>
       <find>map-container</find>
       <find>this.$el</find>
-      <find>svFeatures2Color</find>
       <find>ael</find>
+      <find>image</find>
+      <find>iid</find>
+      <find>imgContainer</find>
+      <find>transform</find>
+      <find>svFeatures2Color</find>
+      <find>_offsetX</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -310,18 +299,18 @@
         <option value="$PROJECT_DIR$/src/lib/SparkPCP.js" />
         <option value="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgPair.vue" />
-        <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
-        <option value="$PROJECT_DIR$/src/Config.js" />
         <option value="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
         <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
         <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
+        <option value="$PROJECT_DIR$/src/Config.js" />
+        <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
       </list>
     </option>
   </component>
@@ -1103,30 +1092,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/webpack.prod.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/webpack.dev.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MapViews/NavMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -1144,14 +1109,6 @@
             <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1210,16 +1167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="91" column="24" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="24" />
-          <folding>
-            <element signature="e#2833#2884#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -1270,23 +1217,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="876">
+          <caret line="60" column="32" lean-forward="true" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+          <folding>
+            <element signature="e#104#147#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="91" column="24" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="91" selection-end-column="24" />
+          <folding>
+            <element signature="e#2833#2884#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.dev.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.prod.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/TrendView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="205" column="17" lean-forward="false" selection-start-line="205" selection-start-column="8" selection-end-line="205" selection-end-column="17" />
+        <state relative-caret-position="330">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
           <folding>
             <element signature="e#72#123#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
+    <entry file="file://$PROJECT_DIR$/src/Config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding>
-            <element signature="e#104#147#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="88">
+          <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

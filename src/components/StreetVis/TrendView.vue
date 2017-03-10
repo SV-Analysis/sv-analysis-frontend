@@ -23,6 +23,7 @@
     mounted(){
       let _this = this;
       this.features = this.svFeatures2Color['allFeatures'];
+      this.imgHeight = this.$el.clientHeight / 6 - 10;
 
       this.colors = [];
       this.features.forEach(function(attr){
@@ -53,7 +54,8 @@
         let secondSet = items[1];
         let overAllHeight = this.$el.clientHeight;
         let overAllWidth = this.$el.clientWidth;
-
+        this.imageHeight = overAllHeight / 3 - 10;
+        this.imageHeightExtend = overAllHeight / 3;
         if(overAllHeight < 10) return;
 
         let firstContainer = d3.select(this.$el).append('g');
@@ -64,19 +66,54 @@
         this.renderTrend(secondContainer,secondSet);
       },
       highlightImg(selectedImages){
+        let _this = this;
         let aid = selectedImages['aid'];
+        if (this.id2Data[aid] == undefined) return
+        let imgContainer = this.id2Data[aid]['imgContainer'];
+        let idArr = this.id2Data[aid]['iid'];
+        let maxIndex = Math.max.apply(null, idArr);
+        let minIndex = Math.min.apply(null, idArr);
+        let imgWidth = this.imageHeight * 4 / 3;
+        let imgWidthExtend = this.imageHeightExtend * 4 / 3;
+        let gap = (this.$el.clientWidth - (idArr.length * imgWidthExtend)) / imgContainer.size();
 
-        if(this.id2Data[aid] != undefined){
-          console.log('image', this.id2Data[aid]['iel']);
-          //Why opacity doesn't work?
-          d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 1)
-        }
+        imgContainer.transition().attr('transform', function(d, i){
+          let _offsetX = null;
+
+          if(i <= minIndex){
+            _offsetX = i * gap;
+          }else if(i<= (maxIndex + 1) && i> minIndex){
+            _offsetX = (i - minIndex) * imgWidthExtend + minIndex * gap
+          }else if(i > maxIndex)
+            _offsetX = ((maxIndex - minIndex) + 1) * imgWidthExtend + (minIndex + i - maxIndex - 1) * gap;
+          return 'translate(' + _offsetX + ', 0)';
+        }).duration(500)
+
+        //Why opacity doesn't work?
+        d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 1)
+        this.id2Data[aid]['iel'].forEach(function(img){
+          d3.select(img).transition().attr('height', _this.imageHeightExtend).duration(500)
+        })
+
       },
       removeHighlightImg(selectedImages){
+        let _this = this;
         let aid = selectedImages['aid'];
-        if(this.id2Data[aid] != undefined){
-          d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 0)
-        }
+        if(this.id2Data[aid] == undefined) return
+        let imgContainer = this.id2Data[aid]['imgContainer'];
+        let gap = (this.$el.clientWidth -  this.imageHeight) / imgContainer.size();
+
+        d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 0);
+
+        this.id2Data[aid]['iel'].forEach(function(img){
+          d3.select(img).transition().attr('height',  _this.imageHeight).transition()
+        })
+        imgContainer.transition()
+          .attr('transform', function(d, i){
+          let _offsetX = i * gap;
+          return 'translate(' + _offsetX + ', 0)';
+        }).duration(500)
+
       },
       generateMessage(d, sign){
         let aid = d['id']
@@ -173,8 +210,10 @@
         });
 
         let imgWidth = 100, height = imgWidth / 4 * 3;
-        let gap = (overAllWidth - imgWidth) / images.length;
+        let gap = (overAllWidth - imgWidth) / (images.length - 1);
         let offsetX = 0;
+//        Calculate positions:
+
         let imgContainer = trendContainer.append('g')
           .attr('transform','translate(0,' + overAllHeight / 6  + ')')
           .selectAll('.imgContainer')
@@ -182,9 +221,8 @@
           .enter()
           .append('g')
           .attr('class', 'imgContainer')
-          .attr('transform', function(d){
-            let _offsetX = offsetX;
-            offsetX += gap;
+          .attr('transform', function(d, i){
+            let _offsetX = i * gap;
             return 'translate(' + _offsetX + ', 0)';
           })
 
@@ -203,19 +241,20 @@
             pipeService.emitImageGroupSelected(imgsMessage, false);
           });
 
-        svgImages.each(function(d){
+        svgImages.each(function(d, index){
           let aid = d['aggregateObj']['id'];
           if(_this.id2Data[aid] == undefined){
             _this.id2Data[aid] = {}
           }
           if(_this.id2Data[aid]['iel'] == undefined){
             _this.id2Data[aid]['iel'] = [];
+            _this.id2Data[aid]['iid'] = [];
+            _this.id2Data[aid]['imgContainer'] = imgContainer
           }
           _this.id2Data[aid]['iel'].push(this);
+          _this.id2Data[aid]['iid'].push(index)
+
         });
-
-
-
 
         function generateImageLink(imgObj, serverLink){
           let imgPath = imgObj['img_path']
