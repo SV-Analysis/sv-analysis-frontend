@@ -77,6 +77,8 @@
     },
     methods:{
       confirm: function(){
+        this.selection[0]['show'] = true;
+        this.selection[1]['show'] = false;
         pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
       }
     },

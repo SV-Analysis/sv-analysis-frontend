@@ -1,14 +1,15 @@
 <template>
-  <svg class="trend-view">
+  <div>
 
-  </svg>
+  </div>
 </template>
 
 <script>
   import pipeService from '../../service/pipeService'
   import * as d3 from 'd3'
   import * as Config from '../../Config'
-
+  import ImgLayer from './ImgLayer.vue'
+  import ImgMap from './ImgMap.vue'
 
   export default {
     name: 'TrendView',
@@ -22,23 +23,6 @@
     },
     mounted(){
       let _this = this;
-      this.features = this.svFeatures2Color['allFeatures'];
-
-      this.colors = [];
-      this.features.forEach(function(attr){
-        _this.colors.push(_this.svFeatures2Color[attr])
-      });
-
-      pipeService.onConfirmSelection(function(items){
-        _this.createTrend(items);
-      });
-      pipeService.onImageGroupSelected(function(selectedImgs){
-        if(selectedImgs['sign'] == true){
-          _this.highlightImg(selectedImgs);
-        }else if(selectedImgs['sign'] == false){
-          _this.removeHighlightImg(selectedImgs);
-        }
-      })
     },
     computed:{
 
