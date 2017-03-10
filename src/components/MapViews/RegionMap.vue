@@ -15,11 +15,11 @@
   import pipeService from '../../service/pipeService'
   import DetailMap from '../../lib/DetailMap'
   import ParallelCoordinate from '../../lib/ParallelCoordinate'
-
+  import * as Config from '../../Config'
 
   export default {
     name: 'mapview',
-    props: ['cityInfo', 'streetData', 'svFeatures2Color','adRegionData'],
+    props: ['cityInfo', 'streetData','adRegionData'],
     data () {
       return {
         title: 'mapview',
@@ -28,7 +28,8 @@
         isChartDisplayed: false,
         imageList: null,
         selectionId: null,
-        polyLinePoints: []
+        polyLinePoints: [],
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

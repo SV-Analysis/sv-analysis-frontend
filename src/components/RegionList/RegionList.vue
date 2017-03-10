@@ -45,10 +45,13 @@
             </td>
           </tr>
           <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
-            <RegionMap v-bind:cityInfo="currentCity" v-bind:streetData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap></td>
+            <RegionMap v-bind:cityInfo="currentCity"
+                       v-bind:streetData="record['context']"
+                       >
+            </RegionMap></td>
           </tr>
           <tr class="extand_map" v-else-if="record['dataType']=='adregion_map'"><td colspan="6">
-            <RegionMap v-bind:cityInfo="currentCity" v-bind:adRegionData="record['context']" v-bind:svFeatures2Color="svFeatures2Color"></RegionMap></td>
+            <RegionMap v-bind:cityInfo="currentCity" v-bind:adRegionData="record['context']" ></RegionMap></td>
           </tr>
           </tbody>
         </table>
@@ -79,13 +82,14 @@
 
   export default {
     name: 'streetlist',
-    props: ['svFeatures2Color', 'selectIdMap'],
+    props: ['selectIdMap'],
     components:{
       RegionMap
     },
     data () {
       return {
         title: 'Street List',
+        svFeatures2Color: Config.svFeatures2Color,
         serverLink: Config.serverLink,
         selectedCity:'',
         selectedType:'st',
@@ -289,8 +293,8 @@
         };
 
         if(record['aggregatedImages'] == undefined){
-            let agImgList = this._createAggregatedImglist(record['image_list']);
-            record['aggregatedImages'] = agImgList;
+          let agImgList = this._createAggregatedImglist(record['image_list']);
+          record['aggregatedImages'] = agImgList;
         }
         pipeService.emitUpdateSelectItems(item);
       },

@@ -9,15 +9,15 @@
   import * as d3 from 'd3'
   import * as Config from '../../Config'
 
-
   export default {
     name: 'TrendView',
-    props:['svFeatures2Color', 'selectItems'],
+    props:['selectItems'],
     data () {
       return {
         title: 'TrendView',
         serverLink: Config.serverLink,
-        id2Data:{}
+        id2Data:{},
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){
@@ -67,6 +67,7 @@
         let aid = selectedImages['aid'];
 
         if(this.id2Data[aid] != undefined){
+          console.log('image', this.id2Data[aid]['iel']);
           //Why opacity doesn't work?
           d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 1)
         }
@@ -200,7 +201,19 @@
           .on('mouseout', function(d){
             let imgsMessage = _this.generateMessage(d['aggregateObj'], false)
             pipeService.emitImageGroupSelected(imgsMessage, false);
-          })
+          });
+
+        svgImages.each(function(d){
+          let aid = d['aggregateObj']['id'];
+          if(_this.id2Data[aid] == undefined){
+            _this.id2Data[aid] = {}
+          }
+          if(_this.id2Data[aid]['iel'] == undefined){
+            _this.id2Data[aid]['iel'] = [];
+          }
+          _this.id2Data[aid]['iel'].push(this);
+        });
+
 
 
 

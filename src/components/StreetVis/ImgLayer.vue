@@ -8,12 +8,16 @@
   import pipeService from '../../service/pipeService'
   import * as d3 from 'd3'
   import SvgImgLayer from '../../lib/SvgImgLayer'
+  import * as Config from '../../Config'
+
+
   export default {
     name: 'Image_layer',
-    props:['svFeatures2Color', 'selectItems'],
+    props:['selectItems'],
     data () {
       return {
         title: 'ImageLayer',
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

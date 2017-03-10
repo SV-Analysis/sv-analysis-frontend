@@ -7,14 +7,18 @@
 <script>
   import SparkPCP from '../../lib/SparkPCP'
   import pipeService from '../../service/pipeService'
+  import * as Config from '../../Config'
+
+
   export default {
     name: 'sparkPCP',
-    props:['svFeatures2Color', 'selectItems'],
+    props:[ 'selectItems'],
     data () {
       return {
         title: 'SparkPCP',
         attrs:['green', 'sky', 'road','building', 'car', 'others'],
-        imageList: []
+        imageList: [],
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

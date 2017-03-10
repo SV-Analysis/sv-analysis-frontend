@@ -31,9 +31,7 @@
               <!--</div>-->
               <div class="col-sm-7 col-md-7 col-lg-7 vis-container" >
                 <StreetVis
-                  v-bind:svFeatures2Color='svFeatures2Color'
                   v-bind:selectItems="selectItems"
-
                 ></StreetVis>
               </div>
               <div class="col-sm-3 col-md-3 col-lg-3 " >
@@ -54,16 +52,18 @@
   import Multiselect from 'vue-multiselect'
   import pipeService from '../service/pipeService'
   import StreetVis from './StreetVis/StreetVis.vue'
+  import * as Config from '../Config'
 
   export default {
     name: 'modalview',
-    props:['svFeatures2Color', 'selectItems'],
+    props:[ 'selectItems'],
     data () {
       return {
         SelectLabel:'',
         title: 'ModalView',
         options: [],
-        selection: []
+        selection: [],
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

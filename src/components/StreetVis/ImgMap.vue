@@ -7,16 +7,17 @@
 <script>
   import DetailMap from '../../lib/DetailMap'
   import pipeService from '../../service/pipeService'
-
+  import * as Config from '../../Config'
 
   export default {
     name: 'ImageMap',
-    props:['svFeatures2Color', 'selectItems', 'data', 'picked'],
+    props:['selectItems', 'data', 'picked'],
     data () {
       return {
         title: 'ImageMap',
         id: 'none',
-        notShow: false
+        notShow: false,
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

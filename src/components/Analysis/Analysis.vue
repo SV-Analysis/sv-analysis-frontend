@@ -1,9 +1,11 @@
 <template>
   <div class="statistic-list">
     <!--<div>{{ title }}</div>-->
-    <div style="display: inline-block; float: left" v-for="query in queryList" class="barChartContainer-container">
+    <div style="display: inline-block; float:left"
+         v-for="query in queryList"
+         class="barChartContainer-container">
       <div> {{query.cityId}} {{query.number}}</div>
-      <BarChart v-bind:regionQueryData="query" v-bind:svFeatures2Color="svFeatures2Color"></BarChart>
+      <BarChart v-bind:regionQueryData="query"></BarChart>
     </div>
   </div>
 </template>
@@ -11,9 +13,10 @@
 <script>
   import pipeService from '../../service/pipeService'
   import BarChart from '../visView/BarChart.vue'
+  import * as Config from '../../Config'
+
   export default {
     name: 'analysis',
-    props: ['svFeatures2Color'],
     components:{
       BarChart
     },
@@ -26,6 +29,7 @@
     },
     mounted(){
       let _this = this;
+      this.svFeatures2Color = Config.svFeatures2Color;
       pipeService.onRegionQueryDataRecieved(function(data){
         _this.queryList.push(_this.praseRegionQueryResult(data));
       })

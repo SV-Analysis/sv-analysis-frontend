@@ -5,17 +5,16 @@
       <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
       <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
         <Navigation class="y-style-top"></Navigation>
-        <CompContainer v-bind:svFeatures2Color="svFeatures2Color" class="y-style-middle"></CompContainer>
-        <Analysis v-bind:svFeatures2Color="svFeatures2Color" class="y-style-botton"></Analysis>
+        <CompContainer  class="y-style-middle"></CompContainer>
+        <Analysis class="y-style-botton"></Analysis>
       </div>
       <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" >
-        <RegionList v-bind:svFeatures2Color="svFeatures2Color" v-bind:selectIdMap="selectIdMap"></RegionList>
+        <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
       </div>
     </div>
     <ModalView
       v-if="showModal"
       @close="showModal = false"
-      v-bind:svFeatures2Color="svFeatures2Color"
       v-bind:selectItems="selectItems"
       v-bind:cityOptions="cityOptions"
     >
@@ -50,15 +49,6 @@
     },
     data () {
       return {
-        svFeatures2Color: {
-          'green': '#2ca02c',
-          'sky': '#17becf',
-          'road': '#8c564b',
-          'building' : '#ff7f0e',
-          'car': '#ff9896',
-          'others': '#c7c7c7',
-          'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
-        },
         serverLink: '',
         showModal: false,
         selectItems:[],

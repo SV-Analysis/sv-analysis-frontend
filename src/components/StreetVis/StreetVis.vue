@@ -1,8 +1,8 @@
 <template>
   <div class="street-view">
-    <SparkPCP v-bind:svFeatures2Color='svFeatures2Color' class="spark-pcp">spark-pcp</SparkPCP>
+    <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
     <div class="img-map-container">
-      <ImgLayer v-bind:svFeatures2Color='svFeatures2Color' class="img-svg"></ImgLayer>
+      <ImgLayer class="img-svg"></ImgLayer>
       <div class="map-container" >
         <div class="radio-container">
           <div  v-for="data in streetData">
@@ -14,13 +14,12 @@
           <ImgMap
             v-bind:picked="picked"
             v-bind:data='data'
-            class="img-map-f"
-            v-bind:svFeatures2Color='svFeatures2Color'>
+            class="img-map-f">
           </ImgMap>
         </div>
       </div>
     </div>
-    <TrendView v-bind:svFeatures2Color='svFeatures2Color' class="trend-view">trend-view</TrendView>
+    <TrendView class="trend-view">trend-view</TrendView>
   </div>
 </template>
 
@@ -32,15 +31,16 @@
   import ImgLayer from './ImgLayer.vue'
   import ImgMap from './ImgMap.vue'
   import pipeService from '../../service/pipeService'
-
+  import * as Config from '../../Config'
   export default {
     name: 'StreetView',
-    props:['svFeatures2Color', 'selectItems'],
+    props:['selectItems'],
     data () {
       return {
         title: 'Street View',
         streetData: [],
         picked: null,
+        svFeatures2Color:Config.svFeatures2Color
 
 
       }
