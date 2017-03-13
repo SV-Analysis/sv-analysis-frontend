@@ -57,14 +57,14 @@
       });
 
       pipeService.onDrawPolyLine(function(msg){
-
+        console.log('msg', msg)
         let cityId = msg['cityId'];
         if(cityId !=  _this.cityInfo.id) return;
 
         let polyLinePoints = msg['polyLinePoints'];
         let imageList = msg['imageList'];
         let selectionId = msg['selectionId'];
-        _this.mapObj.drawMultiplePolylines(polyLinePoints, selectionId);
+        _this.mapObj.drawMultiplePolylines(polyLinePoints, selectionId, msg.regionSign);
         _this.mapObj.drawImagePoints(imageList, selectionId);
 
         //        let cityId = msg['cityId'];

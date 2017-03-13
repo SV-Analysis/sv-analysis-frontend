@@ -252,7 +252,7 @@
           udpateData.push(record);
         });
         _this.data = udpateData;
-        console.log('_this/data', this.data);
+
       },
       rowClick(record){
         let index = -1;

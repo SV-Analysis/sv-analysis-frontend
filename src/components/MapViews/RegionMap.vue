@@ -33,7 +33,7 @@
       }
     },
     mounted(){
-      console.log('data', this.cityInfo, this.streetData, this.adRegionData);
+      console.log('data22', this.cityInfo, this.streetData, this.adRegionData);
       let _this = this;
       if(this.streetData != undefined && this.adRegionData == undefined){
         this.imageList = this.streetData['image_list'];
@@ -93,17 +93,24 @@
         this.mapObj.init();
         this.mapObj.setColorStyle(this.svFeatures2Color);
         this.mapObj.enableControlLayer();
-        this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId);
+        this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId, this.adRegionData != undefined);
+
         this.mapObj.drawImagePoints(this.imageList, this.selectionId);
 //        this.mapObj.drawPolygon(this.streetData);
 //        this.mapObj.drawPointsToMap(this.streetData);
 //
-        this.mapObj.fitBoundByStreet(this.streetData);
+        if(this.streetData){
+          this.mapObj.fitBoundByStreet(this.streetData);
+        }
+        if(this.adRegionData){
+          this.mapObj.fitBoundByRegion(this.adRegionData)
+        }
         pipeService.emitPolyLine({
           'cityId': _this.cityInfo['id'],
           'polyLinePoints': _this.polyLinePoints,
           'imageList': _this.imageList,
-          'selectionId': _this.selectionId
+          'selectionId': _this.selectionId,
+          'regionSign': (_this.adRegionData != undefined)
         });
       },
       drawParallelCoordinate(){

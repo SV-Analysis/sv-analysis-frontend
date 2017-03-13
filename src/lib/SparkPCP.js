@@ -61,6 +61,13 @@ SparkPCP.prototype.initData = function(){
     })
   });
   this.imageList = this.data[0].concat(this.data[1]);
+  let tempImgList=  [];
+  this.imageList.forEach(function(d, i){
+    if( i%5 == 0){
+      tempImgList.push(d);
+    }
+  });
+  // this.imageList = tempI
   let largestRatio = -1;
   this.imageList.forEach(function(d){
     let ratio = d['max_attr']['value'] / 100;
@@ -94,7 +101,6 @@ SparkPCP.prototype.initData = function(){
     for(var i = 0, ilen = ratioBarData[attr].length; i < ilen; i++){
       let ratio = ratioBarData[attr][i] / imageNumber;
       ratioBarData[attr][i] = ratio;
-
     }
   });
 
@@ -107,10 +113,22 @@ SparkPCP.prototype.initData = function(){
     let largestValue = -1;
     this.attrs.forEach(function(attr){
       areaObj[attr] = [];
-      imgList.forEach(function(img){
-        areaObj[attr].push(img[attr])
-        largestValue = largestValue < img[attr]? img[attr]: largestValue;
-      })
+      let _tempData = 0;
+      let _num = 0
+      let gap = Math.floor(imgList.length / 10);
+      imgList.forEach(function(img, i){
+        _tempData += img[attr];
+        _num += 1;
+        if((i % gap == 0 || i == imgList.length - 1)&& (i != 0)){
+
+          areaObj[attr].push(_tempData / _num);
+          _tempData = 0;
+          _num = 0;
+        }
+
+        // areaObj[attr].push(img[attr]);
+        largestValue = largestValue < img[attr] ? img[attr] : largestValue;
+      });
       areaObj[attr]['largest'] = largestValue;
     });
     areaData.push(areaObj)

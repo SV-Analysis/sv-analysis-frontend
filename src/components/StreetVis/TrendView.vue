@@ -110,9 +110,9 @@
         })
         imgContainer.transition()
           .attr('transform', function(d, i){
-          let _offsetX = i * gap;
-          return 'translate(' + _offsetX + ', 0)';
-        }).duration(500)
+            let _offsetX = i * gap;
+            return 'translate(' + _offsetX + ', 0)';
+          }).duration(500)
 
       },
       generateMessage(d, sign){
@@ -186,6 +186,9 @@
               let imgsMessage = _this.generateMessage(d, false)
               pipeService.emitImageGroupSelected(imgsMessage, false);
             })
+            .on('click', function(d){
+              console.log('ddd', d);
+            })
         })
 
         tagContainer.each(function(d){
@@ -233,6 +236,7 @@
           })
           .attr('height', overAllHeight / 3 - 10)
           .on('mouseover', function(d){
+
             let imgsMessage = _this.generateMessage(d['aggregateObj'], true);
             pipeService.emitImageGroupSelected(imgsMessage);
           })

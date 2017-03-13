@@ -6,13 +6,15 @@
 
 <script>
   import * as d3 from 'd3'
+  import * as Config from '../../Config'
 
   export default {
     name: 'barchart',
-    props:['regionQueryData', 'svFeatures2Color'],
+    props:['regionQueryData'],
     data () {
       return {
         title: 'BarChart',
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){

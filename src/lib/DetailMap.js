@@ -5,6 +5,7 @@ let DetailMap = function(el, cityInfo){
   this.$el = el;
   this.cityInfo = cityInfo;
   this.kvPolylines = {};
+  this.kvPolygons = {};
   this.keyPoints = {};
   this.serverLink = Config.serverLink;
 };
@@ -20,6 +21,8 @@ DetailMap.prototype.init = function(){
   this.grayscaleDark   = L.tileLayer(mbUrl, {id: 'mapbox.dark', attribution: null});
   this.grayscaleLight   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: null});
   this.streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: null});
+  this.outdoor  = L.tileLayer(mbUrl, {id: 'mapbox.outdoors',   attribution: null});
+  this.satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite',   attribution: null});
 
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
@@ -34,7 +37,9 @@ DetailMap.prototype.init = function(){
   this.baseLayers = {
     "GrayScaleLight": this.grayscaleLight,
     "GrayScaleDark": this.grayscaleDark,
-    "Streets": this.streets
+    "Streets": this.streets,
+    "Outdoor": this.outdoor,
+    "satellite": this.satellite
   };
 
   this.currentLayer = this.grayscaleLight;
@@ -168,6 +173,8 @@ DetailMap.prototype.getColor = function(type){
 };
 
 DetailMap.prototype.fitBoundByStreet = function(streetInfo){
+  console.log('here');
+  if(streetInfo['node_list'] == undefined) return
   let node_list = streetInfo['node_list'];
   let max_lat = -180;
   let max_lon = -180;
@@ -188,6 +195,10 @@ DetailMap.prototype.fitBoundByStreet = function(streetInfo){
   min_lon += 0.01;
 
   this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
+};
+
+DetailMap.prototype.fitBoundByRegion = function(regionInfo){
+  console.log('region', regionInfo);
 };
 
 DetailMap.prototype.fitBoundByImgList = function(imgList){
@@ -235,13 +246,23 @@ DetailMap.prototype.filterPointsArrInBounds = function(points){
 };
 
 //Interaction among different views
-DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId){
+DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, polygonSign){
   let allPolyLines = [];
+  let allPolygons = [];
   for(var i = 0, ilen = polylinePoints.length; i < ilen; i++){
     allPolyLines.push({
       "type": "LineString",
       "coordinates": polylinePoints[i]
-    })
+    });
+    if(polygonSign == true){
+      allPolygons.push({
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [polylinePoints[i]]
+        }
+      })}
   }
   var myStyle = {
     "color": "#ff7800",
@@ -251,14 +272,30 @@ DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId){
   let geoJsonObj = L.geoJSON(allPolyLines, {
     style: myStyle
   });
+
   this.kvPolylines[lineId] = geoJsonObj;
   geoJsonObj.addTo(this.map);
+
+  if(polygonSign){
+    let polygonObj = L.geoJSON(allPolygons, {
+      style: myStyle
+    });
+    polygonObj.addTo(this.map);
+    this.kvPolygons[lineId] = polygonObj;
+  }
+
+
+
+
 };
 
 DetailMap.prototype.deletePolyline = function(id){
   // Hack: the parameter should be points list
   if(this.kvPolylines[id] != undefined){
     this.map.removeLayer(this.kvPolylines[id]);
+  }
+  if(this.kvPolygons[id] != undefined){
+    this.map.removeLayer(this.kvPolygons[id]);
   }
 };
 
@@ -277,7 +314,7 @@ DetailMap.prototype.drawImagePoints = function(img_list, pointsId){
       "geometry": {
         "type": "Point",
         "coordinates": img_list[i]['location']
-      }
+      },
     })
   }
 
