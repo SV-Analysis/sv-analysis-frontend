@@ -42,7 +42,7 @@ MatrixBar.prototype.draw = function(sourceItem, targetItem, featureArray){
 
   let margin_x = 80;
   let margin_y = 50;//height * 1 / 10;
-  let matrixSize = width / 2 - margin_x ;// - margin_y * 2;
+  let matrixSize = heihgt ;// - margin_y * 2;
 
   let firstArray = sourceItem['record']['image_list'];
   let secondArray = targetItem['record']['image_list'];

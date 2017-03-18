@@ -1,10 +1,10 @@
 <template>
   <div id="navigation" class="navigation">
-    <div>{{ title }}</div>
-    <div style="height: 100%" v-bind:style="new_style">
+
+    <div style="height: 100%" class="map-list-container">
       <div class='navmap-container' v-for="cityInfo in cities">
         <div>
-          <input style='float:left; margin-left: 10px'
+          <input style='float:left; margin-left: 20px'
                  v-bind:value='cityInfo.id' type="checkbox"
                  v-model="checkedItem" :disabled="cityInfo.notDisabled == 1? false: true">
           <div style='float:left; margin-left: 20px' for="checkbox">{{ cityInfo.name }}</div>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-  import 'leaflet/dist/leaflet.css'
-  import NavMapView from './MapViews/NavMapView.vue'
-  import pipeService from '../service/pipeService'
+  import NavMapView from '../MapViews/NavMapView.vue'
+  import pipeService from '../../service/pipeService'
+  import dataService from '../../service/dataService'
 
   export default {
-    name: 'navigation',
+    name: 'citySelection',
     watch:{
       checkedItem: {
         deep: 'true',
@@ -38,6 +38,16 @@
               this.cities[i].notDisabled = 1;
             }
           }
+          let _this = this;
+
+          newValue.forEach(function(cityId){
+            if(_this.statistic[cityId] == undefined){
+              dataService.queryStatistics(cityId, 'region', function(data){
+                console.log('region', data)
+              })
+            }
+          })
+
           pipeService.emitUpdateSelectedMapView(newValue);
         }
       }
@@ -47,10 +57,13 @@
         title: 'Navigation View',
         // City configuration should be loaded from the backend configuration files
         checkedItem: [],
+        statistic:{
+
+        },
         cities: [{
-          'name': 'New York',
-          'gps':[40.7058253, -74.1180861],
-          'id': 'nyc',
+          'name': 'Hong Kong',
+          'gps':[22.365354, 114.105228],
+          'id':'hk',
           'selected': false,
           'notDisabled': 1
         },{
@@ -60,9 +73,9 @@
           'selected': false,
           'notDisabled': 1
         },{
-          'name': 'Hong Kong',
-          'gps':[22.365354, 114.105228],
-          'id':'hk',
+          'name': 'New York',
+          'gps':[40.7058253, -74.1180861],
+          'id': 'nyc',
           'selected': false,
           'notDisabled': 1
         },{
@@ -75,21 +88,25 @@
       }
     },
     mounted(){
+      console.log('cityies', this.cities)
     },
     computed:{
       newMessage: function(){
         return this.title;
       },
       new_style: function(){
-        let width = 350 * this.cities.length + 'px';
-        return {width: width}
+        if(this.$el)
+        {
+          let width = this.$el.clientWidth * this.cities.length + 'px';
+          let height = (this.$el.clientWidth * 3  / 4) * this.cities.length + 'px';
+          console.log('height', height)
+          return {width: width, height: height }
+        }
       }
-
     },
     components:{
       NavMapView
     }
-
   }
 </script>
 
@@ -98,16 +115,14 @@
   #navigation{
     max-width: 100%;
     minwidth: 100%;
-    overflow-x: auto;
 
   }
+  .map-list-container{
+    max-width: 100%;
+  }
   .navmap-container{
-    float: left;
-    /*position: absolute;*/
     margin-left: 20px;
-    width: 300px;
-
     background: rgba(13,13,13,0.1);
-    height: 80%
+    height: 180px;
   }
 </style>

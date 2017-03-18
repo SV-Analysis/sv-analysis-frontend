@@ -4,8 +4,9 @@
       <button v-on:click="changeDisplay()" id="display-points" type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
         <span class="glyphicon " aria-hidden="true">D</span>
       </button>
-
-
+      <button v-on:click="changeInteraction()"  type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
+        <span class="glyphicon " aria-hidden="true">I</span>
+      </button>
     </div>
   </div>
 </template>
@@ -21,7 +22,8 @@
     data () {
       return {
         title: 'Points View',
-        disablePoint: false
+        disablePoint: false,
+        mapInteraction: false,
       }
     },
     mounted(){
@@ -43,6 +45,10 @@
       changeDisplay(){
         this.disablePoint = !this.disablePoint;
         pipeService.emitDisplayPointCloud({'cityId': this.cityInfo.id, 'disablePoints': this.disablePoint})
+      },
+      changeInteraction(){
+        this.mapInteraction = !this.mapInteraction;
+        pipeService.emitChagneInteractions({'cityId': this.cityInfo.id, 'mapInteraction': this.mapInteraction})
       }
     },
     watch:{
@@ -68,6 +74,7 @@
     pointer-events: auto;
   }
   .self-button{
+    width: 20px;
     margin-top: 3px
   }
 </style>

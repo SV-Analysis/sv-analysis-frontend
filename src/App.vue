@@ -1,17 +1,33 @@
 <template>
   <div id="app">
     <Navbar><button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button></Navbar>
-    <div class="ui-row">
-      <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>-->
-      <div class="col-sm-9 col-md-9 col-lg-9 root-container " >
-        <Navigation class="y-style-top"></Navigation>
-        <CompContainer  class="y-style-middle"></CompContainer>
-        <Analysis class="y-style-botton"></Analysis>
-      </div>
-      <div class="col-sm-4 col-md-3 col-lg-3 root-container bstyle" >
+    <el-row :gutter="20" class="whole-row">
+      <el-col :span="5" class="root-container bstyle">
         <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
-      </div>
-    </div>
+      </el-col>
+      <el-col :span="19" class="root-container">
+        <!--<Navigation class="y-style-top"></Navigation>-->
+        <CompContainer  class="y-style-middle"></CompContainer>
+        <!--<ScatterBarChart class="y-style-bottom"></ScatterBarChart>-->
+
+        <!--<Analysis class="y-style-bottom"></Analysis>-->
+        <ImproveLineChart class="y-style-bottom"> </ImproveLineChart>
+      </el-col>
+
+    </el-row>
+
+    <!--<div class="ui-row">-->
+    <!--&lt;!&ndash;<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>&ndash;&gt;-->
+    <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container bstyle" >-->
+    <!--<RegionList v-bind:selectIdMap="selectIdMap"></RegionList>-->
+    <!--</div>-->
+    <!--<div class="col-sm-9 col-md-9 col-lg-9 root-container " >-->
+    <!--<Navigation class="y-style-top"></Navigation>-->
+    <!--<CompContainer  class="y-style-middle"></CompContainer>-->
+    <!--<Analysis class="y-style-botton"></Analysis>-->
+    <!--</div>-->
+
+    <!--</div>-->
     <ModalView
       v-if="showModal"
       @close="showModal = false"
@@ -34,7 +50,8 @@
   import ModalView from './components/AnalysisView.vue'
   import pipeService from './service/pipeService'
   import 'bootstrap/dist/css/bootstrap.css'
-
+  import ScatterBarChart from './components/visView/ScatterBarChart.vue'
+  import ImproveLineChart from './components/visView/ImproveLineChart.vue'
 
   export default {
     name: 'app',
@@ -45,7 +62,9 @@
       CompContainer,
       Analysis,
       RegionList,
-      ModalView
+      ModalView,
+      ScatterBarChart,
+      ImproveLineChart
     },
     data () {
       return {
@@ -133,7 +152,8 @@
   html{
     background: rgba(211,211,211, 0.3);
     height: 100%;
-    width: 100%
+    width: 100%;
+    overflow-y: hidden;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -145,11 +165,28 @@
     margin-top: -10px;
     height:93vh;
     min-height:93vh;
+
+  }
+  .whole-row{
+    margin-top: -10px;
+    height: 90%;
+    min-height:90%;
+    overflow-y: hidden;
+    /*height:92vh;*/
+    /*min-height:92vh;*/
+
   }
   .root-container{
-    height: 100%;
+    height: 98%;
     padding-right: 5px;
     padding-left: 5px
+  }
+  .bstyle {
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px grey;
+    background: #FFF;
+    padding-left: 10px;
+    height: 99%;
   }
 
 
@@ -163,22 +200,14 @@
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
-    margin-top: 10px;
-    height:54%;
+    height:60%;
   }
-  .y-style-botton{
+  .y-style-bottom{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
-    height:19%;
-  }
-  .bstyle {
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px grey;
-    background: #FFF;
-    margin-left: 0px;
-    height:100%;
+    height:40%;
   }
 
 

@@ -40,18 +40,27 @@ function queryRegionFromBackground(cityId, positions, callback) {
   })
 }
 
-function queryStreetCollections(cityId, startIndex, number, callback){
+function queryStreetCollections(cityId, startIndex, number, condition, callback){
   const url = `${dataServerUrl}/streetsetquery`
-  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number}).then(response => {
+  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number, 'condition': condition}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {
     console.log(errResponse)
   })
 }
 
-function queryRegionCollections(cityId, startIndex, number, callback){
+function queryRegionCollections(cityId, startIndex, number, condition, callback){
   const url = `${dataServerUrl}/adregionsetquery`
-  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number}).then(response => {
+  $http.post(url, {'cityId': cityId, 'startIndex': startIndex, 'number': number, 'condition': condition}).then(response => {
+    callback(JSON.parse(response.data))
+  }, errResponse => {
+    console.log(errResponse)
+  })
+}
+
+function queryStatistics(cityId, type, callback){
+  const url = `${dataServerUrl}/statisticsquery`
+  $http.post(url, {'cityId': cityId, 'type': type}).then(response => {
     callback(JSON.parse(response.data))
   }, errResponse => {
     console.log(errResponse)
@@ -63,5 +72,6 @@ export default{
   getAllRecordsForOneCity,
   queryRegionFromBackground,
   queryStreetCollections,
-  queryRegionCollections
+  queryRegionCollections,
+  queryStatistics
 }

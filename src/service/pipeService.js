@@ -17,10 +17,12 @@ var pipeService = new Vue({
     MAPPOLYLINE: 'map_polyline',
     DESTROYPOLYLINE: 'destroy_polyline',
     DISPLAYPOINTCHANGED: 'display_point_updated',
+    INTERACTIONCHANGE: 'interaction_change',
     UPDATESELECTITEMS: 'update_selected_item',
     CONFIRMSELECTION:'confirm_selection',
     UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer',
-    IMAGESELECTED:'image_selected'
+    IMAGESELECTED:'image_selected',
+    STREETSELECTED:'streets_selected'
   },
 
   methods:{
@@ -140,6 +142,17 @@ var pipeService = new Vue({
         callback(msg);
       })
     },
+    //--------------------------------------------------------------
+    //Change interactions, map interaction or select
+    emitChagneInteractions: function(msg){
+      this.$emit(this.INTERACTIONCHANGE, msg);
+    },
+    onChagneInteractions: function(callback){
+      this.$on(this.INTERACTIONCHANGE,function(msg){
+        callback(msg);
+      })
+    },
+
 
     //--------------------------------------------------------------
     emitUpdateSelectItems: function(msg){
@@ -178,6 +191,15 @@ var pipeService = new Vue({
     },
     onImageGroupSelected: function(callback){
       this.$on(this.IMAGESELECTED,function(msg){
+        callback(msg);
+      })
+    },
+    //Message send to the improved linechart
+    emitStreetsSelected: function(msg){
+      this.$emit(this.STREETSELECTED, msg);
+    },
+    onStreetsSelected: function(callback){
+      this.$on(this.STREETSELECTED,function(msg){
         callback(msg);
       })
     },

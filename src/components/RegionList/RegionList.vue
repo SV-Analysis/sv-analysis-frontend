@@ -1,74 +1,17 @@
 <!--这个component没写好，应该再分成一些子模块-->
 <template>
   <div class="region-list">
-    <div class="table-pagination-container">
-      <div> {{title}}</div>
-
-      <select v-model="selectedCity" class="dropbtn">
-        <option v-for="option in cityOptions" v-bind:value="option.id">
-          {{ option.name }}
-        </option>
-      </select>
-
-      <select v-model="selectedType" class="dropbtn">
-        <option v-for="option in typeOption" v-bind:value="option.id">
-          {{ option.name }}
-        </option>
-      </select>
-
-      <div class="table-container">
-        <table class="street-table">
-          <!--<col width="16.67%">-->
-          <thead >
-          <tr>
-            <th v-for="attr in attrObj[selectedType]" class="head-style">{{attr}}</th>
-          </tr>
-          </thead>
-          <tbody>
-          <!--Street Record-->
-          <tr v-for="record in data" v-if="record['dataType']=='street'">
-            <td oncontextmenu="return false;"
-                v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
-                v-on:click='rowClick(record)'
-                v-on:contextmenu="rightClick(record)"
-                v-for="attr_name in attrObj[selectedType]">
-              {{record.attr[attr_name]}}
-            </td>
-          </tr>
-          <tr v-else-if="record['dataType']=='adregion'">
-            <td oncontextmenu="return false;"
-                v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
-                v-on:click='rowClick(record)'
-                v-on:contextmenu="rightClick(record)"
-                v-for="attr_name in attrObj[selectedType]">
-              {{record.attr[attr_name]}}
-            </td>
-          </tr>
-          <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
-            <RegionMap v-bind:cityInfo="currentCity"
-                       v-bind:streetData="record['context']"
-                       >
-            </RegionMap></td>
-          </tr>
-          <tr class="extand_map" v-else-if="record['dataType']=='adregion_map'"><td colspan="6">
-            <RegionMap v-bind:cityInfo="currentCity" v-bind:adRegionData="record['context']" ></RegionMap></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="pagination_container">
-        <div class = "pagination_button_container">
-          <ul class="pagination">
-            <button v-on:click="previousCollection">«</button>
-            <input class="nav-btn-group" v-model="startIndex" placeholder="Start" >
-            ~
-            <input class="nav-btn-group" v-model="endIndex" placeholder="End" >
-            <button v-on:click="confirmNum()">Confirm</button>
-            <button v-on:click="nextCollection">»</button>
-          </ul>
-        </div>
-      </div>
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="City" name="city">
+          <CitySelection ></CitySelection>
+        </el-tab-pane>
+        <el-tab-pane label="Region" name="region" >
+          <RegionSelection :selectIdMap="selectIdMap"> </RegionSelection>
+        </el-tab-pane>
+        <el-tab-pane label="Street" name="street">
+          <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
+        </el-tab-pane>
+      </el-tabs>
     </div>
   </div>
 </template>
@@ -78,13 +21,22 @@
   import dataService from "../../service/dataService"
   import RegionMap from "../MapViews/RegionMap.vue"
   import pipeService from "../../service/pipeService"
+
+  import StreetSelection from "../Selections/StreetSelection.vue"
+  import RegionSelection from "../Selections/RegionSelection.vue"
+  import CitySelection from "../Selections/CitySelection.vue"
   import  * as Config from "../../Config"
+
+
 
   export default {
     name: 'streetlist',
     props: ['selectIdMap'],
     components:{
-      RegionMap
+      RegionMap,
+      StreetSelection,
+      RegionSelection,
+      CitySelection
     },
     data () {
       return {
@@ -123,6 +75,9 @@
             'bound': null
           }
         ],
+        queryCondition:[
+
+        ],
         typeOption:[
           {
             'id': 'st',
@@ -135,7 +90,8 @@
         startIndex: 'Start',
         endIndex: 'End',
         currentLen: 30,
-        currentCity: null
+        currentCity: null,
+        activeName: 'city'
       }
     },
     mounted(){
@@ -227,6 +183,7 @@
           udpateData.push(record);
         });
         _this.data = udpateData;
+        pipeService.emitStreetsSelected(_this.data)
 
       },
       _parseRegionRecords(records, city){
@@ -296,6 +253,7 @@
           let agImgList = this._createAggregatedImglist(record['image_list']);
           record['aggregatedImages'] = agImgList;
         }
+
         pipeService.emitUpdateSelectItems(item);
       },
       _createAggregatedImglist(imgList){
@@ -395,43 +353,10 @@
 <style scoped>
   .region-list{
     height:100%;
+    padding-left: 20px;
+    padding-right: 20px;
   }
-  .table-pagination-container{
-    margin: auto;
-    width: 90%;
-    height: 100%;
-  }
-  .table-container{
-    width:100%;
-    /*height:100%;*/
-    max-height: 80%;
-    overflow-y: auto;
-  }
-  .street-table{
-    /*margin-top:10px;*/
-    padding: auto;
-    width: 100%;
-    border: 1px solid #ddd;
-    max-height: 90%;
-    overflow-y: auto;
-  }
-  .head-style{
-    text-align: center;
-    background-color: #F9FAFB;
-    font-weight: bold;
-    /*color: #fff;*/
-  }
-  .extand_map{
 
-    height: 200px
-  }
-  .pagination_container{
-    background-color: #5bc0de;
-  }
-  .pagination_button_container{
-    /*width: 100%;*/
-    float: right;
-  }
 
   /* css for the table*/
   ul.pagination {

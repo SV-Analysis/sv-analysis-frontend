@@ -1,19 +1,16 @@
 <template>
-  <ul class="navbar-container">
-    <li class="navbar-button"><a class="active" href="#home">Street View Analysis</a></li>
+  <!--<ul class="navbar-container">-->
+  <!--<li class="navbar-button"><a class="active" href="#home">Street View Analysis</a></li>-->
+  <!--<slot name="header">-->
+  <!--</slot>-->
+  <!--</ul>-->
 
-    <div class="dropdown">
-      <!--<a href="#" class="dropbtn">drop down</a>-->
-      <!--<div class="dropdown-content">-->
-      <!--<a href="#">链接 1</a>-->
-      <!--<a href="#">链接 2</a>-->
-      <!--<a href="#">链接 3</a>-->
-      <!--</div>-->
-    </div>
+  <el-menu  theme="dark"  class="el-menu-demo navbar-container" mode="horizontal" >
+    <el-menu-item class="title-name" index="1">Street View Analysis</el-menu-item>
     <slot name="header">
 
     </slot>
-  </ul>
+  </el-menu>
 </template>
 
 
@@ -50,14 +47,19 @@
 </script>
 
 <style scoped>
-  ul.navbar-container {
+  .navbar-container {
     list-style-type: none;
     margin-bottom: 15px;
 
     overflow: hidden;
-    background-color: #333;
+    background-color: #1F2D3D;
   }
+  .title-name{
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-size: 20px;
+    left: 100px;
 
+  }
   li.navbar-button {
     float: left;
   }
@@ -71,7 +73,7 @@
   }
 
   li.navbar-button a:hover, .dropdown:hover .dropbtn {
-    background-color: #111;
+    background-color: #73ff4d;
   }
 
   .dropdown {

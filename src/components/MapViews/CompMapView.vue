@@ -24,8 +24,6 @@
       this.createMap();
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
-
-
         _this.points_world = data;
         let level = _this.mapObj.getZoomLevel();
         let _temp_points = _this.generateSample(_this.points_world, 14 - level);
@@ -121,10 +119,29 @@
       },
 
       createMap(){
+        let _this = this;
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
-        this.mapObj.disableAllInteraction();
+//        this.mapObj.disableAllInteraction();
         this.mapObj.addMapScale();
+
+        this.mapObj.onEvent('dragend', function(event){
+          setTimeout(function(){
+            _this.updatePointCloud()
+          }, 400);
+
+        });
+        this.mapObj.onEvent('zoomend', function(event){
+          _this.updatePointCloud();
+        });
+
+        this.mapObj.onEvent('zoomstart', function(event){
+          pipeService.emitCompMapZoomStart({'cityId': _this.cityInfo['id']});
+        });
+        this.mapObj.onEvent('movestart', function(event){
+          pipeService.emitCompMapDragStart({'cityId': _this.cityInfo['id']});
+        });
+
       },
       updatePointCloud(){
         let _this = this;

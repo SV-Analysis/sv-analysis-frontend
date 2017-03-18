@@ -1,11 +1,11 @@
 <template>
   <div class="comparision-container">
-    <div>{{ title }}</div>
+
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
-      <div class="render_container" v-bind:class="cityInfo.isActive ">
+      <div class="render_container" v-bind:style="{'pointer-events': cityInfo.isConVisActive}" >
         <PointsView class="points-view" v-bind:cityInfo="cityInfo" v-bind:svFeatures2Color="svFeatures2Color"></PointsView>
-        <ControlLayer class="points-view2" v-bind:cityInfo="cityInfo"> </ControlLayer>
+        <ControlLayer class="control-layer" v-bind:cityInfo="cityInfo"> </ControlLayer>
       </div>
     </div>
   </div>
@@ -31,27 +31,29 @@
             'gps':[40.7058253, -74.1180861],
             'id': 'nyc',
             'bound': null,
-            'isActive': 'contaienr-display'},
+            'isActive': 'contaienr-display',
+            'isConVisActive': 'none'},
           'singapore': {
             'name': 'Singapore',
             'gps':[1.3149014, 103.7769792],
             'id': 'singapore',
             'bound': null,
-            'isActive': 'contaienr-display'},
+            'isActive': 'contaienr-display',
+            'isConVisActive': 'none'},
           'hk': {
             'name': 'Hong Kong',
             'gps':[22.365354, 114.105228],
             'id':'hk',
             'bound': null,
-            'isActive': 'contaienr-display'},
+            'isActive': 'contaienr-display',
+            'isConVisActive': 'none'},
           'london': {
             'name': 'London',
             'gps':[51.528308,-0.3817765],
             'id': 'london',
             'bound': null,
-            'isActive': 'contaienr-display'},
-
-
+            'isActive': 'contaienr-display',
+            'isConVisActive': 'none'},
         }
       }
     },
@@ -62,7 +64,6 @@
         for(var i = 0, ilen = city_id_arr.length; i < ilen; i++){
           let city_id = city_id_arr[i];
           _this.cities.push(_this.candidates[city_id]);
-
         }
       });
       pipeService.onDisplayPointCloud(function(msg){
@@ -73,10 +74,21 @@
             }else{
               cityObj['isActive'] = 'contaienr-display'
             }
+
           }
         });
         console.log('msg', msg);
-      })
+      });
+      pipeService.onChagneInteractions(function(msg){
+        console.log('changeIneteacts',msg);
+        _this.cities.forEach(function(cityObj){
+          if(msg['mapInteraction'] == true){
+            cityObj['isConVisActive'] = 'auto';
+          }else{
+            cityObj['isConVisActive'] = 'none';
+          }
+        })
+      });
     },
     created(){
       let _this = this;
@@ -100,26 +112,27 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .compmap-container{
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
     float: left;
     margin-left: 3%;
     width: 45%;
     background: rgba(13,13,13,0.1);
-    height: 88%
+    height: 95%
   }
   .render_container{
     position: absolute;
     height: 100%;
     width: 100%;
     top:0;
-    /*pointer-events: none*/
   }
   .points-view{
     position: absolute;
     height: 100%;
     left: 0px;
   }
-  .points-view2{
+  .control-layer{
     position: absolute;
     left: 0px;
   }
@@ -128,5 +141,8 @@
   }
   .contaienr-display{
     pointer-events: auto;
+  }
+  .mapInteraction{
+    pointer-events: none;
   }
 </style>
