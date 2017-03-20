@@ -1,25 +1,45 @@
 <template>
   <div>
     <div class="table-container">
+      <div class="collapse-control" >
+        <el-collapse size="small"  v-model="activeNames" class="multi-query" >
+          <el-collapse-item title="Control" name="1" style="text-align:center">
+            <div class="title"><span>Select City</span></div>
+            <el-select style = "width: 120px; text-align:center"
+                       size="small" v-model="selectedCity" placeholder="Select City">
+              <el-option
+                v-for="option in cityOptions"
+                :label="option.name"
+                :value="option.id">
+              </el-option>
+            </el-select>
 
-      <el-select class="selection"
-                 size="small" v-model="selectedCity" placeholder="Select City">
-        <el-option
-          v-for="option in cityOptions"
-          :label="option.name"
-          :value="option.id">
-        </el-option>
-      </el-select>
 
-      <el-select style = 'margin-left: 5px' class="selection"
-                 size="small" v-model="selectedCondition" placeholder="Condition">
-        <el-option
-          v-for="option in queryConditions"
-          :label="option"
-          :value="option">
-        </el-option>
-      </el-select>
+            <div class="title" style="margin-top: 12px"><span>Sort By</span></div>
+            <el-select style = "width: 120px; text-align:center"
+                       size="small" v-model="selectedCondition" placeholder="Sort by">
+              <el-option
+                v-for="option in queryConditions"
+                :label="option"
+                :value="option">
+              </el-option>
+            </el-select>
 
+
+            <div class="title" style="margin-top: 10px"><span>Filter</span></div>
+            <div>
+              <div v-for="attrConf in controlConf">
+                <span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>
+                <el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"
+                           range
+                           :max=100>
+                </el-slider>
+              </div>
+              <div style="height: 20px"></div>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </div>
 
       <table class="region-table">
         <!--<col width="16.67%">-->
@@ -61,6 +81,7 @@
   import * as Config from '../../Config'
   import dataService from '../../service/dataService'
   import RegionMap from '../MapViews/RegionMap.vue'
+  import * as d3 from 'd3'
   export default {
     props: ['selectIdMap'],
     components:{
@@ -79,17 +100,34 @@
         serverLink: Config.serverLink,
         queryConditions:Config.svFeatures2Color['allFeatures'],
         currentPage: 1,
-        selectedCondition: null
+        selectedCondition: null,
+        activeNames: ['1'],
+        controlConf:[]
       };
     },
     methods: {
+      upFirstChar(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      },
+      initControlConfig(){
+        let _this = this;
+        let controlConf = this.controlConf
+        this.svFeatures2Color.allFeatures.forEach(function(attr){
+          controlConf.push({
+            'id': attr,
+            'valueRange': [0,100],
+          })
+        })
+      },
+      sortBy(option){
+        return this.upFirstChar(option);
+      },
       initPaginationInput(){
 
         this.endIndex = this.startIndex + this.currentLen - 1;
       },
       selectionChanged(){
         if(!(this.selectedCity && this.selectedCondition)) return
-        console.log('changed')
         let _this = this;
         this.cityOptions.forEach(function(city){
           if(city['id'] == _this.selectedCity){
@@ -257,6 +295,31 @@
       },
       selectedCondition(){
         this.selectionChanged();
+      },
+      controlConf:{
+        handler: function(newData){
+          let _this = this;
+          //Hack 不忍直视
+          d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
+            let e = newData[i];
+            if(e != undefined){
+              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+            }
+
+          });
+          d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
+            let index = parseInt(i / 2)
+            let e = newData[index];
+            if(e != undefined){
+              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+            }
+          });
+
+          // Alternative methods to detect continues actions.
+          if (this.x) clearTimeout(this.x);
+          this.x = setTimeout(function(){ _this.selectionChanged() }, 800);
+        },
+        deep: true
       }
     },
     computed:{
@@ -265,8 +328,7 @@
       }
     },
     mounted(){
-
-
+      this.initControlConfig();
 
     },
   };

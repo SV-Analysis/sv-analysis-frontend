@@ -4,7 +4,6 @@
 
     </div>
     <div class="collapse-control" >
-
       <el-collapse size="small"  v-model="activeNames" class="multi-query" >
         <el-collapse-item title="Control" name="1" style="text-align:center">
           <div class="title"><span>Select City</span></div>
@@ -126,8 +125,6 @@
             'valueRange': [0,100],
           })
         })
-
-
       },
       initPaginationInput(){
         this.startIndex = 0;
@@ -159,7 +156,7 @@
         let udpateData = [];
         let number  = 0;
         records.forEach(function(record){
-//        City is somehow hack
+
           number++;
           record['dataType'] = 'street';
           record['clicked'] = false;
@@ -305,10 +302,9 @@
           agImg['max_attr'] = {
             attr: largestAttr,
             value: largestValue
-          }
+          };
           agImg['img_path'] = agImg['imgList'][0]['img_path'];
           agImg['id'] = 'aggregate_' + agImg['imgList'][0]['index'];
-
 
           let imgPath = agImg['img_path']
           let imgitems = imgPath.split('/');
@@ -346,14 +342,14 @@
         handler: function(newData){
           let _this = this;
           //Hack 不忍直视
-          d3.selectAll('.el-slider__bar').each(function(d, i){
+          d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
             let e = newData[i];
             if(e != undefined){
               d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
             }
 
           });
-          d3.selectAll('.el-slider__button').each(function(d, i){
+          d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
             let index = parseInt(i / 2)
             let e = newData[index];
             if(e != undefined){

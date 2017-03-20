@@ -11,7 +11,7 @@
         <!--<ScatterBarChart class="y-style-bottom"></ScatterBarChart>-->
 
         <!--<Analysis class="y-style-bottom"></Analysis>-->
-        <ImproveLineChart class="y-style-bottom"> </ImproveLineChart>
+        <!--<ImproveLineChart class="y-style-bottom"> </ImproveLineChart>-->
       </el-col>
 
     </el-row>

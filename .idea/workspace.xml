@@ -6,10 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,16 +22,36 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4063948">
+    <splitter split-orientation="horizontal" split-proportion="0.4935125">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1832">
-                  <caret line="345" column="7" lean-forward="true" selection-start-line="345" selection-start-column="7" selection-end-line="345" selection-end-column="7" />
+                <state relative-caret-position="292">
+                  <caret line="299" column="10" lean-forward="false" selection-start-line="299" selection-start-column="10" selection-end-line="299" selection-end-column="10" />
                   <folding>
                     <element signature="e#581#632#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="RegionSelection.vue" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="486">
+                  <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#el-select#0;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="e#2815#2866#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -48,11 +67,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ImproveLineChart.vue" pinned="false" current-in-tab="false">
+          <file leaf-file-name="ImproveLineChart.vue" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/visView/ImproveLineChart.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="964">
-                  <caret line="88" column="37" lean-forward="false" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
+                <state relative-caret-position="440">
+                  <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
                   <folding>
                     <element signature="e#79#103#0" expanded="true" />
                   </folding>
@@ -99,11 +118,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="StreetSelection.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="StreetSelection.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+                <state relative-caret-position="2391">
+                  <caret line="243" column="44" lean-forward="true" selection-start-line="243" selection-start-column="44" selection-end-line="243" selection-end-column="44" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -111,10 +130,11 @@
                     <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                     <element signature="n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-                    <element signature="e#2860#2911#0" expanded="true" />
+                    <element signature="e#2859#2910#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -145,8 +165,8 @@
           <file leaf-file-name="ScatterBarChart.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="440">
-                  <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+                <state relative-caret-position="880">
+                  <caret line="40" column="3" lean-forward="false" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
                   <folding>
                     <element signature="e#79#103#0" expanded="true" />
                   </folding>
@@ -188,14 +208,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+          <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/App.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="851">
-                  <caret line="125" column="14" lean-forward="false" selection-start-line="124" selection-start-column="35" selection-end-line="125" selection-end-column="14" />
+                <state relative-caret-position="242">
+                  <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
                   <folding>
                     <element signature="n#style#0;n#button#0;n#Navbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="e#1561#1605#0" expanded="true" />
+                    <element signature="e#1568#1612#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -239,9 +259,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>STREETSELECTED</find>
-      <find>linear</find>
-      <find>area</find>
       <find>areaRenders</find>
       <find>top</find>
       <find>gradient</find>
@@ -260,15 +277,18 @@
       <find>ImageGroupSelected</find>
       <find>collapse</find>
       <find>multi-query</find>
-      <find>rightClick</find>
       <find>ab</find>
       <find>selection</find>
       <find>collapse-control</find>
       <find>title</find>
-      <find>sortBy</find>
       <find>controlConf</find>
       <find>selectionChanged</find>
       <find>center</find>
+      <find>upFirstChar</find>
+      <find>scatter-bar-chart</find>
+      <find>sortBy</find>
+      <find>d3</find>
+      <find>rightClick</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -326,16 +346,16 @@
         <option value="$PROJECT_DIR$/src/Config.js" />
         <option value="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
-        <option value="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
         <option value="$PROJECT_DIR$/src/components/visView/ImproveLineChart.html" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
-        <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/lib/matrixBars.js" />
         <option value="$PROJECT_DIR$/src/components/visView/ImproveLineChart.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/TrendView.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
+        <option value="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
+        <option value="$PROJECT_DIR$/src/App.vue" />
       </list>
     </option>
   </component>
@@ -623,7 +643,7 @@
     <property name="nodejs_interpreter_path" value="E:/Development/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="E:\Development\nodejs\node.exe" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://G:/vis2017/sv-analysis-frontend/src/components/StreetVis/ImgLayer.vue" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://G:/vis2017/sv-analysis-frontend/src/components/RegionList/RegionList.vue" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
@@ -880,7 +900,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15578285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13847364" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1125,17 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="33" selection-end-line="106" selection-end-column="33" />
-          <folding>
-            <element signature="n#style#0;n#el-select#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#1766#1817#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/matrixBars.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2464">
@@ -1148,14 +1157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1018">
           <caret line="57" column="18" lean-forward="false" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1190,17 +1191,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="851">
-          <caret line="125" column="14" lean-forward="false" selection-start-line="124" selection-start-column="35" selection-end-line="125" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#Navbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1561#1605#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -1217,16 +1207,6 @@
           <caret line="346" column="19" lean-forward="true" selection-start-line="346" selection-start-column="19" selection-end-line="346" selection-end-column="19" />
           <folding>
             <element signature="e#9499#9733#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-          <folding>
-            <element signature="e#79#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1270,16 +1250,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/visView/ImproveLineChart.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="964">
-          <caret line="88" column="37" lean-forward="false" selection-start-line="88" selection-start-column="37" selection-end-line="88" selection-end-column="37" />
-          <folding>
-            <element signature="e#79#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
@@ -1298,16 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1832">
-          <caret line="345" column="7" lean-forward="true" selection-start-line="345" selection-start-column="7" selection-end-line="345" selection-end-column="7" />
-          <folding>
-            <element signature="e#581#632#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1318,8 +1278,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+        <state relative-caret-position="2391">
+          <caret line="243" column="44" lean-forward="true" selection-start-line="243" selection-start-column="44" selection-end-line="243" selection-end-column="44" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1327,10 +1287,78 @@
             <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2860#2911#0" expanded="true" />
+            <element signature="e#2859#2910#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-select#0;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2815#2866#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="299" column="10" lean-forward="false" selection-start-line="299" selection-start-column="10" selection-end-line="299" selection-end-column="10" />
+          <folding>
+            <element signature="e#581#632#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="40" column="3" lean-forward="false" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+          <folding>
+            <element signature="e#79#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#Navbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1568#1612#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/visView/ImproveLineChart.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+          <folding>
+            <element signature="e#79#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
