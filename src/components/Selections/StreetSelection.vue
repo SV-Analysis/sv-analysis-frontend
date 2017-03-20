@@ -1,25 +1,51 @@
 <template>
   <div>
+    <div style="width:100%">
+
+    </div>
+    <div class="collapse-control" >
+
+      <el-collapse size="small"  v-model="activeNames" class="multi-query" >
+        <el-collapse-item title="Control" name="1" style="text-align:center">
+          <div class="title"><span>Select City</span></div>
+          <el-select style = "width: 120px; text-align:center"
+                     size="small" v-model="selectedCity" placeholder="Select City">
+            <el-option
+              v-for="option in cityOptions"
+              :label="option.name"
+              :value="option.id">
+            </el-option>
+          </el-select>
+
+          <div class="title" style="margin-top: 12px"><span>Sort By</span></div>
+          <el-select style = " width: 120px; "
+                     size="small" v-model="selectedCondition" placeholder="Sort by:">
+            <el-option
+                       v-for="option in queryConditions"
+                       :label="sortBy(option)"
+                       :value="option">
+            </el-option>
+          </el-select>
+
+          <div class="title" style="margin-top: 10px"><span>Filter</span></div>
+          <div>
+            <div v-for="attrConf in controlConf">
+              <span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>
+              <el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"
+                         range
+                         :max=100>
+              </el-slider>
+            </div>
+            <div style="height: 20px"></div>
+          </div>
+
+        </el-collapse-item>
+      </el-collapse>
+
+
+    </div>
+
     <div class="table-container">
-
-      <el-select class="selection"
-                 size="small" v-model="selectedCity" placeholder="Select City">
-        <el-option
-          v-for="option in cityOptions"
-          :label="option.name"
-          :value="option.id">
-        </el-option>
-      </el-select>
-
-      <el-select style = 'margin-left: 5px' class="selection"
-                 size="small" v-model="selectedCondition" placeholder="Condition">
-        <el-option
-          v-for="option in queryConditions"
-          :label="option"
-          :value="option">
-        </el-option>
-      </el-select>
-
       <table class="street-table">
         <!--<col width="16.67%">-->
         <thead >
@@ -38,11 +64,9 @@
             {{record.attr[attr_name]}}
           </td>
         </tr>
-
         <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
           <RegionMap v-bind:cityInfo="currentCity"
-                     v-bind:streetData="record['context']"
-          >
+                     v-bind:streetData="record['context']">
           </RegionMap></td>
         </tr>
 
@@ -56,16 +80,16 @@
       :page-size="30"
       :total="totalRecord">
     </el-pagination>
-
   </div>
 
   </div>
 </template>
-<script>
+<script scoped>
   import pipeService from '../../service/pipeService'
   import * as Config from '../../Config'
   import dataService from '../../service/dataService'
   import RegionMap from '../MapViews/RegionMap.vue'
+  import * as d3 from 'd3'
   export default {
     props: ['selectIdMap'],
     components:{
@@ -84,10 +108,27 @@
         serverLink: Config.serverLink,
         currentPage: 1,
         queryConditions:Config.svFeatures2Color['allFeatures'].concat(['img_len']),
-        selectedCondition:'img_len'
+        selectedCondition:'img_len',
+        activeNames: ['1'],
+        controlConf:[]
       };
     },
     methods: {
+      upFirstChar(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      },
+      initControlConfig(){
+        let _this = this;
+        let controlConf = this.controlConf
+        this.svFeatures2Color.allFeatures.forEach(function(attr){
+          controlConf.push({
+            'id': attr,
+            'valueRange': [0,100],
+          })
+        })
+
+
+      },
       initPaginationInput(){
         this.startIndex = 0;
         this.currentPage = 1;
@@ -103,7 +144,6 @@
         if(!this.selectedCity) return;
         this.initPaginationInput();
         this._queryStreet();
-
       },
       _queryStreet(){
         let _this = this;
@@ -111,6 +151,7 @@
           _this._parseStreetRecords(recordObj, _this.selectedCity)
         })
       },
+
       _parseStreetRecords(recordObj, city){
         let records = recordObj['records'];
         let total = recordObj['total'];
@@ -163,6 +204,7 @@
         }
       },
       rightClick(record){
+        let _this = this;
         record['attr']['SL'] = !record['attr']['SL'];
         let item = {
           id: record['city'] + '_' + record['dataType'] + '_' + record['id'],
@@ -171,12 +213,52 @@
           record: record,
           updateSign: record['attr']['SL']
         };
-
+        console.log('right click', record)
         if(record['aggregatedImages'] == undefined){
-          let agImgList = this._createAggregatedImglist(record['image_list']);
-          record['aggregatedImages'] = agImgList;
+//          let agImgList = this._createAggregatedImglist(record['image_list']);
+//          record['aggregatedImages'] = agImgList;
+          _this._formatAggregateedImgList(record);
         }
         pipeService.emitUpdateSelectItems(item);
+      },
+      _formatAggregateedImgList(record){
+        let _this = this;
+        let _aggList = record['agg_obj']['agg_list'];
+        let features = this.svFeatures2Color['allFeatures'];
+
+        let largestValue = 0;
+        let largestAttr = null;
+        _aggList.forEach(function(agImg, i){
+          features.forEach(function(attr){
+            if(largestValue < agImg['attrObj'][attr]){
+              largestValue = agImg['attrObj'][attr]
+              largestAttr = attr;
+            }
+          });
+          agImg['max_attr'] = {
+            attr: largestAttr,
+            value: largestValue
+          };
+
+          agImg.imgList = agImg['img_list'];
+          delete agImg['img_list'];
+
+          let imgPath = agImg['img_path']
+          let imgitems = imgPath.split('/');
+          let cityname = imgitems[0];
+          let cid = imgitems[2];
+          let iid = imgitems[3];
+
+          let imgLink = _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+          agImg['formatImgPath'] = imgLink;
+          agImg['aggregateIndex'] = i;
+        });
+
+        record['aggregatedImages'] = _aggList;
+        record['nClusters'] = record['agg_obj']['n_clusters'];
+        record['standard'] = record['agg_obj']['standard'];
+
+        delete record['agg_obj']
       },
       _createAggregatedImglist(imgList){
         let _this = this;
@@ -216,7 +298,7 @@
           let largestAttr = null;
           features.forEach(function(attr){
             if(largestValue < agImg['attrObj'][attr]){
-              largestValue = agImg['attrObj'][attr]
+              largestValue = agImg['attrObj'][attr];
               largestAttr = attr;
             }
           });
@@ -245,6 +327,9 @@
 
       handleCurrentChange(val){
         this.currentPage = val;
+      },
+      sortBy(option){
+        return this.upFirstChar(option);
       }
     },
     watch:{
@@ -256,26 +341,83 @@
       },
       selectedCondition(){
         this.selectionChanged();
+      },
+      controlConf:{
+        handler: function(newData){
+          let _this = this;
+          //Hack 不忍直视
+          d3.selectAll('.el-slider__bar').each(function(d, i){
+            let e = newData[i];
+            if(e != undefined){
+              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+            }
+
+          });
+          d3.selectAll('.el-slider__button').each(function(d, i){
+            let index = parseInt(i / 2)
+            let e = newData[index];
+            if(e != undefined){
+              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+            }
+          });
+
+          // Alternative methods to detect continues actions.
+          if (this.x) clearTimeout(this.x);
+          this.x = setTimeout(function(){ _this.selectionChanged() }, 800);
+        },
+        deep: true
       }
     },
     computed:{
       startIndex: function(){
         return (this.currentPage - 1) * this.currentLen;
-      }
+      },
+
     },
     mounted(){
-
-
+      this.initControlConfig();
 
     },
   };
 </script>
-<style scope>
-
+<style >
+  .el-slider__bar{
+    background-color: #2b542c;
+  }
+  .title{
+    width: 100%;
+    height: 13px;
+    border-bottom: 1px solid #ccc;
+    /*text-align: center;*/
+    margin-bottom: 15px;
+  }
+  .title>span{
+    /*text-align: center;*/
+    font-size: 13px;
+    color: #666;
+    background-color: #fff;
+    padding: 0 10px;
+  }
   .table-container{
     width:100%;
     max-height: 750px;
     overflow-y: auto;
+  }
+  .collapse-control{
+    width:100%;
+    max-height: 750px;
+    overflow-y: auto;
+    text-align: left;
+  }
+  .collapse-control.el-collapse-item__header{
+    height: 20px;
+  }
+  .multi-query{
+    width: 100%;
+    padding: auto;
+    border: 1px solid #ddd;
+    max-height: 80%;
+    margin-bottom: 5px;
   }
   .street-table{
     width: 100%;
@@ -283,9 +425,10 @@
     border: 1px solid #ddd;
     max-height: 80%;
     overflow-y: auto;
+    margin-top:5px
   }
   .head-style{
-    text-align: center;
+    /*text-align: center;*/
     background-color: #F9FAFB;
     font-weight: bold;
     /*color: #fff;*/

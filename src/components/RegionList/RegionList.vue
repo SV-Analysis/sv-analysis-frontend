@@ -249,11 +249,10 @@
           updateSign: record['attr']['SL']
         };
 
-        if(record['aggregatedImages'] == undefined){
+        if(record['aggregatedImages'] == undefined) {
           let agImgList = this._createAggregatedImglist(record['image_list']);
           record['aggregatedImages'] = agImgList;
         }
-
         pipeService.emitUpdateSelectItems(item);
       },
       _createAggregatedImglist(imgList){
@@ -355,9 +354,8 @@
     height:100%;
     padding-left: 20px;
     padding-right: 20px;
+    overflow-y: auto;
   }
-
-
   /* css for the table*/
   ul.pagination {
     /*display: inline-block;*/

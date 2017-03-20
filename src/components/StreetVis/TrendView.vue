@@ -20,6 +20,7 @@
         svFeatures2Color: Config.svFeatures2Color
       }
     },
+
     mounted(){
       let _this = this;
       this.features = this.svFeatures2Color['allFeatures'];
@@ -102,17 +103,17 @@
         if(this.id2Data[aid] == undefined) return
         let imgContainer = this.id2Data[aid]['imgContainer'];
         let gap = (this.$el.clientWidth -  this.imageHeight) / imgContainer.size();
-
-        d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 0);
+//        d3.select(this.id2Data[aid]['ael']).selectAll('.bar').attr('stroke-width', 0);
 
         this.id2Data[aid]['iel'].forEach(function(img){
           d3.select(img).transition().attr('height',  _this.imageHeight).transition()
-        })
+        });
+
         imgContainer.transition()
           .attr('transform', function(d, i){
             let _offsetX = i * gap;
             return 'translate(' + _offsetX + ', 0)';
-          }).duration(500)
+          }).duration(500);
 
       },
       generateMessage(d, sign){
@@ -149,14 +150,14 @@
           .attr('transform',function(d, i){
             return 'translate(' + (i * avgWidth) + ',0)';
           });
-
+        let setColor = ['red', 'blue', 'green' ,'yellow','purple'];
         tagContainer.each(function(d){
           let barContainer = d3.select(this).append('g').attr('class', 'barContainer')
 
           let barData = [];
           _this.features.forEach(function(attr){
             barData.push(d['attrObj'][attr])
-          })
+          });
           let offsetY = 0;
           barContainer.selectAll('.bar')
             .data(_this.features)
@@ -171,8 +172,12 @@
               return tempY;
             })
             .attr('width', avgWidth)
-            .attr('stroke', 'red')
-            .attr('stroke-width', 0)
+            .attr('stroke', function(){
+                return setColor[d['cluster_label']]
+            })
+            .attr('stroke-width', function(d){
+                return 2
+            })
             .attr('fill', function(feature, i) {return _this.svFeatures2Color[feature]})
 
           barContainer.attr('stroke', 'white')
