@@ -26,6 +26,7 @@
       checkedItem: {
         deep: 'true',
         handler(newValue, oldValue){
+          console.log('newValue', newValue)
           if(newValue.length == 2){
             for(var i = 0, ilen = this.cities.length; i < ilen; i++){
               this.cities[i].notDisabled = 0;
@@ -43,10 +44,13 @@
           newValue.forEach(function(cityId){
             if(_this.statistic[cityId] == undefined){
               dataService.queryStatistics(cityId, 'region', function(data){
-                console.log('region', data)
+                _this.statistic[cityId] = data;
+                _this.generateAndSendSelectedData();
               })
+            }else{
+              _this.generateAndSendSelectedData()
             }
-          })
+          });
 
           pipeService.emitUpdateSelectedMapView(newValue);
         }
@@ -90,6 +94,24 @@
     mounted(){
       console.log('cityies', this.cities)
     },
+    methods:{
+      generateAndSendSelectedData(){
+        let _this = this;
+        let sendData = [];
+        this.checkedItem.forEach(function(cityId){
+          if(_this.statistic[cityId]!= undefined){
+            sendData.push({
+                'cityId': cityId,
+                'imgList': _this.statistic[cityId],
+                'type': 'region'
+            });
+          }else{
+            console.log('Error in selected cities');
+          }
+        });
+        pipeService.emitCitySelected(sendData);
+      }
+    },
     computed:{
       newMessage: function(){
         return this.title;
@@ -99,7 +121,6 @@
         {
           let width = this.$el.clientWidth * this.cities.length + 'px';
           let height = (this.$el.clientWidth * 3  / 4) * this.cities.length + 'px';
-          console.log('height', height)
           return {width: width, height: height }
         }
       }

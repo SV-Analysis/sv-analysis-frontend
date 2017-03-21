@@ -22,7 +22,8 @@ var pipeService = new Vue({
     CONFIRMSELECTION:'confirm_selection',
     UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer',
     IMAGESELECTED:'image_selected',
-    STREETSELECTED:'streets_selected'
+    STREETSELECTED:'streets_selected',
+    CITIESSELECTED:'cities_selected'
   },
 
   methods:{
@@ -194,12 +195,25 @@ var pipeService = new Vue({
         callback(msg);
       })
     },
+
+    //----------------------------------------------------------------
     //Message send to the improved linechart
     emitStreetsSelected: function(msg){
       this.$emit(this.STREETSELECTED, msg);
     },
     onStreetsSelected: function(callback){
       this.$on(this.STREETSELECTED,function(msg){
+        callback(msg);
+      })
+    },
+
+    //----------------------------------------------------------------
+    //Message send to matrixbarchart
+    emitCitySelected: function(msg){
+      this.$emit(this.CITIESSELECTED, msg);
+    },
+    onCitySelected: function(callback){
+      this.$on(this.CITIESSELECTED,function(msg){
         callback(msg);
       })
     },

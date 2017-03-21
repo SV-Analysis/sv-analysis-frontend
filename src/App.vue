@@ -8,7 +8,7 @@
       <el-col :span="19" class="root-container">
         <!--<Navigation class="y-style-top"></Navigation>-->
         <CompContainer  class="y-style-middle"></CompContainer>
-        <!--<ScatterBarChart class="y-style-bottom"></ScatterBarChart>-->
+        <ScatterBarChart class="y-style-bottom"></ScatterBarChart>
 
         <!--<Analysis class="y-style-bottom"></Analysis>-->
         <!--<ImproveLineChart class="y-style-bottom"> </ImproveLineChart>-->
