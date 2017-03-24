@@ -13,7 +13,12 @@ export const svFeatures2Color = {
   'others': '#c7c7c7',
   'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
 };
-
+export const cityId2Name = {
+  'hk': 'Hong Kong',
+  'singapore': 'Singapore',
+  'london': 'London',
+  'nyc': 'New York City'
+}
 export const cityOptions = [
   {
     'name': 'New York',

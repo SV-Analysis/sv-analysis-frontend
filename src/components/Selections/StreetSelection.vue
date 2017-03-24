@@ -20,9 +20,9 @@
           <el-select style = " width: 120px; "
                      size="small" v-model="selectedCondition" placeholder="Sort by:">
             <el-option
-                       v-for="option in queryConditions"
-                       :label="sortBy(option)"
-                       :value="option">
+              v-for="option in queryConditions"
+              :label="sortBy(option)"
+              :value="option">
             </el-option>
           </el-select>
 
@@ -210,7 +210,7 @@
           record: record,
           updateSign: record['attr']['SL']
         };
-        console.log('right click', record)
+
         if(record['aggregatedImages'] == undefined){
 //          let agImgList = this._createAggregatedImglist(record['image_list']);
 //          record['aggregatedImages'] = agImgList;
@@ -240,13 +240,7 @@
           agImg.imgList = agImg['img_list'];
           delete agImg['img_list'];
 
-          let imgPath = agImg['img_path']
-          let imgitems = imgPath.split('/');
-          let cityname = imgitems[0];
-          let cid = imgitems[2];
-          let iid = imgitems[3];
-
-          let imgLink = _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+          let imgLink = _this._generateImageLink(agImg)
           agImg['formatImgPath'] = imgLink;
           agImg['aggregateIndex'] = i;
         });
@@ -254,8 +248,23 @@
         record['aggregatedImages'] = _aggList;
         record['nClusters'] = record['agg_obj']['n_clusters'];
         record['standard'] = record['agg_obj']['standard'];
+        record['segments'] = record['agg_obj']['segments'];
+        record['segments'].forEach(function(seg){
+           seg['summary_img'][0]['formatImgPath'] = _this._generateImageLink(seg['summary_img'][0]);
+        });
+//        record['segments'][0]['summary_img'][0]['formatImgPath'] = _this._generateImageLink(record['segments'][0]['summary_img'][0]);
+        record['sImg_path'] = record['segments'][0]['summary_img'][0]['formatImgPath'];
+        delete record['agg_obj'];
+      },
+      _generateImageLink(agImg){
 
-        delete record['agg_obj']
+        let imgPath = agImg['img_path']
+        let imgitems = imgPath.split('/');
+        let cityname = imgitems[0];
+        let cid = imgitems[2];
+        let iid = imgitems[3];
+        let imgLink = this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
+        return imgLink;
       },
       _createAggregatedImglist(imgList){
         let _this = this;
@@ -347,10 +356,9 @@
             if(e != undefined){
               d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
             }
-
           });
           d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
-            let index = parseInt(i / 2)
+            let index = parseInt(i / 2);
             let e = newData[index];
             if(e != undefined){
               d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
@@ -368,7 +376,6 @@
       startIndex: function(){
         return (this.currentPage - 1) * this.currentLen;
       },
-
     },
     mounted(){
       this.initControlConfig();

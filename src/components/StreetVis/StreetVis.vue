@@ -1,6 +1,6 @@
 <template>
   <div class="street-view">
-    <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
+
     <div class="img-map-container">
       <ImgLayer class="img-svg"></ImgLayer>
       <div class="map-container" >
@@ -19,6 +19,7 @@
         </div>
       </div>
     </div>
+    <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
     <TrendView class="trend-view">trend-view</TrendView>
   </div>
 </template>

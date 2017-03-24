@@ -144,6 +144,7 @@
         let startTime = new Date();
         dataService.queryRegionCollections(this.selectedCity, this.startIndex, this.currentLen, this.selectedCondition, function(records){
           let endTime = new Date();
+
           console.log('Time1 ', endTime - startTime);
           _this._parseRegionRecords(records, _this.selectedCity);
           console.log('Time2 ', new Date() - endTime);
@@ -154,7 +155,7 @@
         let total = recordObj['total'];
         let _this = this;
         let udpateData = [];
-        console.log('records', records)
+
         records.forEach(function(record){
 //        City is somehow hack
           record['attr'] = record['attr'] == undefined ? {}: record['attr'];
@@ -203,8 +204,9 @@
       },
       rightClick(record){
         record['attr']['SL'] = !record['attr']['SL'];
+        let rid = record['id'] == undefined? record['rid']: record['id'];
         let item = {
-          id: record['city'] + '_' + record['dataType'] + '_' + record['id'],
+          id: record['city'] + '_' + record['dataType'] + '_' + rid,
           city: record['city'],
           type: record['dataType'],
           record: record,
@@ -215,6 +217,7 @@
           let agImgList = this._createAggregatedImglist(record['image_list']);
           record['aggregatedImages'] = agImgList;
         }
+
         pipeService.emitUpdateSelectItems(item);
       },
       _createAggregatedImglist(imgList){

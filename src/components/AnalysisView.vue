@@ -12,30 +12,13 @@
           <div class="modal-body-top">
             <div class="ui-row modal-body">
 
-              <div class="col-sm-2 col-md-2 col-lg-2 " >
-                <multiselect v-model="selection"
-                             :options="options"
-                             :multiple="true"
-                             placeholder="Type to search"
-                             track-by="id"
-                             label="id"
-                             :max="2">
-                  <span slot="noResult">No elements found.</span>
-                </multiselect>
-
-                <button v-on:click="confirm()">Confirm</button>
-              </div>
-
-              <!--<div class="col-sm-7 col-md-7 col-lg-7 vis-container" >-->
-              <!--<ScatterBarChart v-bind:svFeatures2Color='svFeatures2Color' v-bind:selectItems="selectItems"></ScatterBarChart>-->
-              <!--</div>-->
-              <div class="col-sm-7 col-md-7 col-lg-7 vis-container" >
+              <div class="col-sm-8 col-md-8 col-lg-8 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
                 ></StreetVis>
               </div>
-              <div class="col-sm-3 col-md-3 col-lg-3 " >
-                c
+              <div class="col-sm-4 col-md-4 col-lg-4 " >
+                <StreetList v-bind:selectItems="selectItems"></StreetList>
               </div>
             </div>
           </div>
@@ -53,6 +36,7 @@
   import pipeService from '../service/pipeService'
   import StreetVis from './StreetVis/StreetVis.vue'
   import * as Config from '../Config'
+  import StreetList from './StreetVis/StreetList.vue'
 
   export default {
     name: 'modalview',
@@ -77,16 +61,17 @@
     },
     methods:{
       confirm: function(){
-        this.selection[0]['show'] = true;
-        this.selection[1]['show'] = false;
-        pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
+//        this.selection[0]['show'] = true;
+//        this.selection[1]['show'] = false;
+//        pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
       }
     },
 
     components:{
 //      ScatterBarChart,
       Multiselect,
-      StreetVis
+      StreetVis,
+      StreetList
     }
   }
 </script>

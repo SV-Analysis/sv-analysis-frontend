@@ -8,7 +8,7 @@
       <el-col :span="19" class="root-container">
         <!--<Navigation class="y-style-top"></Navigation>-->
         <CompContainer  class="y-style-middle"></CompContainer>
-        <ScatterBarChart class="y-style-bottom"></ScatterBarChart>
+        <ScatterBarChart v-bind:selectItems="selectItems" class="y-style-bottom"></ScatterBarChart>
 
         <!--<Analysis class="y-style-bottom"></Analysis>-->
         <!--<ImproveLineChart class="y-style-bottom"> </ImproveLineChart>-->
@@ -200,14 +200,14 @@
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
-    height:60%;
+    height:50%;
   }
   .y-style-bottom{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
-    height:40%;
+    height:50%;
   }
 
 

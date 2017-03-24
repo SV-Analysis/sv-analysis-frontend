@@ -3,12 +3,13 @@
  */
 import * as d3 from 'd3'
 
-let MatrixBarV2 = function(el,svFeatures2Color){
+let MatrixBarV2 = function(el,svFeatures2Color, Config){
   this.$el = el;
   this.width = this.$el.clientWidth;
   this.height = this.$el.clientHeight;
   this.svFeatures2Color = svFeatures2Color;
   this.features = this.svFeatures2Color['allFeatures'];
+  this.Config = Config;
 
   this.colorScale = {
     'hk': '#b2df8a',
@@ -18,7 +19,7 @@ let MatrixBarV2 = function(el,svFeatures2Color){
   };
   this.init();
   this.initMatrix();
-  this.initCollection();
+  this.initDiversity();
 };
 MatrixBarV2.prototype.init = function(){
   this.svgContainer = d3.select(this.$el);
@@ -32,9 +33,10 @@ MatrixBarV2.prototype.init = function(){
   this.matrixSize = matrixSize;
 
   this.collectionContainer = this.svgContainer.append('g').attr('transform', 'translate(' + this.width / 2 + ',0)')
-  this.collectionMargin =  {left: 10, right: 10, top:5, bottom: 5, width: this.width / 2, height: this.height};
+  this.collectionMargin =  {left: 10, right: 10, top:20, bottom: 5, width: this.width / 2, height: this.height};
   this.collectionMargin['regionWidth'] = this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right'];
   this.collectionMargin['regionHeight'] = this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'];
+
 };
 MatrixBarV2.prototype.initMatrix = function(){
   let _this = this;
@@ -68,7 +70,7 @@ MatrixBarV2.prototype.initMatrix = function(){
   }
   let regionContainer = this.matrixContainer.append('g')
     .attr('transform', 'translate(0, ' + this.matrixMargin['top'] + ')');
-
+  this.regionContainer = regionContainer;
 
   this.regions = regionContainer.selectAll('.rect-region')
     .data(regionArray)
@@ -128,15 +130,6 @@ MatrixBarV2.prototype.initMatrix = function(){
     .attr('stoke-opacity', 0.3)
 };
 
-MatrixBarV2.prototype.initCollection = function(){
-  this.collectionContainer.append('rect')
-    .attr('x', this.collectionMargin['left'])
-    .attr('y', this.collectionMargin['top'])
-    .attr('width', this.collectionMargin['regionWidth'])
-    .attr('height', this.collectionMargin['regionHeight'])
-    .attr('fill', 'blue')
-    .attr('opacity', '0.1');
-};
 
 MatrixBarV2.prototype.clearRegions = function(){
   this.regions.each(function(d){
@@ -155,12 +148,14 @@ MatrixBarV2.prototype.mergeData = function(data){
 };
 
 MatrixBarV2.prototype.drawMatrix = function(dataList){
+  console.log('region', dataList)
   let _this = this;
   this.clearRegions();
   let featureArray = this.features;
   // Build a scale function for every region
 
   let dataArray = [];
+
 
   dataList.forEach(function(data){
     let cityId = data['cityId'];
@@ -171,6 +166,45 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
       dataArray.push(d);
     });
   });
+
+  this.regionContainer.selectAll('.legendContainer').remove();
+  let legendsContainer = this.regionContainer.append('g').attr('class', 'legendContainer');
+  let legends = legendsContainer
+    .selectAll('.legends')
+    .data(dataList)
+    .enter()
+    .append('g')
+    .attr('class', 'legends')
+    .attr('transform', function(d, i){
+      let y = i * 25;
+      let bottom_y = 150;
+      return 'translate(' + 22 +',' + (y + _this.matrixMargin.height - bottom_y)+ ')';
+    });
+  legends.append('text')
+    .attr('x', 10)
+    .attr('y', 5)
+    .text(function(d, i){
+      return _this.Config.cityId2Name[d['cityId']];
+    });
+
+  legends.append('circle').attr('r', 6 )
+    .attr('stroke', function(d, i){
+      return _this.colorScale[d['cityId']]
+    })
+    .attr('stroke-width', function(d, i){
+      return 2;
+    })
+    .attr('fill', function(d, i){
+      return _this.colorScale[d['cityId']]
+    })
+    .attr('fill-opacity', 0.5)
+
+  legendsContainer.append('text')
+    .text(function(){
+      if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
+      else return 'Type: Street'
+    })
+    .attr('x', 22).attr('y', _this.matrixMargin.height - 80)
 
   this.regions.each(function(attr, i){
     if(attr['x'] == attr['y']) return;
@@ -211,7 +245,7 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     let axisContainer = null;
     if(attr['y'] == 0) {
       let regionXAxis = d3.axisTop()
-        .ticks(1);
+        .ticks(2);
 
       axisContainer = pointsContainer.append('g').attr('class', 'xdimension')
         .attr("transform", function (d) {
@@ -291,7 +325,7 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
     })
   });
 
-  console.log('largestIndex', attr2RatioArray);
+
 
   let barWidth = this.barContainerMargin.regionWidth / largestIndex * 3 / 4;
   this.barChartsPair.each(function(attr){
@@ -314,7 +348,7 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
         return y_scale(d);
       })
       .attr('fill', function(){
-        return _this.colorScale[cityId]
+        return _this.colorScale[cityId];
       })
       .attr('opacity', 0.7);
 
@@ -361,8 +395,124 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
         .attr('opacity', 0.7);
     }
 
-
-
   });
 };
+
+MatrixBarV2.prototype.initDiversity = function(){
+  // this.collectionContainer.append('rect')
+  //   .attr('x', this.collectionMargin['left'])
+  //   .attr('y', this.collectionMargin['top'])
+  //   .attr('width', this.collectionMargin['regionWidth'])
+  //   .attr('height', this.collectionMargin['regionHeight'])
+  //   .attr('fill', 'blue')
+  //   .attr('opacity', '0.1');
+
+  let r = (this.collectionMargin.height - this.collectionMargin['top'] - this.collectionMargin['bottom'])/ 2;
+  this.diversityContainer = this.collectionContainer.append('g')
+    .attr('transform','translate(' + this.collectionMargin['left']+ ',' + this.collectionMargin['top'] +')');
+
+
+  let features = this.features;
+  let singleRegionSize = this.singleRegionSize;
+  this.diversityContainers = this.diversityContainer.selectAll('.diversityContainers')
+    .data(features)
+    .enter()
+    .append('g')
+    .attr('class', 'diversityContainers')
+    .attr('transform', function(d, i){
+      return 'translate( 0' +',' +(i * singleRegionSize) +')'
+    });
+
+  this.diversityContainers.append('rect').attr('width', this.barContainerMargin['regionWidth'])
+    .attr('x',3)
+    .attr('y', 3)
+    .attr('height', singleRegionSize - 6)
+    .attr('fill', 'none')
+    .attr('stroke', 'grey')
+    .attr('stroke-width', 0.3)
+    .attr('stoke-opacity', 0.3)
+};
+
+MatrixBarV2.prototype.drawDiversity = function(dataList){
+  let _this = this;
+  let features = this.features;
+  console.log('data', dataList);
+  let largestFV = 0;
+  let largestDis = 0;
+  dataList.forEach(function(item){
+    if(item.type == 'adregion'){
+      item['dv'] = {};
+      item['dv']['standard'] = item['record']['standard'];
+      item['dv']['statistics'] = item['record']['statistics'];
+      item['dv']['sv'] = item['record']['sv'];
+      item['dv']['lv'] = item['record']['lv'];
+    }else{
+      item['dv'] = {};
+      item['dv']['standard'] = item['record']['standard'];
+      item['dv']['statistics'] = item['record']['statistics'];
+      item['dv']['sv'] = item['record']['sv'];
+      item['dv']['lv'] = item['record']['lv'];
+
+    }
+    features.forEach(function(attr){
+      largestFV = largestFV < item['dv']['statistics'][attr]? item['dv']['statistics'][attr]: largestFV;
+      largestDis = largestDis < item['dv']['standard'][attr]? item['dv']['standard'][attr]: largestDis;
+    })
+  });
+
+  this.diversityContainers.each(function(d){
+    d3.select(this).selectAll('.diversityPointContainer').remove();
+  });
+
+  let xScale = d3.scaleLinear()
+    .domain([0, largestFV / 100]).range([3, this.collectionMargin['regionWidth'] / 2]);
+
+  let yScale = d3.scaleLinear().range([this.singleRegionSize - 3, 3])
+    .domain([0 , largestDis]);
+
+  let offScale = d3.scaleLinear().range([0, 15]).domain([0, 0.2])
+
+
+  this.diversityContainers.each(function(attr){
+    let diversityPointContainer = d3.select(this).append('g').attr('class','diversityPointContainer');
+
+    let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
+      .data(dataList)
+      .enter()
+      .append('g').attr('class', 'diversityCombination')
+      .attr('transform', function(data, i){
+
+        let _x = xScale(data['dv']['statistics'][attr] / 100);
+
+        let _y = yScale(data['dv']['standard'][attr]);
+
+        return 'translate('+ _x +','+ _y +')'
+      });
+
+
+    pointsContainers.append('line')
+      .attr('x1', function(data){
+        let gapValue = offScale((data['dv']['statistics'][attr] - data['dv']['sv'][attr]) / 100);
+        return -gapValue;
+      })
+      .attr('x2', function(data){
+        let gapValue = offScale((data['dv']['lv'][attr] - data['dv']['statistics'][attr]) / 100);
+        return gapValue;
+      })
+
+      .attr('stroke', function(d){ return _this.colorScale[d['cityObj']['id']]}).attr('stroke-width', 1);
+
+    pointsContainers.append('circle')
+      .attr('r',3)
+      .attr('fill',function(d){return _this.colorScale[d['cityObj']['id']]}).attr('fill-opacity', '0.5')
+      .attr('stroke', function(d){
+        return _this.colorScale[d['cityObj']['id']]
+      })
+      .attr('stroke-width', 1)
+  });
+
+  this.diversityContainers;
+};
+
+
 export default MatrixBarV2
