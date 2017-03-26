@@ -25,7 +25,7 @@ MatrixBarV2.prototype.init = function(){
   this.svgContainer = d3.select(this.$el);
   // Init the configuration of matrix and collection
   this.matrixContainer = this.svgContainer.append('g');
-  this.matrixMargin = {left: 10, right: 10, top:20, bottom: 5, width: this.width / 2, height: this.height};
+  this.matrixMargin = {left: 10, right: 10, top:10, bottom: 5, width: this.width / 2, height: this.height};
   this.matrixMargin['regionWidth'] = this.matrixMargin['width'] - this.matrixMargin['left'] - this.matrixMargin['right'];
   this.matrixMargin['regionHeight'] = this.matrixMargin['height'] - this.matrixMargin['top'] - this.matrixMargin['bottom'];
 
@@ -33,7 +33,7 @@ MatrixBarV2.prototype.init = function(){
   this.matrixSize = matrixSize;
 
   this.collectionContainer = this.svgContainer.append('g').attr('transform', 'translate(' + this.width / 2 + ',0)')
-  this.collectionMargin =  {left: 10, right: 10, top:20, bottom: 5, width: this.width / 2, height: this.height};
+  this.collectionMargin =  {left: 10, right: 10, top:10, bottom: 5, width: this.width / 2, height: this.height, gap:5};
   this.collectionMargin['regionWidth'] = this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right'];
   this.collectionMargin['regionHeight'] = this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'];
 
@@ -47,9 +47,9 @@ MatrixBarV2.prototype.initMatrix = function(){
   let barOffset = singleRegionSize + 10;
   let barContainerLength = this.matrixMargin['width'] - matrixSize;
   this.singleRegionSize = singleRegionSize;
-  let gap = 20;
-  this.barContainerMargin = {left: 10, right: 10, top: 20, bottom: 5, width: barContainerLength, height: this.height, offsetX: this.matrixSize + 40};
-  let _width = this.barContainerMargin['width'] - this.barContainerMargin['left'] - this.barContainerMargin['right'] - gap;
+  this.gap = 20;
+  this.barContainerMargin = {left: 10, right: 10, top: 10, bottom: 5, width: barContainerLength, height: this.height, offsetX: this.matrixSize + this.gap * 1.5};
+  let _width = this.barContainerMargin['width'] - this.barContainerMargin['left'] - this.barContainerMargin['right'] - this.gap;
   this.barContainerMargin['regionWidth'] = _width;
   //
   // this.matrixContainer.append('rect')
@@ -204,7 +204,7 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
       if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
       else return 'Type: Street'
     })
-    .attr('x', 22).attr('y', _this.matrixMargin.height - 80)
+    .attr('x', 22).attr('y', _this.matrixMargin.height - 80);
 
   this.regions.each(function(attr, i){
     if(attr['x'] == attr['y']) return;
@@ -245,11 +245,12 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     let axisContainer = null;
     if(attr['y'] == 0) {
       let regionXAxis = d3.axisTop()
-        .ticks(2);
+        .ticks(2)
+        .tickSize(1)
 
       axisContainer = pointsContainer.append('g').attr('class', 'xdimension')
         .attr("transform", function (d) {
-          return "translate(" + 0 + ',' + (0) + ")";
+          return "translate(" + 0 + ',' + (3) + ")";
         });
 
       axisContainer.append("g")
@@ -270,7 +271,7 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
 
       axisContainer = pointsContainer.append('g').attr('class', 'ydimension')
         .attr("transform", function (d) {
-          return "translate(" + _this.singleRegionSize + ',' + (0) + ")";
+          return "translate(" + (_this.singleRegionSize - 3)  + ',' + (0) + ")";
         });
 
       axisContainer.append("g")
@@ -353,7 +354,10 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
       .attr('opacity', 0.7);
 
     let axis = d3.axisBottom()
-      .ticks(3);
+      .ticks(5)
+      .tickFormat(function(ds){
+        return ds / numberOfScale;
+      });
 
     let axisContainer = barPairContainer.append('g').attr('class', '.dimension')
       .attr("transform", function(d) {
@@ -369,9 +373,7 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
       })
       .append("text")
       .style("text-anchor", "middle")
-      .text(function(d) {
-        return d;
-      })
+
     ;
 
     if(attr2RatioArray.length > 1){
@@ -399,38 +401,53 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
 };
 
 MatrixBarV2.prototype.initDiversity = function(){
-  // this.collectionContainer.append('rect')
-  //   .attr('x', this.collectionMargin['left'])
-  //   .attr('y', this.collectionMargin['top'])
-  //   .attr('width', this.collectionMargin['regionWidth'])
-  //   .attr('height', this.collectionMargin['regionHeight'])
-  //   .attr('fill', 'blue')
-  //   .attr('opacity', '0.1');
-
+  let _this = this;
   let r = (this.collectionMargin.height - this.collectionMargin['top'] - this.collectionMargin['bottom'])/ 2;
   this.diversityContainer = this.collectionContainer.append('g')
-    .attr('transform','translate(' + this.collectionMargin['left']+ ',' + this.collectionMargin['top'] +')');
-
+    .attr('transform','translate(' + this.collectionMargin['left'] * 2+ ',' + this.collectionMargin['top'] +')');
 
   let features = this.features;
-  let singleRegionSize = this.singleRegionSize;
+
+  this.collectionMargin['diversityRegionWidth'] = (this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right']) / 3;
+  this.collectionMargin['diversityRegionHeight'] = (this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'])/ 2;
+  this.collectionMargin['diversityRegionMargin'] = 10;
+
+
+  let diversityRegionWidth = this.collectionMargin['diversityRegionWidth'];
+  let diversityRegionHeight = this.collectionMargin['diversityRegionHeight'];
+  let margin = this.collectionMargin['diversityRegionMargin'];
+
   this.diversityContainers = this.diversityContainer.selectAll('.diversityContainers')
     .data(features)
     .enter()
     .append('g')
     .attr('class', 'diversityContainers')
     .attr('transform', function(d, i){
-      return 'translate( 0' +',' +(i * singleRegionSize) +')'
+      let _x = i % 3 * diversityRegionWidth;
+      let _y = (parseInt(i / 3) * diversityRegionHeight);
+
+      return 'translate('+ _x +',' + _y +')'
     });
 
-  this.diversityContainers.append('rect').attr('width', this.barContainerMargin['regionWidth'])
+  this.diversityContainers.append('rect').attr('width', diversityRegionWidth - margin * 2)
     .attr('x',3)
     .attr('y', 3)
-    .attr('height', singleRegionSize - 6)
+    .attr('height', diversityRegionHeight - margin * 2)
     .attr('fill', 'none')
     .attr('stroke', 'grey')
     .attr('stroke-width', 0.3)
-    .attr('stoke-opacity', 0.3)
+    .attr('stoke-opacity', 0.3);
+
+  let texts = this.diversityContainers.append('text')
+
+    .text(function(d){
+      return d.charAt(0).toUpperCase() + d.slice(1);
+    });
+  texts.attr('x', function(){
+    let _width = d3.select(this).node().getBBox().width;
+    return diversityRegionWidth - _width - margin * 2 - _this.gap;
+  })
+    .attr('y', this.collectionMargin.top * 2)
 };
 
 MatrixBarV2.prototype.drawDiversity = function(dataList){
@@ -464,16 +481,22 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
     d3.select(this).selectAll('.diversityPointContainer').remove();
   });
 
-  let xScale = d3.scaleLinear()
-    .domain([0, largestFV / 100]).range([3, this.collectionMargin['regionWidth'] / 2]);
 
-  let yScale = d3.scaleLinear().range([this.singleRegionSize - 3, 3])
+  let diversityRegionWidth = this.collectionMargin['diversityRegionWidth'];
+  let diversityRegionHeight = this.collectionMargin['diversityRegionHeight'];
+  let margin = this.collectionMargin['diversityRegionMargin'];
+
+
+  let xScale = d3.scaleLinear()
+    .domain([0, largestFV / 100]).range([3, diversityRegionWidth - this.gap]);
+
+  let yScale = d3.scaleLinear().range([diversityRegionHeight - 2 * margin + 3, 3])
     .domain([0 , largestDis]);
 
   let offScale = d3.scaleLinear().range([0, 15]).domain([0, 0.2])
 
 
-  this.diversityContainers.each(function(attr){
+  this.diversityContainers.each(function(attr, i){
     let diversityPointContainer = d3.select(this).append('g').attr('class','diversityPointContainer');
 
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
@@ -481,14 +504,10 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
       .enter()
       .append('g').attr('class', 'diversityCombination')
       .attr('transform', function(data, i){
-
         let _x = xScale(data['dv']['statistics'][attr] / 100);
-
         let _y = yScale(data['dv']['standard'][attr]);
-
-        return 'translate('+ _x +','+ _y +')'
+        return 'translate('+ _x +','+ _y +')';
       });
-
 
     pointsContainers.append('line')
       .attr('x1', function(data){
@@ -508,7 +527,48 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
       .attr('stroke', function(d){
         return _this.colorScale[d['cityObj']['id']]
       })
-      .attr('stroke-width', 1)
+      .attr('stroke-width', 1);
+
+    if(i >= 3){
+      let regionXAxis = d3.axisBottom()
+        .ticks(3);
+
+      let axisContainer = diversityPointContainer.append('g').attr('class', 'xdimension')
+        .attr("transform", function (d) {
+          return "translate(" + 0 + ',' + (diversityRegionHeight - margin* 2 + 3) + ")"
+        });
+
+      axisContainer.append("g")
+        .attr("class", "diversity-axis")
+        .each(function (d) {
+          let ct = d3.select(this)
+            .call(regionXAxis.scale(xScale));
+          ct.selectAll('path').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('line').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('text').attr('fill', '#777')
+        });
+    }
+
+
+    if(i % 3 == 0){
+      let regionYAxis = d3.axisLeft()
+        .ticks(3)
+        .tickSize(2)
+
+      let axisContainer = diversityPointContainer.append('g').attr('class', 'ydimension')
+        .attr("transform", function (d) {
+          return "translate(" + 3 + ',' + (0) + ")";
+        });
+
+      axisContainer.append("g")
+        .attr("class", "axis")
+        .each(function (d) {
+          let ct = d3.select(this).call(regionYAxis.scale(yScale));
+          ct.selectAll('line').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('path').attr('stroke', '#777').attr('stroke-dasharray', '2,2');
+          ct.selectAll('text').attr('fill', '#777')
+        });
+    }
   });
 
   this.diversityContainers;

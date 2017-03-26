@@ -144,6 +144,6 @@
   .navmap-container{
     margin-left: 20px;
     background: rgba(13,13,13,0.1);
-    height: 180px;
+    height: 260px;
   }
 </style>

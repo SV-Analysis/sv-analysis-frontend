@@ -43,7 +43,7 @@
     methods:{
       createMap(cityObj, imgList){
         let _this = this;
-        if(this.$el.clientWidth < 10) return
+        if(this.$el.clientWidth < 10) return;
         let el =  document.createElement("div");
         el.style.width='100%';
         el.style.height='100%';
@@ -61,7 +61,6 @@
           setTimeout(function(){
             _this.sendSelectImages();
           }, 200);
-
         });
         this.sendSelectImages()
       },

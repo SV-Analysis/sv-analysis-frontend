@@ -2,10 +2,10 @@
   <div id="app">
     <Navbar><button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button></Navbar>
     <el-row :gutter="20" class="whole-row">
-      <el-col :span="5" class="root-container bstyle">
+      <el-col :span="6" class="root-container bstyle">
         <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
       </el-col>
-      <el-col :span="19" class="root-container">
+      <el-col :span="18" class="root-container">
         <!--<Navigation class="y-style-top"></Navigation>-->
         <CompContainer  class="y-style-middle"></CompContainer>
         <ScatterBarChart v-bind:selectItems="selectItems" class="y-style-bottom"></ScatterBarChart>

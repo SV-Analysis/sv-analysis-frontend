@@ -191,6 +191,58 @@ SvgImgLayer.prototype.updateImages = function(){
         data.push(d['attrObj'][attr])
       });
 
+      function drawVoilin(e, img, width, height, featureColor){
+        let order = ['sky', 'green', 'road', 'others', 'building', 'car'];
+        let dataarr = [];
+        order.forEach(function(attr){
+          dataarr.push(img['attrObj'][attr]);
+          // dataarr.push(img['attrObj'][attr]);
+        });
+
+        var xScale = d3.scaleLinear().range([0, width]).domain([0, 0.4]);
+        var yScale = d3.scaleLinear().range([0, height]).domain([0, dataarr.length]);
+
+        //xScale(img['attrObj'][attr]
+        // console.log('dataarr', dataarr);
+        var area = d3.area()
+          .x0(function(d, i){
+            // console.log('attr', img, attr, img[attr]);
+            return -1 / 2 * xScale(d / 100)})
+          .x1(function(d, i){return 1 / 2 * xScale(d / 100)})
+          .y(function(attr, i){return yScale(i)})
+          // .curve(d3.curveBasis);
+
+
+
+        let holder = d3.select(e).append('g')
+          .attr("transform", "translate(" + (dx - width - 3) + "," + (dy - 27) + ")")
+        holder
+          .append("clipPath")
+          .attr('id', img.id + 'clip')
+          .append("path")
+          .data([dataarr])
+          .attr("class", "area")
+          .attr("d", area)
+          .attr('opacity', 0.7)
+
+        holder.selectAll('rect').data(dataarr).enter()
+          .append('rect')
+          .attr('x', -500)
+          .attr('y', function(d, i){
+            return yScale(i);
+          })
+          .attr('width', 800)
+          .attr('height', height / 6)
+          .attr('fill', function(d,i){
+
+            return featureColor[order[parseInt(i )]];
+          })
+          .attr("clip-path", "url(#" + img.id + 'clip)')
+
+
+      }
+      //violin grah
+      // drawVoilin(this, d, 40, 68, _this.svFeatures2Color);
 
       var g = d3.select(this).selectAll(".arc")
         .data(pie(data))

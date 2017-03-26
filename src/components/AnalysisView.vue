@@ -12,12 +12,12 @@
           <div class="modal-body-top">
             <div class="ui-row modal-body">
 
-              <div class="col-sm-8 col-md-8 col-lg-8 vis-container" >
+              <div class="col-sm-6 col-md-8 col-lg-8 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
                 ></StreetVis>
               </div>
-              <div class="col-sm-4 col-md-4 col-lg-4 " >
+              <div class="col-sm-3 col-md-4 col-lg-4 " >
                 <StreetList v-bind:selectItems="selectItems"></StreetList>
               </div>
             </div>
@@ -97,7 +97,7 @@
   }
 
   .modal-container {
-    width: 90%;
+    width: 60%;
     height: 95%;
     margin: 0px auto;
     padding: 20px 30px;

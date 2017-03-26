@@ -5,7 +5,7 @@
 import * as d3 from 'd3'
 
 let SparkPCP = function(el, attrs, data, featureColor ){
-  console.log('data', data);
+
   this.$el = el;
   d3.select(this.$el).selectAll('g').remove();
   this.attrs = attrs;
@@ -24,7 +24,7 @@ SparkPCP.prototype.initRender = function(){
   this.margin = {top: 40, right: this.width / 5, bottom: 40, left: 100};
   this.pcpRegion = {
     areaHeight: 40,
-    pcpWidth: (this.width - this.margin.right - this.margin.left) / 2,
+    pcpWidth: (this.width - this.margin.right - this.margin.left) -100,
     pcpHeight: this.height - this.margin.bottom - this.margin.top,
     overallHeight: this.height,
     overallWidth: this.width
