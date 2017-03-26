@@ -224,6 +224,9 @@ DetailMap.prototype.fitBoundByImgList = function(imgList){
   this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
 };
 
+DetailMap.prototype.generateScreenPosition = function(){
+
+};
 
 DetailMap.prototype.addMapScale = function(){
   L.control.scale().addTo(this.map)
@@ -492,7 +495,20 @@ DetailMap.prototype.sampleImagesInTheBound = function(){
   return newImages;
 };
 
+DetailMap.prototype.generateImgObjWithScreenPosition = function(){
+  let mewImages = [];
+  let _this = this;
+  this.aggregatedImages.forEach(function(d){
+    let location = [d['location'][1],d['location'][0]]
 
+      d['screenLoc'] = _this.map.latLngToContainerPoint(location)
+      mewImages.push(d);
+
+  });
+
+  return mewImages;
+
+};
 
 
 

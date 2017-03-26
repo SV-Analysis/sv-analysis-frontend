@@ -9,7 +9,7 @@ let SparkPCP = function(el, attrs, data, featureColor ){
   this.$el = el;
   d3.select(this.$el).selectAll('g').remove();
   this.attrs = attrs;
-  this.data = [data[0]['record']['aggregatedImages'],data[1]['record']['aggregatedImages']]; // Image list
+  this.data = data; // Image list
   this.svFeatures2Color = featureColor;
   this.isRendered = false;
   this.isChartDisplayed = false;
@@ -21,25 +21,20 @@ SparkPCP.prototype.initRender = function(){
   let _this = this;
   this.width = this.$el.clientWidth;
   this.height = this.$el.clientHeight;
-  this.margin = {top: 40, right: 100, bottom: 40, left: 40};
-
+  this.margin = {top: 40, right: this.width / 5, bottom: 40, left: 100};
   this.pcpRegion = {
-    top: this.margin.top,
-    left: this.margin.left,
     areaHeight: 40,
-    pcpWidth: (this.width - this.margin.right - this.margin.left) ,
+    pcpWidth: (this.width - this.margin.right - this.margin.left) -100,
     pcpHeight: this.height - this.margin.bottom - this.margin.top,
     overallHeight: this.height,
-    overallWidth: this.width,
+    overallWidth: this.width
   };
-  let axisData = ['region'].concat(this.attrs);
 
-  this.x = this.generateOverallXScale([0, this.pcpRegion.pcpWidth], axisData, function(){
-    return 0;
-  });
+  this.x = d3.scalePoint().range([0, this.pcpRegion.pcpWidth]);
+  this.x.domain(this.attrs);
 
   this.y = {};
-  axisData.forEach(function(attr){
+  this.attrs.forEach(function(attr){
     _this.y[attr] = d3.scaleLinear().domain([0, _this.largestRatio]).range([_this.height - _this.margin.bottom,  _this.margin.top]);
   });
 
@@ -47,21 +42,13 @@ SparkPCP.prototype.initRender = function(){
 
   this.pcpContainer = this.svgContainer
     .append("g")
-    .attr("transform", "translate(" + this.pcpRegion.left + "," + 0 + ")");
-  this.pcpContainer.append('rect')
-    .attr('y', this.margin.top)
-    .attr('width', this.pcpRegion.pcpWidth)
-    .attr('height', this.pcpRegion.pcpHeight)
-    .attr('stroke', 'blue')
-    .attr('fill', 'none')
-
+    .attr("transform", "translate(" + this.margin.left + "," + 0 + ")");
 
   this.dimensionContainer = this.pcpContainer.selectAll(".dimension")
-    .data(axisData)
+    .data(this.attrs)
     .enter().append("g")
     .attr("class", "dimension")
     .attr("transform", function(d) {
-
       return "translate(" + _this.x(d) + ")";
     });
 };
@@ -152,98 +139,16 @@ SparkPCP.prototype.initData = function(){
 SparkPCP.prototype.drawAxis = function(){
   let _this = this;
   let axis = d3.axisLeft();
-  axis.ticks(5);
+  axis.ticks(2);
 
-  let axisContainer = this.dimensionContainer.append("g")
-    .attr("class", "axis");
-  let imagePointsContainer = null;
-  axisContainer.each(function(d){
-    let _container = d3.select(this);
-    if(d == 'region'){
-      imagePointsContainer = _container;
-      _container.attr('transform', 'translate(0,' + _this.pcpRegion.top + ')')
-      _container.append("text")
-        .style("text-anchor", "middle")
-        .attr("y",20)
-        .text(function(d){return d})
-        .style('fill', 'black')
-    }else{
-      _container.call(axis.scale(_this.y[d]));
-      _container.append("text")
-        .style("text-anchor", "middle")
-        .attr("y",20)
-        .text(function(d){return d})
-        .style('fill', 'black')
-    }
-  })
-  this.drawImagePoints(imagePointsContainer, _this.pcpRegion.pcpWidth / 4, _this.pcpRegion.pcpHeight, this.data[0]);
-};
-SparkPCP.prototype.generateOverallXScale = function(range, domain, specialXScale){
-  let specialAttr = null;
-  let remainArr = [];
-  for(var i = 0,ilen = domain.length; i < ilen; i++){
-    if(i == 0){
-      specialAttr = domain[i];
-    }else{
-      remainArr.push(domain[i]);
-    }
-  }
-
-
-  let tempScale = function(d, location){
-
-    let attrX = d3.scalePoint()
-      .range([range[0]+ (range[1] - range[0]) / 4, range[1]])
-      .domain(domain);
-    if(d == specialAttr){
-      return specialXScale(location)
-    }else{
-      return attrX(d);
-    }
-  }
-  return tempScale
+  this.dimensionContainer.append("g")
+    .attr("class", "axis")
+    .each(function(d) { d3.select(this).call(axis.scale(_this.y[d])); })
+    .append("text")
+    .style("text-anchor", "middle")
+    .attr("y", -9)
 };
 
-SparkPCP.prototype.drawImagePoints = function(container, width, height, streetData){
-  console.log('here', streetData);
-  let _this = this;
-  container.append('rect')
-    .attr('width',width)
-    .attr('height', height)
-    .attr('stroke', 'red')
-    .attr('fill', 'none')
-  this.xRange = d3.extent(streetData, function(d){
-    return d['location'][0]
-  });
-  this.yRange = d3.extent(streetData, function(d){
-    return d['location'][1]
-  });
-
-  let tempXScale = d3.scaleLinear().range([0, width]).domain(this.xRange);
-  let tempYScale = d3.scaleLinear().range([height, 0]).domain(this.yRange);
-  this.regionXScale = tempXScale;
-  this.regionYScale = tempYScale;
-  let sigContainers = container.selectAll('.imagePointContainer')
-    .data(streetData)
-    .enter()
-    .append('g')
-    .attr('class', 'imagePointContainer')
-    .attr('transform', function(d){
-      let x = tempXScale(d['location'][0]);
-      let y = tempYScale(d['location'][1]);
-
-      return 'translate(' + x + ',' + y + ')';
-    });
-
-  sigContainers.append('circle')
-    .attr('r', 5)
-    .attr('fill-opacity', 0.8)
-    .attr('fill', function(d){
-      let attr = d['max_attr']['attr']
-      return _this.svFeatures2Color[attr];
-    })
-    .attr('stroke', 'white')
-};
 SparkPCP.prototype.drawPCPBars = function(){
   let _this = this;
   let barHeight = (this.height - 60) / 20;
@@ -276,54 +181,38 @@ SparkPCP.prototype.drawPCPBars = function(){
 
 SparkPCP.prototype.drawPCPLines = function(){
   let _this = this;
-  let allAttrs = ['region'].concat(this.attrs);
+  let line = d3.line();
 
-  // Draw
-  let xScale = this.generateOverallXScale([0, this.pcpRegion.pcpWidth], allAttrs, function(d){
-    return _this.regionXScale(d[0]);
-
-  });
-  let yScale = function(attr, d){
-    if(attr == 'region'){
-
-      let yValue = d['location'][1];
-      let _y = _this.regionYScale(yValue) + _this.pcpRegion['top']
-      // console.log('y ',yValue, _y )
-      return _y;
-    }else{
-      let yValue = d['attrObj'][attr];
-      let _y = _this.y[attr](yValue / 100);
-      // console.log('fy', _y);
-      return _y;
+  var lines = this.pcpContainer
+    .attr("class", "background")
+    .selectAll("path")
+    .data(this.imageList)
+    .enter().append("path")
+    .attr("d", path)
+    .attr('class', 'parallel-path')
+    .attr('stroke', function(d){
+      return _this.pcpColor[d['group']]
+    })
+    .attr('fill', 'none')
+    .attr('opacity', '0.05');
+  lines.each(function(d){
+    let iid = d['index']
+    if(_this.id2Data[iid] == undefined){
+      _this.id2Data[iid] = {}
     }
-  }
-
-
-  var  lineContainers = this.pcpContainer.append('g').attr("class", "background")
-
-    .selectAll('.lineContainer')
-    .data(this.data[0])
-    .enter()
-    .append('g').attr('class', 'lineContainer')
-
-  lineContainers.each(function(aggImg){
-    let _container = d3.select(this);
-    let line = d3.line()
-      .x(function(attr){
-        let _x = xScale(attr, aggImg['location'])
-        return _x;
-      })
-      .y(function(attr){
-        let _y =  yScale(attr, aggImg)
-        return _y ;
-      })
-      .curve(d3.curveLinear)
-    _container.datum(allAttrs).append('path').attr('d', line)
-      .attr('fill', 'none')
-      .attr('stroke', 'red')
-      .attr('opacity', 0.3)
+    _this.id2Data[iid]['data'] = d;
+    _this.id2Data[iid]['iel'] = this;
   })
 
+  function position(d) {
+    return _this.x(d);
+  }
+  function path(d) {
+    var _arrs = _this.attrs.map(function(p){
+      return [position(p), _this.y[p](d[p] / 100)];
+    })
+    return line(_arrs);
+  }
 };
 
 SparkPCP.prototype.onSelectedImages = function(selectedImages){
@@ -385,9 +274,6 @@ SparkPCP.prototype.drawLineArea = function(){
 
 
   lineAreaContainer.each(function(attr){
-    if(attr == 'region'){
-      return
-    }
     let areaPairContainers = d3.select(this).selectAll('.areaContainer')
       .data(_this.areaData)
       .enter()
@@ -437,11 +323,11 @@ SparkPCP.prototype.init = function(){
   this.initData();
   this.initRender();
   this.drawAxis();
-  //
+
   this.drawPCPLines();
-  // this.drawLineArea();
-  // this.drawPCPBars();
-  // this.drawRemarkIcon();
+  this.drawLineArea();
+  this.drawPCPBars();
+  this.drawRemarkIcon();
 };
 
 SparkPCP.prototype.updateDisplay = function(sign){

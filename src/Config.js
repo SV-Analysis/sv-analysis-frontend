@@ -11,7 +11,7 @@ export const svFeatures2Color = {
   'building' : '#ff7f0e',
   'car': '#ff9896',
   'others': '#c7c7c7',
-  'allFeatures': ['green', 'sky', 'road', 'building', 'car', 'others']
+  'allFeatures': ['green',  'sky', 'building',  'road', 'car', 'others']
 };
 export const cityId2Name = {
   'hk': 'Hong Kong',

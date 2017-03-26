@@ -11,7 +11,6 @@
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
-
               <div class="col-sm-6 col-md-8 col-lg-8 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
@@ -97,7 +96,7 @@
   }
 
   .modal-container {
-    width: 60%;
+    width: 80%;
     height: 95%;
     margin: 0px auto;
     padding: 20px 30px;

@@ -58,7 +58,7 @@
     },
     watch:{
       checked(newData){
-        console.log('new', newData);
+
         let _this = this;
         if(newData.length < 2){
           this.selectItems.forEach(function(d){

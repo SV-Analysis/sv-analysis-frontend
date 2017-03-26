@@ -20,7 +20,7 @@
       </div>
     </div>
     <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
-    <TrendView class="trend-view">trend-view</TrendView>
+    <!--<TrendView class="trend-view">trend-view</TrendView>-->
   </div>
 </template>
 
@@ -62,7 +62,6 @@
     mounted(){
       let _this = this;
       pipeService.onConfirmSelection(function(items){
-        console.log('items', items);
         items[0]['show']= true;
         items[1]['show']= false;
         _this.streetData = items;
@@ -93,7 +92,7 @@
 
   }
   .spark-pcp{
-    height: 25%;
+    height: 50%;
     /*background-color: #5bc0de;*/
     border-width: 1px;
     border-style: solid;

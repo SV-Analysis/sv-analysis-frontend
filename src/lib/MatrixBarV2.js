@@ -11,12 +11,21 @@ let MatrixBarV2 = function(el,svFeatures2Color, Config){
   this.features = this.svFeatures2Color['allFeatures'];
   this.Config = Config;
 
+  // this.colorScale = {
+  //   'hk': '#009620',
+  //   'singapore': '#fb9a99',
+  //   'london': '#1f78b4',
+  //   'nyc': '#ff7f00'
+  // };
+
   this.colorScale = {
-    'hk': '#b2df8a',
+    'hk': '#fb9a99',
     'singapore': '#fb9a99',
     'london': '#1f78b4',
-    'nyc': '#ff7f00'
+    'nyc': '#1f78b4'
   };
+
+
   this.init();
   this.initMatrix();
   this.initDiversity();
@@ -48,7 +57,7 @@ MatrixBarV2.prototype.initMatrix = function(){
   let barContainerLength = this.matrixMargin['width'] - matrixSize;
   this.singleRegionSize = singleRegionSize;
   this.gap = 20;
-  this.barContainerMargin = {left: 10, right: 10, top: 10, bottom: 5, width: barContainerLength, height: this.height, offsetX: this.matrixSize + this.gap * 1.5};
+  this.barContainerMargin = {left: 10, right: 10, top: 10, bottom: 5, width: barContainerLength, height: this.height, offsetX: this.matrixSize + this.gap / 2};
   let _width = this.barContainerMargin['width'] - this.barContainerMargin['left'] - this.barContainerMargin['right'] - this.gap;
   this.barContainerMargin['regionWidth'] = _width;
   //
@@ -84,7 +93,11 @@ MatrixBarV2.prototype.initMatrix = function(){
   this.regions.each(function(attr) {
     let pointContainer = d3.select(this);
     if (attr['x'] == attr['y']) {
-      let str = featureArray[attr['x']].charAt(0).toUpperCase() + featureArray[attr['x']].slice(1);
+      let str = featureArray[attr['x']];
+      console.log('str', str);
+      if(str == 'green') str = 'greenery';
+      if(str == 'car') str = 'vehicle';
+      str = str.charAt(0).toUpperCase() + str.slice(1);
       pointContainer.append('text')
         .attr('x', 5)
         .attr('y', singleRegionSize / 2 + 5)
@@ -148,7 +161,7 @@ MatrixBarV2.prototype.mergeData = function(data){
 };
 
 MatrixBarV2.prototype.drawMatrix = function(dataList){
-  console.log('region', dataList)
+
   let _this = this;
   this.clearRegions();
   let featureArray = this.features;
@@ -216,9 +229,9 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     let largest_y = Math.max.apply(Math,dataArray.map(function(e){return e[secondAttr];}));
 
     let xscale = d3.scaleLinear().range([3,_this.singleRegionSize - 3])
-      .domain([0 , largest_x / 100]);
-    let yscale = d3.scaleLinear().range([3, _this.singleRegionSize - 3])
-      .domain([0 , largest_y / 100]);
+      .domain([0 , 50 / 100]);
+    let yscale = d3.scaleLinear().range([_this.singleRegionSize - 3 ,3])
+      .domain([0 , 50 / 100]);
 
     pointsContainer.append('g').selectAll('.scatter-point-x')
       .data(dataArray)
@@ -243,14 +256,14 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
       .attr('stroke', function(d){return _this.colorScale[d['cityId']]});
 
     let axisContainer = null;
-    if(attr['y'] == 0) {
-      let regionXAxis = d3.axisTop()
-        .ticks(2)
+    if(attr['y'] == attr['x'] - 1) {
+      let regionXAxis = d3.axisBottom()
+        .ticks(1)
         .tickSize(1)
 
       axisContainer = pointsContainer.append('g').attr('class', 'xdimension')
         .attr("transform", function (d) {
-          return "translate(" + 0 + ',' + (3) + ")";
+          return "translate(" + 0 + ',' + (_this.singleRegionSize -3) + ")";
         });
 
       axisContainer.append("g")
@@ -264,14 +277,14 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
         })
     }
 
-    if( attr['x'] == 5) {
-      let regionYAxis = d3.axisRight()
-        .ticks(2)
-        .tickSize(2)
+    if(attr['y'] == attr['x'] - 1) {
+      let regionYAxis = d3.axisLeft()
+        .ticks(1)
+        .tickSize(1)
 
       axisContainer = pointsContainer.append('g').attr('class', 'ydimension')
         .attr("transform", function (d) {
-          return "translate(" + (_this.singleRegionSize - 3)  + ',' + (0) + ")";
+          return "translate(" + ( + 3)  + ',' + (0) + ")";
         });
 
       axisContainer.append("g")
@@ -311,13 +324,12 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
   dataList.forEach(function(d, i){
     if(d['cityId'] != attr2RatioArray[i]['cityId']) return;
     let images = d['imgList'];
+    attr2RatioArray[i].len = images.length;
     images.forEach(function(img){
       features.forEach(function(attr){
         let value = parseInt(img[attr] / (100 / numberOfScale));
         attr2RatioArray[i][attr][value] += 1;
-        if(largestValue < attr2RatioArray[i][attr][value]){
-          largestValue = attr2RatioArray[i][attr][value];
-        }
+
 
         if(largestIndex < value){
           largestIndex = value;
@@ -325,13 +337,24 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
       })
     })
   });
+  console.log('att', attr2RatioArray);
+  attr2RatioArray.forEach(function(singleArr){
+    features.forEach(function(attr){
+      console.log('attr', attr, singleArr)
+      for(var i = 0, ilen = singleArr[attr].length; i < ilen; i++){
 
-
+        singleArr[attr][i] /= singleArr.len;
+        if(largestValue < singleArr[attr][i]){
+          largestValue = singleArr[attr][i];
+        }
+      }
+    })
+  })
 
   let barWidth = this.barContainerMargin.regionWidth / largestIndex * 3 / 4;
   this.barChartsPair.each(function(attr){
     let x_scale = d3.scaleLinear().domain([0, largestIndex + 1]).range([3, _this.barContainerMargin.regionWidth]);
-    let y_scale = d3.scaleLinear().domain([0, largestValue + 0.1]).range([3, _this.singleRegionSize / 2 - 6]);
+    let y_scale = d3.scaleLinear().domain([0, largestValue+ 0.1]).range([3, _this.singleRegionSize / 2 - 6]);
     let barPairContainer = d3.select(this).append('g').attr('class', 'barContainer');
     let cityId = attr2RatioArray[0]['cityId'];
     barPairContainer.append('g').selectAll('.bar').data(attr2RatioArray[0][attr].slice(0, largestIndex + 1))
@@ -439,21 +462,29 @@ MatrixBarV2.prototype.initDiversity = function(){
     .attr('stoke-opacity', 0.3);
 
   let texts = this.diversityContainers.append('text')
-
+    .attr('font-size', 35)
     .text(function(d){
+
+      if(d == 'green') d = 'Greenery'
+      if(d == 'car') d = 'vehicle'
       return d.charAt(0).toUpperCase() + d.slice(1);
     });
   texts.attr('x', function(){
     let _width = d3.select(this).node().getBBox().width;
-    return diversityRegionWidth - _width - margin * 2 - _this.gap;
+    return diversityRegionWidth / 2 - _width / 2 - margin;
   })
-    .attr('y', this.collectionMargin.top * 2)
+    .attr('y', function(){
+      let _height = d3.select(this).node().getBBox().height;
+      return diversityRegionHeight / 2 - _height / 2 + margin + 10;
+    })
+    .attr('opacity', 0.2)
+
 };
 
 MatrixBarV2.prototype.drawDiversity = function(dataList){
   let _this = this;
   let features = this.features;
-  console.log('data', dataList);
+
   let largestFV = 0;
   let largestDis = 0;
   dataList.forEach(function(item){
@@ -488,7 +519,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
 
 
   let xScale = d3.scaleLinear()
-    .domain([0, largestFV / 100]).range([3, diversityRegionWidth - this.gap]);
+    .domain([0, 50 / 100]).range([3, diversityRegionWidth - this.gap]);
 
   let yScale = d3.scaleLinear().range([diversityRegionHeight - 2 * margin + 3, 3])
     .domain([0 , largestDis]);
@@ -531,7 +562,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
 
     if(i >= 3){
       let regionXAxis = d3.axisBottom()
-        .ticks(3);
+        .ticks(5);
 
       let axisContainer = diversityPointContainer.append('g').attr('class', 'xdimension')
         .attr("transform", function (d) {

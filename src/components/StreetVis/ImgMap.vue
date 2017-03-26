@@ -21,7 +21,7 @@
       }
     },
     mounted(){
-      console.log('data',this.data);
+
       this.createMap(this.data['cityObj'], this.data['record']['aggregatedImages']);
       this.id = this.data['id']
     },
@@ -30,14 +30,13 @@
     },
     watch:{
       picked(value){
-        console.log('value', value);
+
         if(value == this.id){
           this.notShow = false;
           this.sendSelectImages();
         }else{
           this.notShow = true;
         }
-
       }
     },
     methods:{
@@ -54,6 +53,9 @@
         this.mapObj.addMapScale();
         this.mapObj.calculateImgLocations(imgList);
         this.mapObj.fitBoundByImgList(imgList);
+        let imageList = this.mapObj.generateImgObjWithScreenPosition();
+
+
         this.mapObj.onEvent('zoomend', function(event){
           _this.sendSelectImages();
         });

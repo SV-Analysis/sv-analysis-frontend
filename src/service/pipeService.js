@@ -23,7 +23,8 @@ var pipeService = new Vue({
     UPDATEIMGFROMIMGMAP2IMGLAYER: 'update_images_from_image_map_2_imagelayer',
     IMAGESELECTED:'image_selected',
     STREETSELECTED:'streets_selected',
-    CITIESSELECTED:'cities_selected'
+    CITIESSELECTED:'cities_selected',
+    SCREENIMAGES:'screen_images'
   },
 
   methods:{
@@ -214,6 +215,17 @@ var pipeService = new Vue({
     },
     onCitySelected: function(callback){
       this.$on(this.CITIESSELECTED,function(msg){
+        callback(msg);
+      })
+    },
+
+    //----------------------------------------------------------------
+    //Message send
+    emitScreenLocImages: function(msg){
+      this.$emit(this.SCREENIMAGES, msg);
+    },
+    onScreenLocImages: function(callback){
+      this.$on(this.SCREENIMAGES,function(msg){
         callback(msg);
       })
     },
