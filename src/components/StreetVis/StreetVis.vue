@@ -6,8 +6,8 @@
       <div class="map-container" >
         <div class="radio-container">
           <div  v-for="data in streetData">
-            <input style=" left: 10px; pointer-events: auto" type="radio" id="one" v-bind:value="data['id']" v-model="picked">
-            <label style="pointer-events: auto" for="one">{{data['id']}}</label>
+            <!--<input style=" left: 10px; pointer-events: auto" type="radio" id="one" v-bind:value="data['id']" v-model="picked">-->
+            <!--<label style="pointer-events: auto" for="one">{{data['id']}}</label>-->
           </div>
         </div>
         <div v-for="data in streetData" >
@@ -92,7 +92,7 @@
 
   }
   .spark-pcp{
-    height: 50%;
+    height: 40%;
     /*background-color: #5bc0de;*/
     border-width: 1px;
     border-style: solid;
@@ -101,7 +101,7 @@
 
   .img-map-container{
     position: relative;
-    height: 50%;
+    height: 70%;
     border-width: 1px;
     border-style: solid;
     border-color: #9ea0ff;

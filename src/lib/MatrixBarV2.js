@@ -19,10 +19,10 @@ let MatrixBarV2 = function(el,svFeatures2Color, Config){
   // };
 
   this.colorScale = {
-    'hk': '#fb9a99',
-    'singapore': '#fb9a99',
-    'london': '#1f78b4',
-    'nyc': '#1f78b4'
+    'hk': '#2b8cbe',
+    'singapore': '#df65b0',
+    'london': '#2b8cbe',
+    'nyc': '#df65b0'
   };
 
 
@@ -152,12 +152,6 @@ MatrixBarV2.prototype.clearRegions = function(){
   this.barChartsPair.each(function(d){
     d3.select(this).selectAll('.barContainer').remove();
   })
-};
-
-
-MatrixBarV2.prototype.mergeData = function(data){
-
-
 };
 
 MatrixBarV2.prototype.drawMatrix = function(dataList){

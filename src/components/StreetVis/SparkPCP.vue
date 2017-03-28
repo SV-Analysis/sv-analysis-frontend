@@ -24,7 +24,7 @@
     mounted(){
       let _this = this;
       pipeService.onConfirmSelection(function(items){
-        console.log('items', items);
+
         _this.drawSpartPCP(items);
       });
       pipeService.onImageGroupSelected(function(selectedImgs){

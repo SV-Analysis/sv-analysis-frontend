@@ -4,7 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
+import Vue2Filters from 'vue2-filters'
 
+Vue.use(Vue2Filters)
 Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({

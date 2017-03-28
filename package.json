@@ -18,7 +18,8 @@
     "three.js": "^0.77.1",
     "vue": "^2.1.0",
     "vue-multiselect": "^2.0.0-beta.13",
-    "vue-resource": "^1.0.3"
+    "vue-resource": "^1.0.3",
+    "vue2-filters": "^0.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
