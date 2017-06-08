@@ -78,8 +78,9 @@ PointCloud.prototype.setData = function(arr, level){
 
   if(!arr || arr.length == 0) return;
   if(level > 12){
-    point_size = point_size + 20 / Math.abs(level - 19) * Math.abs(12 - level)
+    point_size = point_size + 40 / Math.abs(level - 19) * Math.abs(12 - level)
   }
+  point_size = 10
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
@@ -166,8 +167,6 @@ PointCloud.prototype.screenToWorldOrth = function(position){
 
 PointCloud.prototype.worldToScreen = function(position){
   var pos = position.clone();
-  // var pos = new THREE.Vector(position.x / this.width * 2 - 1,
-  //   -1 * position.y / this.height * 2 + 1, 1);
   pos.project(this.camera);
   pos.x = ( pos.x + 1 ) * this.width / 2;
   pos.y = ( - pos.y + 1) * this.height / 2;

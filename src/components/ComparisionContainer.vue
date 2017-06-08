@@ -77,10 +77,10 @@
 
           }
         });
-        console.log('msg', msg);
+
       });
       pipeService.onChagneInteractions(function(msg){
-        console.log('changeIneteacts',msg);
+
         _this.cities.forEach(function(cityObj){
           if(msg['mapInteraction'] == true){
             cityObj['isConVisActive'] = 'auto';
@@ -116,8 +116,8 @@
     margin-bottom: 10px;
     position: relative;
     float: left;
-    margin-left: 3%;
-    width: 45%;
+    margin-left: 2%;
+    width: 47%;
     background: rgba(13,13,13,0.1);
     height: 95%
   }

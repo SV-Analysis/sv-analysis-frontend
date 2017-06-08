@@ -352,7 +352,7 @@
 <style scoped>
   .region-list{
     height:100%;
-    padding-left: 20px;
+    width: 98%;
     padding-right: 20px;
     overflow-y: auto;
   }

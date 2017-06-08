@@ -5,10 +5,10 @@
       <ImgLayer class="img-svg"></ImgLayer>
       <div class="map-container" >
         <div class="radio-container">
-          <div  v-for="data in streetData">
+          <!--<div  v-for="data in streetData">-->
             <!--<input style=" left: 10px; pointer-events: auto" type="radio" id="one" v-bind:value="data['id']" v-model="picked">-->
             <!--<label style="pointer-events: auto" for="one">{{data['id']}}</label>-->
-          </div>
+          <!--</div>-->
         </div>
         <div v-for="data in streetData" >
           <ImgMap

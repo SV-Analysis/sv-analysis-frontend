@@ -46,30 +46,53 @@
         visible: false,
         svFeatures2Color: Config.svFeatures2Color,
         controlConf:[],
-        Config: Config
+        Config: Config,
+        features: Config.svFeatures2Color.allFeatures,
+        selectedRegions: []
       }
     },
-//    mounted(){
-//      console.log('matrix bar chart');
-//      let _this = this;
-//      let matrixBarHandler = new MatrixBar(this.$el);
-//      pipeService.onConfirmSelection(function(items){
-//        console.log('itmes', items);
-//        matrixBarHandler.draw(items[0], items[1], _this.svFeatures2Color['allFeatures']);
-//      })
-//    },
+
     mounted(){
 
       let _this = this;
       this.initControlConfig();
       let _el = document.getElementById('scatter-bar-chart');
       this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
-//      matrixBarHandler.draw();
       pipeService.onCitySelected(function(data){
-
+        console.log('selected city ', data);
+//                Demo
         _this.matrixBarHandler.drawMatrix(data);
         _this.matrixBarHandler.drawdsbBarchart(data);
+        let list = [];
+        data.forEach(function(d){
+          let tempList = [];
+          d['imgList'].forEach(function(img){
+            let standard = img['record']['standard'];
+            if (_this.checkStatistics(standard)){
+              tempList.push(img)
+            }
+          })
+          list = list.concat(tempList)
+        });
 
+        _this.matrixBarHandler.drawDiversity(list);
+      });
+
+      pipeService.onSelectRegion(function(d){
+        console.log('data', d);
+        let imgList =  _this.parseRecords(d['streets'], d['name']);
+        let record = {'imgList': imgList, 'name':d['name']}
+        if(_this.selectedRegions.length == 2){
+          _this.selectedRegions = []
+        }
+        _this.selectedRegions.push(record)
+        _this.selectedCollectionUpdated(_this.selectedRegions)
+
+      });
+
+      pipeService.onSelectedRegionByClick(function(region){
+        console.log('selected region', region)
+        _this.matrixBarHandler.highlightSelection(region)
       });
 
     },
@@ -77,6 +100,52 @@
 
     },
     methods:{
+      selectedCollectionUpdated(newData){
+
+        let _this = this;
+        console.log('Region updated', newData);
+        let names = [];
+        newData.forEach(function(d){
+          names.push(d['name'])
+        })
+
+        // Change color
+        _this.matrixBarHandler.setColorStyle(names);
+//                Demo
+        _this.matrixBarHandler.drawMatrix(newData);
+        _this.matrixBarHandler.drawdsbBarchart(newData);
+        let list = [];
+
+        newData.forEach(function(d){
+          let tempList = [];
+          d['imgList'].forEach(function(img){
+            let standard = img['record']['standard'];
+            if (_this.checkStatistics(standard)){
+              tempList.push(img)
+            }
+          })
+          list = list.concat(tempList)
+        });
+        _this.matrixBarHandler.drawDiversity(list);
+
+      },
+      parseRecords(list, cityId){
+        let output = [];
+        list.forEach(function(d){
+          output.push({
+            'record': d,
+            'cityObj':{'id': cityId}
+          })
+        })
+        return output
+      },
+      checkStatistics(standard){
+        let sum = 0;
+        this.features.forEach(function(attr){
+          sum += standard[attr];
+        })
+        return sum == 0? false: true
+      },
       initControlConfig(){
         let _this = this;
         let controlConf = this.controlConf
@@ -108,12 +177,11 @@
             }
           });
 
-          // Alternative methods to detect continues actions.
-//          if (this.x) clearTimeout(this.x);
-//          this.x = setTimeout(function(){ _this.selectionChanged() }, 800);
         },
         deep: true
       },
+
+
       selectItems(newData){
         this.matrixBarHandler.drawDiversity(newData);
       }

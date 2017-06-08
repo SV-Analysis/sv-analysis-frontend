@@ -1,18 +1,8 @@
 <template>
-  <div class="selection-layer">
-    <div class="control-buttons">
-      <button v-on:click="changeDisplay()" id="display-points" type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
-        <span class="glyphicon " aria-hidden="true">D</span>
-      </button>
-      <button v-on:click="changeInteraction()"  type="button" class="btn btn-default btn-xs self-button" aria-label="Left Align">
-        <span class="glyphicon " aria-hidden="true">I</span>
-      </button>
-    </div>
-  </div>
+  <div class="selection-layer"></div>
 </template>
 
 <script>
-
   import DragSelection from '../lib/DragSelection'
   import pipeService from '../service/pipeService'
 
@@ -57,7 +47,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .selection-layer{
     float: left;
@@ -65,16 +54,5 @@
     height: 100%;
     z-index: 1001;
 
-  }
-  .control-buttons{
-    position: absolute;
-    width: 20px;
-    left: 5px;
-    top: 5px;
-    pointer-events: auto;
-  }
-  .self-button{
-    width: 20px;
-    margin-top: 3px
   }
 </style>

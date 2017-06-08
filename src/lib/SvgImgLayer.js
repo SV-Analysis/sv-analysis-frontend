@@ -173,22 +173,19 @@ SvgImgLayer.prototype.updateImages = function(){
     };
 
     // Hack
-    let sampleIndex = 8;
+    let sampleIndex = 4;
     let offsetx = 100;
     let offsety = 0;
-    let sides1X = -dx - 2 - offsetx;
+    let sides1X = -dx - 2 - offsetx + 50;
     let sides1Y = -dy - 2 - offsety;
-    let sides2X = dx - 27;
-    let sides2Y = dy - 27;
+    let sides2X = dx - 50;
+    let sides2Y = dy - 50;
 
 
 
     new_images.each(function(d, i){
         if(i % sampleIndex== 0){
-
-            let points = [{x: 0, y: 0}, {x: (-dx - 2 - offsetx + 80), y: (-dy - 2 - offsety + 60)}];
-
-
+            let points = [{x: 0, y: 0}, {x: (-dx - 2 - offsetx + 60), y: (-dy - 2 - offsety + 60)}];
             d3.select(this).append('g').datum(points).append('path').attr('class','image_pointer_link')
                 .attr('d', line)
                 .attr('stroke',strokeColor)
@@ -225,7 +222,7 @@ SvgImgLayer.prototype.updateImages = function(){
 
         }else if(i % (sampleIndex / 2) == 0){
 
-            let points = [{x: 0, y: 0}, {x: (dx - 26), y: (dy - 26)}];
+            let points = [{x: 0, y: 0}, {x: sides2X + 80, y: sides2Y}];
 
             d3.select(this).append('g').datum(points).append('path').attr('class','image_pointer_link')
                 .attr('d', line)
@@ -252,8 +249,8 @@ SvgImgLayer.prototype.updateImages = function(){
                 .attr('xlink:href', function(d){
                     return d['formatImgPath']
                 })
-                .attr('x', dx - 25)
-                .attr('y', dy - 25)
+                .attr('x', sides2X + 2)
+                .attr('y', sides2Y + 2)
                 .attr('width', 0)
                 .attr('height', 0)
                 .attr('stroke', 'white')

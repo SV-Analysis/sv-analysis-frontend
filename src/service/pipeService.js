@@ -24,7 +24,9 @@ var pipeService = new Vue({
     IMAGESELECTED:'image_selected',
     STREETSELECTED:'streets_selected',
     CITIESSELECTED:'cities_selected',
-    SCREENIMAGES:'screen_images'
+    SCREENIMAGES:'screen_images',
+    SELECTREGIONS:'select_regions',
+    SELECTREGIONBYCLICK:'select_region_by_left_click'
   },
 
   methods:{
@@ -229,6 +231,27 @@ var pipeService = new Vue({
         callback(msg);
       })
     },
+    //Update multiple selections
+    emitSelectRegion: function(msg){
+      this.$emit(this.SELECTREGIONS, msg);
+    },
+    onSelectRegion: function(callback){
+      this.$on(this.SELECTREGIONS,function(msg){
+        callback(msg);
+      })
+    },
+
+    //Update multiple selections
+    emitSelectedRegionByClick: function(msg){
+      this.$emit(this.SELECTREGIONBYCLICK, msg);
+    },
+    onSelectedRegionByClick: function(callback){
+      this.$on(this.SELECTREGIONBYCLICK,function(msg){
+        callback(msg);
+      })
+    },
+
+
   }
 })
 

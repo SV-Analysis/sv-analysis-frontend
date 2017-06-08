@@ -50,10 +50,6 @@ DetailMap.prototype.init = function(){
   if(this.cityInfo.bound) this.map.fitBounds(this.cityInfo.bound);
 
 
-
-  // var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-  //   imageBounds = [[40.712216, -74.22655], [40.873941, -74.12544]];
-  // L.imageOverlay(imageUrl, imageBounds).addTo(this.map);
 };
 
 DetailMap.prototype.setColorStyle = function(colorStyle){
@@ -106,8 +102,69 @@ DetailMap.prototype.getBoundsRegion = function(){
   let bound = this.map.getBounds();
   return bound;
 };
+function isMarkerInsidePolygon(marker, poly) {
+  var polyPoints = poly.getLatLngs();
+  var x = marker.lat, y = marker.lng;
 
-DetailMap.prototype.worldToContaierPointsArr = function(arr){
+  var inside = false;
+  for (var i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
+    var xi = polyPoints[i].lat, yi = polyPoints[i].lng;
+    var xj = polyPoints[j].lat, yj = polyPoints[j].lng;
+
+    var intersect = ((yi > y) != (yj > y))
+      && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+
+  return inside;
+};
+function inside(point, vs) {
+  // ray-casting algorithm based on
+  // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+  var x = point[0], y = point[1];
+
+  var inside = false;
+  for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+    var xi = vs[i][0], yi = vs[i][1];
+    var xj = vs[j][0], yj = vs[j][1];
+
+    var intersect = ((yi > y) != (yj > y))
+      && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+
+  return inside;
+};
+
+
+DetailMap.prototype.worldToContaierPointsArr = function(arr, boundaryDict){
+  let allBoundaries = [];
+  let newArr = undefined;
+  if(boundaryDict != undefined){
+    newArr = [];
+    for(let attr in boundaryDict){
+      boundaryDict[attr].forEach(function(b){
+        let _b = [];
+        b.forEach(function(point){
+          _b.push([point[1], point[0]])
+        })
+        allBoundaries.push(_b)
+      })
+    }
+    arr.forEach(function(d){
+      for(var i = 0, ilen = allBoundaries.length; i < ilen; i++) {
+        let boundary = allBoundaries[i];
+        // let conainSign = isMarkerInsidePolygon(L.latLng(d[0], d[1]), boundary)
+        let conainSign = inside(d, boundary);
+        if (conainSign) {
+          newArr.push(d)
+          break;
+        }
+      }
+    })
+  }
+  if(newArr != undefined) arr = newArr;
   let outArr = [];
   let time = new Date();
   for(var i = 0, ilen = arr.length; i < ilen; i++){
@@ -118,8 +175,39 @@ DetailMap.prototype.worldToContaierPointsArr = function(arr){
   return outArr
 };
 
-DetailMap.prototype.worldToContaierPointsObj = function(data){
+DetailMap.prototype.worldToContaierPointsObj = function(data, boundaryDict){
   let arr = data.records;
+
+  let allBoundaries = [];
+  let newArr = undefined;
+  if(boundaryDict != undefined){
+    newArr = [];
+    for(let attr in boundaryDict){
+      boundaryDict[attr].forEach(function(b){
+        let _b = [];
+        b.forEach(function(point){
+          _b.push([point[1], point[0]])
+        })
+        allBoundaries.push(_b)
+      })
+    }
+    arr.forEach(function(d){
+      for(var i = 0, ilen = allBoundaries.length; i < ilen; i++) {
+        let boundary = allBoundaries[i];
+        let newPosition = [d['location'][1], d['location'][0]]
+        // let conainSign = isMarkerInsidePolygon(L.latLng(d[0], d[1]), boundary)
+        let conainSign = inside(newPosition, boundary);
+        if (conainSign) {
+          newArr.push(d)
+          break;
+        }
+      }
+    })
+  }
+  if(newArr != undefined) arr = newArr;
+
+
+
   let outArr = [];
   let time = new Date();
   for(var i = 0, ilen = arr.length; i < ilen; i++){
@@ -144,10 +232,6 @@ DetailMap.prototype.contaierPointsToWorld = function(arr){
   }
   console.log('time', new Date() - time);
   return outArr
-};
-
-DetailMap.prototype.addCanvasLayer = function(callback){
-  callback(this.map);
 };
 
 DetailMap.prototype.getMapInstance = function(){
@@ -224,18 +308,10 @@ DetailMap.prototype.fitBoundByImgList = function(imgList){
   this.map.fitBounds([[min_lon , min_lat ],[max_lon , max_lat]]);
 };
 
-DetailMap.prototype.generateScreenPosition = function(){
-
-};
-
 DetailMap.prototype.addMapScale = function(){
   L.control.scale().addTo(this.map)
 };
 
-DetailMap.prototype.boundContainSinglePoint = function(point){
-  var bounds = this.getBounds();
-  return bounds.contains(point);
-};
 DetailMap.prototype.filterPointsArrInBounds = function(points){
   let bounds = this.getBounds();
   let newArrs = [];
@@ -268,9 +344,10 @@ DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, pol
       })}
   }
   var myStyle = {
-    "color": "#ff7800",
+    "color": "#ffffff",
     "weight": 1,
-    "opacity": 0.65
+    "opacity": 0.8,
+    "fill": null
   };
   let geoJsonObj = L.geoJSON(allPolyLines, {
     style: myStyle
@@ -286,10 +363,6 @@ DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, pol
     polygonObj.addTo(this.map);
     this.kvPolygons[lineId] = polygonObj;
   }
-
-
-
-
 };
 
 DetailMap.prototype.deletePolyline = function(id){
@@ -329,8 +402,8 @@ DetailMap.prototype.drawImagePoints = function(img_list, pointsId){
         radius: 1,
         fillColor: _color,
         color: _color,
-        opacity: 0.8,
-        fillOpacity: 0.3
+        opacity: 0.3,
+        fillOpacity: 0.1
       });
       let imageId = feature['properties']['img_id'];
       let imgPath = feature['properties']['img_path'];
@@ -364,115 +437,7 @@ DetailMap.prototype.calculateImgLocations = function(imgList){
   this.aggregatedImages = imgList;
   this.drawImagePoints(this.aggregatedImages, 'temp_id');
 };
-// DetailMap.prototype.calculateImgLocations = function(imgList){
-//   let _this = this;
-//   this.imgList = imgList;
-//   let locationMap = {};
-//
-//   let aggregateImgList = [];
-//
-//   for(let i = 0, ilen = imgList.length; i < ilen; i++){
-//     let imgObj = imgList[i];
-//     let [x, y] = imgObj['location'];
-//
-//     if(locationMap[x] == undefined){
-//       locationMap[x] = {};
-//     }
-//     if(locationMap[x][y] == undefined){
-//       locationMap[x][y] = {
-//         imgList:[],
-//         location: [x,y],
-//         attrObj:{}
-//       };
-//       aggregateImgList.push(locationMap[x][y])
-//     }
-//     locationMap[x][y]['imgList'].push(imgObj);
-//   }
-//   let features = this.colorStyle['allFeatures'];
-//   aggregateImgList.forEach(function(agImg, i){
-//     // Init attrs in the AggregateImgOb
-//     features.forEach(function(attr){
-//       agImg['attrObj'][attr] = 0;
-//     });
-//     //  Calculate Attr
-//     agImg['imgList'].forEach(function(imgObj){
-//       features.forEach(function(attr){
-//         agImg['attrObj'][attr] += (imgObj[attr] / agImg['imgList'].length);
-//       })
-//     });
-//     let largestValue = 0;
-//     let largestAttr = null;
-//     features.forEach(function(attr){
-//       if(largestValue < agImg['attrObj'][attr]){
-//         largestValue = agImg['attrObj'][attr]
-//         largestAttr = attr;
-//       }
-//     });
-//     agImg['max_attr'] = {
-//       attr: largestAttr,
-//       value: largestValue
-//     }
-//     agImg['img_path'] = agImg['imgList'][0]['img_path'];
-//     agImg['id'] = 'aggregate_' + agImg['imgList'][0]['index'];
-//
-//
-//     let imgPath = agImg['img_path']
-//     let imgitems = imgPath.split('/');
-//     let cityname = imgitems[0];
-//     let cid = imgitems[2];
-//     let iid = imgitems[3];
-//
-//     let imgLink = _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
-//     agImg['formatImgPath'] = imgLink;
-//     agImg['aggregateIndex'] = i;
-//   });
-//   this.drawImagePoints(aggregateImgList, 'temp_id');
-//   for(var i = 1, ilen = aggregateImgList.length; i < ilen; i++){
-//     let fpos = aggregateImgList[i - 1]['location'];
-//     var firstLatlng = L.latLng(fpos[0], fpos[1]);
-//     let spos = aggregateImgList[i]['location'];
-//     var secondLatlng = L.latLng(spos[0], spos[1]);
-//     let distance = firstLatlng.distanceTo(secondLatlng);
-//   }
-//   this.aggregatedImages = aggregateImgList;
-//   // this.displayAllImages(aggregateImgList)
-// };
 
-//No using.
-DetailMap.prototype.displayAllImages = function(imgList){
-
-  for(let i = 0, ilen = imgList.length; i < ilen; i++){
-    if(i % 20 != 0) continue
-    console.log('here');
-    let imgObj = imgList[i];
-    let location = imgObj['location'];
-    location[0] += 0.001;
-
-    let imgPath = imgObj['img_path']
-    let imgitems = imgPath.split('/');
-    let cityname = imgitems[0];
-    let cid = imgitems[2];
-    let iid = imgitems[3];
-
-    let imgLink = this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid;
-
-    let firstImgObj = imgList[0];
-    let lastImgObj = imgList[imgList.length - 1];
-
-    let streetVectorY = lastImgObj['location'][1] - firstImgObj['location'][1];
-    let streetVectorX = lastImgObj['location'][0] - firstImgObj['location'][0];
-    let renderRatio = - streetVectorY / streetVectorX;
-    let distance = 0.1;
-    let dy = distance * distance / (1 + renderRatio * renderRatio);
-    let dx = dy / renderRatio;
-    let newPosition = [location[0] + dx, location[1] + dy];
-    let imageBounds = [[newPosition[1], newPosition[0]], [newPosition[1] + 0.003, newPosition[0]+ 0.004]];
-
-    // imageBounds = [location, [40.773941, -74.12544]];
-
-    L.imageOverlay(imgLink, imageBounds).addTo(this.map);
-  }
-};
 
 DetailMap.prototype.sampleImagesInTheBound = function(){
   let _this = this;
@@ -501,8 +466,8 @@ DetailMap.prototype.generateImgObjWithScreenPosition = function(){
   this.aggregatedImages.forEach(function(d){
     let location = [d['location'][1],d['location'][0]]
 
-      d['screenLoc'] = _this.map.latLngToContainerPoint(location)
-      mewImages.push(d);
+    d['screenLoc'] = _this.map.latLngToContainerPoint(location)
+    mewImages.push(d);
 
   });
 
@@ -510,112 +475,5 @@ DetailMap.prototype.generateImgObjWithScreenPosition = function(){
 
 };
 
-
-
-
-
-
-///// will not be used
-// DetailMap.prototype.deletePolyline = function(streetInfo){
-//   // Hack: the parameter should be points list
-//   let polylineId = streetInfo['id'];
-//   // for(var i = 0; i < this.polylines.length; i++){
-//   //   if(polylineObj == this.polylines[i]){
-//   //     this.polylines.splice(i,1);
-//   //     this.map.removeLayer(polylineObj);
-//   //     return;
-//   //   }
-//   // }
-//   if(this.kvPolylines[polylineId] != undefined){
-//     this.map.removeLayer(this.kvPolylines[polylineId]);
-//   }
-// };
-
-// Old version
-DetailMap.prototype.drawPointsToMap = function(streetInfo){
-  // Hack: the parameter should be points list
-  let _this = this;
-  let pointsId = streetInfo['id'];
-  let img_list = streetInfo['image_list'];
-  let render_img_list = [];
-  for(var i = 0, ilen = img_list.length; i < ilen; i++){
-    render_img_list.push({
-      "type": "Feature",
-      "properties": {
-        "maxAttr": img_list[i]['max_attr']['attr'],
-        'img_id': img_list[i]['index'],
-        'img_path': img_list[i]['img_path']
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": img_list[i]['location']
-      }
-    })
-  }
-
-  let points_layer = L.geoJSON(render_img_list, {
-    pointToLayer: function (feature, latlng) {
-      let maxAttr = feature['properties'].maxAttr;
-      let _color = _this.getColor(maxAttr);
-      let circleMarder = L.circleMarker(latlng, {
-        radius: 1,
-        fillColor: _color,
-        color: _color,
-        opacity: 0.8,
-        fillOpacity: 0.3
-      });
-      let imageId = feature['properties']['img_id'];
-      let imgPath = feature['properties']['img_path'];
-      let imgitems = imgPath.split('/');
-      let cityname = imgitems[0];
-      let cid = imgitems[2];
-      let iid = imgitems[3];
-
-      let imageLink = '<img src=' + _this.serverLink  + 'getImage?city=' + cityname +'&cid='+cid +'&iid=' + iid+ ' style="width:120px;">' ;
-      circleMarder.bindPopup(imageLink);
-      return circleMarder;
-    }
-  });
-  points_layer.addTo(this.map)
-  if(this.keyPoints[pointsId] == undefined){
-    this.keyPoints[pointsId] = points_layer;
-  }else{
-    console.log('Points exited!')
-  }
-  L.popup();
-  return streetInfo;
-};
-
-// DetailMap.prototype.deletePoints = function(streetInfo) {
-//   let pointsId = streetInfo['id'];
-//   if(this.keyPoints[pointsId] != undefined){
-//     this.map.removeLayer(this.keyPoints[pointsId]);
-//   }
-// };
-
-DetailMap.prototype.drawPolygon = function(streetInfo){
-  // Hack: the parameter should be points list
-  let node_list = streetInfo['node_list'];
-  let pointList = [];
-  for(var i = 0; i < node_list.length; i ++){
-    let node = node_list[i]['location'];
-    pointList.push(new L.LatLng(node[1], node[0]))
-  }
-
-  var firstpolyline = new L.Polyline(pointList, {
-    color: 'red',
-    weight: 2,
-    opacity: 0.5,
-    smoothFactor: 1
-  });
-
-  // this.addPolyline(firstpolyline);
-  // this.polylines.push({
-  //   streetInfo.id: firstpolyline
-  // });
-  this.kvPolylines[streetInfo['id']] = firstpolyline;
-  firstpolyline.addTo(this.map);
-  return streetInfo;
-};
 export default DetailMap
 

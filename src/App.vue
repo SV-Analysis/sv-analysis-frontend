@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar><button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button></Navbar>
-    <el-row :gutter="20" class="whole-row">
+    <el-row :gutter="15" class="whole-row">
       <el-col :span="6" class="root-container bstyle">
         <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
       </el-col>
@@ -149,27 +149,31 @@
 </script>
 
 <style scoped>
+  body{
+    overflow-y: hidden;
+  }
   html{
     background: rgba(211,211,211, 0.3);
     height: 100%;
     width: 100%;
     overflow-y: hidden;
+
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     text-align: center;
     background: #ddd;
-    height: 100vh
+    height: 100vh;
+    width: 100%;
+    overflow-y: hidden;
   }
-  .ui-row{
-    margin-top: -10px;
-    height:93vh;
-    min-height:93vh;
 
-  }
   .whole-row{
+    left: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
     margin-top: -10px;
-    height: 90%;
+    height: 94%;
     min-height:90%;
     overflow-y: hidden;
     /*height:92vh;*/
@@ -178,14 +182,11 @@
   }
   .root-container{
     height: 98%;
-    padding-right: 5px;
-    padding-left: 5px
   }
   .bstyle {
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
-    padding-left: 10px;
     height: 99%;
   }
 
@@ -200,14 +201,14 @@
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
-    height:50%;
+    height:42%;
   }
   .y-style-bottom{
     border-radius: 5px;
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     margin-top: 10px;
-    height:50%;
+    height:58%;
   }
 
 

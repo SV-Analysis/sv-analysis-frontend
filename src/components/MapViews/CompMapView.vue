@@ -16,7 +16,10 @@
       return {
         title: 'comp-mapview',
         points_world: [],
-        disablePoint: false
+        disablePoint: false,
+        regionSign: 'city',
+        currentPolygons: [],
+        id2Boundary:{}
       }
     },
     mounted(){
@@ -55,7 +58,7 @@
       });
 
       pipeService.onDrawPolyLine(function(msg){
-        console.log('msg', msg)
+
         let cityId = msg['cityId'];
         if(cityId !=  _this.cityInfo.id) return;
 
@@ -88,6 +91,24 @@
           _this.updatePointCloud();
         }
       })
+      pipeService.onSelectRegion(function(msg){
+        if(msg['cityId']!=  _this.cityInfo.id) return
+
+        if(msg['attr']['SL'] == true){
+
+          _this.regionSign = 'region';
+          let regions = [];
+          msg['subRegion'].forEach(function(r){
+            regions.push(r['boundary'])
+          })
+          _this.id2Boundary[msg['name']] = regions;
+          _this.updatePointCloud()
+        }else if(msg['attr']['SL'] == false){
+          delete _this.id2Boundary[msg['name']]
+          _this.updatePointCloud()
+        }
+
+      });
     },
     computed:{
       cityId(){
@@ -107,6 +128,9 @@
             _this.updatePointCloud()
           }, 400);
         }
+      },
+      pointType(newType){
+
       }
     },
     methods:{
@@ -143,6 +167,10 @@
         });
 
       },
+      updatePointCloudInPolygons(){
+        let _this = this;
+
+      },
       updatePointCloud(){
         let _this = this;
         let zoomLevel = this.mapObj.getZoomLevel();
@@ -154,7 +182,7 @@
             'zoomLevel': zoomLevel});
         }else{
           if(zoomLevel >= 13){
-
+            console.log('zoomLevel', zoomLevel);
             let regions = _this.mapObj.getBoundsRegion();
             let positions = [
               regions.getSouthWest(), regions.getSouthEast(),
@@ -162,19 +190,26 @@
             ];
 
             dataService.queryRegionFromBackground( this.cityInfo['id'], positions, function(data){
-              let current_points = _this.mapObj.worldToContaierPointsObj(data);
+              let current_points = null;
+              if(_this.regionSign == 'city')
+                current_points = _this.mapObj.worldToContaierPointsObj(data);
+              else
+                current_points = _this.mapObj.worldToContaierPointsObj(data, _this.id2Boundary)
               pipeService.emitUpdateAllResultData({
                 'cityId': _this.cityInfo['id'],
                 'data': current_points,
                 'zoomLevel': zoomLevel});
             })
           }else{
+            console.log('zoomLevel', zoomLevel);
             let level = _this.mapObj.getZoomLevel();
-
             let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
-
-            _temp_points = _this.generateSample(_temp_points,14 - level);
-            let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
+//            _temp_points = _this.generateSample(_temp_points,14 - level);
+            let current_points = null;
+            if(_this.regionSign == 'city')
+              current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
+            else
+              current_points = _this.mapObj.worldToContaierPointsArr(_temp_points, _this.id2Boundary)
 
             pipeService.emitUpdateAllResultData({
               'cityId': _this.cityInfo['id'],

@@ -6,7 +6,7 @@
   <!--</ul>-->
 
   <el-menu  theme="dark"  class="el-menu-demo navbar-container" mode="horizontal" >
-    <el-menu-item class="title-name" index="1">Street View Analysis</el-menu-item>
+    <el-menu-item class="title-name" index="1">StreetVizor</el-menu-item>
     <slot name="header">
 
     </slot>
@@ -21,7 +21,7 @@
     name: 'navbar',
     data(){
       return {
-        title: 'Street View Analysis',
+        title: 'StreetVizor',
         buttons: [
           {'name': 'Start', 'link': "http://www.huamin.org/"},
 

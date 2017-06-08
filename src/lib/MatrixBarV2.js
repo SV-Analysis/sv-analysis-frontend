@@ -24,7 +24,7 @@ let MatrixBarV2 = function(el,svFeatures2Color, Config){
     'london': '#2b8cbe',
     'nyc': '#df65b0'
   };
-
+  this.colorScaleArray = ['#df65b0', '#2b8cbe'];
 
   this.init();
   this.initMatrix();
@@ -34,15 +34,15 @@ MatrixBarV2.prototype.init = function(){
   this.svgContainer = d3.select(this.$el);
   // Init the configuration of matrix and collection
   this.matrixContainer = this.svgContainer.append('g');
-  this.matrixMargin = {left: 10, right: 10, top:10, bottom: 5, width: this.width / 2, height: this.height};
+  this.matrixMargin = {left: 10, right: 10, top:10, bottom: 5, width: this.width * 3/ 5, height: this.height};
   this.matrixMargin['regionWidth'] = this.matrixMargin['width'] - this.matrixMargin['left'] - this.matrixMargin['right'];
   this.matrixMargin['regionHeight'] = this.matrixMargin['height'] - this.matrixMargin['top'] - this.matrixMargin['bottom'];
 
   let matrixSize = this.matrixMargin['regionWidth'] > this.matrixMargin['regionHeight']? this.matrixMargin['regionHeight']: this.matrixMargin['regionWidth'];
   this.matrixSize = matrixSize;
 
-  this.collectionContainer = this.svgContainer.append('g').attr('transform', 'translate(' + this.width / 2 + ',0)')
-  this.collectionMargin =  {left: 10, right: 10, top:10, bottom: 5, width: this.width / 2, height: this.height, gap:5};
+  this.collectionContainer = this.svgContainer.append('g').attr('transform', 'translate(' + this.width * 3/ 5 + ',0)')
+  this.collectionMargin =  {left: 0, right: 10, top:10, bottom: 5, width: this.width *3 / 5, height: this.height, gap:5};
   this.collectionMargin['regionWidth'] = this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right'];
   this.collectionMargin['regionHeight'] = this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'];
 
@@ -94,7 +94,7 @@ MatrixBarV2.prototype.initMatrix = function(){
     let pointContainer = d3.select(this);
     if (attr['x'] == attr['y']) {
       let str = featureArray[attr['x']];
-      console.log('str', str);
+
       if(str == 'green') str = 'greenery';
       if(str == 'car') str = 'vehicle';
       str = str.charAt(0).toUpperCase() + str.slice(1);
@@ -142,7 +142,15 @@ MatrixBarV2.prototype.initMatrix = function(){
     .attr('stroke-width', 0.3)
     .attr('stoke-opacity', 0.3)
 };
+MatrixBarV2.prototype.setColorStyle = function(names){
+  this.colorScaleArray;
+  this.colorScale = {};
+  let _this = this;
+  names.forEach(function(name, i){
+    _this.colorScale[name] = _this.colorScaleArray[i];
+  })
 
+};
 
 MatrixBarV2.prototype.clearRegions = function(){
   this.regions.each(function(d){
@@ -168,7 +176,9 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     let cityId = data['cityId'];
     let type = data['type'];
     data['imgList'].forEach(function(d){
-      let id = cityId + '_' + type + '_' + d['id'];
+
+      let _id = d['id'] != undefined? d['id']: d['record']['statistics']['id']
+      let id = cityId + '_' + type + '_' + _id;
       d['point_id'] = id;
       dataArray.push(d);
     });
@@ -191,18 +201,29 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     .attr('x', 10)
     .attr('y', 5)
     .text(function(d, i){
-      return _this.Config.cityId2Name[d['cityId']];
+      if(d['cityId']!= undefined)
+        return _this.Config.cityId2Name[d['cityId']];
+      else
+        return d['name']
     });
 
   legends.append('circle').attr('r', 6 )
     .attr('stroke', function(d, i){
-      return _this.colorScale[d['cityId']]
+
+      if(d['cityId']!= undefined)
+        return _this.colorScale[d['cityId']]
+      else
+        return _this.colorScale[d['name']]
+
     })
     .attr('stroke-width', function(d, i){
       return 2;
     })
     .attr('fill', function(d, i){
-      return _this.colorScale[d['cityId']]
+      if(d['cityId']!= undefined)
+        return _this.colorScale[d['cityId']]
+      else
+        return _this.colorScale[d['name']]
     })
     .attr('fill-opacity', 0.5)
 
@@ -219,36 +240,48 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
     let pointsContainer = d3.select(this).append('g').attr('class', 'pointsContainer');
     let firstAttr = featureArray[attr['x']];
     let secondAttr = featureArray[attr['y']];
-    let largest_x = Math.max.apply(Math,dataArray.map(function(e){return e[firstAttr];}));
-    let largest_y = Math.max.apply(Math,dataArray.map(function(e){return e[secondAttr];}));
-
+    let largest_x = Math.max.apply(Math,dataArray.map(function(e){return e['record']['statistics'][firstAttr];}));
+    let largest_y = Math.max.apply(Math,dataArray.map(function(e){return e['record']['statistics'][secondAttr];}));
+    largest_x = largest_x < 50 ? 50 : largest_x;
+    largest_y = largest_y < 50 ? 50 : largest_y;
     let xscale = d3.scaleLinear().range([3,_this.singleRegionSize - 3])
-      .domain([0 , 50 / 100]);
+      .domain([0 , largest_x / 100]);
     let yscale = d3.scaleLinear().range([_this.singleRegionSize - 3 ,3])
-      .domain([0 , 50 / 100]);
+      .domain([0 , largest_y / 100]);
 
-    pointsContainer.append('g').selectAll('.scatter-point-x')
+    let circles = pointsContainer.append('g').selectAll('.scatter-point-x')
       .data(dataArray)
       .enter()
       .append('circle')
-      .attr('class', 'scatter-point-x')
+
+      .attr('class', d=> 'scatter-point-x '+ d['point_id'])
       .attr('cx', function(d){
-        let ratio = d[firstAttr];
+        let ratio = d['record']['statistics'][firstAttr];
         let xvalue = xscale(ratio / 100)
         return xvalue
       })
       .attr('cy', function(d){
-        let ratio = d[secondAttr];
+        let ratio = d['record']['statistics'][secondAttr];
         let yvalue = yscale(ratio/ 100)
         return yvalue
       })
-      .attr('r', 2)
-      .attr('fill', function(d){return _this.colorScale[d['cityId']]})
+      .attr('r', function(d){
+
+        return 2
+      })
+      .attr('fill', function(d){
+        return _this.colorScale[d['cityObj']['id']]})
       .attr('fill-opacity', 0.2)
       .attr('stroke-width', 1)
       .attr('stroke-opacity', 0.3)
       .attr('stroke', function(d){return _this.colorScale[d['cityId']]});
 
+    circles.each(function(d){
+      if(d['render'] == undefined){
+        d['render'] = []
+      }
+      d['render'].push(this)
+    })
     let axisContainer = null;
     if(attr['y'] == attr['x'] - 1) {
       let regionXAxis = d3.axisBottom()
@@ -294,10 +327,12 @@ MatrixBarV2.prototype.drawMatrix = function(dataList){
 };
 
 MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
+
   let _this = this;
   let features = this.features;
 
   let numberOfScale = 20;
+  this.numberOfScale = numberOfScale;
   // Init the data
   let attr2RatioArray = [];
   for(let i = 0, ilen = dataList.length; i <ilen; i++){
@@ -318,25 +353,22 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
   dataList.forEach(function(d, i){
     if(d['cityId'] != attr2RatioArray[i]['cityId']) return;
     let images = d['imgList'];
+    attr2RatioArray[i]['name'] = d['name']
     attr2RatioArray[i].len = images.length;
     images.forEach(function(img){
       features.forEach(function(attr){
-        let value = parseInt(img[attr] / (100 / numberOfScale));
+        let value = parseInt(img['record']['statistics'][attr] / (100 / numberOfScale));
         attr2RatioArray[i][attr][value] += 1;
-
-
         if(largestIndex < value){
           largestIndex = value;
         }
       })
     })
   });
-  console.log('att', attr2RatioArray);
+
   attr2RatioArray.forEach(function(singleArr){
     features.forEach(function(attr){
-      console.log('attr', attr, singleArr)
       for(var i = 0, ilen = singleArr[attr].length; i < ilen; i++){
-
         singleArr[attr][i] /= singleArr.len;
         if(largestValue < singleArr[attr][i]){
           largestValue = singleArr[attr][i];
@@ -348,9 +380,11 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
   let barWidth = this.barContainerMargin.regionWidth / largestIndex * 3 / 4;
   this.barChartsPair.each(function(attr){
     let x_scale = d3.scaleLinear().domain([0, largestIndex + 1]).range([3, _this.barContainerMargin.regionWidth]);
+    _this.x_scale = x_scale;
     let y_scale = d3.scaleLinear().domain([0, largestValue+ 0.1]).range([3, _this.singleRegionSize / 2 - 6]);
     let barPairContainer = d3.select(this).append('g').attr('class', 'barContainer');
     let cityId = attr2RatioArray[0]['cityId'];
+    let name = attr2RatioArray[0]['name'];
     barPairContainer.append('g').selectAll('.bar').data(attr2RatioArray[0][attr].slice(0, largestIndex + 1))
       .enter()
       .append('rect').attr('class','bar')
@@ -365,8 +399,11 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
       .attr('height', function(d){
         return y_scale(d);
       })
-      .attr('fill', function(){
-        return _this.colorScale[cityId];
+      .attr('fill', function(d){
+        if(cityId!= undefined)
+          return _this.colorScale[cityId]
+        else
+          return _this.colorScale[name]
       })
       .attr('opacity', 0.7);
 
@@ -395,6 +432,7 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
 
     if(attr2RatioArray.length > 1){
       let cityId = attr2RatioArray[1]['cityId'];
+      let name = attr2RatioArray[1]['name'];
       barPairContainer.append('g').selectAll('.bar').data(attr2RatioArray[1][attr].slice(0, largestIndex + 1))
         .enter()
         .append('rect').attr('class','bar')
@@ -409,7 +447,10 @@ MatrixBarV2.prototype.drawdsbBarchart = function(dataList){
           return y_scale(d);
         })
         .attr('fill', function(){
-          return _this.colorScale[cityId];
+          if(cityId!= undefined)
+            return _this.colorScale[cityId]
+          else
+            return _this.colorScale[name]
         })
         .attr('opacity', 0.7);
     }
@@ -425,8 +466,10 @@ MatrixBarV2.prototype.initDiversity = function(){
 
   let features = this.features;
 
-  this.collectionMargin['diversityRegionWidth'] = (this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right']) / 3;
-  this.collectionMargin['diversityRegionHeight'] = (this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'])/ 2;
+  this.collectionMargin['diversityRegionHeight'] = (this.collectionMargin['height'] - this.collectionMargin['top'] - this.collectionMargin['bottom'])/ 3;
+  this.collectionMargin['diversityRegionWidth'] =
+    (this.collectionMargin['width'] - this.collectionMargin['left'] - this.collectionMargin['right']) / 3;
+  //this.collectionMargin['diversityRegionHeight'] * 5 / 3;
   this.collectionMargin['diversityRegionMargin'] = 10;
 
 
@@ -440,8 +483,8 @@ MatrixBarV2.prototype.initDiversity = function(){
     .append('g')
     .attr('class', 'diversityContainers')
     .attr('transform', function(d, i){
-      let _x = i % 3 * diversityRegionWidth;
-      let _y = (parseInt(i / 3) * diversityRegionHeight);
+      let _x = i % 2 * diversityRegionWidth;
+      let _y = (parseInt(i / 2) * diversityRegionHeight);
 
       return 'translate('+ _x +',' + _y +')'
     });
@@ -476,6 +519,7 @@ MatrixBarV2.prototype.initDiversity = function(){
 };
 
 MatrixBarV2.prototype.drawDiversity = function(dataList){
+
   let _this = this;
   let features = this.features;
 
@@ -513,7 +557,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
 
 
   let xScale = d3.scaleLinear()
-    .domain([0, 50 / 100]).range([3, diversityRegionWidth - this.gap]);
+    .domain([0, largestFV / 100]).range([3, diversityRegionWidth - this.gap]);
 
   let yScale = d3.scaleLinear().range([diversityRegionHeight - 2 * margin + 3, 3])
     .domain([0 , largestDis]);
@@ -534,7 +578,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
         return 'translate('+ _x +','+ _y +')';
       });
 
-    pointsContainers.append('line')
+    let lines = pointsContainers.append('line')
       .attr('x1', function(data){
         let gapValue = offScale((data['dv']['statistics'][attr] - data['dv']['sv'][attr]) / 100);
         return -gapValue;
@@ -542,19 +586,60 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
       .attr('x2', function(data){
         let gapValue = offScale((data['dv']['lv'][attr] - data['dv']['statistics'][attr]) / 100);
         return gapValue;
+      }).attr('class', d=> d['point_id'])
+
+      .attr('stroke', function(d){ return _this.colorScale[d['cityObj']['id']]}).attr('stroke-width', 1)
+      .on('click', function(d){
+        let renders = d['render'];
+        renders.forEach(function(e){
+          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+            .attr('fill', 'red').attr('fill-opacity', 0.5)
+            .attr('r',4)
+
+          e.parentNode.appendChild(e);
+          e.parentNode.parentNode.appendChild(e.parentNode);
+
+        })
+        console.log('d', d);
+      });
+
+    lines.each(function(d){
+      if(d['render'] == undefined){
+        d['render'] = []
+      }
+      d['render'].push(this)
+    })
+
+    let circles = pointsContainers.append('circle')
+      .attr('stroke-width', 1)
+      .on('click', function(d){
+        let renders = d['render'];
+        renders.forEach(function(e){
+          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+            .attr('fill', 'red').attr('fill-opacity', 0.9)
+            .attr('r',4)
+          e.parentNode.appendChild(e);
+          e.parentNode.parentNode.appendChild(e.parentNode);
+
+        })
+        console.log('d', d);
       })
-
-      .attr('stroke', function(d){ return _this.colorScale[d['cityObj']['id']]}).attr('stroke-width', 1);
-
-    pointsContainers.append('circle')
+      .attr('class', d => d['point_id'])
       .attr('r',3)
       .attr('fill',function(d){return _this.colorScale[d['cityObj']['id']]}).attr('fill-opacity', '0.5')
       .attr('stroke', function(d){
         return _this.colorScale[d['cityObj']['id']]
       })
-      .attr('stroke-width', 1);
 
-    if(i >= 3){
+    circles.each(function(d){
+      if(d['render'] == undefined){
+        d['render'] = []
+      }
+      d['render'].push(this)
+    })
+
+
+    if(i >= 4){
       let regionXAxis = d3.axisBottom()
         .ticks(5);
 
@@ -575,7 +660,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
     }
 
 
-    if(i % 3 == 0){
+    if(i % 2 == 0){
       let regionYAxis = d3.axisLeft()
         .ticks(3)
         .tickSize(2)
@@ -599,5 +684,26 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
   this.diversityContainers;
 };
 
-
+MatrixBarV2.prototype.highlightSelection = function(record){
+  // let point_id = record['cityId'] + '_region_' + record['rid'];
+  // console.log('record', record);
+  // let _this = this;
+  // let selections = d3.selectAll('.' + point_id).attr('fill', 'red').attr('stroke', 'red').attr('fill-opacity', 0.8)
+  //   .attr('stroke-width', 2)
+  //   .attr('stroke', 'red')
+  //   .attr('r', 3.5);
+  //
+  // // let value = parseInt(img['record']['statistics'][attr] / (100 / numberOfScale));
+  // let recordFeatures = record['statistics'];
+  // this.barChartsPair.each(function(attr){
+  //   let featureValue = recordFeatures[attr] / (100 / _this.numberOfScale)
+  //   let x = _this.x_scale(featureValue)
+  //   d3.select(this).append('line').attr('x1', x).attr('x2',x).attr('y1', _this.singleRegionSize / 2).attr('y2', _this.singleRegionSize - 10).attr('stroke', 'red').attr('stroke-width', 1.5);
+  //   console.log('x', x);
+  // })
+  // selections.each(function(){
+  //   this.parentNode.appendChild(this);
+  //   this.parentNode.parentNode.appendChild(this.parentNode);
+  // })
+};
 export default MatrixBarV2
