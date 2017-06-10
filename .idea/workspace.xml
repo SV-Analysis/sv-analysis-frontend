@@ -7,25 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/service/pipeService.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/lib/SparkPCP - Copy.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" afterPath="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" afterPath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Navbar.vue" afterPath="$PROJECT_DIR$/src/components/Navbar.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/DetailMap.js" afterPath="$PROJECT_DIR$/src/lib/DetailMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MatrixBarV2.js" afterPath="$PROJECT_DIR$/src/lib/MatrixBarV2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/PointCloud.js" afterPath="$PROJECT_DIR$/src/lib/PointCloud.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" afterPath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
-    </list>
+    <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,8 +48,8 @@
       <file leaf-file-name="PointCloud.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lib/PointCloud.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+            <state relative-caret-position="616">
+              <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -636,8 +618,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="2578" height="1408" extended-state="7" />
-    <editor active="false" />
+    <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19335938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1042,8 +1024,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/PointCloud.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        <state relative-caret-position="616">
+          <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
           <folding />
         </state>
       </provider>
