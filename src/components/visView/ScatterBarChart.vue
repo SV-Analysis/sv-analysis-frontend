@@ -3,8 +3,6 @@
     <svg class="scatter-bar-chart" id="scatter-bar-chart">
 
     </svg>
-
-
     <el-popover
       ref="popcontrol"
       width="400"
@@ -34,7 +32,7 @@
 <script>
   import * as d3 from 'd3'
   import pipeService from '../../service/pipeService'
-  import MatrixBar from '../../lib/MatrixBarV2'
+  import MatrixBar from '../../lib/MatrixBarV3'
   import * as Config from '../../Config'
   export default {
     name: 'scatterBarChart',
@@ -48,19 +46,18 @@
         controlConf:[],
         Config: Config,
         features: Config.svFeatures2Color.allFeatures,
-        selectedRegions: []
+        selectedRegions: [],
+        currentComparisonType: null
       }
     },
 
     mounted(){
-
       let _this = this;
       this.initControlConfig();
       let _el = document.getElementById('scatter-bar-chart');
       this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
       pipeService.onCitySelected(function(data){
-        console.log('selected city ', data);
-//                Demo
+        _this.currentComparisonType = "city";
         _this.matrixBarHandler.drawMatrix(data);
         _this.matrixBarHandler.drawdsbBarchart(data);
         let list = [];
@@ -69,29 +66,28 @@
           d['imgList'].forEach(function(img){
             let standard = img['record']['standard'];
             if (_this.checkStatistics(standard)){
-              tempList.push(img)
+              tempList.push(img);
             }
-          })
+          });
           list = list.concat(tempList)
         });
-
         _this.matrixBarHandler.drawDiversity(list);
       });
 
       pipeService.onSelectRegion(function(d){
-        console.log('data', d);
+        _this.currentComparisonType = "region";
+
         let imgList =  _this.parseRecords(d['streets'], d['name']);
         let record = {'imgList': imgList, 'name':d['name']}
         if(_this.selectedRegions.length == 2){
           _this.selectedRegions = []
         }
-        _this.selectedRegions.push(record)
+        _this.selectedRegions.push(record);
         _this.selectedCollectionUpdated(_this.selectedRegions)
 
       });
 
       pipeService.onSelectedRegionByClick(function(region){
-        console.log('selected region', region)
         _this.matrixBarHandler.highlightSelection(region)
       });
 
@@ -101,14 +97,12 @@
     },
     methods:{
       selectedCollectionUpdated(newData){
-
         let _this = this;
-        console.log('Region updated', newData);
         let names = [];
         newData.forEach(function(d){
           names.push(d['name'])
         })
-
+        console.log('matrix_region', newData);
         // Change color
         _this.matrixBarHandler.setColorStyle(names);
 //                Demo
@@ -176,13 +170,11 @@
               d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
             }
           });
-
         },
         deep: true
       },
-
-
       selectItems(newData){
+        this.currentComparisonType = "street";
         this.matrixBarHandler.drawDiversity(newData);
       }
     }

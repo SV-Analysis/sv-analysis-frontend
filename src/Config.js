@@ -19,28 +19,22 @@ export const cityId2Name = {
   'london': 'London',
   'nyc': 'New York City'
 }
-export const cityOptions = [
-  {
-    'name': 'New York',
-    'gps':[40.7058253, -74.1180861],
-    'id': 'nyc',
-    'bound': null
-  },{
-    'name': 'Singapore',
-    'gps':[1.3149014, 103.7769792],
-    'id': 'singapore',
-    'bound': null
-  },{
-    'name': 'Hong Kong',
-    'gps':[22.365354, 114.105228],
-    'id':'hk',
-    'bound': null
-  },{
-    'name': 'London',
-    'gps':[51.528308,-0.3817765],
-    'id': 'london',
-    'bound': null
-  }
-];
+export const cityOptions = [{
+  'name': 'Hong Kong',
+  'gps':[22.365354, 114.105228],
+  'id':'hk',
+},{
+  'name': 'Singapore',
+  'gps':[1.3149014, 103.7769792],
+  'id': 'singapore',
+},{
+  'name': 'New York',
+  'gps':[40.7058253, -74.1180861],
+  'id': 'nyc',
+},{
+  'name': 'London',
+  'gps':[51.528308,-0.3817765],
+  'id': 'london',
+}];
 
 // v-bind:svFeatures2Color="svFeatures2Color"

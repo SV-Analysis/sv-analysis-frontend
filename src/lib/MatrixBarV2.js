@@ -2,6 +2,8 @@
  * Created by qshen on 2/21/2017.
  */
 import * as d3 from 'd3'
+// import * as d3contour from 'd3-contour'
+import * as d3contour from '../../src/lib/d3-contour'
 
 let MatrixBarV2 = function(el,svFeatures2Color, Config){
   this.$el = el;
@@ -10,13 +12,6 @@ let MatrixBarV2 = function(el,svFeatures2Color, Config){
   this.svFeatures2Color = svFeatures2Color;
   this.features = this.svFeatures2Color['allFeatures'];
   this.Config = Config;
-
-  // this.colorScale = {
-  //   'hk': '#009620',
-  //   'singapore': '#fb9a99',
-  //   'london': '#1f78b4',
-  //   'nyc': '#ff7f00'
-  // };
 
   this.colorScale = {
     'hk': '#2b8cbe',
@@ -60,14 +55,6 @@ MatrixBarV2.prototype.initMatrix = function(){
   this.barContainerMargin = {left: 10, right: 10, top: 10, bottom: 5, width: barContainerLength, height: this.height, offsetX: this.matrixSize + this.gap / 2};
   let _width = this.barContainerMargin['width'] - this.barContainerMargin['left'] - this.barContainerMargin['right'] - this.gap;
   this.barContainerMargin['regionWidth'] = _width;
-  //
-  // this.matrixContainer.append('rect')
-  //   .attr('x', this.matrixMargin['left'])
-  //   .attr('y', this.matrixMargin['top'])
-  //   .attr('width', this.matrixMargin['regionWidth'])
-  //   .attr('height', this.matrixMargin['regionHeight'])
-  //   .attr('fill', 'red')
-  //   .attr('opacity', '0.1');
 
   let regionArray = [];
   let index = 0;
@@ -519,7 +506,6 @@ MatrixBarV2.prototype.initDiversity = function(){
 };
 
 MatrixBarV2.prototype.drawDiversity = function(dataList){
-
   let _this = this;
   let features = this.features;
 
@@ -564,9 +550,72 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
 
   let offScale = d3.scaleLinear().range([0, 15]).domain([0, 0.2])
 
-
+  let idMap = null;
   this.diversityContainers.each(function(attr, i){
     let diversityPointContainer = d3.select(this).append('g').attr('class','diversityPointContainer');
+
+    let __nodes1 = [];
+    let __nodes2 = [];
+
+    dataList.forEach(function(data){
+
+      let dataid = data['cityObj']['id'];
+      if(idMap == null){
+        idMap = dataid;
+      }
+
+      let nodes = data['cityObj']['id'] == idMap ? __nodes1: __nodes2
+
+
+      nodes.push({
+        x: xScale(data['dv']['statistics'][attr] / 100),
+        y: yScale(data['dv']['standard'][attr])
+      })
+    });
+
+    console.log('nodes', __nodes1, __nodes2)
+    // 'hk': '#2b8cbe',
+    // 'singapore': '#df65b0',
+    let bandwidth = 10;
+    let c1 = d3contour.contourDensity()
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .size([diversityRegionWidth , diversityRegionHeight])
+      .bandwidth(bandwidth)
+      (__nodes1);
+
+    let c2 = d3contour.contourDensity()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .size([diversityRegionWidth , diversityRegionHeight])
+        .bandwidth(bandwidth)
+        (__nodes2);
+
+    console.log('c1', c1);
+    diversityPointContainer.append('g')
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+      .attr("stroke-width", 0.5)
+      .attr("stroke-linejoin", "round")
+      .selectAll("path")
+      .data(c1)
+      .enter().append("path")
+      .attr("fill", '#2b8cbe')
+      .attr("d", d3.geoPath())
+      .attr('opacity', 0.3);
+
+
+    diversityPointContainer.append('g')
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+      .attr("stroke-width", 0.5)
+      .attr("stroke-linejoin", "round")
+      .selectAll("path")
+      .data(c2)
+      .enter().append("path")
+      .attr("fill", '#df65b0')
+      .attr("d", d3.geoPath())
+      .attr('opacity', 0.3)
 
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
       .data(dataList)
@@ -575,68 +624,73 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
       .attr('transform', function(data, i){
         let _x = xScale(data['dv']['statistics'][attr] / 100);
         let _y = yScale(data['dv']['standard'][attr]);
+        // let _x = __nodes[i]['x'];
+        // let _y = __nodes[i]['y'];
         return 'translate('+ _x +','+ _y +')';
       });
 
-    let lines = pointsContainers.append('line')
-      .attr('x1', function(data){
-        let gapValue = offScale((data['dv']['statistics'][attr] - data['dv']['sv'][attr]) / 100);
-        return -gapValue;
-      })
-      .attr('x2', function(data){
-        let gapValue = offScale((data['dv']['lv'][attr] - data['dv']['statistics'][attr]) / 100);
-        return gapValue;
-      }).attr('class', d=> d['point_id'])
-
-      .attr('stroke', function(d){ return _this.colorScale[d['cityObj']['id']]}).attr('stroke-width', 1)
-      .on('click', function(d){
-        let renders = d['render'];
-        renders.forEach(function(e){
-          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
-            .attr('fill', 'red').attr('fill-opacity', 0.5)
-            .attr('r',4)
-
-          e.parentNode.appendChild(e);
-          e.parentNode.parentNode.appendChild(e.parentNode);
-
-        })
-        console.log('d', d);
-      });
-
-    lines.each(function(d){
-      if(d['render'] == undefined){
-        d['render'] = []
-      }
-      d['render'].push(this)
-    })
-
-    let circles = pointsContainers.append('circle')
-      .attr('stroke-width', 1)
-      .on('click', function(d){
-        let renders = d['render'];
-        renders.forEach(function(e){
-          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
-            .attr('fill', 'red').attr('fill-opacity', 0.9)
-            .attr('r',4)
-          e.parentNode.appendChild(e);
-          e.parentNode.parentNode.appendChild(e.parentNode);
-
-        })
-        console.log('d', d);
-      })
-      .attr('class', d => d['point_id'])
-      .attr('r',3)
-      .attr('fill',function(d){return _this.colorScale[d['cityObj']['id']]}).attr('fill-opacity', '0.5')
-      .attr('stroke', function(d){
-        return _this.colorScale[d['cityObj']['id']]
-      })
-
-    circles.each(function(d){
-      if(d['render'] == undefined){
-        d['render'] = []
-      }
-      d['render'].push(this)
-    })
+    // let lines = pointsContainers.append('line')
+    //   .attr('x1', function(data){
+    //     let gapValue = offScale((data['dv']['statistics'][attr] - data['dv']['sv'][attr]) / 100);
+    //     return -gapValue;
+    //   })
+    //   .attr('x2', function(data){
+    //     let gapValue = offScale((data['dv']['lv'][attr] - data['dv']['statistics'][attr]) / 100);
+    //     return gapValue;
+    //   }).attr('class', d=> d['point_id'])
+    //
+    //   .attr('stroke', function(d){ return _this.colorScale[d['cityObj']['id']]}).attr('stroke-width', 1)
+    //   .on('click', function(d){
+    //     let renders = d['render'];
+    //     renders.forEach(function(e){
+    //       d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+    //         .attr('fill', 'red').attr('fill-opacity', 0.5)
+    //         .attr('r',4)
+    //
+    //       e.parentNode.appendChild(e);
+    //       e.parentNode.parentNode.appendChild(e.parentNode);
+    //
+    //     });
+    //   });
+    //
+    // lines.each(function(d){
+    //   if(d['render'] == undefined){
+    //     d['render'] = []
+    //   }
+    //   d['render'].push(this)
+    // })
+    //
+    // let circles = pointsContainers.append('circle')
+    //   .attr('stroke-width', 1)
+    //   .on('click', function(d){
+    //     let renders = d['render'];
+    //     renders.forEach(function(e){
+    //       d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+    //         .attr('fill', 'red').attr('fill-opacity', 0.9)
+    //         .attr('r',4);
+    //       e.parentNode.appendChild(e);
+    //       e.parentNode.parentNode.appendChild(e.parentNode);
+    //
+    //     });
+    //     console.log('d', d);
+    //   })
+    //   .attr('class', d => d['point_id'])
+    //   .attr('r',2)
+    //   .attr('fill',function(d){
+    //     return "red";
+    //     return _this.colorScale[d['cityObj']['id']]
+    //   })
+    //   .attr('fill-opacity', '0.5')
+    //   .attr('stroke', function(d){
+    //     return _this.colorScale[d['cityObj']['id']]
+    //   });
+    //
+    // circles.each(function(d){
+    //   if(d['render'] == undefined){
+    //     d['render'] = []
+    //   }
+    //   d['render'].push(this)
+    // });
 
 
     if(i >= 4){
@@ -663,7 +717,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
     if(i % 2 == 0){
       let regionYAxis = d3.axisLeft()
         .ticks(3)
-        .tickSize(2)
+        .tickSize(2);
 
       let axisContainer = diversityPointContainer.append('g').attr('class', 'ydimension')
         .attr("transform", function (d) {
@@ -681,9 +735,15 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
     }
   });
 
-  this.diversityContainers;
+  this.diversityContainer.each(function(attr, i){
+    console.log('attr', attr, i);
+  });
+
 };
 
+function drawDiversityAxis(i, diversityPointContainer){
+
+}
 MatrixBarV2.prototype.highlightSelection = function(record){
   // let point_id = record['cityId'] + '_region_' + record['rid'];
   // console.log('record', record);

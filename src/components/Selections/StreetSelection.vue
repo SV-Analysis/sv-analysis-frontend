@@ -252,7 +252,6 @@
         record['segments'].forEach(function(seg){
            seg['summary_img'][0]['formatImgPath'] = _this._generateImageLink(seg['summary_img'][0]);
         });
-//        record['segments'][0]['summary_img'][0]['formatImgPath'] = _this._generateImageLink(record['segments'][0]['summary_img'][0]);
         record['sImg_path'] = record['segments'][0]['summary_img'][0]['formatImgPath'];
         delete record['agg_obj'];
       },

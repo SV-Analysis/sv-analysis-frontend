@@ -34,6 +34,7 @@
       },
       createMap(){
         let _this = this;
+
         this.mapObj = new DetailMap(this.$el, this.cityInfo);
         this.mapObj.init();
         this.mapObj.enableControlLayer();
