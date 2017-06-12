@@ -54,6 +54,7 @@
       this.selectItems.forEach(function(d){
         _this.options.push(d)
       });
+      console.log('selected', this.selectItems)
     },
     computed:{
 

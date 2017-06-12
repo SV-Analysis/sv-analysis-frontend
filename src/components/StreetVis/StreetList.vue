@@ -1,12 +1,15 @@
 <template>
   <div class="street-list-container">
     <div class="street-list">
-      <div v-for="street,i in selectItems" >
+      <!--<input v-for = "d in testArray" type="checkbox" v-bind:value="d" v-model="checked">-->
+      <div v-for="street in selectItems" >
+
         <div style="text-align: left">
           <input type="checkbox"
-                 v-bind:value='street'
-                 v-model="checked"
+                 id = "street.id"
+                 v-bind:value="street"
                  :disabled="street.selectDisable == true? true: false"
+                 v-model="checked"
           >
           <label>{{street.id}}</label>
         </div>
@@ -36,11 +39,15 @@
         svFeatures2Color: Config.svFeatures2Color,
         activeSelections: [],
         checked: [],
-        streetList: []
+        streetList: [],
+        testArray: [{'id': 1, 'value': [1,2,3,4,5]},{'id': 2, 'value': 2},{'id': 3, 'value': 3},{'id': 4, 'value': 4}]
       }
     },
     mounted(){
-
+      console.log("vis mounted");
+      this.selectItems.forEach(function(d){
+        delete d['render']
+      })
       let _this = this;
       this.selectItems.forEach(function(d){
         d['selectDisable'] = false;
@@ -58,7 +65,7 @@
     },
     watch:{
       checked(newData){
-
+        console.log('newData', newData);
         let _this = this;
         if(newData.length < 2){
           this.selectItems.forEach(function(d){
