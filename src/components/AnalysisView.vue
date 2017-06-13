@@ -11,12 +11,12 @@
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
-              <div class="col-sm-6 col-md-8 col-lg-8 vis-container" >
+              <div class="col-sm-9 col-md-9 col-lg-9 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
                 ></StreetVis>
               </div>
-              <div class="col-sm-3 col-md-4 col-lg-4 " >
+              <div class="col-sm-3 col-md-3 col-lg-3 " >
                 <StreetList v-bind:selectItems="selectItems"></StreetList>
               </div>
             </div>
@@ -54,16 +54,15 @@
       this.selectItems.forEach(function(d){
         _this.options.push(d)
       });
-      console.log('selected', this.selectItems)
     },
     computed:{
 
     },
     methods:{
       confirm: function(){
-//        this.selection[0]['show'] = true;
-//        this.selection[1]['show'] = false;
-//        pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
+        this.selection[0]['show'] = true;
+        this.selection[1]['show'] = false;
+        pipeService.emitConfirmSelection([this.selection[0], this.selection[1]]);
       }
     },
 

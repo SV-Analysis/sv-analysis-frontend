@@ -410,7 +410,6 @@ SvgImgLayer.prototype.drawTreemap = function(e, data, width, height){
         .attr("width", function(d) { return d.x1 - d.x0; })
         .attr("height", function(d) { return d.y1 - d.y0; })
         .attr("fill", function(d) {
-            console.log('dd', d);
             return  _this.svFeatures2Color[d['data']['name']];
         });
 

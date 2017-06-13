@@ -2,14 +2,18 @@
   <div class="street-view">
 
     <div class="img-map-container">
-
-      <div v-for="street in streetData" class="map-container">
-        <div class="img-map-wrapper">
-          <ImgLayer class="img-svg" v-bind:street="street"></ImgLayer>
-
+      <ImgLayer class="img-svg"></ImgLayer>
+      <div class="map-container" >
+        <div class="radio-container">
+          <!--<div  v-for="data in streetData">-->
+            <!--<input style=" left: 10px; pointer-events: auto" type="radio" id="one" v-bind:value="data['id']" v-model="picked">-->
+            <!--<label style="pointer-events: auto" for="one">{{data['id']}}</label>-->
+          <!--</div>-->
+        </div>
+        <div v-for="data in streetData" >
           <ImgMap
             v-bind:picked="picked"
-            v-bind:street='street'
+            v-bind:data='data'
             class="img-map-f">
           </ImgMap>
         </div>
@@ -97,55 +101,48 @@
 
   .img-map-container{
     position: relative;
-    height: 50%;
+    height: 70%;
     border-width: 1px;
     border-style: solid;
     border-color: #9ea0ff;
   }
-
-  /*.map-container{*/
-  /*float: left;*/
-  /*height: 100%;*/
-  /*width: 50%*/
-  /*}*/
-  .map-container:nth-child(1){
-    float: left;
-    height: 100%;
-    width: 49.5%
+  .radio-container{
+    color: yellow;
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    z-index: 1001;
+    pointer-events:none;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 5px;
   }
-  .map-container:nth-child(2){
-    float: right;
-    height: 100%;
-    width: 49.5%
-  }
-  .img-map-wrapper{
+  .map-container{
     position: relative;
-    width: 100%;
     height: 100%;
-    background-color: #00fd20;
+    width: 100%
   }
   .img-map-f{
     position: absolute;
     height: 100%;
-    width: 100%;
     top: 0px;
     left: 0px;
   }
   .img-svg{
     position: absolute;
     height: 100%;
-    width: 100%;
     top: 0px;
     left: 0px;
     pointer-events: none;
     z-index: 1000;
   }
-  .img-map-p{
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background-color: #5e7382;
+  .trend-view{
+    height: 30%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #baff92;
   }
-
+  .active{
+    display:none;
+  }
 </style>

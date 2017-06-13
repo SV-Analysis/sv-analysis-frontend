@@ -1,9 +1,7 @@
 <template>
   <div class="street-list-container">
     <div class="street-list">
-      <!--<input v-for = "d in testArray" type="checkbox" v-bind:value="d" v-model="checked">-->
       <div v-for="street in selectItems" >
-
         <div style="text-align: left">
           <input type="checkbox"
                  id = "street.id"
@@ -20,7 +18,7 @@
         </el-carousel>
       </div>
     </div>
-    <el-button  v-on:click="confirm()">
+    <el-button v-on:click="confirm()">
       Confirm
     </el-button>
   </div>
@@ -84,7 +82,6 @@
               d['selectDisable'] = false;
             }
           })
-
         }
       }
     }

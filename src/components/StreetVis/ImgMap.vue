@@ -1,5 +1,8 @@
 <template>
-  <div v-bind:class="{ active: notShow }" class="img-map">
+  <!--<div v-bind:class="{ active: notShow }" class="img-map">-->
+  <!--{{id}}-->
+  <!--</div>-->
+  <div class="img-map">
 
   </div>
 </template>
@@ -11,7 +14,7 @@
 
   export default {
     name: 'ImageMap',
-    props:['selectItems', 'data', 'picked'],
+    props:['street', 'picked'],
     data () {
       return {
         title: 'ImageMap',
@@ -21,9 +24,9 @@
       }
     },
     mounted(){
-
-      this.createMap(this.data['cityObj'], this.data['record']['aggregatedImages']);
-      this.id = this.data['id']
+      console.log('sss', this.street, this.picked);
+      this.createMap(this.street['cityObj'], this.street['record']['aggregatedImages']);
+      this.id = this.street['id'];
     },
     computed:{
 
@@ -70,8 +73,10 @@
         let _this = this;
         if(!this.mapObj) return;
         let images = this.mapObj.sampleImagesInTheBound();
-        pipeService.emitUpdateImagesFromImgMap2ImgLayer(images);
-
+        pipeService.emitUpdateImagesFromImgMap2ImgLayer({
+            images: images,
+            id: _this.id
+        });
       }
     }
   }
@@ -81,10 +86,8 @@
 <style >
   .img-map{
     margin-top: 0px;
-    width: 100%;
-    height: 100%
+    background-color: #1b6d85;
   }
-
   .active{
     display: none
     /*z-index: 10000*/

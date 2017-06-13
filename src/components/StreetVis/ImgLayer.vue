@@ -13,20 +13,27 @@
 
   export default {
     name: 'Image_layer',
-    props:['selectItems'],
+    props:['selectItems', 'street'],
     data () {
       return {
         title: 'ImageLayer',
+        id: null,
         svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){
       let _this = this;
+      this.id = this.street.id;
       this.svgImgLayer = new SvgImgLayer(this.$el, this.svFeatures2Color);
       this.container = this.svgImgLayer.getCotnainer();
-      pipeService.onUpdateImagesFromImgMap2ImgLayer(function(images){
-        _this.updateImages(images);
+      pipeService.onUpdateImagesFromImgMap2ImgLayer(function(updateImagesObj){
+        let id = updateImagesObj['id'];
+        if(id == _this.id){
+          let images = updateImagesObj['images'];
+          _this.updateImages(images);
+        }
       });
+
       pipeService.onImageGroupSelected(function(selectedImgs){
         _this.svgImgLayer.onSelectedImages(selectedImgs);
       })
@@ -45,7 +52,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style >
   .img-layer{
-    width: 100%;
+
   }
   circle{
     pointer-events: none;
