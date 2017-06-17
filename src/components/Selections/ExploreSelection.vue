@@ -1,6 +1,5 @@
 <template>
   <div class="exploreSelection">
-    <div v-on:mouseover="mouseOver" >Explore{{streets.length}} {{regions.length}}</div>
   </div>
 </template>
 <script>
@@ -30,13 +29,28 @@
 
       },
       initRender: function(){
-        console.log('el config ', this.$el.clientWidth);
         if(this.isInitRender) return;
         this.isInitRender = true;
         this.multiExploration = new MulitExploration(this.$el, Config.svFeatures2Color);
         this.multiExploration.setAttrs(this.attrs);
-
         this.multiExploration.update(this.streets);
+      },
+      updateRegionOrStreet(record){
+        let id = record['id'];
+        let streets = [];
+        let isExist = false;
+        for(var i = 0, ilen = this.streets.length; i < ilen; i++){
+          let _s = this.streets[i];
+          if(_s.id != id){
+            streets.push(_s);
+          }else{
+            isExist = true;
+          }
+        }
+        if(isExist == false){
+          streets.push(record)
+        }
+        return streets
       }
     },
     watch:{
@@ -48,15 +62,21 @@
     mounted(){
 
       let features = Config.svFeatures2Color.allFeatures.slice();
-      let attrs = ['id'].concat(features);
+      let attrs = ['id', 'city'].concat(features);
       this.attrs = attrs;
       pipeService.onSelectRegion((record)=>{
-        let id = record['rid'];
-        this.regions.push(record);
+        record.id = record['rid'];
+        record.record = {
+          statistics: record.statistics,
+          id: record.rid
+        };
+
+        let streets = this.updateRegionOrStreet(record);
+        this.streets = streets;
       });
       pipeService.onUpdateSelectItems((record)=>{
-        let id = record['id'];
-        this.streets.push(record);
+        let streets = this.updateRegionOrStreet(record);
+        this.streets = streets;
         if(this.multiExploration)
           this.multiExploration.update(this.streets);
       });

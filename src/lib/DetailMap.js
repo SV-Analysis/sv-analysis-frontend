@@ -72,7 +72,6 @@ DetailMap.prototype.updateLayer = function(layerName){
     this.map.addLayer(this.currentLayer);
   }
   else{
-    console.log('Error layer', layerName);
   }
 };
 

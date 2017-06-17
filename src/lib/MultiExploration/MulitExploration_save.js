@@ -45,7 +45,7 @@ MultiExploration.prototype.setAttrs = function(attrs){
   this.unitConfig.attr2Index = {};
   this.attrUnits = [];
   for(let i = 0, ilen = this.attrs.length; i < ilen; i++){
-    this.attrUnits.push(new Unit(this.attrs[i], this.attrs[i],0, i));
+    this.attrUnits.push(new Unit(this.attrs[i], this.attrs[i], this.attrs[i],0, i));
     this.unitConfig.attr2Index[this.attrs[i]] = i;
   }
   if(this.widthsRatio == undefined || this.widthRatios.length == 0){
@@ -54,7 +54,6 @@ MultiExploration.prototype.setAttrs = function(attrs){
       this.widthRatios.push(1 / ilen);
     }
   }
-
   this.updateRenderHead();
 };
 
@@ -86,74 +85,71 @@ MultiExploration.prototype.update = function(dataList){
   this.svg.attr('height', _height);
 };
 
+
 MultiExploration.prototype.updateRenderBody = function(){
+
   let _this = this;
   let unitConfig = this.unitConfig;
   this.container.selectAll('.bodyContainer').remove();
   this.bodyContainer = this.container.append('g').attr('class', 'bodyContainer')
     .attr('transform','translate(0,' + (this.unitConfig.headHeight) + ')');
+  let units = [];
+  this.bodyData.forEach(function(row){
+    units = units.concat(row.data);
+  });
+  let unitContainers = this.bodyContainer.selectAll('.bodyUnit')
+    .data(units).enter().append('g').attr('class', 'bodyUnit');
 
-  this.rowContainers = this.bodyContainer.selectAll('.rowContainer')
-    .data(this.bodyData)
-    .enter()
-    .append('g').attr('class', 'rowContainer');
+  unitContainers.each(function(d){
+    let yIndex = d['yIndex'];
+    let xIndex = d['xIndex'];
+    let left = unitConfig.lefts[yIndex];
+    let _width = unitConfig.widths[yIndex] - unitConfig.left - unitConfig.right;
+    let _height = unitConfig.height - unitConfig.top - unitConfig.bottom;
 
-  this.rowContainers.each(function(row){
-    let rowContainer = d3.select(this);
-    let unitContainers = rowContainer.selectAll('.bodyUnit').data(row.data).enter().append('g').attr('class', 'bodyUnit');
-    unitContainers.each(function(d){
+    let value = d['value'];
+    let unitContainer = d3.select(this);
+    unitContainer.attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
+    unitContainer.append('rect').attr('class','unitBackground')
+      .attr('width', _width).attr('height', _height)
+      .attr('fill', function(){
+        return xIndex % 2 != 0? '#eee': '#fff';
+      })
+      .attr('opacity', 0.8)
+      .attr('x', unitConfig.left)
+      .attr('y', unitConfig.top);
 
-      let yIndex = d['yIndex'];
-      let xIndex = d['xIndex'];
-      let left = unitConfig.lefts[yIndex];
-      let _width = unitConfig.widths[yIndex] - unitConfig.left - unitConfig.right;
-      let _height = unitConfig.height - unitConfig.top - unitConfig.bottom;
+    if(d.attr == 'id') {
+      let text = unitContainer.append('text').text(value);
+      let conf = text.node().getBBox();
+      text.attr('x', unitConfig.renderLeft)
+        .attr('y', (conf.height + unitConfig.height) / 2 - 1 )
 
-      let value = d['value'];
-      let unitContainer = d3.select(this);
-      unitContainer.attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
-      unitContainer.append('rect').attr('class','unitBackground')
-        .attr('width', _width).attr('height', _height)
-        .attr('fill', function(){
-          return xIndex % 2 != 0? '#eee': '#fff';
+    }else{
+      unitContainer.append('rect').attr('class', 'value')
+        .attr('width', d=>{
+          let _w = unitConfig.widthScale[yIndex](value);
+          return _w;
+        })
+        .attr('height', unitConfig.renderHeight)
+        .attr('fill', ()=>{
+          // '#5FB2E8'
+          return _this.colorMap[d.attr]
         })
         .attr('opacity', 0.8)
-        .attr('x', unitConfig.left)
-        .attr('y', unitConfig.top);
-
-      if(d.attr == 'id') {
-        let text = unitContainer.append('text').text(value)
-        // console.log('text', unitConfig.renderTop, text.node().getBBox())
-        let conf = text.node().getBBox();
-        text.attr('x', unitConfig.renderLeft)
-          .attr('y', (conf.height + unitConfig.height) / 2 - 1 )
-
-      }else{
-        unitContainer.append('rect').attr('class', 'value')
-          .attr('width', d=>{
-            let _w = unitConfig.widthScale[yIndex](value);
-            return _w;
-          })
-          .attr('height', unitConfig.renderHeight)
-          .attr('fill', ()=>{
-            // '#5FB2E8'
-            return _this.colorMap[d.attr]
-          })
-          .attr('opacity', 0.8)
-          .attr('x', unitConfig.renderLeft)
-          .attr('y', unitConfig.renderTop)
-      }
-    })
+        .attr('x', unitConfig.renderLeft)
+        .attr('y', unitConfig.renderTop)
+    }
   })
+
 };
-
-
 
 
 
 MultiExploration.prototype.updateRenderHead = function(){
   // neet set attrs
   let unitConfig = this.unitConfig;
+  let _this = this;
   this.unitConfig.widths = [];
   let left = 0;
   this.widthRatios.forEach((d)=>{
@@ -182,22 +178,40 @@ MultiExploration.prototype.updateRenderHead = function(){
       .attr('width', _width).attr('height', _height)
       .attr('fill', '#eee').attr('opacity', 0.8)
       .attr('x', unitConfig.left)
-      .attr('y', unitConfig.top);
+      .attr('y', unitConfig.top)
+      .on('click', function(){
+        _this.clickOnAttr(d.value)
+      })
     unitContainer.append('text')
       .style('font-weight', 'bold')
       .style('font-family', "'PT Sans',Tahoma")
       .text(d.value).attr('y', 20).attr('x', unitConfig.left)
   });
 };
+MultiExploration.prototype.clickOnAttr = function(attr){
+  this.sortByAttr(attr);
+  this.updateRenderBody();
 
-MultiExploration.prototype.addData = function(data){
-
+};
+MultiExploration.prototype.sortByAttr = function(attr){
+  let index = this.unitConfig.attr2Index[attr];
+  this.bodyData.sort(function(row1, row2){
+    return (row2.data[index].value  - row1.data[index].value ) > 0;
+  });
+  this.freshIndex();
 };
 
 MultiExploration.prototype.removeData = function(d){
 
 };
 
+MultiExploration.prototype.freshIndex = function(){
+  this.bodyData.forEach(function(row, y){
+    row.data.forEach(function(unit, x){
+      unit.updateIndex(x, y);
+    })
+  })
+};
 
 function processStreets(streets, attrs){
   console.log('data', streets);
@@ -212,7 +226,8 @@ function processStreets(streets, attrs){
         attr == 'region'? street.city: attr2Value[attr];
       if(attr == 'id') streetId = value;
       _unit[attr] = value;
-      unitArray.push(new Unit(attr, value, rIndex, cIndex, 'data'));
+      let id = streetId + '_' + attr
+      unitArray.push(new Unit(id, attr, value, rIndex, cIndex, 'data'));
     });
     vectors.push({'id': streetId, data: unitArray, raw: street});
   });

@@ -33,7 +33,6 @@
       }
     },
     mounted(){
-      console.log('data22', this.cityInfo, this.streetData, this.adRegionData);
       let _this = this;
       if(this.streetData != undefined && this.adRegionData == undefined){
         this.imageList = this.streetData['image_list'];
@@ -60,7 +59,6 @@
           imageList = imageList.concat(d['images']);
         });
         this.imageList = imageList;
-        console.log('this.adReegionData', this.adRegionData)
       }
 
       this.createMap();
