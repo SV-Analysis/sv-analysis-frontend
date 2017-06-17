@@ -68,7 +68,7 @@ DiversityChart.prototype.getColor = function(id){
 DiversityChart.prototype.draw = function(dataList){
   let _this = this;
   this.clearRegion();
-
+  console.log('Diversity dataList ', dataList);
   let features = this.features;
 
   let largestFV = 0;
@@ -147,10 +147,6 @@ DiversityChart.prototype.draw = function(dataList){
         .size([diversityRegionWidth , diversityRegionHeight])
         .bandwidth(bandwidth)
         (__nodes2);
-
-
-
-
 
     diversityPointContainer.append('g')
       .attr("fill", "none")

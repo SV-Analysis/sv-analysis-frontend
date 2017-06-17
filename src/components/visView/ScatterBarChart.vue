@@ -60,6 +60,7 @@
 
       pipeService.onMESelected((record)=>{
         this.updateRecords(record);
+        _this.selectedCollectionUpdated(_this.selectedRegions)
       });
 
 
@@ -105,19 +106,24 @@
     },
     methods:{
       updateRecords(d){
-        console.log('Recieve ', d);
+        // To decide to remove a old element or add a new element
         let _this = this;
-
-        _this.currentComparisonType = "region";
-
+        let newRecords = [];
         let imgList =  _this.parseRecords(d['streets'], d['name']);
-        let record = {'imgList': imgList, 'name':d['name']}
-        if(_this.selectedRegions.length == 2){
-          _this.selectedRegions = []
-        }
-        _this.selectedRegions.push(record);
-        _this.selectedCollectionUpdated(_this.selectedRegions)
+        let record = {'imgList': imgList, 'name':d.name, id: d.id, 'color': d.mColor};
+        let existed = false;
+        this.selectedRegions.forEach((region)=>{
+          if(region.id != record.id){
+              newRecords.push(region)
+          }else{
+              existed = true;
+          }
+        });
 
+        if(newRecords.length < 2 && existed == false){
+          newRecords.push(record);
+        }
+        _this.selectedRegions = newRecords;
       },
       selectedCollectionUpdated(newData){
         let _this = this;

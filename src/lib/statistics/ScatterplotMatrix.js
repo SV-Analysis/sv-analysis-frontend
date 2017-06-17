@@ -76,14 +76,16 @@ ScatterPlotMatrix.prototype.getColor = function(id){
 };
 
 ScatterPlotMatrix.prototype.draw = function(dataList){
-
+  console.log('In Datalist', dataList)
   let _this = this;
   this.clearRegions();
+  if(dataList.length == 0){
+    return;
+  }
   let featureArray = this.features;
   // Build a scale function for every region
 
   let dataArray = [];
-
 
   dataList.forEach(function(data){
     let cityId = data['cityId'];
@@ -92,10 +94,12 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
       let _id = d['id'] != undefined? d['id']: d['cityObj']['id'];
       let id = cityId + '_' + type + '_' + _id;
       d['point_id'] = id;
+      d.color = data.color;
       dataArray.push(d);
     });
   });
   this.regionContainer.selectAll('.legendContainer').remove();
+
   let legendsContainer = this.regionContainer.append('g').attr('class', 'legendContainer');
   let legends = legendsContainer
     .selectAll('.legends')
@@ -120,32 +124,23 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
 
   legends.append('circle').attr('r', 6 )
     .attr('stroke', function(d, i){
-      if(d['cityId']!= undefined){
-        return _this.getColor(d['cityId']);
-      }
-      else{
-        return _this.getColor(d['name']);
-      }
-
+      return d.color;
     })
     .attr('stroke-width', function(d, i){
       return 2;
     })
     .attr('fill', function(d, i){
-
-      if(d['cityId']!= undefined)
-        return _this.getColor(d['cityId']);
-      else
-        return _this.getColor(d['name']);
+      return d.color
     })
     .attr('fill-opacity', 0.5);
-
-  legendsContainer.append('text')
-    .text(function(){
-      if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
-      else return 'Type: Street'
-    })
-    .attr('x', 22).attr('y', _this.config.margin.height - 80);
+  if(dataList.length > 0){
+    legendsContainer.append('text')
+      .text(function(){
+        if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
+        else return 'Type: Street'
+      })
+      .attr('x', 22).attr('y', _this.config.margin.height - 80);
+  }
 
   this.regions.each(function(attr, i){
     if(attr['x'] == attr['y']) return;
@@ -183,13 +178,15 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
 
       })
       .attr('fill', function(d){
-        return _this.getColor(d['cityObj']['id']);
+        // return _this.getColor(d['cityObj']['id']);
+        return d.color
       })
       .attr('fill-opacity', 0.2)
       .attr('stroke-width', 1)
       .attr('stroke-opacity', 0.3)
       .attr('stroke', function(d){
-        return _this.getColor(d['cityId'])
+        return d.color
+        // return _this.getColor(d['cityId'])
       });
 
     circles.each(function(d){
@@ -246,5 +243,6 @@ ScatterPlotMatrix.prototype.clearRegions = function(){
   this.regions.each(function(d){
     d3.select(this).selectAll('.pointsContainer').remove();
   });
+  this.regionContainer.selectAll('.legendContainer').remove();
 };
 export default ScatterPlotMatrix

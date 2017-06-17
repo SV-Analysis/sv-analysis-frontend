@@ -71,16 +71,6 @@ MatrixBarV2.prototype.initMatrix = function(){
     'cityId2Name': _this.Config.cityId2Name,
     'colorScale': _this.colorScale
   });
-
-  // Assist polygons
-  // this.matrixContainer.append('rect')
-  //   .attr('width',  this.matrixMargin.regionWidth)
-  //   .attr('height', this.matrixMargin.regionHeight)
-  //   .attr('stroke-width', 1)
-  //   .attr('stroke', 'red')
-  //   .attr('fill', 'red')
-  //   .attr('opacity', 0.1);
-
 };
 
 MatrixBarV2.prototype.initCompBars = function(){

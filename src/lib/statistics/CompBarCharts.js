@@ -18,11 +18,11 @@ CompBarChart.prototype.setConfig = function(el, features, config){
   let contaienrOffsetX = this.config.margin['width'] > this.config.margin['height']? (this.config.margin['width'] - this.config.margin['height']): 0;
   this.colorScale = config.colorScale;
   this.compBarContainer = el.append('g').attr('class', 'region_container').attr('transform', 'translate(' + contaienrOffsetX + ',' + '0)');
-  this.barChartsPair = this.compBarContainer.selectAll('.barContaienrs')
+  this.barChartsPair = this.compBarContainer.selectAll('.barContainers')
     .data(features)
     .enter()
     .append('g')
-    .attr('class', 'barContaienrs')
+    .attr('class', 'barContainers')
     .attr('transform', function(d, i){
       return 'translate( 0' +',' +(i * singleRegionSize) +')'
     });
@@ -42,9 +42,9 @@ CompBarChart.prototype.getColor = function(id){
 CompBarChart.prototype.draw = function(dataList){
   let _this = this;
   this.clearRegion();
-
+  if(dataList.length == 0) return;
   let features = this.features;
-
+  console.log('datalist barchart', dataList);
   let numberOfScale = 20;
   this.numberOfScale = numberOfScale;
   // Init the data
@@ -58,6 +58,7 @@ CompBarChart.prototype.draw = function(dataList){
         _cityObj[attr][j] = 0;
       }
     });
+    _cityObj.color = data.color;
     attr2RatioArray.push(_cityObj);
   }
 
@@ -100,6 +101,7 @@ CompBarChart.prototype.draw = function(dataList){
     let barPairContainer = d3.select(this).append('g').attr('class', 'barContainer');
     let cityId = attr2RatioArray[0]['cityId'];
     let name = attr2RatioArray[0]['name'];
+    let color = attr2RatioArray[0].color;
     barPairContainer.append('g').selectAll('.bar').data(attr2RatioArray[0][attr].slice(0, largestIndex + 1))
       .enter()
       .append('rect').attr('class','bar')
@@ -115,10 +117,11 @@ CompBarChart.prototype.draw = function(dataList){
         return y_scale(d);
       })
       .attr('fill', function(d){
-        if(cityId!= undefined)
-          return _this.getColor(cityId)
-        else
-          return _this.getColor(name)
+        return color;
+        // if(cityId!= undefined)
+        //   return _this.getColor(cityId)
+        // else
+        //   return _this.getColor(name)
       })
       .attr('opacity', 0.7);
 
@@ -141,13 +144,12 @@ CompBarChart.prototype.draw = function(dataList){
           .attr('stroke-dasharray', '2,2');
       })
       .append("text")
-      .style("text-anchor", "middle")
-
-    ;
+      .style("text-anchor", "middle");
 
     if(attr2RatioArray.length > 1){
       let cityId = attr2RatioArray[1]['cityId'];
       let name = attr2RatioArray[1]['name'];
+      let color = attr2RatioArray[1].color;
       barPairContainer.append('g').selectAll('.bar').data(attr2RatioArray[1][attr].slice(0, largestIndex + 1))
         .enter()
         .append('rect').attr('class','bar')
@@ -161,11 +163,8 @@ CompBarChart.prototype.draw = function(dataList){
         .attr('height', function(d){
           return y_scale(d);
         })
-        .attr('fill', function(){
-          if(cityId!= undefined)
-            return _this.getColor(cityId);
-          else
-            return _this.getColor(name);
+        .attr('fill', function(d){
+          return color;
         })
         .attr('opacity', 0.7);
     }
