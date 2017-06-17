@@ -33,10 +33,10 @@
         this.isInitRender = true;
         this.multiExploration = new MulitExploration(this.$el, Config.svFeatures2Color);
         this.multiExploration.on('rowClick', function(row, sign){
-            let record = row.raw;
-            record.mSign = sign;
-            record.mColor = row.mColor;
-            pipeService.emitMESelected(record);
+          let record = row.raw;
+          record.mSign = sign;
+          record.mColor = row.mColor;
+          pipeService.emitMESelected(record);
         });
         this.multiExploration.setAttrs(this.attrs);
         this.multiExploration.update(this.streets);
@@ -93,6 +93,16 @@
             this.initRender();
           }, 1);
         }
+      });
+      pipeService.onAllCityStatistics((allStatistics)=>{
+        allStatistics.forEach((record)=>{
+          record.id = record.city;
+          let streets = this.updateRegionOrStreet(record);
+          this.streets = streets;
+          if(this.multiExploration)
+            this.multiExploration.update(this.streets);
+        });
+
       });
     }
   };

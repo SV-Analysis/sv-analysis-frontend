@@ -67,11 +67,21 @@ function queryStatistics(cityId, type, callback){
   })
 }
 
+function queryAllCityStatics(cityIds, callback){
+  const url = `${dataServerUrl}/allstatisticsquery`
+  $http.post(url, {}).then(response => {
+    callback(JSON.parse(response.data))
+  }, errResponse => {
+    console.log(errResponse)
+  })
+}
+
 export default{
   getTestData,
   getAllRecordsForOneCity,
   queryRegionFromBackground,
   queryStreetCollections,
   queryRegionCollections,
-  queryStatistics
+  queryStatistics,
+  queryAllCityStatics
 }

@@ -28,7 +28,8 @@ var pipeService = new Vue({
     SELECTREGIONS:'select_regions',
     SELECTREGIONBYCLICK:'select_region_by_left_click',
     TABCLICKED: 'tab_clicked',
-    MULTIEXPLORATIONSELECTED:'multi_exploration_selected'
+    MULTIEXPLORATIONSELECTED:'multi_exploration_selected',
+    ALLSTASTICS:'all_statistics'
   },
 
   methods:{
@@ -270,6 +271,16 @@ var pipeService = new Vue({
     },
     onMESelected: function(callback){
       this.$on(this.MULTIEXPLORATIONSELECTED,function(msg){
+        callback(msg);
+      })
+    },
+
+  //  Emit all statistics of cities
+    emitAllCityStatistics: function(msg){
+      this.$emit(this.ALLSTASTICS, msg);
+    },
+    onAllCityStatistics: function(callback){
+      this.$on(this.ALLSTASTICS,function(msg){
         callback(msg);
       })
     },

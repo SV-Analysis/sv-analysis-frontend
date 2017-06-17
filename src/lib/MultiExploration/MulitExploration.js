@@ -177,6 +177,7 @@ MultiExploration.prototype.setAttrs = function(attrs){
 };
 
 MultiExploration.prototype.update = function(dataList){
+  console.log('dataList m ', dataList)
 // Hack
   let vectors = processStreets(dataList, this.attrs);
   this.bodyData = vectors;
@@ -478,7 +479,7 @@ MultiExploration.prototype.clickOnAttr = function(attr){
 MultiExploration.prototype.sortByAttr = function(attr){
   let index = this.unitConfig.attr2Index[attr];
   this.bodyData.sort(function(row1, row2){
-    return (row2.data[index].value  - row1.data[index].value ) > 0;
+    return (row2.data[index].value  > row1.data[index].value );
   });
   this.freshIndex();
 };
@@ -503,7 +504,7 @@ function processStreets(streets, attrs){
     let unitArray = [];
     let streetId = null;
     attrs.forEach(function(attr, cIndex){
-      let value = attr == 'id'? street.record.id:
+      let value = attr == 'id'? (street.record.id == undefined? street.id:street.record.id):
         attr == 'city'? street.city: attr2Value[attr];
       if(attr == 'id') streetId = value;
       _unit[attr] = value;

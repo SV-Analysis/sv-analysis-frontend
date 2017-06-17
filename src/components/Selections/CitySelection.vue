@@ -70,6 +70,9 @@
     mounted(){
 
       // Copy city information from config files
+      dataService.queryAllCityStatics(['hk', 'singapore', 'london', 'nyc'], function(d){
+          pipeService.emitAllCityStatistics(d);
+      })
       Config.cityOptions.forEach((d)=>{
         this.cityInfos.push({
           'id': d['id'],

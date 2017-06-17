@@ -60,6 +60,7 @@
 
       pipeService.onMESelected((record)=>{
         this.updateRecords(record);
+
         _this.selectedCollectionUpdated(_this.selectedRegions)
       });
 
@@ -108,8 +109,17 @@
       updateRecords(d){
         // To decide to remove a old element or add a new element
         let _this = this;
+        console.log('udpate');
         let newRecords = [];
         let imgList =  _this.parseRecords(d['streets'], d['name']);
+        imgList.forEach(function(item){
+            if(item.record.record!= undefined){
+              item.record.statistics = item.record.record.statistics;
+              item.record.dv = item.record.record.dv;
+              item.record.standard = item.record.record.standard;
+              item.record.sv = item.record.record.sv;
+            }
+        })
         let record = {'imgList': imgList, 'name':d.name, id: d.id, 'color': d.mColor};
         let existed = false;
         this.selectedRegions.forEach((region)=>{
@@ -134,21 +144,11 @@
         // Change color
         _this.matrixBarHandler.setColorStyle(names);
 //                Demo
+        console.log('draw', newData);
         _this.matrixBarHandler.drawMatrix(newData);
         _this.matrixBarHandler.drawdsbBarchart(newData);
-        let list = [];
 
-        newData.forEach(function(d){
-          let tempList = [];
-          d['imgList'].forEach(function(img){
-            let standard = img['record']['standard'];
-            if (_this.checkStatistics(standard)){
-              tempList.push(img)
-            }
-          });
-          list = list.concat(tempList);
-        });
-        _this.matrixBarHandler.drawDiversity(list);
+        _this.matrixBarHandler.drawDiversity(newData);
 
       },
       parseRecords(list, cityId){

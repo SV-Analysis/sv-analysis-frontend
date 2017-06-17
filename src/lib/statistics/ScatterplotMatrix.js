@@ -118,7 +118,9 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
     .text(function(d, i){
       if(d['cityId']!= undefined)
         return _this.config.cityId2Name[d['cityId']];
-      else
+      else if(_this.config.cityId2Name[d.id]!= undefined){
+        return _this.config.cityId2Name[d.id];
+      }else
         return d['name']
     });
 

@@ -58,6 +58,7 @@ MatrixBarV2.prototype.init = function(){
 
 
   this.svgContainer = d3.select(this.$el);
+
 };
 
 

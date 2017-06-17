@@ -13,6 +13,7 @@ DiversityChart.prototype.setConfig = function(el, features, config){
   let _this = this;
   this.features = features;
   this.config = config;
+  this.clipContainer = el.append('g').attr('class','diversityClip')
   this.diversityContainer = el.append('g').attr('class', 'diversity')
 
   this.config.margin['diversityRegionHeight'] = this.config.margin['height'] / 3;
@@ -23,6 +24,16 @@ DiversityChart.prototype.setConfig = function(el, features, config){
   let diversityRegionWidth = this.config.margin['diversityRegionWidth'];
   let diversityRegionHeight = this.config.margin['diversityRegionHeight'];
   let margin = this.config.margin['diversityRegionMargin'];
+
+  this.clips = this.clipContainer.append('clipPath')
+    .attr('id', function(){
+      return 'diversity_clipPath';
+    })
+    .append('rect')
+    .attr('width',(d, i)=>{
+      return diversityRegionWidth - margin * 2;
+    })
+    .attr('height', diversityRegionHeight - margin * 2);
 
   this.diversityContainers = this.diversityContainer.selectAll('.diversityContainers')
     .data(features)
@@ -64,35 +75,44 @@ DiversityChart.prototype.setConfig = function(el, features, config){
 DiversityChart.prototype.getColor = function(id){
   return this.colorScale != undefined? this.colorScale[id]: "red";
 };
-
+DiversityChart.prototype.checkStatistics = function(standard){
+  let sum = 0;
+  this.features.forEach(function(attr){
+    sum += standard[attr];
+  });
+  return sum == 0? false: true;
+};
 DiversityChart.prototype.draw = function(dataList){
   let _this = this;
   this.clearRegion();
   console.log('Diversity dataList ', dataList);
-  let features = this.features;
-
+  let list = [];
   let largestFV = 0;
   let largestDis = 0;
-  dataList.forEach(function(item){
-    if(item.type == 'adregion'){
+  let features = this.features;
+  dataList.forEach(function(d){
+    let tempList = [];
+    d['imgList'].forEach(function(item){
+      let standard = item['record']['standard'];
       item['dv'] = {};
       item['dv']['standard'] = item['record']['standard'];
       item['dv']['statistics'] = item['record']['statistics'];
       item['dv']['sv'] = item['record']['sv'];
       item['dv']['lv'] = item['record']['lv'];
-    }else{
-      item['dv'] = {};
-      item['dv']['standard'] = item['record']['standard'];
-      item['dv']['statistics'] = item['record']['statistics'];
-      item['dv']['sv'] = item['record']['sv'];
-      item['dv']['lv'] = item['record']['lv'];
-
-    }
-    features.forEach(function(attr){
-      largestFV = largestFV < item['dv']['statistics'][attr]? item['dv']['statistics'][attr]: largestFV;
-      largestDis = largestDis < item['dv']['standard'][attr]? item['dv']['standard'][attr]: largestDis;
-    })
+      _this.features.forEach(function(attr){
+        largestFV = largestFV < item['dv']['statistics'][attr]? item['dv']['statistics'][attr]: largestFV;
+        largestDis = largestDis < item['dv']['standard'][attr]? item['dv']['standard'][attr]: largestDis;
+      });
+      if (_this.checkStatistics(standard)){
+        tempList.push(item);
+      }
+    });
+    list = list.concat(tempList)
   });
+  let oDataList = dataList;
+  dataList = list;
+
+
 
   let diversityRegionWidth = this.config.margin['diversityRegionWidth'];
   let diversityRegionHeight = this.config.margin['diversityRegionHeight'];
@@ -109,26 +129,37 @@ DiversityChart.prototype.draw = function(dataList){
 
   let idMap = null;
   this.diversityContainers.each(function(attr, i){
-    let diversityPointContainer = d3.select(this).append('g').attr('class','diversityPointContainer');
+    let diversityPointContainer = d3.select(this).append('g').attr('class','diversityPointContainer')
 
     let __nodes1 = [];
     let __nodes2 = [];
+    let allNodes = [__nodes1, __nodes2];
 
-    dataList.forEach(function(data){
-
-      let dataid = data['cityObj']['id'];
-      if(idMap == null){
-        idMap = dataid;
-      }
-
-      let nodes = data['cityObj']['id'] == idMap ? __nodes1: __nodes2
-
-
-      nodes.push({
-        x: xScale(data['dv']['statistics'][attr] / 100),
-        y: yScale(data['dv']['standard'][attr])
-      })
+    oDataList.forEach((data, i)=>{
+      allNodes[i].color = data.color;
+      data.imgList.forEach((item)=>{
+        if(_this.checkStatistics(item.record.standard)){
+          allNodes[i].push({
+            x: xScale(item['dv']['statistics'][attr] / 100),
+            y: yScale(item['dv']['standard'][attr])
+          })
+        }
+      });
     });
+
+    // dataList.forEach(function(data){
+    //   let dataid = data['cityObj']['id'];
+    //   if(idMap == null){
+    //     idMap = dataid;
+    //   }
+    //
+    //   let nodes = data['cityObj']['id'] == idMap ? __nodes1: __nodes2
+    //
+    //   nodes.push({
+    //     x: xScale(data['dv']['statistics'][attr] / 100),
+    //     y: yScale(data['dv']['standard'][attr])
+    //   })
+    // });
 
     // console.log('nodes', __nodes1, __nodes2)
     // 'hk': '#2b8cbe',
@@ -142,11 +173,11 @@ DiversityChart.prototype.draw = function(dataList){
       (__nodes1);
 
     let c2 = d3contour.contourDensity()
-        .x(function(d) { return d.x; })
-        .y(function(d) { return d.y; })
-        .size([diversityRegionWidth , diversityRegionHeight])
-        .bandwidth(bandwidth)
-        (__nodes2);
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .size([diversityRegionWidth , diversityRegionHeight])
+      .bandwidth(bandwidth)
+      (__nodes2);
 
     diversityPointContainer.append('g')
       .attr("fill", "none")
@@ -156,11 +187,15 @@ DiversityChart.prototype.draw = function(dataList){
       .selectAll("path")
       .data(c2)
       .enter().append("path")
-      .attr("fill", '#df65b0')
+      .attr("fill", __nodes2.color)
       .attr("d", d3.geoPath())
       .attr('opacity', 0.15)
+      .attr('clip-path', d=>{
+        let clip_id = 'diversity_clipPath';
+        return 'url(#' + clip_id + ')'
+      });
 
-      diversityPointContainer.append('g')
+    diversityPointContainer.append('g')
       .attr("fill", "none")
       .attr("stroke", "#000")
       .attr("stroke-width", 0.5)
@@ -168,9 +203,14 @@ DiversityChart.prototype.draw = function(dataList){
       .selectAll("path")
       .data(c1)
       .enter().append("path")
-      .attr("fill", '#2b8cbe')
+      .attr("fill", __nodes1.color)
       .attr("d", d3.geoPath())
-      .attr('opacity', 0.15);
+      .attr('opacity', 0.15)
+      .attr('clip-path', d=>{
+        let clip_id = 'diversity_clipPath';
+        return 'url(#' + clip_id + ')'
+      });
+
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
       .data(dataList)
       .enter()

@@ -44,7 +44,6 @@ CompBarChart.prototype.draw = function(dataList){
   this.clearRegion();
   if(dataList.length == 0) return;
   let features = this.features;
-  console.log('datalist barchart', dataList);
   let numberOfScale = 20;
   this.numberOfScale = numberOfScale;
   // Init the data
