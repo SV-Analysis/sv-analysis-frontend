@@ -9,6 +9,7 @@
   import pipeService from '../../service/pipeService'
   import * as Config from '../../Config'
 
+
   export default {
     name: 'sparkPCP',
     props:[ 'selectItems'],
@@ -22,19 +23,19 @@
     },
     mounted(){
       let _this = this;
-
       pipeService.onConfirmSelection(function(items){
-        _this.drawSparkPCP(items);
-      });
 
+        _this.drawSpartPCP(items);
+      });
       pipeService.onImageGroupSelected(function(selectedImgs){
+
         _this.handler.onSelectedImages(selectedImgs);
       });
 
     },
     computed:{},
     methods:{
-      drawSparkPCP(items){
+      drawSpartPCP(items){
         let images = items[0]['record']['image_list'];
         this.imageList = images;
         if(this.$el.clientWidth < 10) return;
@@ -51,5 +52,6 @@
   .spark-pcp{
     margin-top: 0px;
     width: 100%;
+
   }
 </style>

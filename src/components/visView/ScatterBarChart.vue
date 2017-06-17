@@ -101,8 +101,7 @@
         let names = [];
         newData.forEach(function(d){
           names.push(d['name'])
-        })
-        console.log('matrix_region', newData);
+        });
         // Change color
         _this.matrixBarHandler.setColorStyle(names);
 //                Demo
@@ -117,8 +116,8 @@
             if (_this.checkStatistics(standard)){
               tempList.push(img)
             }
-          })
-          list = list.concat(tempList)
+          });
+          list = list.concat(tempList);
         });
         _this.matrixBarHandler.drawDiversity(list);
 

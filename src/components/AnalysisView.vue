@@ -11,12 +11,12 @@
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
-              <div class="col-sm-9 col-md-9 col-lg-9 vis-container" >
+              <div class="col-sm-10 col-md-10 col-lg-10 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
                 ></StreetVis>
               </div>
-              <div class="col-sm-3 col-md-3 col-lg-3 " >
+              <div class="col-sm-2 col-md-2 col-lg-2 " >
                 <StreetList v-bind:selectItems="selectItems"></StreetList>
               </div>
             </div>

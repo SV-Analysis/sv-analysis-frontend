@@ -92,7 +92,7 @@ CompBarChart.prototype.draw = function(dataList){
   })
 
   let barWidth = this.config.margin.width / largestIndex * 3 / 4;
-  console.log('band',this.config.margin.width, barWidth);
+
   this.barChartsPair.each(function(attr){
     let x_scale = d3.scaleLinear().domain([0, largestIndex + 1]).range([3, _this.config.margin.width]);
     _this.x_scale = x_scale;

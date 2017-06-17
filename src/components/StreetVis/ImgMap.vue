@@ -24,7 +24,6 @@
       }
     },
     mounted(){
-      console.log('sss', this.street, this.picked);
       this.createMap(this.street['cityObj'], this.street['record']['aggregatedImages']);
       this.id = this.street['id'];
     },

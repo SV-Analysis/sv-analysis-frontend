@@ -10,7 +10,6 @@ ScatterPlotMatrix.prototype.setConfig = function(el, features, config){
   let _this = this;
   this.features = features;
   this.config = config;
-  console.log('size',  this.config.margin)
   let matrixSize = this.config.margin['size'] ;
   let contaienrOffsetX = this.config.margin['offsetX'];
   let singleRegionSize = matrixSize / this.features.length;
@@ -69,7 +68,7 @@ ScatterPlotMatrix.prototype.setConfig = function(el, features, config){
   });
 };
 ScatterPlotMatrix.prototype.init = function(){
-  console.log('init')
+
 };
 
 ScatterPlotMatrix.prototype.getColor = function(id){
@@ -77,7 +76,7 @@ ScatterPlotMatrix.prototype.getColor = function(id){
 };
 
 ScatterPlotMatrix.prototype.draw = function(dataList){
-  console.log('draw', dataList);
+
   let _this = this;
   this.clearRegions();
   let featureArray = this.features;

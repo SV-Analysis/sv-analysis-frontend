@@ -736,7 +736,7 @@ MatrixBarV2.prototype.drawDiversity = function(dataList){
   });
 
   this.diversityContainer.each(function(attr, i){
-    console.log('attr', attr, i);
+
   });
 
 };

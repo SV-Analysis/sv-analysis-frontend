@@ -1,18 +1,22 @@
 <!--这个component没写好，应该再分成一些子模块-->
 <template>
   <div class="region-list">
-      <el-tabs v-model="activeName">
-        <el-tab-pane label="City" name="city">
-          <CitySelection ></CitySelection>
-        </el-tab-pane>
-        <el-tab-pane label="Region" name="region" >
-          <RegionSelection :selectIdMap="selectIdMap"> </RegionSelection>
-        </el-tab-pane>
-        <el-tab-pane label="Street" name="street">
-          <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
+    <el-tabs v-model="activeName" @tab-click="tabClicked">
+      <el-tab-pane label="City" name="city">
+        <CitySelection ></CitySelection>
+      </el-tab-pane>
+      <el-tab-pane label="Region" name="region" >
+        <RegionSelection :selectIdMap="selectIdMap"> </RegionSelection>
+      </el-tab-pane>
+      <el-tab-pane label="Street" name="street">
+        <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
+      </el-tab-pane>
+      <el-tab-pane label="Exploration" name="explore">
+        <ExploreSelection> </ExploreSelection>
+      </el-tab-pane>
+    </el-tabs>
+
+  </div>
   </div>
 </template>
 
@@ -25,6 +29,7 @@
   import StreetSelection from "../Selections/StreetSelection.vue"
   import RegionSelection from "../Selections/RegionSelection.vue"
   import CitySelection from "../Selections/CitySelection.vue"
+  import ExploreSelection from "../Selections/ExploreSelection.vue"
   import  * as Config from "../../Config"
 
 
@@ -36,7 +41,8 @@
       RegionMap,
       StreetSelection,
       RegionSelection,
-      CitySelection
+      CitySelection,
+      ExploreSelection
     },
     data () {
       return {
@@ -121,6 +127,11 @@
       }
     },
     methods:{
+      tabClicked(tab, event){
+//          console.log('tab', tab.label, event);
+          pipeService.emitTabClicked(tab.name);
+
+      },
       selectedChanged(){
         let _this = this;
         let selectedCity = this.selectedCity;

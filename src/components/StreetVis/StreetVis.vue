@@ -88,7 +88,7 @@
 
   }
   .spark-pcp{
-    height: 40%;
+    height: 50%;
     /*background-color: #5bc0de;*/
     border-width: 1px;
     border-style: solid;

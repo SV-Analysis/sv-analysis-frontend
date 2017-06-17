@@ -67,7 +67,6 @@ DiversityChart.prototype.getColor = function(id){
 
 DiversityChart.prototype.draw = function(dataList){
   let _this = this;
-  console.log('draw');
   this.clearRegion();
 
   let features = this.features;
@@ -99,7 +98,6 @@ DiversityChart.prototype.draw = function(dataList){
   let diversityRegionHeight = this.config.margin['diversityRegionHeight'];
   let margin = this.config.margin['diversityRegionMargin'];
 
-  console.log('largest', largestFV, largestDis)
   this.gap = 20;
   let xScale = d3.scaleLinear()
     .domain([0, largestFV / 100]).range([3, diversityRegionWidth - this.gap]);
@@ -135,7 +133,7 @@ DiversityChart.prototype.draw = function(dataList){
     // console.log('nodes', __nodes1, __nodes2)
     // 'hk': '#2b8cbe',
     // 'singapore': '#df65b0',
-    let bandwidth = 10;
+    let bandwidth = 4;
     let c1 = d3contour.contourDensity()
       .x(function(d) { return d.x; })
       .y(function(d) { return d.y; })
@@ -144,25 +142,11 @@ DiversityChart.prototype.draw = function(dataList){
       (__nodes1);
 
     let c2 = d3contour.contourDensity()
-        .x(function(d) { return d.x; })
-        .y(function(d) { return d.y; })
-        .size([diversityRegionWidth , diversityRegionHeight])
-        .bandwidth(bandwidth)
-        (__nodes2);
-
-
-    diversityPointContainer.append('g')
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-      .attr("stroke-width", 0.5)
-      .attr("stroke-linejoin", "round")
-      .selectAll("path")
-      .data(c1)
-      .enter().append("path")
-      .attr("fill", '#2b8cbe')
-      .attr("d", d3.geoPath())
-      .attr('opacity', 0.3);
-
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .size([diversityRegionWidth , diversityRegionHeight])
+      .bandwidth(bandwidth)
+      (__nodes2);
 
     diversityPointContainer.append('g')
       .attr("fill", "none")
@@ -174,8 +158,19 @@ DiversityChart.prototype.draw = function(dataList){
       .enter().append("path")
       .attr("fill", '#df65b0')
       .attr("d", d3.geoPath())
-      .attr('opacity', 0.3)
+      .attr('opacity', 0.15)
 
+    diversityPointContainer.append('g')
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+      .attr("stroke-width", 0.5)
+      .attr("stroke-linejoin", "round")
+      .selectAll("path")
+      .data(c1)
+      .enter().append("path")
+      .attr("fill", '#2b8cbe')
+      .attr("d", d3.geoPath())
+      .attr('opacity', 0.15);
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
       .data(dataList)
       .enter()
@@ -219,37 +214,36 @@ DiversityChart.prototype.draw = function(dataList){
     //   d['render'].push(this)
     // })
 
-    let circles = pointsContainers.append('circle')
-      .attr('stroke-width', 1)
-      .on('click', function(d){
-        let renders = d['render'];
-        renders.forEach(function(e){
-          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
-            .attr('fill', 'red').attr('fill-opacity', 0.9)
-            .attr('r',4);
-          e.parentNode.appendChild(e);
-          e.parentNode.parentNode.appendChild(e.parentNode);
-
-        });
-        console.log('d', d);
-      })
-      .attr('class', d => d['point_id'])
-      .attr('r',2)
-      .attr('fill',function(d){
-        return "red";
-        return _this.getColor(d['cityObj']['id'])
-      })
-      .attr('fill-opacity', '0.5')
-      .attr('stroke', function(d){
-        return _this.getColor(d['cityObj']['id'])
-      });
-
-    circles.each(function(d){
-      if(d['render'] == undefined){
-        d['render'] = []
-      }
-      d['render'].push(this)
-    });
+    // let circles = pointsContainers.append('circle')
+    //   .attr('stroke-width', 1)
+    //   .on('click', function(d){
+    //     let renders = d['render'];
+    //     renders.forEach(function(e){
+    //       d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+    //         .attr('fill', 'red').attr('fill-opacity', 0.9)
+    //         .attr('r',4);
+    //       e.parentNode.appendChild(e);
+    //       e.parentNode.parentNode.appendChild(e.parentNode);
+    //
+    //     });
+    //   })
+    //   .attr('class', d => d['point_id'])
+    //   .attr('r',2)
+    //   .attr('fill',function(d){
+    //     return "red";
+    //     return _this.getColor(d['cityObj']['id'])
+    //   })
+    //   .attr('fill-opacity', '0.5')
+    //   .attr('stroke', function(d){
+    //     return _this.getColor(d['cityObj']['id'])
+    //   });
+    //
+    // circles.each(function(d){
+    //   if(d['render'] == undefined){
+    //     d['render'] = []
+    //   }
+    //   d['render'].push(this)
+    // });
 
 
     if(i >= 4){
@@ -295,7 +289,7 @@ DiversityChart.prototype.draw = function(dataList){
   });
 
   this.diversityContainer.each(function(attr, i){
-    console.log('attr', attr, i);
+
   });
 
 

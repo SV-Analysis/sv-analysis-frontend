@@ -26,7 +26,8 @@ var pipeService = new Vue({
     CITIESSELECTED:'cities_selected',
     SCREENIMAGES:'screen_images',
     SELECTREGIONS:'select_regions',
-    SELECTREGIONBYCLICK:'select_region_by_left_click'
+    SELECTREGIONBYCLICK:'select_region_by_left_click',
+    TABCLICKED: 'tab_clicked'
   },
 
   methods:{
@@ -251,6 +252,15 @@ var pipeService = new Vue({
       })
     },
 
+    //Tab click
+    emitTabClicked: function(msg){
+      this.$emit(this.TABCLICKED, msg);
+    },
+    onTabClicked: function(callback){
+      this.$on(this.TABCLICKED,function(msg){
+        callback(msg);
+      })
+    },
 
   }
 })
