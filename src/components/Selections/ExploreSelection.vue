@@ -33,12 +33,14 @@
         this.isInitRender = true;
         this.multiExploration = new MulitExploration(this.$el, Config.svFeatures2Color);
         this.multiExploration.on('rowClick', function(row, sign){
-            console.log('rowClick', row, sign);
-            row.sign = sign;
-            pipeService.emitMESelected(row);
+            let record = row.raw;
+            record.mSign = sign;
+            record.mColor = row.mColor;
+            pipeService.emitMESelected(record);
         });
         this.multiExploration.setAttrs(this.attrs);
         this.multiExploration.update(this.streets);
+        console.log('streets', this.streets);
       },
       updateRegionOrStreet(record){
         let id = record['id'];

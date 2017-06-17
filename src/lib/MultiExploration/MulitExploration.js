@@ -498,7 +498,6 @@ MultiExploration.prototype.freshIndex = function(){
 function processStreets(streets, attrs){
   let vectors = [];
   streets.forEach((street, rIndex)=>{
-
     let attr2Value = street.record == undefined ? street.statistics: street.record.statistics;
     let _unit = {};
     let unitArray = [];

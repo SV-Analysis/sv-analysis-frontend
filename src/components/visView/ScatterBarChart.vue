@@ -47,7 +47,8 @@
         Config: Config,
         features: Config.svFeatures2Color.allFeatures,
         selectedRegions: [],
-        currentComparisonType: null
+        currentComparisonType: null,
+        records:[]
       }
     },
 
@@ -56,6 +57,11 @@
       this.initControlConfig();
       let _el = document.getElementById('scatter-bar-chart');
       this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
+
+      pipeService.onMESelected((record)=>{
+        this.updateRecords(record);
+      });
+
 
       pipeService.onCitySelected(function(data){
         _this.currentComparisonType = "city";
@@ -76,15 +82,16 @@
       });
 
       pipeService.onSelectRegion(function(d){
-        _this.currentComparisonType = "region";
-
-        let imgList =  _this.parseRecords(d['streets'], d['name']);
-        let record = {'imgList': imgList, 'name':d['name']}
-        if(_this.selectedRegions.length == 2){
-          _this.selectedRegions = []
-        }
-        _this.selectedRegions.push(record);
-        _this.selectedCollectionUpdated(_this.selectedRegions)
+//        console.log('selected' , d);
+//        _this.currentComparisonType = "region";
+//
+//        let imgList =  _this.parseRecords(d['streets'], d['name']);
+//        let record = {'imgList': imgList, 'name':d['name']}
+//        if(_this.selectedRegions.length == 2){
+//          _this.selectedRegions = []
+//        }
+//        _this.selectedRegions.push(record);
+//        _this.selectedCollectionUpdated(_this.selectedRegions)
 
       });
 
@@ -97,6 +104,21 @@
 
     },
     methods:{
+      updateRecords(d){
+        console.log('Recieve ', d);
+        let _this = this;
+
+        _this.currentComparisonType = "region";
+
+        let imgList =  _this.parseRecords(d['streets'], d['name']);
+        let record = {'imgList': imgList, 'name':d['name']}
+        if(_this.selectedRegions.length == 2){
+          _this.selectedRegions = []
+        }
+        _this.selectedRegions.push(record);
+        _this.selectedCollectionUpdated(_this.selectedRegions)
+
+      },
       selectedCollectionUpdated(newData){
         let _this = this;
         let names = [];

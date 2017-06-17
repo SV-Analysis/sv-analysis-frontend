@@ -10,8 +10,8 @@
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" afterPath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,8 +54,8 @@
       <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8030">
-              <caret line="365" column="15" lean-forward="false" selection-start-line="365" selection-start-column="15" selection-end-line="365" selection-end-column="15" />
+            <state relative-caret-position="590">
+              <caret line="267" column="8" lean-forward="true" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
               <folding>
                 <element signature="e#705#756#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7392">
-              <caret line="336" column="44" lean-forward="false" selection-start-line="336" selection-start-column="44" selection-end-line="336" selection-end-column="44" />
+            <state relative-caret-position="710">
+              <caret line="499" column="37" lean-forward="false" selection-start-line="499" selection-start-column="37" selection-end-line="499" selection-end-column="37" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#42#114#0" expanded="true" />
@@ -90,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="372">
-              <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+              <caret line="42" column="1" lean-forward="false" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="45" />
               <folding>
                 <element signature="e#76#127#0" expanded="true" />
               </folding>
@@ -157,9 +157,11 @@
       <file leaf-file-name="ScatterBarChart.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-440">
-              <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-              <folding />
+            <state relative-caret-position="622">
+              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+              <folding>
+                <element signature="e#1097#1121#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -268,13 +270,13 @@
         <option value="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-        <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
         <option value="$PROJECT_DIR$/src/lib/MultiExploration/BasicElements.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
         <option value="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
-        <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
+        <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
         <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
+        <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
       </list>
     </option>
   </component>
@@ -895,6 +897,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#44#65#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1127,8 +1133,8 @@
         <state relative-caret-position="524">
           <caret line="83" column="50" lean-forward="true" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#44#68#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#44#68#0" expanded="false" />
             <element signature="e#1021#1873#0" expanded="false" />
           </folding>
         </state>
@@ -1189,7 +1195,7 @@
         <state relative-caret-position="879">
           <caret line="60" column="35" lean-forward="false" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
           <folding>
-            <element signature="e#449#500#0" expanded="true" />
+            <element signature="e#449#500#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1260,32 +1266,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8030">
-          <caret line="365" column="15" lean-forward="false" selection-start-line="365" selection-start-column="15" selection-end-line="365" selection-end-column="15" />
-          <folding>
-            <element signature="e#705#756#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/BasicElements.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="26" column="34" lean-forward="false" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7392">
-          <caret line="336" column="44" lean-forward="false" selection-start-line="336" selection-start-column="44" selection-end-line="336" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#42#114#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1310,10 +1295,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="499" column="37" lean-forward="false" selection-start-line="499" selection-start-column="37" selection-end-line="499" selection-end-column="37" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#42#114#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="267" column="8" lean-forward="true" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
+          <folding>
+            <element signature="e#705#756#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
-          <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+          <caret line="42" column="1" lean-forward="false" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="45" />
           <folding>
             <element signature="e#76#127#0" expanded="true" />
           </folding>
@@ -1322,9 +1328,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-440">
-          <caret line="34" column="41" lean-forward="true" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="622">
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="e#1097#1121#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
