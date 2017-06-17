@@ -5,8 +5,16 @@ import {Unit} from "../../../src/lib/MultiExploration/BasicElements.js";
 import * as d3 from "d3";
 
 let MultiExploration = function(el, colorMap){
+  this.selected = {
+    'idMap': {},
+    'number': 0,
+    'xIndex2Color':{},
+    'maxSelectd': 2
+  };
+  this.selectedColor = [{'color': '#2b8cbe', 'used': false}, {'color': '#df65b0',  'used': false}];
+
   this.el = el;
-  this.columNumber = 35;
+  this.columNumber = 32;
   this.colorMap = colorMap;
   this.width = el.clientWidth;
   this.height = 400;
@@ -28,7 +36,8 @@ let MultiExploration = function(el, colorMap){
     widths: [],
     lefts: [],
     widthScale: [],
-    domains: []
+    domains: [],
+    signBoxWidth: 6,
   };
   // Generate render attributes
   this.unitConfig.renderTop = this.unitConfig.top + 3;
@@ -37,6 +46,7 @@ let MultiExploration = function(el, colorMap){
   this.unitConfig.renderBottom = this.unitConfig.bottom + 3;
   this.unitConfig.renderHeight = this.unitConfig.height - this.unitConfig.renderTop - this.unitConfig.renderBottom;
   this.attrUnits = [];
+  this.handleFucs = {};
 };
 
 MultiExploration.prototype.updateBackground = function(){
@@ -84,17 +94,18 @@ MultiExploration.prototype.updateBackground = function(){
 
   // ENTER new elements present in new data.
   let newUnitContainers = unitContainers.enter().append('g').attr('class', 'backgroundUnit')
-    .attr('clip-path', d=>{
-      let clip_id = 'clips_'+ d.attr;
-      return 'url(#' + clip_id + ')'
-    });
+  // .attr('clip-path', d=>{
+  //   let clip_id = 'clips_'+ d.attr;
+  //   return 'url(#' + clip_id + ')'
+  // });
 
   newUnitContainers.each(function(d){
     let yIndex = d['yIndex'];
     let xIndex = d['xIndex'];
     let left = unitConfig.lefts[yIndex];
     let _width = unitConfig.widths[yIndex] - unitConfig.left - unitConfig.right;
-    let _height = unitConfig.height - unitConfig.top - unitConfig.bottom;
+    // let _height = unitConfig.height - unitConfig.top - unitConfig.bottom;
+    let _height = unitConfig.height;
 
     let value = d['value'];
     let unitContainer = d3.select(this);
@@ -105,10 +116,8 @@ MultiExploration.prototype.updateBackground = function(){
         return xIndex % 2 != 0? '#eee': '#fff';
       })
       .attr('opacity', 0.8)
-      .attr('x', unitConfig.left)
-      .attr('y', unitConfig.top);
-
-
+      .attr('x', unitConfig.left);
+      // .attr('y', unitConfig.top);
   });
 
   // Remove old elements as needed.
@@ -224,7 +233,7 @@ MultiExploration.prototype.updateRenderBody = function(){
     .data(units, function(d){
       return d.id
     });
-  var t = d3.transition()
+  let t = d3.transition()
     .duration(750);
 
 
@@ -241,16 +250,6 @@ MultiExploration.prototype.updateRenderBody = function(){
     unitContainer
       .transition(t)
       .attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
-
-    // unitContainer.selectAll('.unitBackground')
-    //   .transition(t)
-    //   .attr('width', _width).attr('height', _height)
-    //   .attr('fill', function(){
-    //     return xIndex % 2 != 0? '#eee': '#fff';
-    //   })
-    //   .attr('opacity', 0.8)
-    //   .attr('x', unitConfig.left)
-    //   .attr('y', unitConfig.top);
 
     if(d.attr == 'id' || d.attr == 'city') {
       // id inforamtion
@@ -289,22 +288,35 @@ MultiExploration.prototype.updateRenderBody = function(){
     let value = d['value'];
     let unitContainer = d3.select(this);
     unitContainer.attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
-    // unitContainer.append('rect').attr('class','unitBackground')
-    //   .attr('width', _width).attr('height', _height)
-    //   .attr('fill', function(){
-    //     return xIndex % 2 != 0? '#eee': '#fff';
-    //   })
-    //   .attr('opacity', 0.8)
-    //   .attr('x', unitConfig.left)
-    //   .attr('y', unitConfig.top);
 
-    if(d.attr == 'id' || d.attr == 'city') {
+    if(d.attr == 'id' ) {
+      let text = unitContainer.append('text').text(value);
+      let conf = text.node().getBBox();
+      text.attr('x', unitConfig.renderLeft + unitConfig.signBoxWidth + 2)
+        .attr('y', (conf.height + unitConfig.height) / 2 - 1 );
+      if(d.attr == 'id'){
+        let signY = (unitConfig.height - unitConfig.signBoxWidth) / 2;
+        let signX = unitConfig.left;
+        let signBoxBoundary = unitContainer.append('rect').attr('class', 'singBoxBoundary')
+          .attr('width', unitConfig.signBoxWidth).attr('height', unitConfig.signBoxWidth)
+          .attr('x', signX).attr('y', signY)
+          .attr('fill-opacity', 0)
+          .attr('stroke-width', 1).attr('stroke-opacity', 0.5)
+          .attr('stroke', "#212121")
+        let signBox = unitContainer.append('rect').attr('class','signbox')
+          .attr('width', unitConfig.signBoxWidth - 2)
+          .attr('height', unitConfig.signBoxWidth - 2)
+          .attr('x', signX + 1)
+          .attr('y', signY + 1)
+          .attr('fill', 'none');
+      }
+    }else if(d.attr == 'city'){
       let text = unitContainer.append('text').text(value);
       let conf = text.node().getBBox();
       text.attr('x', unitConfig.renderLeft)
-        .attr('y', (conf.height + unitConfig.height) / 2 - 1 )
-
-    }else{
+        .attr('y', (conf.height + unitConfig.height) / 2 - 1 );
+    }
+    else{
       unitContainer.append('rect').attr('class', 'value')
         .attr('width', d=>{
           let _w = unitConfig.widthScale[yIndex](value);
@@ -321,14 +333,110 @@ MultiExploration.prototype.updateRenderBody = function(){
     }
   });
 
+  newUnitContainers.on('click', (d)=>{
+    let id = d.raw.id;
+    if(this.selected.idMap[id] == undefined){
+      if(this.selected.number >= this.selected.maxSelectd ){
+        return
+      }
+      this.selected.idMap[id] = d;
+      this.selected.number += 1;
+      this.handleFucs['rowClick'](d, 'add');
+      this.clickHighlightRow(d.xIndex);
+    }else{
+      delete this.selected.idMap[id];
+      this.selected.number -= 1;
+      this.handleFucs['rowClick'](d, 'remove');
+      this.removeClickHighlightRow(d.xIndex);
+    }
+  }).on('mouseover',(d)=>{
+    this.hoverHighlightRow(d.xIndex);
+  }).on('mouseout', (d)=>{
+      this.removeHoverHighlightRow(d.xIndex);
+    });
+
+
   // Remove old elements as needed.
   let exitUnitContainers = unitContainers.exit();
   exitUnitContainers.remove();
 
 };
 
+MultiExploration.prototype.on = function(eventName, func){
+//  register event functions
+  this.handleFucs[eventName] = func;
+};
+MultiExploration.prototype.hoverHighlightRow = function(xIndex){
+  let t = d3.transition()
+    .duration(300);
+  this.bodyContainer.selectAll('.backgroundUnit').each(function(d){
+    if(d.xIndex == xIndex){
+      d3.select(this).selectAll('rect').transition(t).attr('fill', '#ccc')
+    }
+  })
+};
+MultiExploration.prototype.removeHoverHighlightRow = function(xIndex){
+  let t = d3.transition()
+    .duration(300);
 
+  this.bodyContainer.selectAll('.backgroundUnit').each(function(d){
+    if(d.xIndex == xIndex){
+      d3.select(this).selectAll('rect').transition(t).attr('fill', function(){
+        return xIndex % 2 != 0? '#eee': '#fff';
+      })
+    }
+  })
+};
 
+MultiExploration.prototype.calY = function(xIndex){
+  return xIndex * this.unitConfig.height;
+};
+MultiExploration.prototype.clickHighlightRow = function(xIndex){
+  let color = this.findUnusedColor();
+  console.log('color', color);
+  if(!color) return;
+  this.selected.xIndex2Color[xIndex] = color;
+  ////////////////////////////////////////////////////
+  let t = d3.transition()
+    .duration(500);
+
+  this.bodyContainer.selectAll('.bodyUnit').each(function(d){
+    if(d.xIndex == xIndex && d.attr == 'id'){
+      d3.select(this).selectAll('.signbox').transition(t).attr('fill', color).attr('fill-opacity', 0.8);
+    }
+  })
+};
+MultiExploration.prototype.removeClickHighlightRow = function(xIndex){
+  let color = this.selected.xIndex2Color[xIndex];
+  this.releaseColor(color);
+  let t = d3.transition()
+    .duration(500);
+
+  this.bodyContainer.selectAll('.bodyUnit').each(function(d){
+    if(d.xIndex == xIndex && d.attr == 'id'){
+      d3.select(this).selectAll('.signbox').transition(t).attr('fill-opacity', 0);
+    }
+  })
+};
+
+MultiExploration.prototype.findUnusedColor = function(){
+
+  for(var i = 0, ilen = this.selectedColor.length; i < ilen; i++){
+    let colorObj = this.selectedColor[i];
+    if(colorObj.used == false){
+      colorObj.used = true;
+      return colorObj.color
+    }
+  }
+  return null;
+};
+MultiExploration.prototype.releaseColor = function(color){
+  this.selectedColor.forEach((d)=>{
+    if(d.color == color){
+      d.used = false;
+    }
+  });
+}
 MultiExploration.prototype.updateRenderHead = function(){
   // neet set attrs
   let unitConfig = this.unitConfig;
@@ -388,8 +496,8 @@ MultiExploration.prototype.removeData = function(d){
 };
 
 MultiExploration.prototype.freshIndex = function(){
-  this.bodyData.forEach(function(row, y){
-    row.data.forEach(function(unit, x){
+  this.bodyData.forEach(function(row, x){
+    row.data.forEach(function(unit, y){
       unit.updateIndex(x, y);
     })
   })
@@ -408,8 +516,8 @@ function processStreets(streets, attrs){
         attr == 'city'? street.city: attr2Value[attr];
       if(attr == 'id') streetId = value;
       _unit[attr] = value;
-      let id = streetId + '_' + attr
-      unitArray.push(new Unit(id, attr, value, rIndex, cIndex, 'data'));
+      let id = streetId + '_' + attr;
+      unitArray.push(new Unit(id, attr, value, rIndex, cIndex, 'data', street));
     });
     vectors.push({'id': streetId, data: unitArray, raw: street});
   });

@@ -2,7 +2,7 @@
  * Created by qshen on 16/6/2017.
  */
 
-let Unit = function(id, attr, value, x, y, type){
+let Unit = function(id, attr, value, x, y, type, raw){
   this.id = id;
   this.value = value;
   this.attr = attr;
@@ -10,10 +10,11 @@ let Unit = function(id, attr, value, x, y, type){
   this.yIndex = y;
   this.pos = [x, y];
   this.el = {};
+  this.raw = raw;
   this.type = type == undefined? value: type;
   this.updateIndex = function(_x, _y){
     this.xIndex = _x == undefined? this.xIndex: _x;
-    this.xIndex = _y == undefined? this.xIndex: _y;
+    this.yIndex = _y == undefined? this.yIndex: _y;
   }
 };
 

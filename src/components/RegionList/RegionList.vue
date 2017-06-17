@@ -364,7 +364,6 @@
   .region-list{
     height:100%;
     width: 98%;
-    padding-right: 20px;
     overflow-y: auto;
   }
   /* css for the table*/

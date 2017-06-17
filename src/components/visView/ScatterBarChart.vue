@@ -56,6 +56,7 @@
       this.initControlConfig();
       let _el = document.getElementById('scatter-bar-chart');
       this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
+
       pipeService.onCitySelected(function(data){
         _this.currentComparisonType = "city";
         _this.matrixBarHandler.drawMatrix(data);
@@ -129,15 +130,15 @@
             'record': d,
             'cityObj':{'id': cityId}
           })
-        })
+        });
         return output
       },
       checkStatistics(standard){
         let sum = 0;
         this.features.forEach(function(attr){
           sum += standard[attr];
-        })
-        return sum == 0? false: true
+        });
+        return sum == 0? false: true;
       },
       initControlConfig(){
         let _this = this;
@@ -173,8 +174,8 @@
         deep: true
       },
       selectItems(newData){
-        this.currentComparisonType = "street";
-        this.matrixBarHandler.drawDiversity(newData);
+//        this.currentComparisonType = "street";
+//        this.matrixBarHandler.drawDiversity(newData);
       }
     }
   }

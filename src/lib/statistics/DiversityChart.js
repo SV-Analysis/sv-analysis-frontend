@@ -142,11 +142,15 @@ DiversityChart.prototype.draw = function(dataList){
       (__nodes1);
 
     let c2 = d3contour.contourDensity()
-      .x(function(d) { return d.x; })
-      .y(function(d) { return d.y; })
-      .size([diversityRegionWidth , diversityRegionHeight])
-      .bandwidth(bandwidth)
-      (__nodes2);
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .size([diversityRegionWidth , diversityRegionHeight])
+        .bandwidth(bandwidth)
+        (__nodes2);
+
+
+
+
 
     diversityPointContainer.append('g')
       .attr("fill", "none")
@@ -160,7 +164,7 @@ DiversityChart.prototype.draw = function(dataList){
       .attr("d", d3.geoPath())
       .attr('opacity', 0.15)
 
-    diversityPointContainer.append('g')
+      diversityPointContainer.append('g')
       .attr("fill", "none")
       .attr("stroke", "#000")
       .attr("stroke-width", 0.5)

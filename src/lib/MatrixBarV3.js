@@ -3,7 +3,6 @@
  */
 import * as d3 from 'd3'
 // import * as d3contour from 'd3-contour'
-import * as d3contour from '../../src/lib/d3-contour'
 import ScatterPlotMatrix from '../../src/lib/statistics/ScatterplotMatrix'
 import CompBarCharts from '../../src/lib/statistics/CompBarCharts'
 import DiversityChart from '../../src/lib/statistics/DiversityChart'
