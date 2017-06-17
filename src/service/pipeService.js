@@ -27,7 +27,8 @@ var pipeService = new Vue({
     SCREENIMAGES:'screen_images',
     SELECTREGIONS:'select_regions',
     SELECTREGIONBYCLICK:'select_region_by_left_click',
-    TABCLICKED: 'tab_clicked'
+    TABCLICKED: 'tab_clicked',
+    MULTIEXPLORATIONSELECTED:'multi_exploration_selected'
   },
 
   methods:{
@@ -258,6 +259,17 @@ var pipeService = new Vue({
     },
     onTabClicked: function(callback){
       this.$on(this.TABCLICKED,function(msg){
+        callback(msg);
+      })
+    },
+
+    //Tab click
+    //Select one element in the exploration view
+    emitMESelected: function(msg){
+      this.$emit(this.MULTIEXPLORATIONSELECTED, msg);
+    },
+    onMESelected: function(callback){
+      this.$on(this.MULTIEXPLORATIONSELECTED,function(msg){
         callback(msg);
       })
     },

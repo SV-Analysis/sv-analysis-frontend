@@ -32,8 +32,10 @@
         if(this.isInitRender) return;
         this.isInitRender = true;
         this.multiExploration = new MulitExploration(this.$el, Config.svFeatures2Color);
-        this.multiExploration.on('rowClick', function(row){
-            console.log('rowClick', row);
+        this.multiExploration.on('rowClick', function(row, sign){
+            console.log('rowClick', row, sign);
+            row.sign = sign;
+            pipeService.emitMESelected(row);
         });
         this.multiExploration.setAttrs(this.attrs);
         this.multiExploration.update(this.streets);

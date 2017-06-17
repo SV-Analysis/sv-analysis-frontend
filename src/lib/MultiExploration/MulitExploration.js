@@ -117,7 +117,7 @@ MultiExploration.prototype.updateBackground = function(){
       })
       .attr('opacity', 0.8)
       .attr('x', unitConfig.left);
-      // .attr('y', unitConfig.top);
+    // .attr('y', unitConfig.top);
   });
 
   // Remove old elements as needed.
@@ -125,15 +125,6 @@ MultiExploration.prototype.updateBackground = function(){
   exitUnitContainers.remove();
 
 
-  // let brContainers = this.backgroundContainer.selectAll('.backgroundRow').data(backRows);
-  //
-  // brContainers.enter().append('g').attr('transform', (d, i)=>{
-  //   return 'translate(0,' + (i * this.unitConfig.height) + ')';
-  // });
-  //
-  // brContainers.each(function(d){
-  //   d3.select(this).selectAll('.backUnit').data(d).enter().append('rect').attr('class', 'backUnit')
-  // });
 };
 
 MultiExploration.prototype.initBodyRender = function(){
@@ -341,8 +332,9 @@ MultiExploration.prototype.updateRenderBody = function(){
       }
       this.selected.idMap[id] = d;
       this.selected.number += 1;
+      let color = this.clickHighlightRow(d.xIndex);
+      d.mColor = color;
       this.handleFucs['rowClick'](d, 'add');
-      this.clickHighlightRow(d.xIndex);
     }else{
       delete this.selected.idMap[id];
       this.selected.number -= 1;
@@ -352,8 +344,8 @@ MultiExploration.prototype.updateRenderBody = function(){
   }).on('mouseover',(d)=>{
     this.hoverHighlightRow(d.xIndex);
   }).on('mouseout', (d)=>{
-      this.removeHoverHighlightRow(d.xIndex);
-    });
+    this.removeHoverHighlightRow(d.xIndex);
+  });
 
 
   // Remove old elements as needed.
@@ -393,7 +385,6 @@ MultiExploration.prototype.calY = function(xIndex){
 };
 MultiExploration.prototype.clickHighlightRow = function(xIndex){
   let color = this.findUnusedColor();
-  console.log('color', color);
   if(!color) return;
   this.selected.xIndex2Color[xIndex] = color;
   ////////////////////////////////////////////////////
@@ -404,7 +395,8 @@ MultiExploration.prototype.clickHighlightRow = function(xIndex){
     if(d.xIndex == xIndex && d.attr == 'id'){
       d3.select(this).selectAll('.signbox').transition(t).attr('fill', color).attr('fill-opacity', 0.8);
     }
-  })
+  });
+  return color;
 };
 MultiExploration.prototype.removeClickHighlightRow = function(xIndex){
   let color = this.selected.xIndex2Color[xIndex];
