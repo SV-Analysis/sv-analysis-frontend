@@ -11,7 +11,7 @@ let MultiExploration = function(el, colorMap){
     'xIndex2Color':{},
     'maxSelectd': 2
   };
-  this.selectedColor = [{'color': '#2b8cbe', 'used': false}, {'color': '#df65b0',  'used': false}];
+  this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
 
   this.el = el;
   this.columNumber = 32;

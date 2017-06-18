@@ -9,7 +9,7 @@ import DiversityChart from '../../src/lib/statistics/DiversityChart'
 
 let MatrixBarV2 = function(el,svFeatures2Color, Config){
   this.$el = el;
-  this.width = this.$el.clientWidth;
+  this.width = this.$el.clientWidth - 30;
   this.height = this.$el.clientHeight;
   this.svFeatures2Color = svFeatures2Color;
   this.features = this.svFeatures2Color['allFeatures'];
@@ -41,7 +41,7 @@ MatrixBarV2.prototype.init = function(){
   }
 
   // Init the configuration of matrix and collection
-  let _margin = {left: 10, right: 10, top:10, bottom: 5};
+  let _margin = {left: 10, right: 10, top:10, bottom: 15};
   let matrixWidth = this.width * 2/ 5;
   let matrixHeight = this.height;
 
@@ -52,9 +52,9 @@ MatrixBarV2.prototype.init = function(){
   this.matrixMargin = generate_config(_margin, {width: matrixWidth, height: matrixHeight, offsetX: contaienrOffsetX});
   this.matrixSize = this.matrixMargin['regionWidth'] > this.matrixMargin['regionHeight']? this.matrixMargin['regionHeight']: this.matrixMargin['regionWidth'];
   this.matrixMargin['size'] = this.matrixSize;
-  this.compBarMargin = generate_config(_margin, {offsetX: this.matrixMargin['width'], width:this.width * 1 / 5, height: this.height});
+  this.compBarMargin = generate_config(_margin, {offsetX: this.matrixSize, width:this.width * 1 / 5, height: this.height});
 
-  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height, offsetX: this.matrixMargin['width'] + this.compBarMargin['width']})
+  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height, offsetX: this.matrixSize + this.compBarMargin['width'] + 20})
 
 
   this.svgContainer = d3.select(this.$el);

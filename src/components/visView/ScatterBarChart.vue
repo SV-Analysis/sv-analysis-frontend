@@ -66,21 +66,21 @@
 
 
       pipeService.onCitySelected(function(data){
-        _this.currentComparisonType = "city";
-        _this.matrixBarHandler.drawMatrix(data);
-        _this.matrixBarHandler.drawdsbBarchart(data);
-        let list = [];
-        data.forEach(function(d){
-          let tempList = [];
-          d['imgList'].forEach(function(img){
-            let standard = img['record']['standard'];
-            if (_this.checkStatistics(standard)){
-              tempList.push(img);
-            }
-          });
-          list = list.concat(tempList)
-        });
-        _this.matrixBarHandler.drawDiversity(list);
+//        _this.currentComparisonType = "city";
+//        _this.matrixBarHandler.drawMatrix(data);
+//        _this.matrixBarHandler.drawdsbBarchart(data);
+//        let list = [];
+//        data.forEach(function(d){
+//          let tempList = [];
+//          d['imgList'].forEach(function(img){
+//            let standard = img['record']['standard'];
+//            if (_this.checkStatistics(standard)){
+//              tempList.push(img);
+//            }
+//          });
+//          list = list.concat(tempList)
+//        });
+//        _this.matrixBarHandler.drawDiversity(list);
       });
 
       pipeService.onSelectRegion(function(d){
@@ -113,20 +113,20 @@
         let newRecords = [];
         let imgList =  _this.parseRecords(d['streets'], d['name']);
         imgList.forEach(function(item){
-            if(item.record.record!= undefined){
-              item.record.statistics = item.record.record.statistics;
-              item.record.dv = item.record.record.dv;
-              item.record.standard = item.record.record.standard;
-              item.record.sv = item.record.record.sv;
-            }
+          if(item.record.record!= undefined){
+            item.record.statistics = item.record.record.statistics;
+            item.record.dv = item.record.record.dv;
+            item.record.standard = item.record.record.standard;
+            item.record.sv = item.record.record.sv;
+          }
         })
         let record = {'imgList': imgList, 'name':d.name, id: d.id, 'color': d.mColor};
         let existed = false;
         this.selectedRegions.forEach((region)=>{
           if(region.id != record.id){
-              newRecords.push(region)
+            newRecords.push(region)
           }else{
-              existed = true;
+            existed = true;
           }
         });
 
@@ -138,8 +138,19 @@
       selectedCollectionUpdated(newData){
         let _this = this;
         let names = [];
-        newData.forEach(function(d){
-          names.push(d['name'])
+        console.log('newData', newData);
+
+        newData.forEach(function(region){
+          names.push(region['name'])
+//          imgList could be a list of regions or streets
+          let imgList = [];
+          region.imgList.forEach(function(img){
+            let _statistics = img.record.statistics;
+            if(_this.checkStatistics(_statistics)){
+              imgList.push(img)
+            }
+          });
+          region.imgList = imgList;
         });
         // Change color
         _this.matrixBarHandler.setColorStyle(names);

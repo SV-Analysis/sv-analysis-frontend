@@ -70,6 +70,7 @@
     mounted(){
 
       // Copy city information from config files
+
       dataService.queryAllCityStatics(['hk', 'singapore', 'london', 'nyc'], function(d){
           pipeService.emitAllCityStatistics(d);
       })
@@ -84,7 +85,6 @@
     },
     methods:{
       generateAndSendSelectedData(){
-
         let _this = this;
         let sendData = [];
 

@@ -30,6 +30,7 @@ DiversityChart.prototype.setConfig = function(el, features, config){
       return 'diversity_clipPath';
     })
     .append('rect')
+    .attr('x', 4).attr('y', 4)
     .attr('width',(d, i)=>{
       return diversityRegionWidth - margin * 2;
     })
@@ -331,8 +332,6 @@ DiversityChart.prototype.draw = function(dataList){
   this.diversityContainer.each(function(attr, i){
 
   });
-
-
 };
 
 DiversityChart.prototype.clearRegion = function(){
