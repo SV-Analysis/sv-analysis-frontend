@@ -4,6 +4,13 @@
 import {Unit} from "../../../src/lib/MultiExploration/BasicElements.js";
 import * as d3 from "d3";
 
+let nameMap = {
+  'london': 'LON',
+  'singapore': 'SIN',
+  'nyc': 'NYC',
+  'hk': 'HK'
+}
+let durationTime = 500;
 let MultiExploration = function(el, colorMap){
   this.selected = {
     'idMap': {},
@@ -34,7 +41,7 @@ let MultiExploration = function(el, colorMap){
     right: 2,
     top: 2,
     bottom: 2,
-    headHeight: 28,
+    headHeight: 30,
     height: 25,
 
     widths: [],
@@ -73,7 +80,8 @@ MultiExploration.prototype.updateBackground = function(){
     .data(backUnits, function(d){
       return d.id
     });
-
+  let t = d3.transition()
+    .duration(durationTime);
   // UPDATE old elements present in new data.e
   unitContainers.each(function(d){
     let yIndex = d['yIndex'];
@@ -84,9 +92,11 @@ MultiExploration.prototype.updateBackground = function(){
     let value = d['value'];
 
     let unitContainer = d3.select(this);
-    unitContainer.attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
+    unitContainer.transition(t)
+      .attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
+
     unitContainer.selectAll('.unitBackground')
-    // .transition(t)
+      .transition(t)
       .attr('width', _width).attr('height', _height)
       .attr('fill', function(){
         return xIndex % 2 != 0? '#eee': '#fff';
@@ -188,23 +198,28 @@ MultiExploration.prototype.update = function(dataList){
   let vectors = processStreets(dataList, this.attrs);
   this.bodyData = vectors;
   let largestValue = -1;
-
+  let largestMax = -1
   console.log('vectors', vectors);
   this.attrs.forEach((attr, i)=>{
     let extent = d3.extent(vectors, function(d){
       return d.data[i].value;
     });
 
-    let featureExtent = d3.extent(vectors, function(d){
+    let maxExtent = d3.extent(vectors, function(d){
       return d.data[i].plot['max'];
     });
-    console.log('features', featureExtent);
 
     if(attr != 'id' && attr != 'city'){
       largestValue = largestValue < extent[1]? extent[1]: largestValue;
+      largestMax = largestMax < maxExtent[1]? maxExtent[1] : largestMax;
     }
 
     this.unitConfig.domains[i] = extent;
+
+  });
+
+
+  this.attrs.forEach((attr, i)=>{
     let index = this.unitConfig.attr2Index[attr];
     if(attr == 'id') {
       this.unitConfig.widthScale[i] = null;
@@ -218,10 +233,9 @@ MultiExploration.prototype.update = function(dataList){
       let xscale = d3.scaleLinear().range([0, this.unitConfig.widths[index] - this.unitConfig.renderRight])
         .domain([0 , largestValue]);
       this.unitConfig.widthScale[i] = xscale;
-      let plotScale = d3.scaleLinear().range([0, this.unitConfig.widths[index] - this.unitConfig.renderRight]).domain([0 , 50]);
+      let plotScale = d3.scaleLinear().range([0, this.unitConfig.widths[index] - this.unitConfig.renderRight]).domain([0 , largestMax+5]);
       this.unitConfig.boxplotWidthScale[i] = plotScale;
     }
-    console.log('largest', largestValue)
   });
 
   let _height = this.columNumber * this.unitConfig.height + this.unitConfig.headHeight + this.tableMargin.top + this.tableMargin.bottom;
@@ -236,11 +250,11 @@ MultiExploration.prototype.updateRenderBody = function(){
 
   let units = [];
   let t = d3.transition()
-    .duration(750);
+    .duration(durationTime);
 
   this.clips_rects.transition(t).attr('width',(d, i)=>{
     return this.unitConfig.widths[i] - this.unitConfig.left;
-  })
+  });
 
   this.bodyData.forEach(function(row){
     units = units.concat(row.data);
@@ -286,7 +300,7 @@ MultiExploration.prototype.updateRenderBody = function(){
   let newUnitContainers = unitContainers.enter().append('g').attr('class', 'bodyUnit')
     .attr('clip-path', d=>{
       let clip_id = 'clips_'+ d.attr;
-      return 'url(#' + clip_id + ')'
+      return 'url(#' + clip_id + ')';
     });
 
   newUnitContainers.each(function(d){
@@ -305,7 +319,7 @@ MultiExploration.prototype.updateRenderBody = function(){
       _this.renderLabel(unitContainer, d);
     }
     else{
-      d.currStyle = 'bar'
+      d.currStyle = 'bar';
       _this.renderBar(unitContainer, d);
     }
   });
@@ -313,10 +327,13 @@ MultiExploration.prototype.updateRenderBody = function(){
   newUnitContainers.on('click', (d)=>{
     _this.clickOnBodyUnit(d);
   }).on('mouseover',(d)=>{
+    console.log('d', d);
     this.hoverHighlightRow(d.xIndex);
   }).on('mouseout', (d)=>{
     this.removeHoverHighlightRow(d.xIndex);
-  });
+  }).append('title').text(function(d){
+    return d.raw.name;
+  })
 
 
   // Remove old elements as needed.
@@ -335,7 +352,6 @@ MultiExploration.prototype.hoverHighlightRow = function(xIndex){
   let t = d3.transition()
     .duration(300);
   this.bodyContainer.selectAll('.backgroundUnit').each(function(d){
-
     if(d.xIndex == xIndex){
       d3.select(this).selectAll('rect').transition(t).attr('fill', '#ccc')
     }
@@ -363,7 +379,7 @@ MultiExploration.prototype.clickHighlightRow = function(xIndex){
   this.selected.xIndex2Color[xIndex] = color;
   ////////////////////////////////////////////////////
   let t = d3.transition()
-    .duration(500);
+    .duration(durationTime);
 
   this.bodyContainer.selectAll('.bodyUnit').each(function(d){
     if(d.xIndex == xIndex ){
@@ -382,7 +398,7 @@ MultiExploration.prototype.removeClickHighlightRow = function(xIndex){
   let color = this.selected.xIndex2Color[xIndex];
   this.releaseColor(color);
   let t = d3.transition()
-    .duration(500);
+    .duration(durationTime);
 
   this.bodyContainer.selectAll('.bodyUnit').each(function(d){
     if(d.xIndex == xIndex ){
@@ -428,7 +444,6 @@ MultiExploration.prototype.updateRenderHead = function(){
   });
 
 
-
   this.container.selectAll('.rowContainer').remove();
   this.attrsRowContainer = this.container.append('g').attr('class', 'rowContainer');
   this.attrContainers = this.attrsRowContainer.selectAll('.attrContainer')
@@ -468,9 +483,13 @@ MultiExploration.prototype.clickOnAttr = function(attr){
 
 MultiExploration.prototype.sortByAttr = function(attr){
   let index = this.unitConfig.attr2Index[attr];
+  let arr = [];
   this.bodyData.sort(function(row1, row2){
-    return (row2.data[index].value  > row1.data[index].value );
+    let value2 = row2.data[index].value;
+    let value1 = row1.data[index].value;
+    return value2  - value1 ;
   });
+
   this.freshIndex();
 };
 
@@ -509,7 +528,8 @@ MultiExploration.prototype.renderLabel = function(el, d){
   let yIndex = d['yIndex'];
   let xIndex = d['xIndex'];
   let value = d['value'];
-  let text = el.append('text').text(value);
+  let label = nameMap[value] == undefined? value : nameMap[value];
+  let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft)
     .attr('y', (conf.height + unitConfig.height) / 2 - 1 );
@@ -521,8 +541,9 @@ MultiExploration.prototype.renderKeyLabel = function(el, d){
   let yIndex = d['yIndex'];
   let xIndex = d['xIndex'];
   let value = d['value'];
-
-  let text = el.append('text').text(value);
+  let label = nameMap[value] == undefined? value : nameMap[value];
+  label = "HK "+label;
+  let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft + unitConfig.signBoxWidth + 2)
     .attr('y', (conf.height + unitConfig.height) / 2 - 1 );
@@ -535,6 +556,7 @@ MultiExploration.prototype.renderKeyLabel = function(el, d){
       .attr('fill-opacity', 0)
       .attr('stroke-width', 1).attr('stroke-opacity', 0.5)
       .attr('stroke', "#212121")
+
     let signBox = el.append('rect').attr('class','signbox')
       .attr('width', unitConfig.signBoxWidth - 2)
       .attr('height', unitConfig.signBoxWidth - 2)
@@ -556,7 +578,9 @@ MultiExploration.prototype.renderClickBackground = function(el, d){
   el.append('rect').attr('class', 'clickBackground')
     .attr('width', _width)
     .attr('height', _height)
-    .attr('opacity', 0)
+    .attr('opacity', function(d){
+      return 0
+    })
     .attr('x', unitConfig.renderLeft)
     .attr('y', 0);
 };
@@ -573,7 +597,13 @@ MultiExploration.prototype.updateClickBackground = function(el, d){
   el.select('.clickBackground')
     .attr('width', _width)
     .attr('height', _height)
-    .attr('opacity', 0)
+    .attr('opacity', function(){
+      if(d.raw.clicked == true){
+        return 0.4;
+      }else{
+        return 0;
+      }
+    })
     .attr('x', unitConfig.renderLeft)
     .attr('y', 0);
 };
@@ -584,7 +614,7 @@ MultiExploration.prototype.updateBar = function(el, d){
   let xIndex = d['xIndex'];
   let value = d['value'];
   let t = d3.transition()
-    .duration(750);
+    .duration(durationTime);
 
   el.select('.value')
     .transition(t)
@@ -594,8 +624,6 @@ MultiExploration.prototype.updateBar = function(el, d){
     .attr('y', unitConfig.renderTop)
 };
 
-
-
 MultiExploration.prototype.updateBoxPlot = function(el, d){
   let unitConfig = this.unitConfig;
   let yIndex = d['yIndex'];
@@ -603,7 +631,7 @@ MultiExploration.prototype.updateBoxPlot = function(el, d){
   let value = d['value'];
 
   let t = d3.transition()
-    .duration(750);
+    .duration(durationTime);
 
   let plotData = d.plot;
 
@@ -665,12 +693,14 @@ MultiExploration.prototype.clickOnBodyUnit = function(d){
       this.selected.idMap[id] = d;
       this.selected.number += 1;
       let color = this.clickHighlightRow(d.xIndex);
+      d.raw.clicked = true;
       d.mColor = color;
       this.handleFucs['rowClick'](d, 'add');
     }else{
       delete this.selected.idMap[id];
       this.selected.number -= 1;
       this.handleFucs['rowClick'](d, 'remove');
+      delete d.raw.clicked;
       this.removeClickHighlightRow(d.xIndex);
     }
   }else{

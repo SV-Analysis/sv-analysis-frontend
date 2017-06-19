@@ -10,12 +10,8 @@
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MatrixBarV3.js" afterPath="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" afterPath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/d3-contour.js" afterPath="$PROJECT_DIR$/src/lib/d3-contour.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" afterPath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" afterPath="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,29 +42,48 @@
       <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+            <state relative-caret-position="400">
+              <caret line="378" column="28" lean-forward="false" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="28" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#42#114#0" expanded="true" />
-                <element signature="e#4572#5249#0" expanded="false" />
-                <element signature="e#5306#5999#0" expanded="false" />
-                <element signature="e#10178#10247#0" expanded="false" />
-                <element signature="e#10313#10565#0" expanded="false" />
-                <element signature="e#10637#10951#0" expanded="false" />
-                <element signature="e#11017#11652#0" expanded="false" />
-                <element signature="e#11724#12200#0" expanded="false" />
-                <element signature="e#12258#12483#0" expanded="false" />
-                <element signature="e#12543#12642#0" expanded="false" />
-                <element signature="e#12701#14243#0" expanded="false" />
-                <element signature="e#14301#14356#0" expanded="false" />
-                <element signature="e#14413#14598#0" expanded="false" />
-                <element signature="e#14651#14778#0" expanded="false" />
-                <element signature="e#15445#15747#0" expanded="false" />
-                <element signature="e#15809#16840#0" expanded="false" />
-                <element signature="e#20201#20882#0" expanded="false" />
-                <element signature="e#20943#22050#0" expanded="false" />
+                <element signature="e#4759#5436#0" expanded="false" />
+                <element signature="e#5493#6186#0" expanded="false" />
+                <element signature="e#10521#10590#0" expanded="false" />
+                <element signature="e#10656#10907#0" expanded="false" />
+                <element signature="e#10979#11293#0" expanded="false" />
+                <element signature="e#12075#12560#0" expanded="false" />
+                <element signature="e#12618#12843#0" expanded="false" />
+                <element signature="e#12903#13002#0" expanded="false" />
+                <element signature="e#14660#14715#0" expanded="false" />
+                <element signature="e#15075#15202#0" expanded="false" />
+                <element signature="e#18589#18984#0" expanded="false" />
+                <element signature="e#19045#20879#0" expanded="false" />
+                <element signature="e#20938#21675#0" expanded="false" />
+                <element signature="e#21736#22843#0" expanded="false" />
+                <element signature="e#22897#23242#0" expanded="false" />
+                <element signature="n#!!block;n#processStreets#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DiversityChart.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="980">
+              <caret line="606" column="61" lean-forward="false" selection-start-line="606" selection-start-column="60" selection-end-line="606" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExploreSelection.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="77" column="10" lean-forward="true" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -76,7 +91,7 @@
       <file leaf-file-name="RegionSelection.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7260">
+            <state relative-caret-position="1540">
               <caret line="334" column="75" lean-forward="false" selection-start-line="333" selection-start-column="10" selection-end-line="334" selection-end-column="75" />
               <folding />
             </state>
@@ -121,18 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>0.5</find>
-      <find>clickMormalOpacity</find>
-      <find>removeClickHighlightRow</find>
-      <find>backgroundUnit</find>
-      <find>clickHighlightOpacity</find>
-      <find>body</find>
-      <find>clickToCompare</find>
-      <find>idMap</find>
-      <find>features</find>
-      <find>ilen - 1</find>
-      <find>widthRatios</find>
-      <find>extendXIndex</find>
       <find>nitConfig.widthScale[i</find>
       <find>clips_</find>
       <find>this.clips</find>
@@ -140,7 +143,6 @@
       <find>clickbackgroun</find>
       <find>renderClickBackground</find>
       <find>processStreets</find>
-      <find>click</find>
       <find>widthScale</find>
       <find>boxplotWidthScale</find>
       <find>30</find>
@@ -150,12 +152,26 @@
       <find>clickBackground</find>
       <find>Background</find>
       <find>max</find>
+      <find>head</find>
+      <find>city</find>
       <find>console</find>
+      <find>red</find>
+      <find>name</find>
+      <find>clickBack</find>
+      <find>click</find>
+      <find>clickHighlightRow</find>
+      <find>updateClickBackground</find>
+      <find>idMap</find>
+      <find>transition</find>
+      <find>750</find>
+      <find>500</find>
+      <find>xIndex2Color</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
       <replace>DiversityChart</replace>
       <replace>left</replace>
+      <replace>blue</replace>
     </replaceStrings>
     <dirStrings>
       <dir>G:\vis2017\sv-analysis-frontend</dir>
@@ -215,9 +231,9 @@
         <option value="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/d3-contour.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" />
-        <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
         <option value="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
+        <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
         <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
       </list>
@@ -807,7 +823,7 @@
     <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15742187" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35562548" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1142,36 +1158,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="388" column="0" lean-forward="true" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="152" column="10" lean-forward="false" selection-start-line="152" selection-start-column="10" selection-end-line="152" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7260">
-          <caret line="334" column="75" lean-forward="false" selection-start-line="333" selection-start-column="10" selection-end-line="334" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#110#184#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1207,40 +1197,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1078">
+          <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#110#184#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="980">
+          <caret line="606" column="61" lean-forward="false" selection-start-line="606" selection-start-column="60" selection-end-line="606" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1540">
+          <caret line="334" column="75" lean-forward="false" selection-start-line="333" selection-start-column="10" selection-end-line="334" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29">
-          <caret line="41" column="51" lean-forward="false" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
-          <folding>
-            <element signature="e#76#127#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="348">
+          <caret line="77" column="10" lean-forward="true" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+        <state relative-caret-position="400">
+          <caret line="378" column="28" lean-forward="false" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="28" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#42#114#0" expanded="true" />
-            <element signature="e#4572#5249#0" expanded="false" />
-            <element signature="e#5306#5999#0" expanded="false" />
-            <element signature="e#10178#10247#0" expanded="false" />
-            <element signature="e#10313#10565#0" expanded="false" />
-            <element signature="e#10637#10951#0" expanded="false" />
-            <element signature="e#11017#11652#0" expanded="false" />
-            <element signature="e#11724#12200#0" expanded="false" />
-            <element signature="e#12258#12483#0" expanded="false" />
-            <element signature="e#12543#12642#0" expanded="false" />
-            <element signature="e#12701#14243#0" expanded="false" />
-            <element signature="e#14301#14356#0" expanded="false" />
-            <element signature="e#14413#14598#0" expanded="false" />
-            <element signature="e#14651#14778#0" expanded="false" />
-            <element signature="e#15445#15747#0" expanded="false" />
-            <element signature="e#15809#16840#0" expanded="false" />
-            <element signature="e#20201#20882#0" expanded="false" />
-            <element signature="e#20943#22050#0" expanded="false" />
+            <element signature="e#4759#5436#0" expanded="false" />
+            <element signature="e#5493#6186#0" expanded="false" />
+            <element signature="e#10521#10590#0" expanded="false" />
+            <element signature="e#10656#10907#0" expanded="false" />
+            <element signature="e#10979#11293#0" expanded="false" />
+            <element signature="e#12075#12560#0" expanded="false" />
+            <element signature="e#12618#12843#0" expanded="false" />
+            <element signature="e#12903#13002#0" expanded="false" />
+            <element signature="e#14660#14715#0" expanded="false" />
+            <element signature="e#15075#15202#0" expanded="false" />
+            <element signature="e#18589#18984#0" expanded="false" />
+            <element signature="e#19045#20879#0" expanded="false" />
+            <element signature="e#20938#21675#0" expanded="false" />
+            <element signature="e#21736#22843#0" expanded="false" />
+            <element signature="e#22897#23242#0" expanded="false" />
+            <element signature="n#!!block;n#processStreets#0" expanded="false" />
           </folding>
         </state>
       </provider>

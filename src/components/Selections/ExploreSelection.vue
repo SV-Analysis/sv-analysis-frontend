@@ -68,7 +68,7 @@
     mounted(){
 
       let features = Config.svFeatures2Color.allFeatures.slice();
-      let attrs = ['id', 'city'].concat(features);
+      let attrs = ['id'].concat(features);
       this.attrs = attrs;
       pipeService.onSelectRegion((record)=>{
         record.id = record['rid'];
