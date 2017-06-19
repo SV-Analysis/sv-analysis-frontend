@@ -134,7 +134,7 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
     .attr('fill', function(d, i){
       return d.color
     })
-    .attr('fill-opacity', 0.5);
+    .attr('fill-opacity', 0.3);
   if(dataList.length > 0){
     legendsContainer.append('text')
       .text(function(){
@@ -175,21 +175,23 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
         return yvalue
       })
       .attr('r', function(d){
-
         return 2
-
       })
       .attr('fill', function(d){
         // return _this.getColor(d['cityObj']['id']);
         return d.color
       })
-      .attr('fill-opacity', 0.2)
+      .attr('fill-opacity', 0.1)
       .attr('stroke-width', 1)
-      .attr('stroke-opacity', 0.3)
+      .attr('stroke-opacity', 0.1)
       .attr('stroke', function(d){
         return d.color
         // return _this.getColor(d['cityId'])
-      });
+      }).on('mousemove', function(d){
+        console.log('dsdsdf', d);
+      }).on('mouseout', function(d){
+        console.log('mouseout', d);
+      })
 
     circles.each(function(d){
       if(d['render'] == undefined){

@@ -301,7 +301,8 @@ function defaultY(d) {
   return d[1];
 }
 
-var density = function() {
+var density = function(threshold) {
+  var threshold = threshold == undefined? 10: threshold;
   var x = defaultX,
       y = defaultY,
       dx = 960,
@@ -311,7 +312,7 @@ var density = function() {
       o = r * 3, // grid offset, to pad for blur
       n = (dx + o * 2) >> k, // grid width
       m = (dy + o * 2) >> k, // grid height
-      threshold = constant(20);
+      threshold = constant(threshold);
 
   function density(data) {
     var values0 = new Float32Array(n * m),

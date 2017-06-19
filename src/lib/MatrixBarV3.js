@@ -52,9 +52,9 @@ MatrixBarV2.prototype.init = function(){
   this.matrixMargin = generate_config(_margin, {width: matrixWidth, height: matrixHeight, offsetX: contaienrOffsetX});
   this.matrixSize = this.matrixMargin['regionWidth'] > this.matrixMargin['regionHeight']? this.matrixMargin['regionHeight']: this.matrixMargin['regionWidth'];
   this.matrixMargin['size'] = this.matrixSize;
-  this.compBarMargin = generate_config(_margin, {offsetX: this.matrixSize, width:this.width * 1 / 5, height: this.height});
+  this.compBarMargin = generate_config(_margin, {offsetX: this.matrixSize + 10, width:this.width * 1 / 5, height: this.height});
 
-  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height, offsetX: this.matrixSize + this.compBarMargin['width'] + 20})
+  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height, offsetX: this.matrixSize + this.compBarMargin['width'] + 25})
 
 
   this.svgContainer = d3.select(this.$el);
@@ -119,9 +119,16 @@ MatrixBarV2.prototype.initDiversity = function(){
 };
 
 MatrixBarV2.prototype.drawDiversity = function(dataList){
-  this.diversityChart.draw(dataList);
+  this.diversityChart.update(dataList);
 };
 
+MatrixBarV2.prototype.switchDiversityStyle = function(style){
+  this.diversityChart.switchDiversityStyle(style);
+};
+
+MatrixBarV2.prototype.updateDiversityBandwidth = function(bandwidth, threshold){
+  this.diversityChart.updateDiversityBandwidth(bandwidth, threshold)
+};
 
 MatrixBarV2.prototype.setColorStyle = function(names){
   this.colorScaleArray;

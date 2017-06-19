@@ -40,7 +40,6 @@
         });
         this.multiExploration.setAttrs(this.attrs);
         this.multiExploration.update(this.streets);
-        console.log('streets', this.streets);
       },
       updateRegionOrStreet(record){
         let id = record['id'];

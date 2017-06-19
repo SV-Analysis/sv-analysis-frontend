@@ -7,23 +7,53 @@
       ref="popcontrol"
       width="400"
       height="500"
-      placement="left-end"  v-model="visible">
-      <el-radio size="large" class="radio" v-model="radio" label="region">Region</el-radio>
-      <el-radio size="small" class="radio" v-model="radio" label="street">Street</el-radio>
+      placement="left-end"  >
 
-      <div style="width: 80%">
-        <div v-for="attrConf in controlConf">
-          <span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>
-          <el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"
-                     range
-                     :max=100>
-          </el-slider>
+      <div class="title"><span>ScatterPlot matrix</span></div>
+      <div>
+        <span style="margin-top: 10px; float: left; text-align: left; width: 15%">Opacity</span>
+        <el-slider v-model="matrixOpacity" style="width: 70%;float:left" :max=100></el-slider>
+      </div>
+
+
+
+      <div class="title" style="margin-top: 15px"><span>Feature Diversity</span></div>
+      <div>
+        <div >
+          <span style="margin-top: 10px; float: left; text-align: left; width: 15%">Form</span>
+          <el-switch style="margin-top: 5px;"
+                     width= 90
+                     v-model="diversityStyle"
+                     on-text="Point"
+                     off-text="Contour"
+                     on-color="#20a0ff"
+                     off-color="#20a0ff">
+          </el-switch>
+        </div>
+        <div style="clear: left">
+          <span style="margin-top: 10px; float: left; text-align: left; width: 15%">Opacity</span>
+          <el-slider v-model="diversityOpacity" style="width: 70%;float:left" :max=100></el-slider>
+        </div>
+        <div style="clear: left">
+          <span style="margin-top: 10px; float: left; text-align: left; width: 15%">Bandwidth</span>
+          <el-slider v-model="diversityBandwidth" style="width: 70%;float:left" :max=50></el-slider>
+        </div>
+        <div style="clear: left">
+          <span style="margin-top: 10px; float: left; text-align: left; width: 15%">Threshold</span>
+          <el-slider v-model="diversityThreshold" style="width: 70%;float:left" :max=50></el-slider>
         </div>
       </div>
 
-      <div style="position: absolute;  bottom: 10px; right: 20px">
-        <el-button type="primary" size="mini" @click="visible = false">confirm</el-button>
-      </div>
+      <!--<div style="width: 80%">-->
+      <!--<div v-for="attrConf in controlConf">-->
+      <!--<span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>-->
+      <!--<el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"-->
+      <!--range-->
+      <!--:max=100>-->
+      <!--</el-slider>-->
+      <!--</div>-->
+      <!--</div>-->
+
     </el-popover>
     <el-button size='small' class="botton-class" v-popover:popcontrol>config</el-button>
   </div>
@@ -48,7 +78,12 @@
         features: Config.svFeatures2Color.allFeatures,
         selectedRegions: [],
         currentComparisonType: null,
-        records:[]
+        records:[],
+        matrixOpacity: 0.8,
+        diversityStyle: true, // true: point, false: contour
+        diversityOpacity: 0.8,
+        diversityBandwidth: 4,
+        diversityThreshold: 10
       }
     },
 
@@ -109,7 +144,7 @@
       updateRecords(d){
         // To decide to remove a old element or add a new element
         let _this = this;
-        console.log('udpate');
+
         let newRecords = [];
         let imgList =  _this.parseRecords(d['streets'], d['name']);
         imgList.forEach(function(item){
@@ -138,7 +173,6 @@
       selectedCollectionUpdated(newData){
         let _this = this;
         let names = [];
-        console.log('newData', newData);
 
         newData.forEach(function(region){
           names.push(region['name'])
@@ -155,10 +189,8 @@
         // Change color
         _this.matrixBarHandler.setColorStyle(names);
 //                Demo
-        console.log('draw', newData);
         _this.matrixBarHandler.drawMatrix(newData);
         _this.matrixBarHandler.drawdsbBarchart(newData);
-
         _this.matrixBarHandler.drawDiversity(newData);
 
       },
@@ -191,31 +223,35 @@
       },
     },
     watch:{
-      controlConf:{
-        handler: function(newData){
-          let _this = this;
-          //Hack 不忍直视
-          d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
-            let e = newData[i];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-
-          });
-          d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
-            let index = parseInt(i / 2)
-            let e = newData[index];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-          });
-        },
-        deep: true
-      },
       selectItems(newData){
 //        this.currentComparisonType = "street";
 //        this.matrixBarHandler.drawDiversity(newData);
+      },
+      diversityStyle(newData){
+        if(this.matrixBarHandler){
+          this.matrixBarHandler.switchDiversityStyle(newData == true? 'point': 'contour')
+        }
+      },
+      diversityBandwidth(newData){
+        if (this.timeSign) clearTimeout(this.timeSign);
+        this.timeSign = setTimeout(()=>{
+          if(this.matrixBarHandler){
+            this.matrixBarHandler.updateDiversityBandwidth(this.diversityBandwidth, this.diversityThreshold)
+          }
+        }, 800);
+
+
+      },
+      diversityThreshold(newData){
+        if (this.timeSign) clearTimeout(this.timeSign);
+        this.timeSign = setTimeout(()=>{
+          if(this.matrixBarHandler){
+            this.matrixBarHandler.updateDiversityBandwidth(this.diversityBandwidth, this.diversityThreshold)
+          }
+        }, 800);
+
       }
+
     }
   }
 </script>
@@ -230,5 +266,14 @@
     position: absolute;
     left: 10px;
     bottom: 10px;
+  }
+  .title{
+    clear: left;
+    width: 100%;
+    height: 13px;
+    border-bottom: 1px solid #ccc;
+    /*text-align: center;*/
+    margin-bottom: 15px;
+    text-align:center
   }
 </style>
