@@ -187,6 +187,7 @@ DiversityChart.prototype.drawPoints = function(){
         }
       });
     });
+    console.log('lenlnelne', __nodes1.length, __nodes2.length);
 
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
       .data(dataList)

@@ -3,9 +3,37 @@
     <div style="width:100%">
 
     </div>
+    <div class="table-container">
+      <table class="street-table">
+        <!--<col width="16.67%">-->
+        <thead >
+        <tr>
+          <th height="30" v-for="attr in attrObj" class="head-style">{{attr}}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr v-for="record in streetArray" v-if="record['dataType']=='street'">
+          <td oncontextmenu="return false;"
+              v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
+              v-on:click='rowClick(record)'
+              v-on:contextmenu="rightClick(record)"
+              v-for="attr_name in attrObj">
+            {{record.attr[attr_name]}}
+          </td>
+        </tr>
+        <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
+          <RegionMap v-bind:cityInfo="currentCity"
+                     v-bind:streetData="record['context']">
+          </RegionMap></td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
     <div class="collapse-control" >
       <el-collapse size="small"  v-model="activeNames" class="multi-query" >
-        <el-collapse-item title="Control" name="1" style="text-align:center">
+        <el-collapse-item title="Query" name="1" style="text-align:center">
           <div class="title"><span>Select City</span></div>
           <el-select style = "width: 120px; text-align:center"
                      size="small" v-model="selectedCity" placeholder="Select City">
@@ -44,34 +72,7 @@
 
     </div>
 
-    <div class="table-container">
-      <table class="street-table">
-        <!--<col width="16.67%">-->
-        <thead >
-        <tr>
-          <th height="30" v-for="attr in attrObj" class="head-style">{{attr}}</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        <tr v-for="record in streetArray" v-if="record['dataType']=='street'">
-          <td oncontextmenu="return false;"
-              v-bind:class="record['attr']['SL'] ? 'selectRow' : 'notSelectRow'"
-              v-on:click='rowClick(record)'
-              v-on:contextmenu="rightClick(record)"
-              v-for="attr_name in attrObj">
-            {{record.attr[attr_name]}}
-          </td>
-        </tr>
-        <tr class="extand_map" v-else-if="record['dataType']=='street_map'"><td colspan="6">
-          <RegionMap v-bind:cityInfo="currentCity"
-                     v-bind:streetData="record['context']">
-          </RegionMap></td>
-        </tr>
-
-        </tbody>
-      </table>
-    </div>
     <el-pagination
       @current-change="handleCurrentChange"
       :current-page="currentPage"
@@ -113,12 +114,30 @@
       };
     },
     methods: {
+      initFilterElements(){
+        let newData = this.controlConf;
+        let _this = this;
+        //Hack 不忍直视
+        d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
+          let e = newData[i];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
+        d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
+          let index = parseInt(i / 2)
+          let e = newData[index];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
+      },
       upFirstChar(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
       },
       initControlConfig(){
         let _this = this;
-        let controlConf = this.controlConf
+        let controlConf = this.controlConf;
         this.svFeatures2Color.allFeatures.forEach(function(attr){
           controlConf.push({
             'id': attr,
@@ -145,6 +164,7 @@
       _queryStreet(){
         let _this = this;
         dataService.queryStreetCollections(this.selectedCity, this.startIndex, this.currentLen,this.selectedCondition, function(recordObj){
+          console.log('record', recordObj);
           _this._parseStreetRecords(recordObj, _this.selectedCity)
         })
       },
@@ -250,7 +270,7 @@
         record['standard'] = record['agg_obj']['standard'];
         record['segments'] = record['agg_obj']['segments'];
         record['segments'].forEach(function(seg){
-           seg['summary_img'][0]['formatImgPath'] = _this._generateImageLink(seg['summary_img'][0]);
+          seg['summary_img'][0]['formatImgPath'] = _this._generateImageLink(seg['summary_img'][0]);
         });
         record['sImg_path'] = record['segments'][0]['summary_img'][0]['formatImgPath'];
         delete record['agg_obj'];
@@ -350,20 +370,6 @@
         handler: function(newData){
           let _this = this;
           //Hack 不忍直视
-          d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
-            let e = newData[i];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-          });
-          d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
-            let index = parseInt(i / 2);
-            let e = newData[index];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-          });
-
           // Alternative methods to detect continues actions.
           if (this.x) clearTimeout(this.x);
           this.x = setTimeout(function(){ _this.selectionChanged() }, 800);
@@ -378,6 +384,13 @@
     },
     mounted(){
       this.initControlConfig();
+
+      pipeService.onTabClicked(msg=>{
+        let newData = this.controlConf;
+        if(msg == 'street'){
+          this.initFilterElements();
+        }
+      });
 
     },
   };

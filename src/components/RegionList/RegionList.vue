@@ -15,7 +15,6 @@
         <ExploreSelection> </ExploreSelection>
       </el-tab-pane>
     </el-tabs>
-
   </div>
   </div>
 </template>
@@ -31,8 +30,6 @@
   import CitySelection from "../Selections/CitySelection.vue"
   import ExploreSelection from "../Selections/ExploreSelection.vue"
   import  * as Config from "../../Config"
-
-
 
   export default {
     name: 'streetlist',
@@ -128,9 +125,7 @@
     },
     methods:{
       tabClicked(tab, event){
-//          console.log('tab', tab.label, event);
-          pipeService.emitTabClicked(tab.name);
-
+        pipeService.emitTabClicked(tab.name);
       },
       selectedChanged(){
         let _this = this;
@@ -158,6 +153,7 @@
       _queryStreet(){
         let _this = this;
         dataService.queryStreetCollections(this.selectedCity, this.startIndex, this.currentLen, function(records){
+          console.log('street',records);
           _this._parseStreetRecords(records, _this.selectedCity)
         })
       },

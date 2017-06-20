@@ -547,7 +547,7 @@ MultiExploration.prototype.renderKeyLabel = function(el, d){
   let xIndex = d['xIndex'];
   let value = d['value'];
   let label = nameMap[value] == undefined? value : nameMap[value];
-  label = "HK "+label;
+  label = label;
   let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft + unitConfig.signBoxWidth + 2)

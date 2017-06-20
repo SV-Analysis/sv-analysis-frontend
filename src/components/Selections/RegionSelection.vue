@@ -106,6 +106,24 @@
       };
     },
     methods: {
+      initFilterElements(){
+        let newData = this.controlConf;
+        let _this = this;
+        //Hack 不忍直视
+        d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
+          let e = newData[i];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
+        d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
+          let index = parseInt(i / 2)
+          let e = newData[index];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
+      },
       upFirstChar(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
       },
@@ -123,7 +141,6 @@
         return this.upFirstChar(option);
       },
       initPaginationInput(){
-
         this.endIndex = this.startIndex + this.currentLen - 1;
       },
       selectionChanged(){
@@ -144,7 +161,7 @@
         let startTime = new Date();
         dataService.queryRegionCollections(this.selectedCity, this.startIndex, this.currentLen, this.selectedCondition, function(records){
           let endTime = new Date();
-
+          console.log('region', records);
           console.log('Time1 ', endTime - startTime);
           _this._parseRegionRecords(records, _this.selectedCity);
           console.log('Time2 ', new Date() - endTime);
@@ -181,7 +198,6 @@
         _this.totalRecords = total;
       },
       rowClick(record){
-
         let index = -1;
         for(var i = 0; i < this.regionArray.length; i++){
           if(record == this.regionArray[i]){
@@ -209,10 +225,8 @@
 
       },
       rightClick(record){
-
         let item = this._parsesRecord(record);
         pipeService.emitSelectRegion(record);
-
 //
 //                pipeService.emitUpdateSelectItems(item);
       },
@@ -278,7 +292,7 @@
           agImg['max_attr'] = {
             attr: largestAttr,
             value: largestValue
-          }
+          };
           agImg['img_path'] = agImg['imgList'][0]['img_path'];
           agImg['id'] = 'aggregate_' + agImg['imgList'][0]['index'];
 
@@ -303,6 +317,7 @@
     },
     watch:{
       selectedCity(newValue, oldValue){
+
         this.selectionChanged();
       },
       currentPage(newValue, oldValue){
@@ -314,21 +329,6 @@
       controlConf:{
         handler: function(newData){
           let _this = this;
-          //Hack 不忍直视
-          d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
-            let e = newData[i];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-
-          });
-          d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
-            let index = parseInt(i / 2)
-            let e = newData[index];
-            if(e != undefined){
-              d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
-            }
-          });
 
           // Alternative methods to detect continues actions.
           if (this.x) clearTimeout(this.x);
@@ -344,6 +344,12 @@
     },
     mounted(){
       this.initControlConfig();
+      pipeService.onTabClicked(msg=>{
+        let newData = this.controlConf;
+        if(msg == 'region'){
+          this.initFilterElements();
+        }
+      });
 
     },
   };
