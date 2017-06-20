@@ -41,11 +41,12 @@ MatrixBarV2.prototype.init = function(){
   }
 
   // Init the configuration of matrix and collection
-  let _margin = {left: 10, right: 10, top:10, bottom: 15};
+  let _margin = {left: 10, right: 10, top:35, bottom: 15};
   let matrixWidth = this.width * 2/ 5;
   let matrixHeight = this.height;
 
   this.matrixSize = matrixWidth > matrixHeight? matrixHeight: matrixWidth;
+
   let contaienrOffsetX = matrixWidth > matrixHeight? (matrixWidth - matrixHeight): 0;
 
 
@@ -53,10 +54,8 @@ MatrixBarV2.prototype.init = function(){
   this.matrixSize = this.matrixMargin['regionWidth'] > this.matrixMargin['regionHeight']? this.matrixMargin['regionHeight']: this.matrixMargin['regionWidth'];
   this.matrixMargin['size'] = this.matrixSize;
   this.compBarMargin = generate_config(_margin, {offsetX: this.matrixSize + 10, width:this.width * 1 / 5, height: this.height});
-
-  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height, offsetX: this.matrixSize + this.compBarMargin['width'] + 25})
-
-
+  ////Marklabel
+  this.diversityMargin = generate_config(_margin,{width: this.width * 2 / 5, height: this.height - 36, offsetX: this.matrixSize + this.compBarMargin['width'] + 25})
   this.svgContainer = d3.select(this.$el);
 
 };

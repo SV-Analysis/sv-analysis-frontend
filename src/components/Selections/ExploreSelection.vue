@@ -1,5 +1,23 @@
 <template>
   <div class="exploreSelection">
+    <div class='exploreContainer'style="width: 100%; height: 100%"></div>
+
+    <div>
+      <el-collapse size="small"  v-model="activeNames" class="multi-query" >
+        <el-collapse-item title="Control" name="1" style="text-align:center">
+          <div class="title" style="margin-top: 10px"><span>Filter</span></div>
+          <div v-for="attrConf in controlConf">
+            <span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>
+            <el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"
+                       range
+                       :max=100>
+            </el-slider>
+          </div>
+          <div style="height: 20px"></div>
+        </el-collapse-item>
+      </el-collapse>
+    </div>
+
   </div>
 </template>
 <script>
@@ -21,17 +39,39 @@
         region:{},
         selected: [],
         isInitRender: false,
-        attrs: []
+        svFeatures2Color: Config.svFeatures2Color,
+        attrs: [],
+        activeNames: ['1'],
+        controlConf:[]
       };
     },
     methods: {
-      mouseOver:function(){
-
+      initFilter: function(){
+        let newData = this.controlConf;
+        let _this = this;
+        //Hack 不忍直视
+        d3.select(this.$el).selectAll('.el-slider__bar').each(function(d, i){
+          let e = newData[i];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
+        d3.select(this.$el).selectAll('.el-slider__button').each(function(d, i){
+          let index = parseInt(i / 2);
+          let e = newData[index];
+          if(e != undefined){
+            d3.select(this).style('background-color', _this.svFeatures2Color[e['id']]);
+          }
+        });
       },
+
       initRender: function(){
         if(this.isInitRender) return;
         this.isInitRender = true;
-        this.multiExploration = new MulitExploration(this.$el, Config.svFeatures2Color);
+        let container = d3.select(this.$el).select('.exploreContainer').nodes()[0];
+        console.log('container', container);
+
+        this.multiExploration = new MulitExploration(container, Config.svFeatures2Color);
         this.multiExploration.on('rowClick', function(row, sign){
           let record = row.raw;
           record.mSign = sign;
@@ -40,6 +80,9 @@
         });
         this.multiExploration.setAttrs(this.attrs);
         this.multiExploration.update(this.streets);
+
+
+        this.initFilter();
       },
       updateRegionOrStreet(record){
         let id = record['id'];
@@ -93,20 +136,29 @@
           }, 1);
         }
       });
-      pipeService.onAllCityStatistics((allStatistics)=>{
-        allStatistics.forEach((record)=>{
-          record.id = record.city;
-          let streets = this.updateRegionOrStreet(record);
-          this.streets = streets;
-          if(this.multiExploration)
-            this.multiExploration.update(this.streets);
-        });
+//      pipeService.onAllCityStatistics((allStatistics)=>{
+//        allStatistics.forEach((record)=>{
+//          record.id = record.city;
+//          let streets = this.updateRegionOrStreet(record);
+//          this.streets = streets;
+//          if(this.multiExploration)
+//            this.multiExploration.update(this.streets);
+//        });
+//
+//      });
 
-      });
+
+      let controlConf = this.controlConf
+      this.svFeatures2Color.allFeatures.forEach(function(attr){
+        controlConf.push({
+          'id': attr,
+          'valueRange': [0,100],
+        })
+      })
     }
   };
 </script>
-<style scope>
+<style >
   .exploreSelection{
 
     width: 100%;

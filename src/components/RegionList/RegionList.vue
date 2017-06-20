@@ -11,7 +11,7 @@
       <el-tab-pane label="Street" name="street">
         <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
       </el-tab-pane>
-      <el-tab-pane label="Exploration" name="explore">
+      <el-tab-pane label="Ranking" name="explore">
         <ExploreSelection> </ExploreSelection>
       </el-tab-pane>
     </el-tabs>

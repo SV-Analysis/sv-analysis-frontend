@@ -9,9 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MatrixBarV3.js" afterPath="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" afterPath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" afterPath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,14 +24,41 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="ExploreSelection.vue" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="3036">
+                    <caret line="138" column="0" lean-forward="false" selection-start-line="138" selection-start-column="2" selection-end-line="147" selection-end-column="11" />
+                    <folding>
+                      <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#span#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#el-slider#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                      <element signature="e#831#882#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="MatrixBarV3.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1078">
-              <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+            <state relative-caret-position="1254">
+              <caret line="57" column="101" lean-forward="false" selection-start-line="57" selection-start-column="101" selection-end-line="57" selection-end-column="101" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#110#184#0" expanded="true" />
@@ -39,30 +67,75 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="378" column="28" lean-forward="false" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="28" />
+            <state relative-caret-position="704">
+              <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#42#114#0" expanded="true" />
-                <element signature="e#4759#5436#0" expanded="false" />
-                <element signature="e#5493#6186#0" expanded="false" />
-                <element signature="e#10521#10590#0" expanded="false" />
-                <element signature="e#10656#10907#0" expanded="false" />
-                <element signature="e#10979#11293#0" expanded="false" />
-                <element signature="e#12075#12560#0" expanded="false" />
-                <element signature="e#12618#12843#0" expanded="false" />
-                <element signature="e#12903#13002#0" expanded="false" />
-                <element signature="e#14660#14715#0" expanded="false" />
-                <element signature="e#15075#15202#0" expanded="false" />
-                <element signature="e#18589#18984#0" expanded="false" />
-                <element signature="e#19045#20879#0" expanded="false" />
-                <element signature="e#20938#21675#0" expanded="false" />
-                <element signature="e#21736#22843#0" expanded="false" />
-                <element signature="e#22897#23242#0" expanded="false" />
+                <element signature="e#4838#5515#0" expanded="false" />
+                <element signature="e#10540#10609#0" expanded="false" />
+                <element signature="e#10675#10926#0" expanded="false" />
+                <element signature="e#10998#11312#0" expanded="false" />
+                <element signature="e#12094#12579#0" expanded="false" />
+                <element signature="e#12637#12862#0" expanded="false" />
+                <element signature="e#12922#13021#0" expanded="false" />
+                <element signature="e#14759#14814#0" expanded="false" />
+                <element signature="e#15174#15301#0" expanded="false" />
+                <element signature="e#18688#19083#0" expanded="false" />
+                <element signature="e#19144#20978#0" expanded="false" />
+                <element signature="e#21037#21774#0" expanded="false" />
+                <element signature="e#21835#22942#0" expanded="false" />
+                <element signature="e#22996#23341#0" expanded="false" />
                 <element signature="n#!!block;n#processStreets#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="48" column="54" lean-forward="true" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegionList.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="14" column="46" lean-forward="true" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StreetList.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-110">
+              <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="7" selection-end-line="17" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StreetSelection.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1826">
+              <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
+              <folding>
+                <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,19 +144,11 @@
       <file leaf-file-name="DiversityChart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="980">
-              <caret line="606" column="61" lean-forward="false" selection-start-line="606" selection-start-column="60" selection-end-line="606" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExploreSelection.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="77" column="10" lean-forward="true" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="-308">
+              <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+              <folding>
+                <element signature="e#42#66#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,8 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nitConfig.widthScale[i</find>
-      <find>clips_</find>
       <find>this.clips</find>
       <find>clip</find>
       <find>clickbackgroun</find>
@@ -152,9 +215,7 @@
       <find>clickBackground</find>
       <find>Background</find>
       <find>max</find>
-      <find>head</find>
       <find>city</find>
-      <find>console</find>
       <find>red</find>
       <find>name</find>
       <find>clickBack</find>
@@ -166,6 +227,10 @@
       <find>750</find>
       <find>500</find>
       <find>xIndex2Color</find>
+      <find>index</find>
+      <find>console</find>
+      <find>activeNames</find>
+      <find>head</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -204,11 +269,9 @@
         <option value="$PROJECT_DIR$/src/lib/PointCloud.js" />
         <option value="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
         <option value="$PROJECT_DIR$/src/Config.js" />
-        <option value="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/ScatterplotMatrix.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/diversityChart.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/StreetList.vue" />
         <option value="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
         <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
@@ -222,7 +285,6 @@
         <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
-        <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/lib/MultiExploration/BasicElements.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/CompBarCharts.js" />
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
@@ -231,11 +293,14 @@
         <option value="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/d3-contour.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" />
-        <option value="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
         <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
-        <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/StreetList.vue" />
+        <option value="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
+        <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
+        <option value="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
+        <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
       </list>
     </option>
   </component>
@@ -975,13 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -1069,16 +1127,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4070">
-          <caret line="185" column="11" lean-forward="true" selection-start-line="185" selection-start-column="11" selection-end-line="185" selection-end-column="11" />
-          <folding>
-            <element signature="e#1594#1638#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/DetailMap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
@@ -1090,13 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="26" column="34" lean-forward="false" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="267" column="8" lean-forward="true" selection-start-line="267" selection-start-column="8" selection-end-line="267" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1120,13 +1161,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="32" column="15" lean-forward="false" selection-start-line="32" selection-start-column="15" selection-end-line="35" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1197,25 +1231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="53" column="46" lean-forward="false" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#110#184#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="980">
-          <caret line="606" column="61" lean-forward="false" selection-start-line="606" selection-start-column="60" selection-end-line="606" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Selections/RegionSelection.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1540">
@@ -1224,38 +1239,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+    <entry file="file://$PROJECT_DIR$/src/lib/statistics/DiversityChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="77" column="10" lean-forward="true" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
+        <state relative-caret-position="-308">
+          <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <folding>
+            <element signature="e#42#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-110">
+          <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="7" selection-end-line="17" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1826">
+          <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="57" column="101" lean-forward="false" selection-start-line="57" selection-start-column="101" selection-end-line="57" selection-end-column="101" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#110#184#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="378" column="28" lean-forward="false" selection-start-line="378" selection-start-column="16" selection-end-line="378" selection-end-column="28" />
+        <state relative-caret-position="704">
+          <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#42#114#0" expanded="true" />
-            <element signature="e#4759#5436#0" expanded="false" />
-            <element signature="e#5493#6186#0" expanded="false" />
-            <element signature="e#10521#10590#0" expanded="false" />
-            <element signature="e#10656#10907#0" expanded="false" />
-            <element signature="e#10979#11293#0" expanded="false" />
-            <element signature="e#12075#12560#0" expanded="false" />
-            <element signature="e#12618#12843#0" expanded="false" />
-            <element signature="e#12903#13002#0" expanded="false" />
-            <element signature="e#14660#14715#0" expanded="false" />
-            <element signature="e#15075#15202#0" expanded="false" />
-            <element signature="e#18589#18984#0" expanded="false" />
-            <element signature="e#19045#20879#0" expanded="false" />
-            <element signature="e#20938#21675#0" expanded="false" />
-            <element signature="e#21736#22843#0" expanded="false" />
-            <element signature="e#22897#23242#0" expanded="false" />
+            <element signature="e#4838#5515#0" expanded="false" />
+            <element signature="e#10540#10609#0" expanded="false" />
+            <element signature="e#10675#10926#0" expanded="false" />
+            <element signature="e#10998#11312#0" expanded="false" />
+            <element signature="e#12094#12579#0" expanded="false" />
+            <element signature="e#12637#12862#0" expanded="false" />
+            <element signature="e#12922#13021#0" expanded="false" />
+            <element signature="e#14759#14814#0" expanded="false" />
+            <element signature="e#15174#15301#0" expanded="false" />
+            <element signature="e#18688#19083#0" expanded="false" />
+            <element signature="e#19144#20978#0" expanded="false" />
+            <element signature="e#21037#21774#0" expanded="false" />
+            <element signature="e#21835#22942#0" expanded="false" />
+            <element signature="e#22996#23341#0" expanded="false" />
             <element signature="n#!!block;n#processStreets#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="48" column="54" lean-forward="true" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3036">
+          <caret line="138" column="0" lean-forward="false" selection-start-line="138" selection-start-column="2" selection-end-line="147" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-slider#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#831#882#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RegionList/RegionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="46" lean-forward="true" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

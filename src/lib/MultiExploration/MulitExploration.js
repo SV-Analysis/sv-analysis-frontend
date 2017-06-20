@@ -9,7 +9,12 @@ let nameMap = {
   'singapore': 'SIN',
   'nyc': 'NYC',
   'hk': 'HK'
-}
+};
+let featureMap = {
+  'green': 'greenery',
+  'car': 'vehicle'
+};
+
 let durationTime = 500;
 let MultiExploration = function(el, colorMap){
   this.selected = {
@@ -25,7 +30,7 @@ let MultiExploration = function(el, colorMap){
     clickNormalOpacity: 0.2,
   };
   this.el = el;
-  this.columNumber = 32;
+  this.columNumber = 18;
   this.colorMap = colorMap;
   this.width = el.clientWidth;
   this.height = 400;
@@ -92,11 +97,12 @@ MultiExploration.prototype.updateBackground = function(){
     let value = d['value'];
 
     let unitContainer = d3.select(this);
-    unitContainer.transition(t)
+    unitContainer
+      // .transition(t)
       .attr('transform', 'translate('+ left + ',' + (xIndex * unitConfig.height)+ ')');
 
     unitContainer.selectAll('.unitBackground')
-      .transition(t)
+      // .transition(t)
       .attr('width', _width).attr('height', _height)
       .attr('fill', function(){
         return xIndex % 2 != 0? '#eee': '#fff';
@@ -199,7 +205,6 @@ MultiExploration.prototype.update = function(dataList){
   this.bodyData = vectors;
   let largestValue = -1;
   let largestMax = -1
-  console.log('vectors', vectors);
   this.attrs.forEach((attr, i)=>{
     let extent = d3.extent(vectors, function(d){
       return d.data[i].value;
@@ -327,7 +332,6 @@ MultiExploration.prototype.updateRenderBody = function(){
   newUnitContainers.on('click', (d)=>{
     _this.clickOnBodyUnit(d);
   }).on('mouseover',(d)=>{
-    console.log('d', d);
     this.hoverHighlightRow(d.xIndex);
   }).on('mouseout', (d)=>{
     this.removeHoverHighlightRow(d.xIndex);
@@ -471,7 +475,8 @@ MultiExploration.prototype.updateRenderHead = function(){
       .style('font-weight', 'bold')
       .style('font-family', "'PT Sans',Tahoma")
       .text(function(d){
-        return d.value.charAt(0).toUpperCase() + d.value.slice(1);
+        let value = featureMap[d.value] == undefined? d.value: featureMap[d.value];
+        return value.charAt(0).toUpperCase() + value.slice(1);
       }).attr('y', 18).attr('x', unitConfig.left + 1)
   });
 };
