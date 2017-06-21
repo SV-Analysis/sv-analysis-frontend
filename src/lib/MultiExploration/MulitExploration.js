@@ -24,7 +24,7 @@ let MultiExploration = function(el, colorMap){
     'maxSelectd': 2,
     'extendYIndex': null
   };
-  this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
+  this.selectedColor = [{'color': '#2b8cbe', 'used': false}, {'color': '#df65b0',  'used': false}];
   this.styleConfig = {
     clickHighlightOpacity: 0.3,
     clickNormalOpacity: 0.2,
@@ -547,7 +547,7 @@ MultiExploration.prototype.renderKeyLabel = function(el, d){
   let xIndex = d['xIndex'];
   let value = d['value'];
   let label = nameMap[value] == undefined? value : nameMap[value];
-  label = label;
+  label = 'HK ' + label;
   let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft + unitConfig.signBoxWidth + 2)

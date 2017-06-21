@@ -137,17 +137,17 @@
         }
       });
 
-
-      pipeService.onAllCityStatistics((allStatistics)=>{
-        console.log('allStatistics', allStatistics);
-        allStatistics.forEach((record)=>{
-          record.id = record.city;
-          let streets = this.updateRegionOrStreet(record);
-          this.streets = streets;
-          if(this.multiExploration)
-            this.multiExploration.update(this.streets);
-        });
-      });
+//
+//      pipeService.onAllCityStatistics((allStatistics)=>{
+//        console.log('allStatistics', allStatistics);
+//        allStatistics.forEach((record)=>{
+//          record.id = record.city;
+//          let streets = this.updateRegionOrStreet(record);
+//          this.streets = streets;
+//          if(this.multiExploration)
+//            this.multiExploration.update(this.streets);
+//        });
+//      });
 
 
       let controlConf = this.controlConf

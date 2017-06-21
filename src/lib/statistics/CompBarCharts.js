@@ -48,6 +48,11 @@ CompBarChart.prototype.draw = function(dataList){
   this.numberOfScale = numberOfScale;
   // Init the data
   let attr2RatioArray = [];
+
+  // move latter
+  dataList.reverse();
+
+
   for(let i = 0, ilen = dataList.length; i <ilen; i++){
     let data = dataList[i];
     let _cityObj = {'cityId': data['cityId']};

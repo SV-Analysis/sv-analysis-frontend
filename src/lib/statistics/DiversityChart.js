@@ -79,7 +79,7 @@ DiversityChart.prototype.setConfig = function(el, features, config){
 };
 
 DiversityChart.prototype.getColor = function(id){
-  return this.colorScale != undefined? this.colorScale[id]: "blue";
+  return this.colorScale != undefined? this.colorScale[id]: "red";
 };
 
 DiversityChart.prototype.checkStatistics = function(standard){
@@ -219,8 +219,8 @@ DiversityChart.prototype.drawPoints = function(){
         let renders = d['render'];
         d.high = true;
         renders.forEach(function(e){
-          d3.select(e).attr('stroke', 'blue').attr('stroke-width', 2)
-            .attr('fill', 'blue').attr('fill-opacity', 0.5)
+          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+            .attr('fill', 'red').attr('fill-opacity', 0.5)
             .attr('r',4)
 
           e.parentNode.appendChild(e);
@@ -242,8 +242,8 @@ DiversityChart.prototype.drawPoints = function(){
         d.high = true;
         _this.highLightSet[d.record.id] = d;
         renders.forEach(function(e){
-          d3.select(e).attr('stroke', 'blue').attr('stroke-width', 2)
-            .attr('fill', 'blue').attr('fill-opacity', 0.9)
+          d3.select(e).attr('stroke', 'red').attr('stroke-width', 2)
+            .attr('fill', 'red').attr('fill-opacity', 0.9)
             .attr('r',4);
           e.parentNode.appendChild(e);
           e.parentNode.parentNode.appendChild(e.parentNode);
@@ -374,7 +374,7 @@ DiversityChart.prototype.drawHighLightPoints = function(){
 
       .attr('stroke', function(d){
         if(_this.highLightSet[d.record.id]!= undefined){
-          return 'blue'
+          return 'red'
         }else{
           return 0
         }
@@ -406,14 +406,14 @@ DiversityChart.prototype.drawHighLightPoints = function(){
       })
       .attr('fill',function(d){
         if(_this.highLightSet[d.record.id]!= undefined){
-          return 'blue'
+          return 'red'
         }else{
           return 0
         }
       })
       .attr('fill-opacity', '0.5')
       .attr('stroke', function(d){
-        return 'blue';
+        return 'red';
 
       });
 

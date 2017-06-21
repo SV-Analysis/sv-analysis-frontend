@@ -4,10 +4,10 @@
 
 import * as d3 from 'd3'
 import VerticalStackArea from '../../src/lib/VerticalStackArea'
-
+import VerticalPolyline from '../../src/lib/VerticalPolyline'
 
 let SparkPCP = function(el, attrs, data, featureColor){
-  console.log('Init ',attrs, featureColor, data);
+
   d3.select(this.$el).selectAll('g').remove();
 
   this.width = el.clientWidth;
@@ -29,6 +29,7 @@ let SparkPCP = function(el, attrs, data, featureColor){
   }
   this.margin['top'] = 10;
   this.margin['bottom'] = 10;
+  this.margin['rightLeft'] = this.margin['left'] + this.margin['middle'];
 };
 SparkPCP.prototype.initData = function(attrs){
   this.leftData = [];
@@ -51,12 +52,13 @@ SparkPCP.prototype.initData = function(attrs){
         }
         obj['attrArr'].push({
           attr: attr,
-          value: currentRatio
+          value: currentRatio,
+          raw: obj
         })
       })
     });
   });
-  console.log('left', this.leftData);
+
 };
 SparkPCP.prototype.initRender = function(){
   this.container = d3.select(this.$el).append('g').attr('class', 'container');
@@ -74,25 +76,33 @@ SparkPCP.prototype.initXScale = function(){
 
   this.middleXScale = middleXScale;
   this.middleYScale = d3.scaleLinear().domain([0, this.largestRatio]).range([this.height - this.margin.bottom, this.margin.top]);
-  this.leftXScale = function(attr){
-    return middleLeft;
+  this.leftXScale = function(attr, d){
+    return d == undefined? middleLeft: d.raw.scalePoint.x;
   };
-  this.rightXScale = function(attr){
-    return middleRight;
+  this.rightXScale = function(attr, d){
+    if(d != undefined){
+      console.log('dd', this.margin['rightLeft'],  d);
+    }
+    return d == undefined? middleRight: d.raw.scalePoint.x + this.margin['rightLeft']
+
   };
-  this.xScale = function(attr){
-    return attr == 'left' ? this.leftXScale(attr):
-      attr == 'right'? this.rightXScale(attr): this.middleXScale(attr);
+  this.xScale = function(attr, d){
+    return attr == 'left' ? this.leftXScale(attr, d):
+      attr == 'right'? this.rightXScale(attr, d): this.middleXScale(attr);
   };
-  this.leftYScale = function(value){
-    return 100;
+  this.leftYScale = function(value, d){
+    return d == undefined? 100: d.raw.scalePoint.y;
+
   };
-  this.rightYScale = function(value){
-    return 100;
+  this.rightYScale = function(value, attr, d){
+    if(d == undefined){
+      console.log('ddd', d)
+    }
+    return d == undefined? 100: d.raw.scalePoint.y;
   };
-  this.yScale = function(value, attr){
-    return attr == 'left'? this.leftYScale(value):
-      attr =='right'? this.rightYScale(value): this.middleYScale(value);
+  this.yScale = function(value, attr, d){
+    return attr == 'left'? this.leftYScale(value, d):
+      attr =='right'? this.rightYScale(value, attr, d): this.middleYScale(value);
   }
 };
 
@@ -150,12 +160,12 @@ SparkPCP.prototype.drawPCPLines = function(){
     .append('g').attr('class', 'lineContainer')
 
   let line = d3.line()
-    .x((d)=>{
-      let _x = this.xScale(d.attr)
+    .x((d, i)=>{
+      let _x = this.xScale(d.attr, d)
       return _x;
     })
     .y((d)=>{
-      let _y =  this.yScale(d.value, d.attr)
+      let _y =  this.yScale(d.value, d.attr, d)
       return _y ;
     })
     .curve(d3.curveLinear);
@@ -190,6 +200,9 @@ SparkPCP.prototype.drawPCPAreas = function(){
 
   let leftArea = new VerticalStackArea(this.leftAreaContainer.nodes()[0], leftAreaData, this.margin['left'], this.height, this.svFeatures2Color);
   let rightArea = new VerticalStackArea(this.rightAreaContainer.nodes()[0], rightAreaData, this.margin['right'], this.height, this.svFeatures2Color);
+
+  let leftPolyline = new VerticalPolyline(this.leftAreaContainer.nodes()[0], this.leftData, this.margin['left'], this.height, this.svFeatures2Color);
+  let rightPolyline = new VerticalPolyline(this.rightAreaContainer.nodes()[0], this.rightData, this.margin['right'], this.height, this.svFeatures2Color)
 
 };
 SparkPCP.prototype.createAreaData = function(imgList){
@@ -258,8 +271,8 @@ SparkPCP.prototype.init = function(){
   this.initData();
   this.initRender();
   this.drawAxis();
-  this.drawPCPLines();
   this.drawPCPAreas();
+  this.drawPCPLines();
   // this.drawPCPBars();
   // this.drawRemarkIcon();
 };
