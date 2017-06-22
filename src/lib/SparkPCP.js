@@ -80,13 +80,14 @@ SparkPCP.prototype.initXScale = function(){
     return d == undefined? middleLeft: d.raw.scalePoint.x;
   };
   this.rightXScale = function(attr, d){
-    if(d != undefined){
-      console.log('dd', this.margin['rightLeft'],  d);
-    }
+
     return d == undefined? middleRight: d.raw.scalePoint.x + this.margin['rightLeft']
 
   };
   this.xScale = function(attr, d){
+    if(attr == 'left' && d == undefined){
+      console.log('attr', d);
+    }
     return attr == 'left' ? this.leftXScale(attr, d):
       attr == 'right'? this.rightXScale(attr, d): this.middleXScale(attr);
   };
@@ -109,14 +110,14 @@ SparkPCP.prototype.initXScale = function(){
 SparkPCP.prototype.drawAxis = function(){
   let _this = this;
 
-  this.container.append('g').selectAll('circle').data(['left','right']).enter()
-    .append('circle')
-    .attr('cx', d => {
-      return this.xScale(d);
-    })
-    .attr('cy', 100)
-    .attr('r', 10)
-    .attr('fill', 'blue');
+  // this.container.append('g').selectAll('circle').data(['left','right']).enter()
+  //   .append('circle')
+  //   .attr('cx', d => {
+  //     return this.xScale(d);
+  //   })
+  //   .attr('cy', 100)
+  //   .attr('r', 10)
+  //   .attr('fill', 'blue');
 
   this.dimensionContainer = this.container.append('g').attr('class', 'dimensionContainer').selectAll('.dimension')
     .data(this.attrs)
@@ -175,7 +176,7 @@ SparkPCP.prototype.drawPCPLines = function(){
     lc.datum(aggImg['attrArr']).append('path').attr('d', line)
       .attr('fill', 'none')
       .attr('stroke', 1)
-      .attr('opacity', 1)
+      .attr('opacity', 0.3)
       .attr('stroke', d=>{
         return aggImg['attrObj']['left'] != undefined? 'red':'green'
       })

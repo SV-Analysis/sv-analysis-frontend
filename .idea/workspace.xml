@@ -8,17 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/tools/Vector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/tools/Verticalize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" afterPath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SparkPCP.js" afterPath="$PROJECT_DIR$/src/lib/SparkPCP.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/CompBarCharts.js" afterPath="$PROJECT_DIR$/src/lib/statistics/CompBarCharts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" afterPath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/VerticalPolyline.js" afterPath="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -50,21 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StreetVis.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2134">
-              <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SparkPCP.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+            <state relative-caret-position="308">
+              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding>
                 <element signature="e#71#112#0" expanded="true" />
               </folding>
@@ -72,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SparkPCP.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SparkPCP.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="98" column="27" lean-forward="true" selection-start-line="98" selection-start-column="27" selection-end-line="98" selection-end-column="27" />
+            <state relative-caret-position="356">
+              <caret line="178" column="26" lean-forward="false" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#44#68#0" expanded="true" />
@@ -85,11 +66,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/App.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="36" selection-end-column="16" />
+              <folding>
+                <element signature="e#1594#1638#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="VerticalPolyline.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="572">
+              <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#42#67#0" expanded="true" />
@@ -101,7 +94,7 @@
       <file leaf-file-name="Vector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/tools/Vector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2034">
+            <state relative-caret-position="2706">
               <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
               <folding>
                 <element signature="n#!!doc;n#Vector#0" expanded="false" />
@@ -123,8 +116,8 @@
       <file leaf-file-name="CalcOmbb.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcOmbb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="79" column="23" lean-forward="true" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+            <state relative-caret-position="1738">
+              <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -133,8 +126,8 @@
       <file leaf-file-name="Verticalize.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/tools/Verticalize.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-132">
-              <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+            <state relative-caret-position="506">
+              <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#43#109#0" expanded="true" />
@@ -165,7 +158,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>750</find>
       <find>500</find>
       <find>xIndex2Color</find>
       <find>index</find>
@@ -192,9 +184,10 @@
       <find>points</find>
       <find>console</find>
       <find>leftXScale</find>
-      <find>xScale</find>
       <find>rightXScale</find>
       <find>yScale</find>
+      <find>xScale</find>
+      <find>red</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -262,8 +255,8 @@
         <option value="$PROJECT_DIR$/src/lib/tools/ombb.js" />
         <option value="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" />
         <option value="$PROJECT_DIR$/src/lib/tools/Verticalize.js" />
-        <option value="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
         <option value="$PROJECT_DIR$/src/lib/VerticalStackArea.js" />
+        <option value="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
         <option value="$PROJECT_DIR$/src/lib/SparkPCP.js" />
       </list>
     </option>
@@ -298,8 +291,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -368,6 +359,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -641,14 +634,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
+    <frame x="-9" y="-9" width="2578" height="1408" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35562548" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19669552" sideWeight="0.496875" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -660,6 +652,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19669552" sideWeight="0.496875" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -889,18 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="146" column="0" lean-forward="true" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-          <folding>
-            <element signature="e#700#751#0" expanded="false" />
-            <element signature="e#4501#4909#0" expanded="false" />
-            <element signature="e#4951#5797#0" expanded="false" />
-            <element signature="e#5839#6649#0" expanded="false" />
-            <element signature="e#6673#7540#0" expanded="false" />
-            <element signature="e#7566#8119#0" expanded="false" />
-            <element signature="e#8160#10232#0" expanded="false" />
-            <element signature="e#10252#10522#0" expanded="false" />
-            <element signature="e#10550#10924#0" expanded="false" />
-            <element signature="e#10948#11238#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -908,23 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="121" column="38" lean-forward="true" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#1;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-slider#0;n#div#1;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-switch#0;n#div#0;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-slider#0;n#div#1;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-slider#0;n#div#2;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#3;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#3;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-slider#0;n#div#3;n#div#3;n#el-popover#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2319#2343#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,22 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3212">
           <caret line="346" column="3" lean-forward="false" selection-start-line="346" selection-start-column="3" selection-end-line="351" selection-end-column="9" />
-          <folding>
-            <element signature="n#table#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#el-pagination#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#2859#2910#0" expanded="false" />
-            <element signature="e#3773#4413#0" expanded="false" />
-            <element signature="e#4440#4514#0" expanded="false" />
-            <element signature="e#4541#4797#0" expanded="false" />
-            <element signature="e#4819#4869#0" expanded="false" />
-            <element signature="e#4898#4970#0" expanded="false" />
-            <element signature="e#5871#6931#0" expanded="false" />
-            <element signature="e#6955#7819#0" expanded="false" />
-            <element signature="e#7845#8009#0" expanded="false" />
-            <element signature="e#8038#8606#0" expanded="false" />
-            <element signature="e#8647#10761#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -955,24 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2684">
           <caret line="159" column="38" lean-forward="true" selection-start-line="159" selection-start-column="38" selection-end-line="159" selection-end-column="38" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#el-slider#0;n#div#0;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#3;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#el-pagination#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="49" column="44" lean-forward="true" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -980,9 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding>
-            <element signature="e#968#1009#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -990,7 +917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1100">
           <caret line="52" column="21" lean-forward="true" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1052,7 +978,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -1066,22 +992,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        <state relative-caret-position="308">
+          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding>
             <element signature="e#71#112#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tools.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tools.js" />
     <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -1092,7 +1011,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/tools/Vector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2034">
+        <state relative-caret-position="2706">
           <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
           <folding>
             <element signature="n#!!doc;n#Vector#0" expanded="false" />
@@ -1102,30 +1021,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcOmbb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="79" column="23" lean-forward="true" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
+        <state relative-caret-position="1738">
+          <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/tools/Verticalize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="27" column="48" lean-forward="true" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+        <state relative-caret-position="506">
+          <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#43#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#42#67#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1138,13 +1046,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#42#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="98" column="27" lean-forward="true" selection-start-line="98" selection-start-column="27" selection-end-line="98" selection-end-column="27" />
+        <state relative-caret-position="356">
+          <caret line="178" column="26" lean-forward="false" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#44#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="36" selection-end-column="16" />
+          <folding>
+            <element signature="e#1594#1638#0" expanded="true" />
           </folding>
         </state>
       </provider>

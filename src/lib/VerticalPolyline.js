@@ -11,7 +11,6 @@ let VerticalPolyline = function(el, data, width, height, colorMap){
   this.height = height == undefined? el.clientHeight: height;
   this.width = width == undefined? el.clientWidth: width;
   this.container = d3.select(el).append('g').attr('class', 'lineContainer')
-  console.log(data);
   this.processData()
 };
 
