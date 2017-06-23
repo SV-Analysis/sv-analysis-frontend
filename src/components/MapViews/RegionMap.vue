@@ -36,7 +36,7 @@
       let _this = this;
       if(this.streetData != undefined && this.adRegionData == undefined){
         this.imageList = this.streetData['image_list'];
-
+        console.log('streetxxxxxxxxxxxx', this.streetData);
         // Use an array for polyLinePoints because the streetData to consider the multipolygon case
         let points = [];
         this.streetData['node_list'].forEach(function(d){

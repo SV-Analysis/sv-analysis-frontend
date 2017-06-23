@@ -236,6 +236,7 @@
 //          record['aggregatedImages'] = agImgList;
           _this._formatAggregateedImgList(record);
         }
+        console.log('right click ', record);
         pipeService.emitUpdateSelectItems(item);
       },
       _formatAggregateedImgList(record){
@@ -264,7 +265,7 @@
           agImg['formatImgPath'] = imgLink;
           agImg['aggregateIndex'] = i;
         });
-
+        console.log('agglen ', _aggList.length)
         record['aggregatedImages'] = _aggList;
         record['nClusters'] = record['agg_obj']['n_clusters'];
         record['standard'] = record['agg_obj']['standard'];
@@ -273,7 +274,7 @@
           seg['summary_img'][0]['formatImgPath'] = _this._generateImageLink(seg['summary_img'][0]);
         });
         record['sImg_path'] = record['segments'][0]['summary_img'][0]['formatImgPath'];
-        delete record['agg_obj'];
+//        delete record['agg_obj'];
       },
       _generateImageLink(agImg){
 

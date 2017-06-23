@@ -1,21 +1,24 @@
 <template>
   <div class="street-view">
 
-    <div class="img-map-container">
+    <div class="img-map-container top_contaienr">
+      <div style="height: 100%; width: 100%">
+        <div v-for="street in streetData" class="map-container">
+          <div class="img-map-wrapper">
+            <ImgLayer class="img-svg" v-bind:street="street"></ImgLayer>
 
-      <div v-for="street in streetData" class="map-container">
-        <div class="img-map-wrapper">
-          <ImgLayer class="img-svg" v-bind:street="street"></ImgLayer>
-
-          <ImgMap
-            v-bind:picked="picked"
-            v-bind:street='street'
-            class="img-map-f">
-          </ImgMap>
+            <ImgMap
+              v-bind:picked="picked"
+              v-bind:street='street'
+              class="img-map-f">
+            </ImgMap>
+          </div>
         </div>
       </div>
     </div>
-    <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
+    <div class = 'spartpcpcontainer bottom_contaienr'>
+      <SparkPCP class="spark-pcp">spark-pcp</SparkPCP>
+    </div>
     <!--<TrendView class="trend-view">trend-view</TrendView>-->
   </div>
 </template>
@@ -82,25 +85,43 @@
 <style scoped>
   .street-view{
     position: relative;
-    margin-top: 0px;
     width: 100%;
     height: 100%;
 
   }
-  .spark-pcp{
-    height: 50%;
-    /*background-color: #5bc0de;*/
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ff899c;
+  .top_contaienr {
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px grey;
+    background: #FFF;
+    height: 99%;
   }
+  .bottom_contaienr {
+    margin-top: 10px;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px grey;
+    background: #FFF;
+
+  }
+  .spartpcpcontainer{
+    width: 100%;
+    height: 50%
+  }
+  .spark-pcp{
+    margin: 0 auto;
+    height: 100%;
+    width: 95%;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #ff899c;*/
+  }
+
 
   .img-map-container{
     position: relative;
-    height: 50%;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #9ea0ff;
+    height: 45%;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #9ea0ff;*/
   }
 
   /*.map-container{*/
@@ -109,22 +130,30 @@
   /*width: 50%*/
   /*}*/
   .map-container:nth-child(1){
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     float: left;
-    height: 100%;
-    width: 49.5%
+    height: 95%;
+    width: 47%
   }
   .map-container:nth-child(2){
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     float: right;
-    height: 100%;
+    height: 95%;
     width: 49.5%
   }
   .img-map-wrapper{
     position: relative;
     width: 100%;
     height: 100%;
+    border-radius: 3px;
     background-color: #00fd20;
   }
   .img-map-f{
+
     position: absolute;
     height: 100%;
     width: 100%;

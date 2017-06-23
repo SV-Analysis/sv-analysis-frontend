@@ -5,13 +5,17 @@ import * as d3 from "d3";
 import Vector from "../../src/lib/tools/Vector";
 import {Verticalize} from "../../src/lib/tools/Verticalize";
 
-let VerticalPolyline = function(el, data, width, height, colorMap){
+let VerticalPolyline = function(el, data, margin, strokeColor){
+
   this.el = el;
   this.data = data;
-  this.height = height == undefined? el.clientHeight: height;
-  this.width = width == undefined? el.clientWidth: width;
-  this.container = d3.select(el).append('g').attr('class', 'lineContainer')
-  this.processData()
+  this.height = margin == undefined? el.clientHeight: margin.height;
+  this.width = margin == undefined? el.clientWidth: margin.width;
+  this.top = margin == undefined? 0: margin.top;
+  this.bottom = margin == undefined? 0: margin.bottom;
+  this.container = d3.select(el).append('g').attr('class', 'lineContainer');
+  this.strokeColor = strokeColor;
+  this.processData();
 };
 
 VerticalPolyline.prototype.draw = function(){
@@ -19,7 +23,6 @@ VerticalPolyline.prototype.draw = function(){
 };
 
 VerticalPolyline.prototype.processData = function(){
-
   this.data.forEach(d=>{
     d.renderLocation = new Vector(d.location[1], d.location[0]);
   });
@@ -29,14 +32,11 @@ VerticalPolyline.prototype.processData = function(){
   });
 
   let resultPoints = verticalResult['points'];
-  let boundary = verticalResult['ombb'];
   let whRatio = verticalResult.width / verticalResult.height;
 
   let scaleWidth = this.height * whRatio;
-  let scaleHeight = this.height;
-
   let xScale = d3.scaleLinear().domain([0, verticalResult.width]).range([(this.width - scaleWidth) / 2, (this.width + scaleWidth) / 2]);
-  let yScale = d3.scaleLinear().domain([0, verticalResult.height]).range([0, scaleHeight]);
+  let yScale = d3.scaleLinear().domain([0, verticalResult.height]).range([this.top, this.height - this.bottom]);
 
   let scalePoints = [];
 
@@ -68,8 +68,9 @@ VerticalPolyline.prototype.processData = function(){
     .attr("class", "line")
     .attr("d", line)
     .attr('fill', 'none')
-    .attr('stroke', 'red')
+    .attr('stroke', this.strokeColor)
     .attr('stroke-width', 2)
-    .attr('opacity', 0.8)
+    .attr('opacity', 0.8);
+
 };
 export default VerticalPolyline

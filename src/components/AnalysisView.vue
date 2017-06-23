@@ -11,14 +11,18 @@
 
           <div class="modal-body-top">
             <div class="ui-row modal-body">
+
               <div class="col-sm-10 col-md-10 col-lg-10 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
                 ></StreetVis>
               </div>
+
+
               <div class="col-sm-2 col-md-2 col-lg-2 " >
                 <StreetList v-bind:selectItems="selectItems"></StreetList>
               </div>
+
             </div>
           </div>
           <div class="modal-footer">
@@ -119,6 +123,7 @@
     /*margin: 20px 0;*/
     height: 90%;
     /*background-color: #5bc0de;*/
+    background: rgba(211,211,211, 0.3);
   }
 
   .modal-default-button {
@@ -158,15 +163,5 @@
     height: 100%;
     /*background-color: rgba(170, 229, 231, 0.84);*/
   }
-  /*.multiselect__tag {*/
-  /*background-color: #dddaff;;*/
-  /*color: black;*/
-
-  /*}*/
-  /*.multiselect__option--highlight:after {*/
-  /*content: attr(data-select);*/
-  /*background: #aae5e7;*/
-  /*color: #fff;*/
-  /*}*/
 
 </style>

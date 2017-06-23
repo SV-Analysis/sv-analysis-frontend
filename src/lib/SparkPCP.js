@@ -6,8 +6,16 @@ import * as d3 from 'd3'
 import VerticalStackArea from '../../src/lib/VerticalStackArea'
 import VerticalPolyline from '../../src/lib/VerticalPolyline'
 
-let SparkPCP = function(el, attrs, data, featureColor){
 
+let featureMap = {
+  'green': 'greenery',
+  'car': 'vehicle'
+};
+
+
+
+let SparkPCP = function(el, attrs, data, featureColor){
+  this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
   d3.select(this.$el).selectAll('g').remove();
 
   this.width = el.clientWidth;
@@ -16,6 +24,7 @@ let SparkPCP = function(el, attrs, data, featureColor){
 
   this.attrs = attrs;
   this.data = [data[0]['record']['aggregatedImages'],data[1]['record']['aggregatedImages']]; // Image list
+  this.barNumber = 40;
   this.svFeatures2Color = featureColor;
   this.isRendered = false;
   this.isChartDisplayed = false;
@@ -27,14 +36,15 @@ let SparkPCP = function(el, attrs, data, featureColor){
   for(let attr in this.regionConfig){
     this.margin[attr] = this.regionConfig[attr] * this.width;
   }
-  this.margin['top'] = 10;
-  this.margin['bottom'] = 10;
+  this.margin['top'] = 20;
+  this.margin['bottom'] = 40;
   this.margin['rightLeft'] = this.margin['left'] + this.margin['middle'];
 };
 SparkPCP.prototype.initData = function(attrs){
   this.leftData = [];
   this.rightData = [];
   this.largestRatio = -1;
+  this.barData = [];
   this.data.forEach((data, i)=>{
     let arr = i==0? this.leftData: this.rightData;
     let label = i==0? 'left': 'right';
@@ -57,9 +67,51 @@ SparkPCP.prototype.initData = function(attrs){
         })
       })
     });
+
   });
+  this.initBarData();
 
 };
+
+SparkPCP.prototype.initBarData = function(){
+  let barNumber = this.barNumber;
+  let barR = Math.floor(100 / barNumber);
+  let features = this.svFeatures2Color['allFeatures'];
+  let dataMap = {};
+  features.forEach((attr, i)=>{
+    let arr1 = [];
+    let arr2 = [];
+    for(var j = 0; j < barNumber; j++){
+      arr1.push(0);
+      arr2.push(0);
+    }
+    dataMap[attr] = [arr1, arr2];
+  });
+  let maxIndex = 0;
+
+  this.data.forEach((dataList, i)=>{
+    dataList.forEach((d, j)=>{
+      let attrObj = d.attrObj;
+      features.forEach(attr=>{
+        let index = Math.floor(attrObj[attr] / barR);
+        maxIndex = maxIndex < index? index: maxIndex
+        dataMap[attr][i][index] += 1;
+      })
+    })
+  });
+
+  features.forEach((attr)=>{
+    let list = dataMap[attr];
+    list.forEach((group, index)=>{
+      for(var i = 0; i < group.length; i++){
+        group[i] = group[i] / this.data[index].length;
+      }
+    });
+  });
+  this.maxIndex = maxIndex;
+  this.barsData = dataMap;
+};
+
 SparkPCP.prototype.initRender = function(){
   this.container = d3.select(this.$el).append('g').attr('class', 'container');
   this.leftAreaContainer = this.container.append('g');
@@ -85,9 +137,6 @@ SparkPCP.prototype.initXScale = function(){
 
   };
   this.xScale = function(attr, d){
-    if(attr == 'left' && d == undefined){
-      console.log('attr', d);
-    }
     return attr == 'left' ? this.leftXScale(attr, d):
       attr == 'right'? this.rightXScale(attr, d): this.middleXScale(attr);
   };
@@ -97,7 +146,7 @@ SparkPCP.prototype.initXScale = function(){
   };
   this.rightYScale = function(value, attr, d){
     if(d == undefined){
-      console.log('ddd', d)
+
     }
     return d == undefined? 100: d.raw.scalePoint.y;
   };
@@ -110,15 +159,6 @@ SparkPCP.prototype.initXScale = function(){
 SparkPCP.prototype.drawAxis = function(){
   let _this = this;
 
-  // this.container.append('g').selectAll('circle').data(['left','right']).enter()
-  //   .append('circle')
-  //   .attr('cx', d => {
-  //     return this.xScale(d);
-  //   })
-  //   .attr('cy', 100)
-  //   .attr('r', 10)
-  //   .attr('fill', 'blue');
-
   this.dimensionContainer = this.container.append('g').attr('class', 'dimensionContainer').selectAll('.dimension')
     .data(this.attrs)
     .enter().append('g').attr('class', 'dimension')
@@ -126,26 +166,40 @@ SparkPCP.prototype.drawAxis = function(){
       return 'translate('+this.xScale(d) + ',0)';
     });
 
-  this.dimensionContainer.append('circle')
-    .attr('r', 10)
-    .attr('stroke', 'red')
-    .attr('stroke-width', 2)
-    .attr('fill', 'none');
-
   let axis = d3.axisLeft();
   axis.ticks(6);
 
   let axisContainer = this.dimensionContainer.append("g")
     .attr("class", "axis");
-
   axisContainer.each(function(d){
     let _container = d3.select(this);
-    _container.call(axis.scale(_this.middleYScale));
-    _container.append("text")
+    let t = _container.call(axis.scale(_this.middleYScale));
+    let textContainer = _container.append('g').attr('transform', 'translate(0,'+ (_this.height - _this.margin.top) + ')')
+    let rectWidth = 50;
+    let rectHeight = 20;
+
+    let _rect = textContainer.append('rect')
+      .attr('width', rectWidth).attr('height', rectHeight)
+      .attr('fill', function(d){
+        return _this.svFeatures2Color[d];
+      })
+      .attr('opacity', 0.5);
+
+    let text = textContainer.append("text")
       .style("text-anchor", "middle")
-      .attr("y",20)
-      .text(function(d){return d})
+      .text(function(d){
+        let title = featureMap[d] == undefined? d: featureMap[d];
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+        return title;
+      })
       .style('fill', 'black');
+
+    let _box = text.node().getBBox();
+    _rect
+      .attr('x', _box.x - (rectWidth - _box.width) / 2)
+      .attr('y', _box.y - (rectHeight - _box.height) / 2);
+
+    t.selectAll('path').attr('stroke', '#777').attr('stroke-width', '1.3').attr('opacity', 0.8)
   });
 
 };
@@ -153,7 +207,6 @@ SparkPCP.prototype.drawAxis = function(){
 SparkPCP.prototype.drawPCPLines = function(){
   let _this = this;
 
-  this.leftData;
   this.lineContainers = this.container.append('g').attr('class', 'background')
     .selectAll('.lineContainer')
     .data(this.leftData.concat(this.rightData))
@@ -162,11 +215,11 @@ SparkPCP.prototype.drawPCPLines = function(){
 
   let line = d3.line()
     .x((d, i)=>{
-      let _x = this.xScale(d.attr, d)
+      let _x = this.xScale(d.attr, d);
       return _x;
     })
     .y((d)=>{
-      let _y =  this.yScale(d.value, d.attr, d)
+      let _y =  this.yScale(d.value, d.attr, d);
       return _y ;
     })
     .curve(d3.curveLinear);
@@ -176,96 +229,115 @@ SparkPCP.prototype.drawPCPLines = function(){
     lc.datum(aggImg['attrArr']).append('path').attr('d', line)
       .attr('fill', 'none')
       .attr('stroke', 1)
-      .attr('opacity', 0.3)
+      .attr('opacity', 0.1)
       .attr('stroke', d=>{
-        return aggImg['attrObj']['left'] != undefined? 'red':'green'
+        return aggImg['attrObj']['left'] != undefined? _this.selectedColor[0].color: _this.selectedColor[1].color;
       })
   });
 };
 SparkPCP.prototype.drawPCPBars = function(data, container){
+  let barsData = this.barsData;
+  let height = this.height - this.margin.bottom - this.margin.top;
+  let barHeight = height / (this.maxIndex + 1);
+  let features = this.svFeatures2Color['allFeatures'];
+  let maxValue = d3.max(features, function(attr){
+    return d3.max(barsData[attr], function(group){
+      return d3.max(group);
+    });
+  });
+  let _this = this;
+
+  let barYScale = d3.scaleLinear().domain([0, this.maxIndex]).range([this.height - this.margin.bottom - barHeight, this.margin.top]);
+  let barWidthScale = d3.scaleLinear().domain([0, maxValue]).range([0, 50]);
+
+  let barsContainers = this.dimensionContainer.append('g').attr('class', 'barsContainer');
+  barsContainers.each(function(attr){
+    let barContainer = d3.select(this).append('g').attr('class', 'barsContainer');
+    barContainer.append('g').attr('class', 'left').selectAll('class', 'attrbar')
+      .data(_this.barsData[attr][0])
+      .enter()
+      .append('rect').attr('class', 'attrbar')
+      .attr('width', (d)=>{
+        return barWidthScale(d);
+      })
+      .attr('height', barHeight)
+      .attr('x', (d)=>{
+        return -1 * barWidthScale(d);
+      })
+      .attr('y', (d, i)=>{
+        return barYScale(i);
+      })
+      .attr('fill', _this.selectedColor[0]['color'])
+      .attr('opacity', 0.9)
+
+    barContainer.append('g').attr('class', 'left').selectAll('class', 'attrbar')
+      .data(_this.barsData[attr][1])
+      .enter()
+      .append('rect').attr('class', 'attrbar')
+      .attr('width', (d)=>{
+        return barWidthScale(d);
+      })
+      .attr('height', barHeight)
+      .attr('x', (d)=>{
+        return 0;
+      })
+      .attr('y', (d, i)=>{
+        return barYScale(i);
+      })
+      .attr('fill', _this.selectedColor[1]['color'])
+      .attr('opacity', 0.7)
+
+  });
 
 };
 
 SparkPCP.prototype.drawPCPAreas = function(){
-  this.leftAreaContainer.append('rect').attr('x', 0).attr('y', 0).attr('width', this.margin['left']).attr('height',this.height)
-    .attr('stroke', 'red')
-    .attr('stroke-width', 2)
-    .attr('fill', 'none');
+  // this.leftAreaContainer.append('rect').attr('x', 0).attr('y', 0).attr('width', this.margin['left']).attr('height',this.height)
+  //   .attr('stroke', '#777')
+  //   .attr('stroke-width', 1)
+  //   .attr('fill', 'none');
+  //
+  // this.rightAreaContainer.append('rect').attr('x', 0).attr('y', 0).attr('height', this.height).attr('width', this.margin['right'])
+  //   .attr('stroke', '#777')
+  //   .attr('stroke-width', 1)
+  //   .attr('fill', 'none');
 
-  this.rightAreaContainer.append('rect').attr('x', 0).attr('y', 0).attr('height', this.height).attr('width', this.margin['right'])
-    .attr('stroke', 'red')
-    .attr('stroke-width', 2)
-    .attr('fill', 'none');
-  let leftAreaData = this.createAreaData(this.leftData);
-  let rightAreaData = this.createAreaData(this.rightData);
+  // let leftAreaData = this.createAreaData(this.leftData);
+  // let rightAreaData = this.createAreaData(this.rightData);
 
-  let leftArea = new VerticalStackArea(this.leftAreaContainer.nodes()[0], leftAreaData, this.margin['left'], this.height, this.svFeatures2Color);
-  let rightArea = new VerticalStackArea(this.rightAreaContainer.nodes()[0], rightAreaData, this.margin['right'], this.height, this.svFeatures2Color);
+  let generalMargin = {'left': 0, 'right': 0, 'top': this.margin.top, 'bottom': this.margin.bottom, 'height': this.height};
+  let leftAreaMargin = Object.assign({}, generalMargin, {'width': this.margin.left});
+  let rightAreaMargin = Object.assign({}, generalMargin, {'width': this.margin.right});
 
-  let leftPolyline = new VerticalPolyline(this.leftAreaContainer.nodes()[0], this.leftData, this.margin['left'], this.height, this.svFeatures2Color);
-  let rightPolyline = new VerticalPolyline(this.rightAreaContainer.nodes()[0], this.rightData, this.margin['right'], this.height, this.svFeatures2Color)
+  let leftArea = new VerticalStackArea(this.leftAreaContainer.nodes()[0], this.leftData, leftAreaMargin, this.svFeatures2Color);
+  let rightArea = new VerticalStackArea(this.rightAreaContainer.nodes()[0], this.rightData, rightAreaMargin, this.svFeatures2Color);
 
-};
-SparkPCP.prototype.createAreaData = function(imgList){
-
-  let featureArrays = [];
-  let attrs = this.attrs;
-  imgList.forEach(function(imgObj, index){
-    let leftSum = 0;
-    for(var i = 0, ilen = attrs.length;i < ilen; i++){
-      if(featureArrays[i] == undefined){
-        featureArrays[i] = [];
-      }
-      let attr = attrs[i];
-      let value = imgObj['attrObj'][attr];
-      featureArrays[i].push({
-        range: [leftSum, leftSum + value],
-        attr: attr,
-        index: index
-      });
-      leftSum += value;
-    }
-  });
-  return featureArrays;
-};
-SparkPCP.prototype.drawLineArea = function(){
+  let leftPolyline = new VerticalPolyline(this.leftAreaContainer.nodes()[0], this.leftData, leftAreaMargin, this.selectedColor[0].color);
+  let rightPolyline = new VerticalPolyline(this.rightAreaContainer.nodes()[0], this.rightData, rightAreaMargin, this.selectedColor[1].color);
 
 };
-SparkPCP.prototype.generateOverallXScaleRegionLeft = function(range, domain, specialXScale){
-
-};
-
-SparkPCP.prototype.generateOverallXScaleRegionRight = function(range, domain, specialXScale){
-
-};
-
-SparkPCP.prototype.drawImagePoints = function(container, width, height, streetData){
-
-
-};
-
-
-SparkPCP.prototype.drawPCPLinesRight = function(imgList){
-
-};
-
-
-SparkPCP.prototype.drawPCPLinesLeft = function(imgList){
-
-
-};
-
-SparkPCP.prototype.onSelectedImages = function(selectedImages){
-
-};
-
-SparkPCP.prototype.highlightSelected = function(selectedImages){
-
-};
-SparkPCP.prototype.removeHighlightSelected = function(selectedImages){
-
-};
-
+// SparkPCP.prototype.createAreaData = function(imgList){
+//
+//   let featureArrays = [];
+//   let attrs = this.attrs;
+//   imgList.forEach(function(imgObj, index){
+//     let leftSum = 0;
+//     for(var i = 0, ilen = attrs.length;i < ilen; i++){
+//       if(featureArrays[i] == undefined){
+//         featureArrays[i] = [];
+//       }
+//       let attr = attrs[i];
+//       let value = imgObj['attrObj'][attr];
+//       featureArrays[i].push({
+//         range: [leftSum, leftSum + value],
+//         attr: attr,
+//         index: index
+//       });
+//       leftSum += value;
+//     }
+//   });
+//   return featureArrays;
+// };
 
 SparkPCP.prototype.init = function(){
 
@@ -274,17 +346,9 @@ SparkPCP.prototype.init = function(){
   this.drawAxis();
   this.drawPCPAreas();
   this.drawPCPLines();
-  // this.drawPCPBars();
+  this.drawPCPBars();
   // this.drawRemarkIcon();
 };
 
-SparkPCP.prototype.updateDisplay = function(sign){
-
-};
-
-SparkPCP.prototype.drawRemarkIcon = function(){
-
-
-};
 
 export default SparkPCP

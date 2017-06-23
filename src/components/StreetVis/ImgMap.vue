@@ -24,6 +24,7 @@
       }
     },
     mounted(){
+
       this.createMap(this.street['cityObj'], this.street['record']['aggregatedImages']);
       this.id = this.street['id'];
     },
@@ -73,8 +74,8 @@
         if(!this.mapObj) return;
         let images = this.mapObj.sampleImagesInTheBound();
         pipeService.emitUpdateImagesFromImgMap2ImgLayer({
-            images: images,
-            id: _this.id
+          images: images,
+          id: _this.id
         });
       }
     }

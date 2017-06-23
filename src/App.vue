@@ -6,34 +6,15 @@
         <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
       </el-col>
       <el-col :span="16" class="root-container">
-        <!--<Navigation class="y-style-top"></Navigation>-->
         <CompContainer  class="y-style-middle"></CompContainer>
         <ScatterBarChart v-bind:selectItems="selectItems" class="y-style-bottom"></ScatterBarChart>
-
-        <!--<Analysis class="y-style-bottom"></Analysis>-->
-        <!--<ImproveLineChart class="y-style-bottom"> </ImproveLineChart>-->
       </el-col>
-
     </el-row>
-
-    <!--<div class="ui-row">-->
-    <!--&lt;!&ndash;<div class="col-sm-3 col-md-3 col-lg-3 root-container" ><ControlPanel class="bstyle"></ControlPanel></div>&ndash;&gt;-->
-    <!--<div class="col-sm-3 col-md-3 col-lg-3 root-container bstyle" >-->
-    <!--<RegionList v-bind:selectIdMap="selectIdMap"></RegionList>-->
-    <!--</div>-->
-    <!--<div class="col-sm-9 col-md-9 col-lg-9 root-container " >-->
-    <!--<Navigation class="y-style-top"></Navigation>-->
-    <!--<CompContainer  class="y-style-middle"></CompContainer>-->
-    <!--<Analysis class="y-style-botton"></Analysis>-->
-    <!--</div>-->
-
-    <!--</div>-->
     <ModalView
       v-if="showModal"
       @close="showModal = false"
       v-bind:selectItems="selectItems"
-      v-bind:cityOptions="cityOptions"
-    >
+      v-bind:cityOptions="cityOptions" >
     </ModalView>
 
   </div>

@@ -35,6 +35,7 @@
     computed:{},
     methods:{
       drawSparkPCP(items){
+
         let images = items[0]['record']['image_list'];
         this.imageList = images;
         if(this.$el.clientWidth < 10) return;
@@ -48,8 +49,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .spark-pcp{
-    margin-top: 0px;
-    width: 100%;
-  }
+
 </style>

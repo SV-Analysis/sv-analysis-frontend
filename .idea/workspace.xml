@@ -3,13 +3,25 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/lib/DetailMap.js" />
     <bookmark url="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" line="113" mnemonic="8" />
-    <bookmark url="file://$PROJECT_DIR$/src/App.vue" line="175" />
+    <bookmark url="file://$PROJECT_DIR$/src/App.vue" line="156" />
     <bookmark url="file://$PROJECT_DIR$/src/service/pipeService.js" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SparkPCP.js" afterPath="$PROJECT_DIR$/src/lib/SparkPCP.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" afterPath="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/VerticalPolyline.js" afterPath="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/VerticalStackArea.js" afterPath="$PROJECT_DIR$/src/lib/VerticalStackArea.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" afterPath="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/StreetVis/ImgPair.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/ImgPair_cp.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,33 +33,95 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="2">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+            <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="708">
+                    <caret line="100" column="23" lean-forward="true" selection-start-line="88" selection-start-column="28" selection-end-line="100" selection-end-column="23" />
+                    <folding>
+                      <element signature="e#42#114#0" expanded="true" />
+                      <element signature="e#4838#5515#0" expanded="false" />
+                      <element signature="e#5572#6265#0" expanded="false" />
+                      <element signature="e#10540#10609#0" expanded="false" />
+                      <element signature="e#10675#10926#0" expanded="false" />
+                      <element signature="e#10998#11312#0" expanded="false" />
+                      <element signature="e#12094#12579#0" expanded="false" />
+                      <element signature="e#12637#12862#0" expanded="false" />
+                      <element signature="e#12922#13021#0" expanded="false" />
+                      <element signature="e#14759#14814#0" expanded="false" />
+                      <element signature="e#15174#15301#0" expanded="false" />
+                      <element signature="e#19146#20980#0" expanded="false" />
+                      <element signature="e#21039#21776#0" expanded="false" />
+                      <element signature="e#21837#22944#0" expanded="false" />
+                      <element signature="e#22998#23343#0" expanded="false" />
+                      <element signature="n#!!block;n#processStreets#0" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+            <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/App.vue">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="2772">
+                    <caret line="136" column="4" lean-forward="false" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="39" />
+                    <folding>
+                      <element signature="e#767#811#0" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="AnalysisView.vue" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="354">
+                    <caret line="138" column="48" lean-forward="true" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ExploreSelection.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+      <file leaf-file-name="SparkPCP.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+            <state relative-caret-position="770">
+              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#el-slider#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#831#882#0" expanded="true" />
+                <element signature="e#71#112#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SparkPCP.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
+      <file leaf-file-name="StreetVis.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
-              <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+              <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
               <folding>
-                <element signature="e#71#112#0" expanded="true" />
+                <element signature="e#738#762#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,8 +130,8 @@
       <file leaf-file-name="SparkPCP.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="178" column="26" lean-forward="false" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
+            <state relative-caret-position="264">
+              <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#44#68#0" expanded="true" />
@@ -66,81 +140,84 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <file leaf-file-name="ImgLayer.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="36" selection-end-column="16" />
+            <state relative-caret-position="902">
+              <caret line="44" column="66" lean-forward="false" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="66" />
               <folding>
-                <element signature="e#1594#1638#0" expanded="true" />
+                <element signature="e#71#122#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VerticalPolyline.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
+      <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#42#67#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Vector.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/tools/Vector.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2706">
-              <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
-              <folding>
-                <element signature="n#!!doc;n#Vector#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CalcConvexHull.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="4004">
+              <caret line="184" column="4" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="184" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalcOmbb.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcOmbb.js">
+      <file leaf-file-name="ImgMap.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1738">
-              <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Verticalize.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/tools/Verticalize.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
+            <state relative-caret-position="946">
+              <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="32" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#43#109#0" expanded="true" />
+                <element signature="e#167#210#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VerticalStackArea.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/VerticalStackArea.js">
+      <file leaf-file-name="SvgImgLayer.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lib/SvgImgLayer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+            <state relative-caret-position="272">
+              <caret line="149" column="34" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
+              <folding>
+                <element signature="e#2235#3040#0" expanded="false" />
+                <element signature="e#3104#4179#0" expanded="false" />
+                <element signature="e#12155#13904#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StreetSelection.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5214">
+              <caret line="247" column="31" lean-forward="false" selection-start-line="247" selection-start-column="31" selection-end-line="247" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#el-select#0;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#el-pagination#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegionMap.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="37" column="55" lean-forward="false" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SparkPCP_save.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP_save.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="814">
+              <caret line="39" column="32" lean-forward="false" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -158,36 +235,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>500</find>
-      <find>xIndex2Color</find>
-      <find>index</find>
-      <find>head</find>
-      <find>activeNames</find>
-      <find>listNumber</find>
-      <find>dataService</find>
-      <find>_queryStreet</find>
-      <find>control</find>
-      <find>mounted</find>
-      <find>PIPEsERVICE</find>
-      <find>street</find>
-      <find>HK</find>
-      <find>Title</find>
-      <find>bodyUnit</find>
-      <find>areaContainer</find>
-      <find>VerticalAreaChart</find>
-      <find>leftAreaContainer</find>
-      <find>point</find>
-      <find>points[</find>
-      <find>UpdateOmbb</find>
-      <find>CalcOmbb</find>
-      <find>topIdx</find>
-      <find>points</find>
-      <find>console</find>
-      <find>leftXScale</find>
-      <find>rightXScale</find>
-      <find>yScale</find>
-      <find>xScale</find>
+      <find>img-map</find>
+      <find>spartpcpcontainer</find>
+      <find>sparkpcpcontainer</find>
+      <find>tic</find>
+      <find>axisContainer</find>
+      <find>d3</find>
+      <find>20</find>
+      <find>pcpline</find>
+      <find>bottom</find>
+      <find>this.data</find>
+      <find>createAreaData</find>
+      <find>initScale</find>
+      <find>drawPCP</find>
+      <find>ImgPair</find>
+      <find>new_images</find>
+      <find>generateAssistanceGraphics</find>
       <find>red</find>
+      <find>spark-pcp</find>
+      <find>SparkPCP</find>
+      <find>rightClick</find>
+      <find>bottom_contaienr</find>
+      <find>initData</find>
+      <find>_createAggregatedImglist</find>
+      <find>getImgPerDis</find>
+      <find>console</find>
+      <find>this.imgList</find>
+      <find>emitUpdateImagesFromImgMap2ImgLayer</find>
+      <find>sort</find>
+      <find>_formatAggregateedImgList</find>
+      <find>setImgList</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -207,7 +284,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/lib/matrixBars.js" />
         <option value="$PROJECT_DIR$/src/components/visView/StreetList.vue" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/components/Navbar.vue" />
@@ -221,17 +297,10 @@
         <option value="$PROJECT_DIR$/src/lib/ScatterplotMatrix.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/diversityChart.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue" />
-        <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
         <option value="$PROJECT_DIR$/src/lib/MatrixBarV2.js" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
-        <option value="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
-        <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
         <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/Analysis/Analysis.vue" />
-        <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/lib/MultiExploration/BasicElements.js" />
         <option value="$PROJECT_DIR$/src/service/dataService.js" />
         <option value="$PROJECT_DIR$/src/service/pipeService.js" />
@@ -244,7 +313,6 @@
         <option value="$PROJECT_DIR$/src/lib/MatrixBarV3.js" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
         <option value="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
-        <option value="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
         <option value="$PROJECT_DIR$/src/lib/statistics/CompBarCharts.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
         <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
@@ -253,11 +321,20 @@
         <option value="$PROJECT_DIR$/src/lib/tools.js" />
         <option value="$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js" />
         <option value="$PROJECT_DIR$/src/lib/tools/ombb.js" />
-        <option value="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" />
         <option value="$PROJECT_DIR$/src/lib/tools/Verticalize.js" />
+        <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
+        <option value="$PROJECT_DIR$/src/lib/tools/CalcOmbb.js" />
         <option value="$PROJECT_DIR$/src/lib/VerticalStackArea.js" />
         <option value="$PROJECT_DIR$/src/lib/VerticalPolyline.js" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/ImgPair.vue" />
         <option value="$PROJECT_DIR$/src/lib/SparkPCP.js" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
+        <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
+        <option value="$PROJECT_DIR$/src/components/Selections/StreetSelection.vue" />
+        <option value="$PROJECT_DIR$/src/lib/SvgImgLayer.js" />
+        <option value="$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue" />
       </list>
     </option>
   </component>
@@ -291,6 +368,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -314,6 +392,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -357,16 +453,121 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MultiExploration" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StreetVis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Selections" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sv-analysis-frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MapViews" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="G:/workspace/ombb-rotating-calipers" />
+    <property name="last_opened_file_path" value="E:/workspace/venv3/Scripts/python.exe" />
     <property name="editor.config.accepted" value="true" />
     <property name="nodejs_interpreter_path" value="E:/Development/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
@@ -637,24 +838,24 @@
     <frame x="-9" y="-9" width="2578" height="1408" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35562548" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19669552" sideWeight="0.496875" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,18 +866,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -740,34 +934,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/SvgImgLayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="455" column="2" lean-forward="true" selection-start-line="455" selection-start-column="2" selection-end-line="455" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="34" column="9" lean-forward="false" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP_save.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP_save.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="774">
@@ -779,16 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="14" column="2" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="14" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="879">
-          <caret line="60" column="35" lean-forward="false" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
-          <folding>
-            <element signature="e#449#500#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -833,20 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" column="8" lean-forward="true" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="278" column="25" lean-forward="false" selection-start-line="278" selection-start-column="4" selection-end-line="278" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -899,20 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2684">
-          <caret line="159" column="38" lean-forward="true" selection-start-line="159" selection-start-column="38" selection-end-line="159" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/statistics/CompBarCharts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1100">
@@ -924,18 +1052,184 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tools.js" />
+    <entry file="file://$PROJECT_DIR$/src/lib/tools/Vector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2706">
+          <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/dataService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1738">
+          <caret line="83" column="4" lean-forward="false" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcOmbb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="69" column="13" lean-forward="false" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/tools/Verticalize.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="29" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/VerticalStackArea.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="79" column="7" lean-forward="false" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgPair_cp.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-132">
+          <caret line="15" column="41" lean-forward="false" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
-            <element signature="e#42#66#0" expanded="false" />
+            <element signature="e#71#112#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP_save.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="39" column="32" lean-forward="false" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="16" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="e#738#762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#44#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/StreetSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5214">
+          <caret line="247" column="31" lean-forward="false" selection-start-line="247" selection-start-column="31" selection-end-line="247" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#el-select#0;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-select#1;n#el-collapse-item#0;n#el-collapse#0;n#div#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#el-pagination#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgLayer.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="44" column="66" lean-forward="false" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="66" />
+          <folding>
+            <element signature="e#71#122#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MapViews/RegionMap.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="37" column="55" lean-forward="false" selection-start-line="37" selection-start-column="55" selection-end-line="37" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/ImgMap.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="946">
+          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="32" />
+          <folding>
+            <element signature="e#167#210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4004">
+          <caret line="184" column="4" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="184" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2772">
+          <caret line="136" column="4" lean-forward="false" selection-start-line="136" selection-start-column="4" selection-end-line="136" selection-end-column="39" />
+          <folding>
+            <element signature="e#767#811#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="9" column="15" lean-forward="true" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        <state relative-caret-position="708">
+          <caret line="100" column="23" lean-forward="true" selection-start-line="88" selection-start-column="28" selection-end-line="100" selection-end-column="23" />
           <folding>
-            <element signature="e#42#114#0" expanded="false" />
+            <element signature="e#42#114#0" expanded="true" />
             <element signature="e#4838#5515#0" expanded="false" />
             <element signature="e#5572#6265#0" expanded="false" />
             <element signature="e#10540#10609#0" expanded="false" />
@@ -946,7 +1240,6 @@
             <element signature="e#12922#13021#0" expanded="false" />
             <element signature="e#14759#14814#0" expanded="false" />
             <element signature="e#15174#15301#0" expanded="false" />
-            <element signature="e#18690#19085#0" expanded="false" />
             <element signature="e#19146#20980#0" expanded="false" />
             <element signature="e#21039#21776#0" expanded="false" />
             <element signature="e#21837#22944#0" expanded="false" />
@@ -956,125 +1249,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/MatrixBarV3.js">
+    <entry file="file://$PROJECT_DIR$/src/lib/SvgImgLayer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+        <state relative-caret-position="272">
+          <caret line="149" column="34" lean-forward="false" selection-start-line="149" selection-start-column="34" selection-end-line="149" selection-end-column="34" />
           <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#110#184#0" expanded="false" />
+            <element signature="e#2235#3040#0" expanded="false" />
+            <element signature="e#3104#4179#0" expanded="false" />
+            <element signature="e#12155#13904#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/AnalysisView.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+        <state relative-caret-position="354">
+          <caret line="138" column="48" lean-forward="true" selection-start-line="138" selection-start-column="48" selection-end-line="138" selection-end-column="48" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="20" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-slider#0;n#div#1;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#el-collapse-item#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#831#882#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/SparkPCP.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="16" column="26" lean-forward="false" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-          <folding>
-            <element signature="e#71#112#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tools.js" />
-    <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcConvexHull.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tools/Vector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2706">
-          <caret line="125" column="22" lean-forward="false" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc;n#Vector#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tools/CalcOmbb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1738">
-          <caret line="79" column="23" lean-forward="false" selection-start-line="79" selection-start-column="23" selection-end-line="79" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/tools/Verticalize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="27" column="48" lean-forward="false" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#43#109#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/VerticalStackArea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/VerticalPolyline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#42#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/SparkPCP.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="178" column="26" lean-forward="false" selection-start-line="178" selection-start-column="26" selection-end-line="178" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#44#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="30" column="4" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="36" selection-end-column="16" />
-          <folding>
-            <element signature="e#1594#1638#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
