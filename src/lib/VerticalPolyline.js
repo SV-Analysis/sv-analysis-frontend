@@ -26,11 +26,11 @@ VerticalPolyline.prototype.processData = function(){
   this.data.forEach(d=>{
     d.renderLocation = new Vector(d.location[1], d.location[0]);
   });
-
+  // console.log('here1', this.data)
   let verticalResult = Verticalize(this.data, function(d){
     return d.renderLocation;
   });
-
+  // console.log('here2', this.data)
   let resultPoints = verticalResult['points'];
   let whRatio = verticalResult.width / verticalResult.height;
 

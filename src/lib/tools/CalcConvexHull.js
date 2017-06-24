@@ -2,10 +2,13 @@
  * Created by qshen on 21/6/2017.
  */
 //Need vector
+import * as d3 from "d3";
+import Vector from "../../../src/lib/tools/Vector";
+
 var ON = 0;
 var LEFT = 1;
 var RIGHT = 2;
-var ALMOST_ZERO = 0.00000001;
+var ALMOST_ZERO = 0;
 
 function GetSideOfLine(lineStart, lineEnd, point)
 {
@@ -59,5 +62,6 @@ function CalcConvexHull(points, func)
 
   return convexHull;
 }
+
 
 export default CalcConvexHull

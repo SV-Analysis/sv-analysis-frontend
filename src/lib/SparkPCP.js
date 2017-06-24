@@ -237,6 +237,8 @@ SparkPCP.prototype.drawPCPLines = function(){
 
 SparkPCP.prototype.rmHighlight = function(selectId){
   this.lineContainers.each(function(aggImgArr, i){
+
+    // Hack
     let _data = aggImgArr[0].raw;
     if(_data.id == selectId){
       d3.select(this).selectAll('.multiLines')
