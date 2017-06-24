@@ -29,7 +29,8 @@ var pipeService = new Vue({
     SELECTREGIONBYCLICK:'select_region_by_left_click',
     TABCLICKED: 'tab_clicked',
     MULTIEXPLORATIONSELECTED:'multi_exploration_selected',
-    ALLSTASTICS:'all_statistics'
+    ALLSTASTICS:'all_statistics',
+    STREETVISHOVER: 'streetvis_hover'
   },
 
   methods:{
@@ -285,6 +286,15 @@ var pipeService = new Vue({
       })
     },
 
+    //  Emit hover on images --------------------------------------------
+    emitStreetVisHoverHighlight: function(msg){
+      this.$emit(this.STREETVISHOVER, msg);
+    },
+    onStreetVisHoverHighlight: function(callback){
+      this.$on(this.STREETVISHOVER,function(msg){
+        callback(msg);
+      })
+    }
   }
 })
 

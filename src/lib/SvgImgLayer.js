@@ -12,6 +12,8 @@ let SvgImgLayer = function(el, svFeatures2Color){
   this.container = d3.select(this.$el).append('g').attr('class', 'imagecontainer');
   this.id2Data = {};
   this.features = svFeatures2Color['allFeatures'];
+  this.imgWidth = 84;
+  this.imgHeight = 64;
 };
 
 SvgImgLayer.prototype.setColorStyle = function(colorStyle){
@@ -56,7 +58,7 @@ SvgImgLayer.prototype.getImgPerDis = function(imgList){
   return {
     avg: imgAvgDis,
     dis: allDis,
-    bestNumber: allDis / 80
+    bestNumber: allDis / 60
   };
 };
 
@@ -80,7 +82,7 @@ SvgImgLayer.prototype.sampleImage = function(imgList, func){
 SvgImgLayer.prototype.reInit = function(){
   this.generateColorStyles();
   this.generateOffset();
-  this.generateAssistanceGraphics();
+  // this.generateAssistanceGraphics();
 };
 
 SvgImgLayer.prototype.getImgList = function(){
@@ -140,269 +142,175 @@ SvgImgLayer.prototype.generateAssistanceGraphics = function(){
 
 };
 
-SvgImgLayer.prototype.updateImages = function(){
+SvgImgLayer.prototype.updateImages = function(allNumber){
   let _this = this;
   let features = this.features;
   this.reInit();
-  let colorScales = this.colorScales;
+  let feature2Color = this.svFeatures2Color;
   let disObj = this.getImgPerDis();
-  let disPerImg = disObj.avg;
-  let bestNumber = disObj.bestNumber;
-  let _gap = Math.floor(this.imgList.length / bestNumber);
+  let displayNumber = disObj.bestNumber / this.imgList.length * allNumber;
+  let maxScale = Math.floor(Math.log2(displayNumber * 2) - 1) ;
+  //Init scales
+  let t = d3.transition(500)
+  let imgList = [];
+  this.imgList.forEach(d=>{
+    if(d.scaleLevel <= maxScale){
+      imgList.push(d);
+    }
+  });
+
+  let line = d3.line().x(function(d){return d.x;}).y(function(d){return d.y;}).curve(d3.curveLinear);
 
   let images = this.container.selectAll('.imageRect')
-    .data(this.imgList, function(d){
-      return d['id'];
-    });
+    .data(imgList, function(d){return d['id'];});
 
   //Not exited in the new data
 
-  let ids = [];
-  this.imgList.forEach(function(img){
-    ids.push(img.id);
-  });
-  console.log('list', ids);
-  images.exit()
-    .transition(1000)
-    .attr('opacity', 0)
-    .remove();
+  let deletedImages = images.exit().remove();
 
-  _gap = _gap / 5;
-  console.log('gap', _gap)
   // Old data
-  images.transition().attr('transform', function(d, i){
+  images.transition(t).attr('transform', function(d, i){
     let loc = d['screenLocation'];
     return 'translate(' + loc['x'] + ','+ loc['y'] + ')';
   })
-    .duration(500);
 
-  images.each(function(d, i){
-    //
-    // if(i % _gap != 0){
-    //   return
-    // }
-    let imgContainer = d3.select(this);
+    .each(function(d, i){
+      let imgContainer = d3.select(this);
+      let index = d.aggregateIndex;
+      let _dx = index % 2 == 0?_this.dx:  -1 * _this.dx;
+      let _dy = index % 2 == 0?_this.dy:  -1 * _this.dy;
 
-    imgContainer.selectAll('line')
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", (d)=>{
-        return i % 2 == 0?_this.dx:  -1 * _this.dx;
-      } )
-      .attr("y2",(d)=>{
-        return i % 2 == 0?_this.dy:  -1 * _this.dy;
-      } )
-      .attr('stroke', 'green')
-      .attr('stroke-width', 1);
-  });
+      imgContainer.selectAll('.image_pointer_link')
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", _dx)
+        .attr("y2", _dy)
+        .attr('stroke-width', 2);
+    });
 
+
+  // Hack
+  let strokeColor = '#aaa';
   let new_images = images.enter()
     .append('g')
-    .attr('class', 'imageRect');
+    .attr('class', 'imageRect')
+    .attr('transform', function(d, i){
+      let loc = d['screenLocation'];
+      return 'translate(' + loc['x'] + ','+ loc['y'] + ')';
+    });
 
-  new_images.attr('transform', function(d, i){
-    let loc = d['screenLocation'];
-    return 'translate(' + loc['x'] + ','+ loc['y'] + ')';
-  });
 
-  new_images.append('circle')
-    .attr('r', 0)
-    .attr('stroke', 'red')
-    .attr('fill', 'red')
-    .attr('opacity', 1)
-    .transition()
-    .attr('r', function(d, i){
-      if(i == 0|| i == _this.imgList.length - 1){
-        return 2;
-      }else{
-        return 0;
-      }
-    })
-    .duration(500);
-  let dx = this.dx;
-  let dy = this.dy;
-
-  let line = d3.line()
-    .x(function(d){
-      return d.x;
-    })
-    .y(function(d){
-      return d.y;
-    })
-    .curve(d3.curveLinear)
-  // Hack
-  let sampleIndex = 4;
-  let offsetx = 100;
-  let offsety = 0;
-  let sides1X = -dx - 2 - offsetx + 50;
-  let sides1Y = -dy - 2 - offsety;
-  let sides2X = dx - 50;
-  let sides2Y = dy - 50;
   new_images.each(function(d, i){
-    // if(i % _gap != 0){
-    //   return
-    // }
     let imgContainer = d3.select(this);
+    let index = d.aggregateIndex;
+    let _dx = index % 2 == 0?_this.dx:  -1 * _this.dx;
+    let _dy = index % 2 == 0?_this.dy:  -1 * _this.dy;
+    let sideX = _dx > 0 ? _dx * 0.9: _dx * 0.9 - _this.imgWidth ;
+    let sideY = _dy > 0 ? _dy * 0.9: _dy * 0.9 - _this.imgHeight ;
+    let attrObj = d.attrObj;
+    let largestValue = -1;
+    let primaryFeature = null;
+    features.forEach(attr=>{
+      largestValue = largestValue < attrObj[attr]? attrObj[attr]: largestValue;
+      primaryFeature = largestValue == attrObj[attr]? attr: primaryFeature;
+    });
 
-    imgContainer.append('line')
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", (d)=>{
-        return i % 2 == 0?_this.dx:  -1 * _this.dx;
-      } )
-      .attr("y2",(d)=>{
-        return i % 2 == 0?_this.dy:  -1 * _this.dy;
-      } )
-      .attr('stroke', 'red')
-      .attr('stroke-width', 1);
+    imgContainer.append('circle').attr('r', 5)
+      .attr('fill', feature2Color[primaryFeature]).attr('opacity', 0.6);
+    imgContainer.append('line').attr('class', 'image_pointer_link')
+      .attr("x2", _dx).attr("y2", _dy)
+      .attr('stroke', strokeColor).attr('stroke-width', 2)
+      .attr('stroke-opacity', 0.5);
+
+    let rectImage = imgContainer.append('g').attr('class', 'imgRectContaienr')
+      .attr('transform', 'translate('+ sideX + ',' + sideY+ ')');
+    rectImage.append('rect').attr('class','background')
+      .attr('rx', 5).attr('ry', 5)
+      .transition(t)
+      .attr('width', _this.imgWidth).attr('height', _this.imgHeight)
+      .attr('fill', 'white').attr('opacity', 0.5)
+
+    rectImage.append('image')
+      .attr('xlink:href', d['formatImgPath'])
+      .attr('x',2).attr('y', 2)
+      .attr('stroke', 'white').attr('width', 0).attr('height', 0)
+      .transition(t)
+      .attr('width', _this.imgWidth - 4).attr('height', _this.imgHeight - 4);
+
+
+    imgContainer.on('mouseover', function(d, i){
+      let _container = d3.select(this);
+      _container.select('#featureIcon').remove();
+      _container.selectAll('.background').attr('fill', 'orange');
+
+      let treemapConatiner = _container.select('.imgRectContaienr').append('g').attr('id','featureIcon')
+        .attr('transform','translate(' + ( 1.5 ) + ',' + ( 1.5)+ ')');
+      let attrObj = d['attrObj'];
+      let childrenArray = [];
+      features.forEach(function(attr){
+        childrenArray.push({
+          'name': attr,
+          'value': attrObj[attr]
+        })
+      });
+      let _data = {'name': 'root','children': childrenArray};
+      _this.drawTreemap(treemapConatiner, _data, _this.imgWidth - 4, _this.imgHeight - 4);
+      this.parentNode.parentNode.appendChild(this.parentNode)
+      this.parentNode.appendChild(this);
+      _this.hightLightHover(d, this);
+      if(_this.mouseover)
+        _this.mouseover(d);
+
+    }).on('mouseout', function(){
+      d3.select(this).selectAll('.background').attr('fill', 'white')
+      d3.select(this).select('#featureIcon').remove();
+      _this.rmHightLightHover(d, this);
+      if(_this.mouseout){
+        _this.mouseout(d);
+      }
+
+    })
   });
 
-  // new_images.each(function(d, i){
-  //     if(i % sampleIndex== 0){
-  //         let points = [{x: 0, y: 0}, {x: (-dx - 2 - offsetx + 60), y: (-dy - 2 - offsety + 60)}];
-  //         d3.select(this).append('g').datum(points).append('path').attr('class','image_pointer_link')
-  //             .attr('d', line)
-  //             .attr('stroke',strokeColor)
-  //             .attr('stroke-width', 3)
-  //
-  //
-  //         d3.select(this).append('rect')
-  //             .attr('class','background')
-  //             .attr('x', sides1X)
-  //             .attr('y', sides1Y)
-  //             .attr('rx', 5)
-  //             .attr('ry', 5)
-  //             .attr('width', 0)
-  //             .attr('height', 0)
-  //             .attr('fill', 'white')
-  //             .transition()
-  //             .attr('width', 84)
-  //             .attr('height', 64)
-  //             .duration(500);
-  //
-  //         d3.select(this).append('image')
-  //             .attr('xlink:href', function(d){
-  //                 return d['formatImgPath']
-  //             })
-  //             .attr('x',sides1X + 2)
-  //             .attr('y', sides1Y + 2)
-  //             .attr('width', 0)
-  //             .attr('height', 0)
-  //             .attr('stroke', 'white')
-  //             .transition()
-  //             .attr('width', 80)
-  //             .attr('height', 60)
-  //             .duration(500);
-  //
-  //     }else if(i % (sampleIndex / 2) == 0){
-  //
-  //         let points = [{x: 0, y: 0}, {x: sides2X + 80, y: sides2Y}];
-  //
-  //         d3.select(this).append('g').datum(points).append('path').attr('class','image_pointer_link')
-  //             .attr('d', line)
-  //             .attr('stroke',strokeColor)
-  //             .attr('stroke-width', 3)
-  //
-  //
-  //
-  //         d3.select(this).append('rect')
-  //             .attr('class','background')
-  //             .attr('x',sides2X)
-  //             .attr('y', sides2Y)
-  //             .attr('rx', 5)
-  //             .attr('ry', 5)
-  //             .attr('width', 0)
-  //             .attr('height', 0)
-  //             .attr('fill', 'white')
-  //             .transition()
-  //             .attr('width', 84)
-  //             .attr('height', 64)
-  //             .duration(500);
-  //
-  //         d3.select(this).append('image')
-  //             .attr('xlink:href', function(d){
-  //                 return d['formatImgPath']
-  //             })
-  //             .attr('x', sides2X + 2)
-  //             .attr('y', sides2Y + 2)
-  //             .attr('width', 0)
-  //             .attr('height', 0)
-  //             .attr('stroke', 'white')
-  //             .transition()
-  //             .attr('width', 80)
-  //             .attr('height', 60)
-  //             .duration(500);
-  //
-  //         let features = _this.svFeatures2Color['allFeatures'];
-  //         let data = [];
-  //         features.forEach(function(attr){
-  //             data.push(d['attrObj'][attr])
-  //         });
-  //
-  //         function drawVoilin(e, img, width, height, featureColor){
-  //         }
-  //
-  //
-  //         d3.select(this).append('title').text(function(d, i){
-  //             return d['aggregateIndex'];
-  //         });
-  //
-  //         d3.select(this).selectAll('circle').attr('fill', function(d){
-  //             return _this.svFeatures2Color[d['max_attr']['attr']]
-  //         })
-  //
-  //     }else{
-  //         d3.select(this).selectAll('circle').attr('fill', function(d){
-  //             return _this.svFeatures2Color[d['max_attr']['attr']]
-  //         })
-  //     }
-  // });
-  //
+
   //
   // new_images.each(function(d){
-  //     let aid = d['id']
-  //     if(_this.id2Data[aid] == undefined){
-  //         _this.id2Data[aid] = {}
-  //     }
-  //     _this.id2Data[aid]['data'] = d;
-  //     _this.id2Data[aid]['el'] = this
-  // })
+  //     // let aid = d['id']
+  //     // if(_this.id2Data[aid] == undefined){
+  //     //     _this.id2Data[aid] = {}
+  //     // }
+  //     // _this.id2Data[aid]['data'] = d;
+  //     // _this.id2Data[aid]['el'] = this
+  // }).on('mousemove', function(d, i){
   //
-  // new_images.on('mousemove', function(d, i){
-  //     d3.select(this).select('#featureIcon').remove();
-  //     d3.select(this).selectAll('.background').attr('fill', 'orange')
-  //     let mousex = d3.mouse(this)[0];
-  //     let mousey = d3.mouse(this)[1];
-  //     if(i % sampleIndex == 0){
-  //         mousex = sides1X;
-  //         mousey = sides1Y;
-  //     }else{
-  //         mousex = sides2X;
-  //         mousey = sides2Y;
-  //     }
-  //     let treemapConatiner = d3.select(this).append('g').attr('id','featureIcon')
   //
-  //         .attr('transform','translate(' + (mousex + 1.5 ) + ',' + (mousey + 1.5)+ ')')
-  //     let attrObj = d['attrObj'];
-  //     let childrenArray = [];
-  //     features.forEach(function(attr){
-  //         childrenArray.push({
-  //             'name': attr,
-  //             'value': attrObj[attr]
-  //         })
-  //     });
-  //     let _data = {'name': 'root','children': childrenArray};
-  //
-  //     _this.drawTreemap(treemapConatiner, _data, 80, 60);
-  //     // treemapConatiner.append('circle').attr('r', 50).attr('fill','orange').attr('fill-opacity', 0.8);
-  //     this.parentNode.parentNode.appendChild(this.parentNode)
-  //     this.parentNode.appendChild(this);
   // }).on('mouseout', function(d){
-  //     d3.select(this).selectAll('.background').attr('fill', 'white')
-  //     d3.select(this).select('#featureIcon').remove();
+  //
   // })
 
 };
+
+SvgImgLayer.prototype.hightLightHover = function(d, el){
+  let _container = d3.select(el);
+  _container.selectAll('.image_pointer_link').attr('stroke-opacity', 1);
+  _container.selectAll('circle').attr('opacity', 1);
+};
+
+SvgImgLayer.prototype.rmHightLightHover = function(d, el){
+  let _container = d3.select(el);
+  _container.selectAll('.image_pointer_link').attr('stroke-opacity', 0.5);
+  _container.selectAll('circle').attr('opacity', 0.6);
+};
+
+SvgImgLayer.prototype.onEvent = function(msg, func){
+  if(msg == 'mouseover'){
+    this.mouseover = func
+  }else if(msg == 'mouseout'){
+    this.mouseout = func
+  };
+};
+
+
 
 SvgImgLayer.prototype.drawTreemap = function(e, data, width, height){
   let _this = this;

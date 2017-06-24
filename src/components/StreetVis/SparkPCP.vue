@@ -31,6 +31,11 @@
         _this.handler.onSelectedImages(selectedImgs);
       });
 
+      pipeService.onStreetVisHoverHighlight((msg)=>{
+          let id = msg.id;
+          let action = msg.action;
+          this.hoverAction(id, action)
+      })
     },
     computed:{},
     methods:{
@@ -42,6 +47,16 @@
         let handler = new SparkPCP(this.$el, this.attrs, items, this.svFeatures2Color);
         handler.init();
         this.handler = handler;
+      },
+      hoverAction(id, action){
+        if(this.handler){
+            if(action == 'add') {
+              this.handler.highlight(id);
+            }else if(action == 'rm'){
+                this.handler.rmHighlight(id);
+            }
+
+        }
       }
     }
   }

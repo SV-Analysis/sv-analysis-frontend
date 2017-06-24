@@ -43,7 +43,52 @@
       }
     },
     methods:{
+      generateScales(elementNumber, scaleNumber){
+        scaleNumber = scaleNumber == undefined? 100: scaleNumber;
+        let ids = [0, Math.floor((elementNumber - 1) / 2)];
+        let newIds = [ids];
+
+        for(let i = 0; i< scaleNumber; i++){
+          let oldIds = newIds[i];
+          let _newIds = [];
+          for(let j = 0, jlen = oldIds.length; j< jlen; j++){
+            _newIds.push(oldIds[j]);
+            if(j < oldIds.length - 1){
+              let startId = oldIds[j];
+              let endId = oldIds[j+1];
+              let midId = Math.floor((startId + endId) / 2);
+              if(midId != startId && midId != endId){
+                _newIds.push(Math.floor(midId));
+              }
+            }
+          }
+          if(_newIds.length <= oldIds.length){
+            break
+          }
+          newIds.push(_newIds);
+        }
+        let formatIds = [];
+        newIds.forEach(function(ids){
+          let arr = [];
+          ids.forEach(function(id){
+            arr.push(id*2)
+            if(id * 2 + 1< elementNumber) arr.push(id*2+1);
+          })
+          if(arr.length != 0) formatIds.push(arr)
+        });
+        return formatIds
+      },
+      addScaleToImgAgg(imgList){
+        let scaleArr = this.generateScales(imgList.length);
+        console.log('scale', scaleArr)
+        scaleArr.forEach((ids, level)=>{
+          ids.forEach(index=>{
+            imgList[index].scaleLevel = imgList[index].scaleLevel == undefined? level: imgList[index].scaleLevel;
+          })
+        });
+      },
       createMap(cityObj, imgList){
+        this.addScaleToImgAgg(imgList);
         let _this = this;
         if(this.$el.clientWidth < 10) return;
         let el =  document.createElement("div");
@@ -73,9 +118,11 @@
         let _this = this;
         if(!this.mapObj) return;
         let images = this.mapObj.sampleImagesInTheBound();
+        let allNumber  = this.mapObj.getImageNumber();
         pipeService.emitUpdateImagesFromImgMap2ImgLayer({
           images: images,
-          id: _this.id
+          id: _this.id,
+          allNumber: allNumber
         });
       }
     }

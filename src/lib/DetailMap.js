@@ -458,7 +458,9 @@ DetailMap.prototype.sampleImagesInTheBound = function(){
   imagesObj['newImages'] = newImages;
   return newImages;
 };
-
+DetailMap.prototype.getImageNumber = function(){
+  return this.aggregatedImages.length;
+};
 DetailMap.prototype.generateImgObjWithScreenPosition = function(){
   let mewImages = [];
   let _this = this;

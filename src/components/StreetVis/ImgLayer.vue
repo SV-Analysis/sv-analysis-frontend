@@ -26,11 +26,20 @@
       this.id = this.street.id;
       this.svgImgLayer = new SvgImgLayer(this.$el, this.svFeatures2Color);
       this.container = this.svgImgLayer.getCotnainer();
+
+      this.svgImgLayer.onEvent('mouseover', function(d){
+        pipeService.emitStreetVisHoverHighlight({id: d.id, action: 'add'});
+      });
+      this.svgImgLayer.onEvent('mouseout', function(d){
+        pipeService.emitStreetVisHoverHighlight({id: d.id, action: 'rm'});
+      });
       pipeService.onUpdateImagesFromImgMap2ImgLayer(function(updateImagesObj){
         let id = updateImagesObj['id'];
+
         if(id == _this.id){
+          let allNumber = updateImagesObj['allNumber'];
           let images = updateImagesObj['images'];
-          _this.updateImages(images);
+          _this.updateImages(images, allNumber);
         }
       });
 
@@ -41,9 +50,9 @@
     computed:{
     },
     methods:{
-      updateImages(originImgList){
+      updateImages(originImgList, allNumber){
         this.svgImgLayer.setImgList(originImgList, 'aggregateIndex');
-        this.svgImgLayer.updateImages();
+        this.svgImgLayer.updateImages(allNumber);
       }
     }
   }

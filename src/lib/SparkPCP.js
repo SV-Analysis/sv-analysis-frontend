@@ -1,10 +1,9 @@
 /**
  * Created by Qiaomu on 13/6/2017.
  */
-
-import * as d3 from 'd3'
-import VerticalStackArea from '../../src/lib/VerticalStackArea'
-import VerticalPolyline from '../../src/lib/VerticalPolyline'
+import * as d3 from "d3";
+import VerticalStackArea from "../../src/lib/VerticalStackArea";
+import VerticalPolyline from "../../src/lib/VerticalPolyline";
 
 
 let featureMap = {
@@ -206,7 +205,7 @@ SparkPCP.prototype.drawAxis = function(){
 
 SparkPCP.prototype.drawPCPLines = function(){
   let _this = this;
-
+  console.log('left', this.leftData);
   this.lineContainers = this.container.append('g').attr('class', 'background')
     .selectAll('.lineContainer')
     .data(this.leftData.concat(this.rightData))
@@ -226,15 +225,36 @@ SparkPCP.prototype.drawPCPLines = function(){
 
   this.lineContainers.each(function(aggImg){
     let lc = d3.select(this);
-    lc.datum(aggImg['attrArr']).append('path').attr('d', line)
+    lc.datum(aggImg['attrArr']).append('path').attr('class', 'multiLines').attr('d', line)
       .attr('fill', 'none')
-      .attr('stroke', 1)
+      .attr('stroke-width', 1)
       .attr('opacity', 0.1)
       .attr('stroke', d=>{
         return aggImg['attrObj']['left'] != undefined? _this.selectedColor[0].color: _this.selectedColor[1].color;
       })
   });
 };
+
+SparkPCP.prototype.rmHighlight = function(selectId){
+  this.lineContainers.each(function(aggImgArr, i){
+    let _data = aggImgArr[0].raw;
+    if(_data.id == selectId){
+      d3.select(this).selectAll('.multiLines')
+        .attr('stroke-width', 1)
+        .attr('opacity', 0.1)
+    }
+  });
+};
+SparkPCP.prototype.highlight = function(selectId){
+  this.lineContainers.each(function(aggImgArr, i){
+    let _data = aggImgArr[0].raw;
+    if(_data.id == selectId){
+      d3.select(this).selectAll('.multiLines').attr('opacity', 1).attr('stroke-width', 2)
+    }
+  });
+};
+
+
 SparkPCP.prototype.drawPCPBars = function(data, container){
   let barsData = this.barsData;
   let height = this.height - this.margin.bottom - this.margin.top;
