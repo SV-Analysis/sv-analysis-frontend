@@ -9,6 +9,7 @@
                  v-model="checkedItem" :disabled="cityInfo.notDisabled == 1? false: true">
           <div style='float:left; margin-left: 20px' for="checkbox">{{ cityInfo.name }}</div>
         </div>
+
         <NavMapView v-bind:cityInfo="cityInfo"></NavMapView>
       </div>
     </div>

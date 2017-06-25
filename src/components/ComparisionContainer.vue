@@ -1,6 +1,5 @@
 <template>
   <div class="comparision-container">
-
     <div v-for="cityInfo in cities" class = "compmap-container">
       <CompMap  v-bind:cityInfo="cityInfo"></CompMap>
       <div class="render_container" v-bind:style="{'pointer-events': cityInfo.isConVisActive}" >

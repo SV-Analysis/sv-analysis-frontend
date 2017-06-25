@@ -10,8 +10,7 @@ var LEFT = 1;
 var RIGHT = 2;
 var ALMOST_ZERO = 0;
 
-function GetSideOfLine(lineStart, lineEnd, point)
-{
+function GetSideOfLine(lineStart, lineEnd, point) {
   var d = (lineEnd.x-lineStart.x)*(point.y-lineStart.y)-(lineEnd.y-lineStart.y)*(point.x-lineStart.x);
   return (d > ALMOST_ZERO ? LEFT : (d < -ALMOST_ZERO ? RIGHT : ON));
 }
