@@ -6,6 +6,7 @@
 
 <script>
   import pipeService from '../../service/pipeService'
+  import dataService from '../../service/dataService'
   import DetailMap from '../../lib/DetailMap'
 
   export default {
@@ -56,7 +57,8 @@
             'cityId': _this.cityInfo['id'],
             'layerName': event.name
           });
-        })
+        });
+
       }
     }
   }
