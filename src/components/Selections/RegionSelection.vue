@@ -25,6 +25,8 @@
           <RegionMap v-bind:cityInfo="currentCity" v-bind:adRegionData="record['context']" ></RegionMap></td>
         </tbody>
       </table>
+
+      <el-button @click="selectAllRegions" size="small" style="float: left;  margin-top: 5px; margin-bottom: 5px" :disabled="selectAllButtonDisable">Select All</el-button>
       <div class="collapse-control" >
         <el-collapse size="small"  v-model="activeNames" class="multi-query" >
           <el-collapse-item title="Query" name="1" style="text-align:center">
@@ -48,10 +50,9 @@
                 :value="option">
               </el-option>
             </el-select>
-
-
             <div class="title" style="margin-top: 10px"><span>Filter</span></div>
             <div>
+
               <div v-for="attrConf in controlConf">
                 <span style="float: left; text-align: left; width: 20%">{{attrConf.id}}</span>
                 <el-slider v-model="attrConf['valueRange']" style="width: 70%; float: left"
@@ -64,7 +65,6 @@
           </el-collapse-item>
         </el-collapse>
       </div>
-
     </div>
     <el-pagination
       @current-change="handleCurrentChange"
@@ -89,6 +89,7 @@
     data() {
       return {
         attrObj: ['id', 'city', 'name'],
+        selectAllButtonDisable: true,
         regionArray: [],
         cityOptions: Config.cityOptions,
         selectedCity: null,
@@ -106,6 +107,17 @@
       };
     },
     methods: {
+      selectAllRegions(){
+        console.log('select ', this.regionArray);
+        let submitList = [];
+        this.regionArray.forEach(record=>{
+          if(record['attr']!=undefined){
+            this._parsesRecord(record, true);
+            submitList.push(record);
+          }
+        });
+        pipeService.emitMultipleRecords(submitList);
+      },
       initFilterElements(){
         let newData = this.controlConf;
         let _this = this;
@@ -165,6 +177,8 @@
           console.log('Time1 ', endTime - startTime);
           _this._parseRegionRecords(records, _this.selectedCity);
           console.log('Time2 ', new Date() - endTime);
+
+          _this.selectAllButtonDisable = false;
         })
       },
       _parseRegionRecords(recordObj, city){
@@ -206,7 +220,6 @@
           }
         }
         if(index != -1 && this.regionArray[index]['clicked'] == false){
-
           pipeService.emitSelectedRegionByClick(record);
           // Insert a new element at index
           let mapDataType = 'adregion_map';
@@ -225,13 +238,14 @@
 
       },
       rightClick(record){
+
         let item = this._parsesRecord(record);
         pipeService.emitSelectRegion(record);
 //
 //                pipeService.emitUpdateSelectItems(item);
       },
-      _parsesRecord(record){
-        record['attr']['SL'] = !record['attr']['SL'];
+      _parsesRecord(record, sign){
+        record['attr']['SL'] = sign == undefined ? !(record['attr']['SL']): sign;
         let rid = record['id'] == undefined? record['rid']: record['id'];
         let item = {
           id: record['city'] + '_' + record['dataType'] + '_' + rid,
@@ -350,6 +364,8 @@
           this.initFilterElements();
         }
       });
+
+
 
     },
   };

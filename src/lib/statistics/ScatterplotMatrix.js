@@ -76,7 +76,7 @@ ScatterPlotMatrix.prototype.getColor = function(id){
 };
 
 ScatterPlotMatrix.prototype.draw = function(dataList){
-  console.log('In Datalist', dataList)
+
   let _this = this;
   this.clearRegions();
   if(dataList.length == 0){
@@ -188,9 +188,9 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
         return d.color
         // return _this.getColor(d['cityId'])
       }).on('mousemove', function(d){
-        console.log('dsdsdf', d);
+
       }).on('mouseout', function(d){
-        console.log('mouseout', d);
+
       })
 
     circles.each(function(d){

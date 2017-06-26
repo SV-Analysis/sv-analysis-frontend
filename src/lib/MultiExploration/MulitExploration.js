@@ -18,13 +18,15 @@ let featureMap = {
 let durationTime = 500;
 let MultiExploration = function(el, colorMap){
   this.selected = {
+    'ids': [],
     'idMap': {},
     'number': 0,
     'xIndex2Color':{},
     'maxSelectd': 2,
+
     'extendYIndex': null
   };
-  this.selectedColor = [{'color': '#2b8cbe', 'used': false}, {'color': '#df65b0',  'used': false}];
+  this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
   this.styleConfig = {
     clickHighlightOpacity: 0.3,
     clickNormalOpacity: 0.2,
@@ -352,6 +354,7 @@ MultiExploration.prototype.on = function(eventName, func){
 };
 
 MultiExploration.prototype.hoverHighlightRow = function(xIndex){
+  console.log('hoverhighlightRow');
   let _this = this;
   let t = d3.transition()
     .duration(300);
@@ -376,9 +379,19 @@ MultiExploration.prototype.removeHoverHighlightRow = function(xIndex){
   })
 };
 
+MultiExploration.prototype.getSelectedIds = function(){
+  return this.selected.ids;
+};
 MultiExploration.prototype.clickHighlightRow = function(xIndex){
+  console.log('clickHighlightRow');
   let _this = this;
   let color = this.findUnusedColor();
+  this.selectedColor.forEach((d, i)=>{
+    if(d.color == color){
+      this.selected.ids[i] = this.bodyData[xIndex].id;
+    }
+  });
+
   if(!color) return;
   this.selected.xIndex2Color[xIndex] = color;
   ////////////////////////////////////////////////////
@@ -603,7 +616,7 @@ MultiExploration.prototype.updateClickBackground = function(el, d){
     .attr('width', _width)
     .attr('height', _height)
     .attr('opacity', function(){
-      if(d.raw.clicked == true){
+      if(d.raw.eClicked == true){
         return 0.4;
       }else{
         return 0;
@@ -698,14 +711,21 @@ MultiExploration.prototype.clickOnBodyUnit = function(d){
       this.selected.idMap[id] = d;
       this.selected.number += 1;
       let color = this.clickHighlightRow(d.xIndex);
-      d.raw.clicked = true;
+      d.raw.eClicked = true;
       d.mColor = color;
       this.handleFucs['rowClick'](d, 'add');
     }else{
+      let _id = this.selected.idMap[id];
+      for(var i = 0, ilen = this.selected.ids.length; i < ilen; i++){
+        if(id == this.selected.ids[i]){
+          this.selected.ids[i] = undefined;
+        }
+      }
+      console.log('ds', this.selected.ids);
       delete this.selected.idMap[id];
       this.selected.number -= 1;
       this.handleFucs['rowClick'](d, 'remove');
-      delete d.raw.clicked;
+      delete d.raw.eClicked;
       this.removeClickHighlightRow(d.xIndex);
     }
   }else{

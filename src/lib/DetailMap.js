@@ -256,7 +256,7 @@ DetailMap.prototype.getColor = function(type){
 };
 
 DetailMap.prototype.fitBoundByStreet = function(streetInfo){
-  console.log('here');
+
   if(streetInfo['node_list'] == undefined) return
   let node_list = streetInfo['node_list'];
   let max_lat = -180;
@@ -281,7 +281,7 @@ DetailMap.prototype.fitBoundByStreet = function(streetInfo){
 };
 
 DetailMap.prototype.fitBoundByRegion = function(regionInfo){
-  console.log('region', regionInfo);
+
 };
 
 DetailMap.prototype.fitBoundByImgList = function(imgList){
@@ -324,14 +324,17 @@ DetailMap.prototype.filterPointsArrInBounds = function(points){
 };
 
 //Interaction among different views
-DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, polygonSign){
+DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, polygonSign, fillColor){
+
   let allPolyLines = [];
   let allPolygons = [];
+
   for(var i = 0, ilen = polylinePoints.length; i < ilen; i++){
     allPolyLines.push({
       "type": "LineString",
       "coordinates": polylinePoints[i]
     });
+
     if(polygonSign == true){
       allPolygons.push({
         "type": "Feature",
@@ -342,11 +345,14 @@ DetailMap.prototype.drawMultiplePolylines = function(polylinePoints, lineId, pol
         }
       })}
   }
+  fillColor = fillColor == undefined? null: fillColor;
+  let fillopacity = fillColor == null? 0: 0.7;
   var myStyle = {
     "color": "#ffffff",
     "weight": 1,
     "opacity": 0.8,
-    "fill": null
+    "fillOpacity": fillopacity,
+    "fillColor": fillColor
   };
   let geoJsonObj = L.geoJSON(allPolyLines, {
     style: myStyle

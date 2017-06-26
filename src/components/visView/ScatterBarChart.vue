@@ -55,7 +55,7 @@
       <!--</div>-->
 
     </el-popover>
-    <el-button size='small' class="botton-class" v-popover:popcontrol>config</el-button>
+    <el-button size='small' class="botton-class matrixConfig" v-popover:popcontrol>config</el-button>
   </div>
 </template>
 
@@ -91,10 +91,17 @@
       let _this = this;
       this.initControlConfig();
       let _el = document.getElementById('scatter-bar-chart');
-      this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
-
+      _this.drawNoData(_el);
       pipeService.onMESelected((record)=>{
-        this.updateRecords(record);
+        console.log('meselected');
+        if(this.matrixBarHandler){
+          this.updateRecords(record);
+        }else{
+          this.clearSvg(_el);
+          this.matrixBarHandler = new MatrixBar(_el, this.svFeatures2Color, Config);
+          this.updateRecords(record);
+        }
+
 
         _this.selectedCollectionUpdated(_this.selectedRegions)
       });
@@ -131,16 +138,39 @@
 //        _this.selectedCollectionUpdated(_this.selectedRegions)
 
       });
-
-      pipeService.onSelectedRegionByClick(function(region){
-        _this.matrixBarHandler.highlightSelection(region)
-      });
+//
+//      pipeService.onSelectedRegionByClick(function(region){
+//        _this.matrixBarHandler.highlightSelection(region)
+//      });
 
     },
     computed:{
 
     },
     methods:{
+      drawNoData(el){
+        console.log('no data');
+        d3.select('.matrixConfig').style('opacity', 0.1);
+        let text = d3.select(el).append('g').attr('class', 'noDataContainer')
+          .append('text')
+          .attr('font-size', 50)
+          .text('No AOI Selected');
+        let _width = el.clientWidth;
+        let _height = el.clientHeight;
+        text.attr('x', function(){
+          let _w = d3.select(this).node().getBBox().width;
+          return _width / 2 - _w / 2 ;
+        })
+          .attr('y', function(){
+            let _h = d3.select(this).node().getBBox().height;
+            return _height / 2 - _h / 2 ;
+          })
+          .attr('opacity', 0.2)
+      },
+      clearSvg(el){
+        d3.select('.matrixConfig').transition().style('opacity', 1).duration(500);
+        d3.select(el).selectAll('g').remove();
+      },
       updateRecords(d){
         // To decide to remove a old element or add a new element
         let _this = this;
@@ -154,7 +184,7 @@
             item.record.standard = item.record.record.standard;
             item.record.sv = item.record.record.sv;
           }
-        })
+        });
         let record = {'imgList': imgList, 'name':d.name, id: d.id, 'color': d.mColor};
         let existed = false;
         this.selectedRegions.forEach((region)=>{

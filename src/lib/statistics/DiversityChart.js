@@ -91,7 +91,7 @@ DiversityChart.prototype.checkStatistics = function(standard){
 };
 
 DiversityChart.prototype.switchDiversityStyle = function(style){
-  console.log('Switch style', style);
+
   this.currentStyle = style;
   if(this.currentStyle == 'contour'){
     this.drawContour();
@@ -101,7 +101,7 @@ DiversityChart.prototype.switchDiversityStyle = function(style){
 };
 
 DiversityChart.prototype.updateDiversityBandwidth = function(bandwidth, threshold){
-  console.log('bandwidth', bandwidth, threshold);
+
   this.bandwidth = bandwidth;
   this.threshold = threshold;
   this.drawContour();
@@ -187,7 +187,6 @@ DiversityChart.prototype.drawPoints = function(){
         }
       });
     });
-    console.log('lenlnelne', __nodes1.length, __nodes2.length);
 
     let pointsContainers = diversityPointContainer.selectAll('.diversityCombination')
       .data(dataList)

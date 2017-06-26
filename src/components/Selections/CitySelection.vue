@@ -5,8 +5,8 @@
       <div class='navmap-container' v-for="cityInfo in cityInfos">
         <div>
           <input style='float:left; margin-left: 20px'
-                 v-bind:value='cityInfo.id' type="checkbox"
-                 v-model="checkedItem" :disabled="cityInfo.notDisabled == 1? false: true">
+                 v-bind:value='cityInfo.id' type="radio"
+                 v-model="checked" :disabled="cityInfo.notDisabled == 1? false: true">
           <div style='float:left; margin-left: 20px' for="checkbox">{{ cityInfo.config.name }}</div>
         </div>
         <NavMapView v-bind:cityInfo="cityInfo.config"></NavMapView>
@@ -24,6 +24,14 @@
   export default {
     name: 'citySelection',
     watch:{
+      checked(newValue, oldValue){
+        pipeService.emitUpdateSelectedMapView([]);
+        setTimeout(function(){
+          pipeService.emitUpdateSelectedMapView([newValue]);
+        }, 200)
+
+
+      },
       checkedItem: {
         deep: 'true',
         handler(newValue, oldValue){
@@ -63,6 +71,7 @@
         statistic:{
 
         },
+        checked: null,
         cityInfos:[]
         //cities: Config.cityOptions
       }
@@ -72,8 +81,8 @@
       // Copy city information from config files
 
       dataService.queryAllCityStatics(['hk', 'singapore', 'london', 'nyc'], function(d){
-          pipeService.emitAllCityStatistics(d);
-      })
+        pipeService.emitAllCityStatistics(d);
+      });
       Config.cityOptions.forEach((d)=>{
         this.cityInfos.push({
           'id': d['id'],
@@ -124,11 +133,15 @@
 <style scoped>
   #navigation{
     max-width: 100%;
-    minwidth: 100%;
-
+    min-width: 100%;
+    height: 1140px;
+    max-height: 100%
   }
   .map-list-container{
+    overflow-y: auto;
     max-width: 100%;
+    max-height: 80%;
+    height: 80%;
   }
   .navmap-container{
     margin-left: 20px;

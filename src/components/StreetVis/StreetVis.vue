@@ -153,7 +153,6 @@
     background-color: #00fd20;
   }
   .img-map-f{
-
     position: absolute;
     height: 100%;
     width: 100%;

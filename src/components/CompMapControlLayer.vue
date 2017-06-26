@@ -1,5 +1,5 @@
 <template>
-  <div class="selection-layer"></div>
+  <div class="control-layer"></div>
 </template>
 
 <script>
@@ -30,6 +30,7 @@
           pipeService.emitInteractiveSelection({
             'cityId': _this.cityInfo.id, 'region': selectionRegion
           });
+
         });
       },
       changeDisplay(){
@@ -48,11 +49,10 @@
 </script>
 
 <style scoped>
-  .selection-layer{
+  .control-layer{
     float: left;
     width: 100%;
     height: 100%;
     z-index: 1001;
-
   }
 </style>

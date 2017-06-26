@@ -21,6 +21,7 @@
     <el-button v-on:click="confirm()">
       Confirm
     </el-button>
+    <slot></slot>
   </div>
 </template>
 

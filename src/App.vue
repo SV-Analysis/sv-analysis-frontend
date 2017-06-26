@@ -1,24 +1,27 @@
 <template>
   <div id="app">
-    <Navbar><button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button></Navbar>
+    <Navbar>
+      <!--<button @click="showModal = true" slot="header" style="margin-top: 10px">Compare</button>-->
+    </Navbar>
     <el-row :gutter="15" class="whole-row">
       <el-col :span="8" class="root-container bstyle">
         <RegionList v-bind:selectIdMap="selectIdMap"></RegionList>
       </el-col>
       <el-col :span="16" class="root-container">
-        <CompContainer  class="y-style-middle"></CompContainer>
+        <DisplayContainer v-if="sign == 'others'" class="y-style-middle"> </DisplayContainer>
+        <CompContainer  v-else class="y-style-middle"></CompContainer>
         <ScatterBarChart v-bind:selectItems="selectItems" class="y-style-bottom"></ScatterBarChart>
       </el-col>
     </el-row>
-    <ModalView
-      v-if="showModal"
-      @close="showModal = false"
-      v-bind:selectItems="selectItems"
-      v-bind:cityOptions="cityOptions" >
+    <ModalView id ='modalview'
+               v-if="showModal"
+               @close="showModal = false"
+               v-bind:selectItems="selectItems"
+               v-bind:cityOptions="cityOptions" >
     </ModalView>
 
-  </div>
 
+  </div>
 </template>
 
 <script>
@@ -26,6 +29,7 @@
   import ControlPanel from './components/ControlPanel.vue'
   import Navigation from './components/Navigation.vue'
   import CompContainer from './components/ComparisionContainer.vue'
+  import DisplayContainer from './components/DisplayContainer.vue'
   import Analysis from './components/Analysis/Analysis.vue'
   import RegionList from './components/RegionList/RegionList.vue'
   import ModalView from './components/AnalysisView.vue'
@@ -45,7 +49,8 @@
       RegionList,
       ModalView,
       ScatterBarChart,
-      ImproveLineChart
+      ImproveLineChart,
+      DisplayContainer
     },
     data () {
       return {
@@ -78,11 +83,20 @@
             'bound': null
           }
         ],
+        sign: 'others'
       };
 
     },
     mounted(){
+
+
+
+
+
       let _this = this;
+      pipeService.onCompCurrentStreets(d=>{
+        this.showModal = true;
+    });
       pipeService.onUpdateSelectItems(function(data){
         let updateSign = data['updateSign'];
         if(updateSign == true) {
@@ -91,7 +105,17 @@
         else{
           _this.removeItem(data)
         }
-      })
+      });
+
+      pipeService.onTabClicked((msg)=>{
+        if(msg == 'explore'){
+        this.sign = 'explore'
+        console.log('Click on explore');
+      }else{
+        console.log('Others');
+        this.sign = 'others'
+      }
+    });
     },
     methods:{
       addItem(data){
@@ -183,6 +207,7 @@
     box-shadow: 3px 3px 3px grey;
     background: #FFF;
     height:42%;
+    /*height:101%*/
   }
   .y-style-bottom{
     border-radius: 5px;
@@ -190,6 +215,7 @@
     background: #FFF;
     margin-top: 10px;
     height:58%;
+    /*height: 0px;*/
   }
 
 

@@ -15,6 +15,7 @@
           </div>
           <div style="height: 20px"></div>
         </el-collapse-item>
+        <el-button @click="compareStreets" size="small" style="float: left;  margin-top: 5px; margin-bottom: 5px" >Street Comparison</el-button>
       </el-collapse>
     </div>
 
@@ -46,6 +47,9 @@
       };
     },
     methods: {
+      compareStreets(){
+        pipeService.emitCompCurrentStreets();
+      },
       initFilter: function(){
         let newData = this.controlConf;
         let _this = this;
@@ -69,10 +73,16 @@
         if(this.isInitRender) return;
         this.isInitRender = true;
         let container = d3.select(this.$el).select('.exploreContainer').nodes()[0];
-        console.log('container', container);
-
+        let _this = this;
         this.multiExploration = new MulitExploration(container, Config.svFeatures2Color);
         this.multiExploration.on('rowClick', function(row, sign){
+          let ids = _this.multiExploration.getSelectedIds();
+          console.log('this', ids);
+          pipeService.emitUpdateSelectedMapView([]);
+          setTimeout(()=>{
+            pipeService.emitUpdateSelectedMapView(ids);
+          }, 200);
+
           let record = row.raw;
           record.mSign = sign;
           record.mColor = row.mColor;
@@ -113,22 +123,26 @@
       let features = Config.svFeatures2Color.allFeatures.slice();
       let attrs = ['id'].concat(features);
       this.attrs = attrs;
+
       pipeService.onSelectRegion((record)=>{
         record.id = record['rid'];
         record.record = {
           statistics: record.statistics,
           id: record.rid
         };
-
+        console.log('On selected regions', record);
         let streets = this.updateRegionOrStreet(record);
         this.streets = streets;
       });
+
       pipeService.onUpdateSelectItems((record)=>{
+        console.log('record', record);
         let streets = this.updateRegionOrStreet(record);
         this.streets = streets;
         if(this.multiExploration)
           this.multiExploration.update(this.streets);
       });
+
       pipeService.onTabClicked((msg)=>{
         if(msg == 'explore'){
           setTimeout(()=>{
@@ -139,7 +153,6 @@
 
 //
 //      pipeService.onAllCityStatistics((allStatistics)=>{
-//        console.log('allStatistics', allStatistics);
 //        allStatistics.forEach((record)=>{
 //          record.id = record.city;
 //          let streets = this.updateRegionOrStreet(record);
@@ -150,7 +163,26 @@
 //      });
 
 
-      let controlConf = this.controlConf
+
+      pipeService.onMultipleRecords((records)=>{
+        console.log('Records  ', records);
+        let streets = [];
+        records.forEach((record)=>{
+          record.id = record['rid'];
+          record.record = {
+            statistics: record.statistics,
+            id: record.rid
+          };
+          streets = this.updateRegionOrStreet(record);
+          this.streets = streets;
+        });
+        this.streets = streets;
+        console.log('all', this.streets);
+        if(this.multiExploration)
+          this.multiExploration.update(this.streets);
+      });
+
+      let controlConf = this.controlConf;
       this.svFeatures2Color.allFeatures.forEach(function(attr){
         controlConf.push({
           'id': attr,

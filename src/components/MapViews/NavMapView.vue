@@ -8,18 +8,57 @@
   import pipeService from '../../service/pipeService'
   import dataService from '../../service/dataService'
   import DetailMap from '../../lib/DetailMap'
-
+  import * as Config from '../../Config'
   export default {
     name: 'mapview',
     props: ['cityInfo'],
     data () {
       return {
-        title: 'mapview'
+        title: 'mapview',
+        polyLinePoints: [],
+        features: Config.svFeatures2Color.allFeatures,
+        svFeatures2Color: Config.svFeatures2Color
       }
     },
     mounted(){
       this.createMap();
       this.sendMapRegion();
+      pipeService.onAllCityStatistics(msg=>{
+        console.log('region', msg);
+        msg.forEach(cityInfo=>{
+          if(cityInfo.id == this.cityInfo.id)
+            cityInfo.streets.forEach((region)=>{
+              let statistics = region.record.statistics;
+
+              let _list = [];
+              this.features.forEach(attr=>{
+                _list.push([attr, statistics[attr]]);
+              });
+              _list.sort(function(a, b){
+                return b[1] - a[1];
+              });
+              let largestAttr = null;
+              if(_list[0][0] == 'road') {
+                if(_list[0][1] >= 33){
+                  largestAttr = 'road'
+                }else{
+                    largestAttr = _list[1][0];
+                }
+              }else{
+                  largestAttr=  _list[0][0]
+              }
+
+              let polyLines = [];
+              region.subRegion.forEach(d=>{
+                let boundaryNodes = d['boundary'];
+                polyLines.push(boundaryNodes);
+              });
+              this.mapObj.drawMultiplePolylines(polyLines, this.cityInfo.id, true, this.svFeatures2Color[largestAttr]);
+            });
+        });
+
+      })
+
     },
     computed:{
     },

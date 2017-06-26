@@ -1,17 +1,15 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
+    <div class="modal-mask" >
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="">
-            <button class="modal-default-button" @click="$emit('close')">
-              X
-            </button>
-          </div>
-
+          <!--<div class="">-->
+            <!--<button class="modal-default-button" @click="$emit('close')">-->
+            <!--X-->
+            <!--</button>-->
+          <!--</div>-->
           <div class="modal-body-top">
             <div class="ui-row modal-body">
-
               <div class="col-sm-10 col-md-10 col-lg-10 vis-container" >
                 <StreetVis
                   v-bind:selectItems="selectItems"
@@ -20,13 +18,17 @@
 
 
               <div class="col-sm-2 col-md-2 col-lg-2 " >
-                <StreetList v-bind:selectItems="selectItems"></StreetList>
+                <StreetList v-bind:selectItems="selectItems">
+                  <el-button @click="$emit('close')">
+                    Close
+                  </el-button>
+                </StreetList>
               </div>
 
             </div>
           </div>
-          <div class="modal-footer">
-          </div>
+          <!--<div class="modal-footer">-->
+          <!--</div>-->
         </div>
       </div>
     </div>
@@ -110,6 +112,8 @@
     transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
     position: relative;
+    /*background: rgba(255, 255, 255, 0.0);*/
+    background: rgba(211,211,211, 1);
   }
 
   .def-modal-header{
@@ -117,18 +121,18 @@
 
   }
   .modal-body-top{
-    height: 100%;
+    height: 115%;
+    width: 100%
   }
   .modal-body {
     /*margin: 20px 0;*/
     height: 90%;
     /*background-color: #5bc0de;*/
-    background: rgba(211,211,211, 0.3);
+    background: rgba(211,211,211, 0.0);
   }
 
   .modal-default-button {
     /*float: right;*/
-
   }
 
   /*

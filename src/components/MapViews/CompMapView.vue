@@ -1,5 +1,13 @@
 <template>
   <div class="comp-mapview">
+
+    <el-dialog class = 'dialogStyle' title="提示" :visible.sync="dialogVisible" size="tiny" :before-close="handleClose">
+      <span>这是一段信息</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -7,7 +15,8 @@
   import pipeService from '../../service/pipeService'
   import DetailMap from '../../lib/DetailMap'
   import dataService from '../../service/dataService'
-
+  import * as d3 from 'd3'
+  import L from "leafLet";
 
   export default {
     name: 'comp-mapview',
@@ -19,28 +28,51 @@
         disablePoint: false,
         regionSign: 'city',
         currentPolygons: [],
-        id2Boundary:{}
+        id2Boundary:{},
+        dialogVisible :false,
       }
     },
     mounted(){
       let _this = this;
       this.createMap();
+      console.log('regionInfo', this.cityInfo);
+
+      let regions = [];
+      let boundary = [];
+      let bounds = null;
+      if(this.cityInfo.subRegion != undefined){
+        this.cityInfo.subRegion.forEach(r=>{
+          let boundaryNodes = r['boundary'];
+          regions.push(boundaryNodes);
+          boundary.push(boundaryNodes)
+        });
+        console.log('boundary', boundary);
+
+
+        let bounds = this.getBound(regions);
+
+        this.mapObj.fitBounds(bounds);
+        _this.mapObj.drawMultiplePolylines(boundary, _this.cityInfo.regioName, true);
+      }
+      if(regions.length != 0){
+        _this.regionSign = 'region'
+        _this.id2Boundary[this.cityInfo['regionName']] = regions;
+        console.log('id2Boundary', _this.id2Boundary, regions);
+      }
+
 //      All the using of the dataService functions should be repackaged.
       dataService.getAllRecordsForOneCity(this.cityInfo['id'], function(data){
         _this.points_world = data;
         let level = _this.mapObj.getZoomLevel();
         let _temp_points = _this.generateSample(_this.points_world, 14 - level);
         let current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);
+        if(regions.length != 0){
+          _this.id2Boundary[_this.cityInfo['regionName']] = regions;
+        }
+        _this.updatePointCloud();
 
-        pipeService.emitUpdateAllResultData({
-          'cityId': _this.cityInfo['id'],
-          'data': current_points});
-
-        pipeService.emitMapInstance({
-          'cityId': _this.cityInfo['id'],
-          'map': _this.mapObj.getMapInstance()
-        })
       });
+
       pipeService.onInteractiveSelection(function(msg){
         let cityId = msg['cityId'];
         let positions = msg['region'];
@@ -49,6 +81,10 @@
         var world_position = _this.mapObj.contaierPointsToWorld(positions);
         dataService.queryRegionFromBackground( _this.cityInfo['id'], world_position, function(data){
           pipeService.emitRegionQueryDataRecieved(data);
+          _this.dialogVisible = !_this.dialogVisible;
+
+          console.log('select add ?',_this.open())
+
         });
       });
       pipeService.onUpdateMapLayer(function(msg){
@@ -58,7 +94,7 @@
       });
 
       pipeService.onDrawPolyLine(function(msg){
-
+        console.log('draw poly line', msg);
         let cityId = msg['cityId'];
         if(cityId !=  _this.cityInfo.id) return;
 
@@ -90,23 +126,43 @@
           _this.disablePoint = msg['disablePoints']
           _this.updatePointCloud();
         }
-      })
-      pipeService.onSelectRegion(function(msg){
-        if(msg['cityId']!=  _this.cityInfo.id) return
+      });
 
-        if(msg['attr']['SL'] == true){
+//      pipeService.onSelectRegion(function(msg){
+//        console.log('here');
+//        if(msg['cityId']!=  _this.cityInfo.id) return
+//
+//        if(msg['attr']['SL'] == true){
+//
+//          _this.regionSign = 'region';
+//          let regions = [];
+//          msg['subRegion'].forEach(function(r){
+//            regions.push(r['boundary'])
+//          });
+//
+//          _this.id2Boundary[msg['name']] = regions;
+//          _this.updatePointCloud();
+//        }else if(msg['attr']['SL'] == false){
+//          delete _this.id2Boundary[msg['name']]
+//          _this.updatePointCloud()
+//        }
+//
+//      });
 
-          _this.regionSign = 'region';
-          let regions = [];
-          msg['subRegion'].forEach(function(r){
-            regions.push(r['boundary'])
-          })
-          _this.id2Boundary[msg['name']] = regions;
-          _this.updatePointCloud()
-        }else if(msg['attr']['SL'] == false){
-          delete _this.id2Boundary[msg['name']]
-          _this.updatePointCloud()
-        }
+      pipeService.onSelectedRegionByClick(region=>{
+        console.log('newSelected', region);
+        let regions = [];
+        region.subRegion.forEach(r=>{
+          regions.push(r['boundary'])
+        });
+        let bounds = this.getBound(regions);
+
+        this.mapObj.fitBounds(bounds);
+
+        _this.id2Boundary[region['name']] = regions;
+        setTimeout(d=>{
+          _this.updatePointCloud();
+        }, 200)
 
       });
     },
@@ -134,6 +190,36 @@
       }
     },
     methods:{
+      open() {
+        this.$alert('', 'Add this region to Ranking View?', {
+          confirmButtonText: 'Confirm',
+          callback: (msg) => {
+            console.log(' ${ action }, ', msg);
+            if(msg == 'confirm'){
+              pipeService.emitSelectRegionByDrag();
+            }else{
+
+            }
+          }
+        });
+      },
+      handleClose(){
+
+      },
+      getBound(boundary){
+        let xExtent = d3.extent(boundary, function(list){
+          return d3.extent(list, function(d){
+            return d[0]
+          });
+        });
+        let yExtent = d3.extent(boundary, function(list){
+          return d3.extent(list, function(d){
+            return d[1]
+          });
+        });
+        let bounds = L.latLngBounds(L.latLng(yExtent[0][0], xExtent[0][0]), L.latLng(yExtent[0][1], xExtent[0][1]));
+        return bounds;
+      },
       generateSample(array, n){
         var result = [];
         for(var i = 0; i < array.length; i += n){
@@ -172,6 +258,7 @@
 
       },
       updatePointCloud(){
+        console.log('update');
         let _this = this;
         let zoomLevel = this.mapObj.getZoomLevel();
 
@@ -231,5 +318,10 @@
     width: 100%;
     background: rgba(13,13,13,0.1);
     height: 100%
+  }
+  .dialogStyle{
+    width: 800px;
+    height: 300px;
+    z-index: 1010;
   }
 </style>

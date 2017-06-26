@@ -29,7 +29,8 @@
         imageList: null,
         selectionId: null,
         polyLinePoints: [],
-        svFeatures2Color: Config.svFeatures2Color
+        svFeatures2Color: Config.svFeatures2Color,
+        features: Config.svFeatures2Color.allFeatures
       }
     },
     mounted(){
@@ -47,6 +48,7 @@
 
 
       }else if(this.streetData == undefined && this.adRegionData != undefined){
+        console.log('here',this.streetData, this.adRegionData)
         this.imageList = [];
         this.polyLinePoints = [];
         this.adRegionData.subRegion.forEach(function(d){
@@ -59,6 +61,8 @@
           imageList = imageList.concat(d['images']);
         });
         this.imageList = imageList;
+
+
       }
 
       this.createMap();
@@ -91,7 +95,37 @@
         this.mapObj.init();
         this.mapObj.setColorStyle(this.svFeatures2Color);
         this.mapObj.enableControlLayer();
-        this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId, this.adRegionData != undefined);
+
+
+        console.log('this. ad region data', this.adRegionData);
+
+
+        if(this.adRegionData){
+          let _list = [];
+          let statistics = this.adRegionData.statistics;
+          this.features.forEach(attr=>{
+            _list.push([attr, statistics[attr]]);
+          });
+
+          _list.sort(function(a, b){
+            return b[1] - a[1];
+          });
+          let largestAttr = null;
+          if(_list[0][0] == 'road') {
+            if(_list[0][1] >= 33){
+              largestAttr = 'road'
+            }else{
+              largestAttr = _list[1][0];
+            }
+          }else{
+            largestAttr= _list[0][0]
+          }
+
+          this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId, this.adRegionData != undefined, this.svFeatures2Color[largestAttr]);
+        }else{
+          this.mapObj.drawMultiplePolylines(this.polyLinePoints, this.selectionId, this.adRegionData != undefined);
+        }
+
 
         this.mapObj.drawImagePoints(this.imageList, this.selectionId);
 //        this.mapObj.drawPolygon(this.streetData);
@@ -103,6 +137,11 @@
         if(this.adRegionData){
           this.mapObj.fitBoundByRegion(this.adRegionData)
         }
+
+
+
+
+
         pipeService.emitPolyLine({
           'cityId': _this.cityInfo['id'],
           'polyLinePoints': _this.polyLinePoints,

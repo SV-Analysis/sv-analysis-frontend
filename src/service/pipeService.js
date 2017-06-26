@@ -30,7 +30,10 @@ var pipeService = new Vue({
     TABCLICKED: 'tab_clicked',
     MULTIEXPLORATIONSELECTED:'multi_exploration_selected',
     ALLSTASTICS:'all_statistics',
-    STREETVISHOVER: 'streetvis_hover'
+    STREETVISHOVER: 'streetvis_hover',
+    MULTIPLEREGIONSELECTED: 'multiple_region_selected',
+    SELECTREGIONBYDRAG:'select_region_by_drag',
+    COMPARESTREETS: 'compare_streets'
   },
 
   methods:{
@@ -276,7 +279,7 @@ var pipeService = new Vue({
       })
     },
 
-  //  Emit all statistics of cities
+    //  Emit all statistics of cities
     emitAllCityStatistics: function(msg){
       this.$emit(this.ALLSTASTICS, msg);
     },
@@ -294,8 +297,36 @@ var pipeService = new Vue({
       this.$on(this.STREETVISHOVER,function(msg){
         callback(msg);
       })
-    }
+    },
+
+    //  Emit hover on images --------------------------------------------
+    emitMultipleRecords: function(msg){
+      this.$emit(this.MULTIPLEREGIONSELECTED, msg);
+    },
+    onMultipleRecords: function(callback){
+      this.$on(this.MULTIPLEREGIONSELECTED,function(msg){
+        callback(msg);
+      })
+    },
+
+    //  Emit hover on images --------------------------------------------
+    emitSelectRegionByDrag:  function(msg){
+      this.$emit(this.SELECTREGIONBYDRAG, msg);
+    },
+    onSelectRegionByDrag: function(callback){
+      this.$on(this.SELECTREGIONBYDRAG,function(msg){
+        callback(msg);
+      })
+    },
+    emitCompCurrentStreets: function(msg){
+      this.$emit(this.COMPARESTREETS, msg);
+    },
+    onCompCurrentStreets: function(callback){
+      this.$on(this.COMPARESTREETS,function(msg){
+        callback(msg);
+      })
+    },
   }
-})
+});
 
 export default pipeService

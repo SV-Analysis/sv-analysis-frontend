@@ -1,10 +1,18 @@
 <!--这个component没写好，应该再分成一些子模块-->
 <template>
   <div class="region-list">
+
+    <transition name="slide-fade">
+      <div id="selfBadge" class='selfBadge' v-if="show">{{badgeText}}</div>
+    </transition>
+
+    <!--<div class="selfBadge" id="selfBadge">3</div>-->
     <el-tabs v-model="activeName" @tab-click="tabClicked">
+
       <el-tab-pane label="City" name="city">
-        <CitySelection ></CitySelection>
+        <CitySelection></CitySelection>
       </el-tab-pane>
+
       <el-tab-pane label="Region" name="region" >
         <RegionSelection :selectIdMap="selectIdMap"> </RegionSelection>
       </el-tab-pane>
@@ -12,11 +20,13 @@
         <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
       </el-tab-pane>
       <el-tab-pane label="Ranking" name="explore">
+
         <ExploreSelection> </ExploreSelection>
       </el-tab-pane>
     </el-tabs>
+
   </div>
-  </div>
+
 </template>
 
 <script>
@@ -30,7 +40,7 @@
   import CitySelection from "../Selections/CitySelection.vue"
   import ExploreSelection from "../Selections/ExploreSelection.vue"
   import  * as Config from "../../Config"
-
+  import * as d3 from 'd3'
   export default {
     name: 'streetlist',
     props: ['selectIdMap'],
@@ -43,6 +53,8 @@
     },
     data () {
       return {
+        show: false,
+        badgeText:'test',
         title: 'Street List',
         svFeatures2Color: Config.svFeatures2Color,
         serverLink: Config.serverLink,
@@ -99,6 +111,30 @@
     },
     mounted(){
 
+      pipeService.onSelectRegion((record)=>{
+        this.showBadge("1 region selected", 500);
+      });
+
+      pipeService.onUpdateSelectItems((record)=>{
+        this.showBadge("1 street selected", 500);
+      });
+
+      pipeService.onMultipleRecords((records)=>{
+        this.showBadge(records.length + " regions selected", 500)
+      });
+      pipeService.onSelectRegionByDrag(msg=>{
+        this.showBadge(1 + " region selected", 500)
+      });
+
+      setTimeout(()=>{
+        let node = d3.select(this.$el).select('.el-tabs__nav').node();
+        console.log('node', node.clientWidth);
+        let width = node.clientWidth;
+        this.badge = d3.select(".selfBadge").attr('left', (width  / 2) + 'px').text('wakaka');
+
+        this.showBadge("4 cities selected", 1000);
+      }, 4000);
+
     },
     computed:{
       listNumber: function(){
@@ -124,6 +160,16 @@
       }
     },
     methods:{
+      compareStreets(){
+
+      },
+      showBadge(text, time){
+        this.badgeText = text;
+        this.show =  true;
+        setTimeout(d=>{
+          this.show = false;
+        }, time)
+      },
       tabClicked(tab, event){
         pipeService.emitTabClicked(tab.name);
       },
@@ -356,11 +402,12 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+
   .region-list{
     height:100%;
     width: 98%;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
   }
   /* css for the table*/
   ul.pagination {
@@ -453,5 +500,31 @@
   }
   .notSelectRow{
     background-color: white;
+  }
+  .selfBadge{
+    position: absolute;
+    left: 280px;
+    top: 5px;
+    background-color: #20a0ff;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    text-align: center;
+    border: 1px solid #fff;
+  }
+
+  .slide-fade-enter-active {
+    transition: all .5s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all 1.5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-active {
+    transform: translateX(20px);
+    opacity: 0;
   }
 </style>
