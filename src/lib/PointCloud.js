@@ -80,7 +80,7 @@ PointCloud.prototype.setData = function(arr, level){
   if(level > 12){
     point_size = point_size + 40 / Math.abs(level - 19) * Math.abs(12 - level)
   }
-  point_size = 10
+  // point_size = 10
   var geometry = new THREE.Geometry();
   var colors = [];
   for (let i = 0; i < arr.length; i ++ ) {
