@@ -1,13 +1,13 @@
 <template>
   <div class="comp-mapview">
 
-    <el-dialog class = 'dialogStyle' title="提示" :visible.sync="dialogVisible" size="tiny" :before-close="handleClose">
-      <span>这是一段信息</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
-    </el-dialog>
+    <!--<el-dialog class = 'dialogStyle' title="提示" :visible.sync="dialogVisible" size="tiny" :before-close="handleClose">-->
+    <!--<span>这是一段信息</span>-->
+    <!--<span slot="footer" class="dialog-footer">-->
+    <!--<el-button @click="dialogVisible = false">取 消</el-button>-->
+    <!--<el-button type="primary" @click="dialogVisible = false">确 定</el-button>-->
+    <!--</span>-->
+    <!--</el-dialog>-->
   </div>
 </template>
 
@@ -69,6 +69,17 @@
         if(regions.length != 0){
           _this.id2Boundary[_this.cityInfo['regionName']] = regions;
         }
+//        if(_this.cityInfo.regionId != undefined){
+//          console.log('here', _this.cityInfo);
+//
+//
+//
+//          this.cityInfo.subRegion.forEach(r=>{
+//            let boundaryNodes = r['boundary'];
+//            regions.push(boundaryNodes);
+//            boundary.push(boundaryNodes)
+//          });
+//        }
         _this.updatePointCloud();
 
       });
@@ -266,6 +277,7 @@
           pipeService.emitUpdateAllResultData({
             'cityId': _this.cityInfo['id'],
             'data': [],
+            'regionId':_this.cityInfo['regionId'],
             'zoomLevel': zoomLevel});
         }else{
           if(zoomLevel >= 13){
@@ -284,6 +296,7 @@
                 current_points = _this.mapObj.worldToContaierPointsObj(data, _this.id2Boundary)
               pipeService.emitUpdateAllResultData({
                 'cityId': _this.cityInfo['id'],
+                'regionId':_this.cityInfo['regionId'],
                 'data': current_points,
                 'zoomLevel': zoomLevel});
             })
@@ -300,6 +313,7 @@
 
             pipeService.emitUpdateAllResultData({
               'cityId': _this.cityInfo['id'],
+              'regionId':_this.cityInfo['regionId'],
               'data': current_points,
               'zoomLevel': zoomLevel});
           }

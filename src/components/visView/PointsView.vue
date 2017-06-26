@@ -16,19 +16,20 @@
     },
     mounted(){
       let _this = this;
+      console.log('here');
       pipeService.onUpdateAllResultData(function(msg){
-        if(msg.cityId == _this.cityInfo.id){
+        if(msg.cityId == _this.cityInfo.id && msg.regionId == _this.cityInfo.regionId){
           _this.pointView.updatePointCloud(msg.data, msg.zoomLevel);
           ///
         }
       });
       pipeService.onCompMapZoomStart(function(msg){
-        if(msg.cityId == _this.cityInfo.id){
+        if(msg.cityId == _this.cityInfo.id && msg.regionId == _this.cityInfo.regionId){
           _this.pointView.updatePointCloud([]);
         }
       });
       pipeService.onCompMapDragStart(function(msg){
-        if(msg.cityId == _this.cityInfo.id){
+        if(msg.cityId == _this.cityInfo.id && msg.regionId == _this.cityInfo.regionId){
           _this.pointView.updatePointCloud([]);
         }
       });

@@ -8,27 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7b6eeeb-461b-475d-8653-5d15657878a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/DisplayContainer.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AnalysisView.vue" afterPath="$PROJECT_DIR$/src/components/AnalysisView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" afterPath="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" afterPath="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" afterPath="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" afterPath="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" afterPath="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetList.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" afterPath="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/PointsView.vue" afterPath="$PROJECT_DIR$/src/components/visView/PointsView.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" afterPath="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/DetailMap.js" afterPath="$PROJECT_DIR$/src/lib/DetailMap.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" afterPath="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" afterPath="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" afterPath="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/pipeService.js" afterPath="$PROJECT_DIR$/src/service/pipeService.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +32,8 @@
       <file leaf-file-name="ExploreSelection.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+            <state relative-caret-position="203">
+              <caret line="94" column="26" lean-forward="false" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#el-button#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#976#1027#0" expanded="true" />
@@ -61,8 +46,8 @@
       <file leaf-file-name="ComparisionContainer.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="68" column="9" lean-forward="true" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+            <state relative-caret-position="291">
+              <caret line="100" column="51" lean-forward="false" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
               <folding>
                 <element signature="e#563#611#0" expanded="true" />
               </folding>
@@ -73,24 +58,21 @@
       <file leaf-file-name="CompMapView.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3036">
-              <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+            <state relative-caret-position="324">
+              <caret line="42" column="32" lean-forward="false" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="32" />
               <folding>
-                <element signature="e#446#497#0" expanded="true" />
-                <element signature="e#7891#9867#0" expanded="false" />
+                <element signature="e#481#532#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <file leaf-file-name="PointsView.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/visView/PointsView.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="830">
-              <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-              <folding>
-                <element signature="e#939#983#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="242">
+              <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,38 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StreetList.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-              <folding>
-                <element signature="e#858#882#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StreetVis.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="85" column="3" lean-forward="false" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pipeService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="378">
-              <caret line="323" column="43" lean-forward="false" selection-start-line="323" selection-start-column="43" selection-end-line="323" selection-end-column="43" />
+              <caret line="335" column="29" lean-forward="false" selection-start-line="335" selection-start-column="4" selection-end-line="335" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -167,6 +122,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MulitExploration.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="386" column="27" lean-forward="false" selection-start-line="386" selection-start-column="27" selection-end-line="386" selection-end-column="27" />
+              <folding>
+                <element signature="e#2170#4812#0" expanded="false" />
+                <element signature="e#4869#5546#0" expanded="false" />
+                <element signature="e#5603#6296#0" expanded="false" />
+                <element signature="e#10571#10640#0" expanded="false" />
+                <element signature="e#11065#11379#0" expanded="false" />
+                <element signature="e#13393#13492#0" expanded="false" />
+                <element signature="e#15645#15772#0" expanded="false" />
+                <element signature="e#22568#23675#0" expanded="false" />
+                <element signature="e#23729#24074#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -179,12 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getBound</find>
-      <find>SelectedRegionByClick</find>
-      <find>CompMapControlLayer</find>
-      <find>ControlLayer</find>
-      <find>control-layer</find>
-      <find>pointer-events</find>
       <find>button</find>
       <find>isConVisActive</find>
       <find>bound</find>
@@ -194,21 +163,27 @@
       <find>dialog</find>
       <find>MULTIPLEREGIONSELECTED</find>
       <find>RegionMap</find>
-      <find>click</find>
       <find>select all</find>
       <find>compareStreet</find>
       <find>compareStreets</find>
-      <find>open</find>
       <find>Compare</find>
       <find>showModal</find>
-      <find>COMPARESTREETS</find>
       <find>top_con</find>
       <find>bottom_contaienr</find>
       <find>img-map-f</find>
-      <find>street-view</find>
       <find>modal-body-top</find>
       <find>onUpdateSelectedMapView</find>
+      <find>COMPARESTREETS</find>
+      <find>street-view</find>
+      <find>ids</find>
+      <find>SELECTREGIONFROMRANKING</find>
       <find>modal-container</find>
+      <find>click</find>
+      <find>open</find>
+      <find>UpdateAllResultData</find>
+      <find>SelectRegionFromRanking</find>
+      <find>object</find>
+      <find>id2Boundary</find>
     </findStrings>
     <replaceStrings>
       <replace>dimensionContainer</replace>
@@ -261,25 +236,25 @@
         <option value="$PROJECT_DIR$/src/components/Navigation.vue" />
         <option value="$PROJECT_DIR$/src/lib/statistics/DiversityChart.js" />
         <option value="$PROJECT_DIR$/src/lib/statistics/ScatterplotMatrix.js" />
-        <option value="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
         <option value="$PROJECT_DIR$/src/components/Selections/CitySelection.vue" />
-        <option value="$PROJECT_DIR$/src/components/visView/PointsView.vue" />
-        <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
         <option value="$PROJECT_DIR$/src/lib/DetailMap.js" />
         <option value="$PROJECT_DIR$/src/components/visView/ScatterBarChart.vue" />
         <option value="$PROJECT_DIR$/src/components/MapViews/NavMapView.vue" />
         <option value="$PROJECT_DIR$/src/components/DisplayContainer.vue" />
         <option value="$PROJECT_DIR$/src/components/CompMapControlLayer.vue" />
         <option value="$PROJECT_DIR$/src/components/MapViews/RegionMap.vue" />
-        <option value="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
         <option value="$PROJECT_DIR$/src/components/Selections/RegionSelection.vue" />
         <option value="$PROJECT_DIR$/src/components/RegionList/RegionList.vue" />
-        <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
-        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/StreetList.vue" />
         <option value="$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue" />
         <option value="$PROJECT_DIR$/src/components/AnalysisView.vue" />
+        <option value="$PROJECT_DIR$/src/service/pipeService.js" />
+        <option value="$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js" />
+        <option value="$PROJECT_DIR$/src/components/visView/PointsView.vue" />
+        <option value="$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue" />
+        <option value="$PROJECT_DIR$/src/components/MapViews/CompMapView.vue" />
+        <option value="$PROJECT_DIR$/src/components/ComparisionContainer.vue" />
       </list>
     </option>
   </component>
@@ -1060,25 +1035,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="644" column="0" lean-forward="false" selection-start-line="644" selection-start-column="0" selection-end-line="649" selection-end-column="0" />
-          <folding>
-            <element signature="e#2155#4797#0" expanded="false" />
-            <element signature="e#4854#5531#0" expanded="false" />
-            <element signature="e#5588#6281#0" expanded="false" />
-            <element signature="e#10556#10625#0" expanded="false" />
-            <element signature="e#11050#11364#0" expanded="false" />
-            <element signature="e#13230#13329#0" expanded="false" />
-            <element signature="e#15482#15609#0" expanded="false" />
-            <element signature="e#22405#23512#0" expanded="false" />
-            <element signature="e#23566#23911#0" expanded="false" />
-            <marker date="1498466757662" expanded="true" signature="11517:12330" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Selections/CitySelection.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1112,14 +1068,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="77" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/visView/PointsView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1254">
-          <caret line="58" column="4" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1186,7 +1134,7 @@
         <state relative-caret-position="600">
           <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
           <folding>
-            <element signature="e#71#119#0" expanded="true" />
+            <element signature="e#71#119#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1227,29 +1175,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#el-button#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#976#1027#0" expanded="true" />
-            <element signature="e#1712#2353#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3036">
-          <caret line="138" column="38" lean-forward="true" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
-          <folding>
-            <element signature="e#446#497#0" expanded="true" />
-            <element signature="e#7891#9867#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="830">
@@ -1268,14 +1193,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="323" column="43" lean-forward="false" selection-start-line="323" selection-start-column="43" selection-end-line="323" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Navigation.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1287,26 +1204,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding>
-            <element signature="e#858#882#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetVis.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="85" column="3" lean-forward="false" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
           <folding>
             <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/StreetVis/StreetList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="23" column="10" lean-forward="false" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+          <folding>
+            <element signature="e#858#882#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/MultiExploration/MulitExploration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="386" column="27" lean-forward="false" selection-start-line="386" selection-start-column="27" selection-end-line="386" selection-end-column="27" />
+          <folding>
+            <element signature="e#2170#4812#0" expanded="false" />
+            <element signature="e#4869#5546#0" expanded="false" />
+            <element signature="e#5603#6296#0" expanded="false" />
+            <element signature="e#10571#10640#0" expanded="false" />
+            <element signature="e#11065#11379#0" expanded="false" />
+            <element signature="e#13393#13492#0" expanded="false" />
+            <element signature="e#15645#15772#0" expanded="false" />
+            <element signature="e#22568#23675#0" expanded="false" />
+            <element signature="e#23729#24074#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/pipeService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="335" column="29" lean-forward="false" selection-start-line="335" selection-start-column="4" selection-end-line="335" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1320,10 +1263,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/visView/PointsView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Selections/ExploreSelection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="94" column="26" lean-forward="false" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#el-button#0;n#el-collapse#0;n#div#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#976#1027#0" expanded="true" />
+            <element signature="e#1712#2353#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MapViews/CompMapView.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="42" column="32" lean-forward="false" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="32" />
+          <folding>
+            <element signature="e#481#532#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/ComparisionContainer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="68" column="9" lean-forward="true" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
+        <state relative-caret-position="291">
+          <caret line="100" column="51" lean-forward="false" selection-start-line="100" selection-start-column="51" selection-end-line="100" selection-end-column="51" />
           <folding>
             <element signature="e#563#611#0" expanded="true" />
           </folding>

@@ -23,7 +23,7 @@ let MultiExploration = function(el, colorMap){
     'number': 0,
     'xIndex2Color':{},
     'maxSelectd': 2,
-
+    'raws': [],
     'extendYIndex': null
   };
   this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
@@ -382,6 +382,11 @@ MultiExploration.prototype.removeHoverHighlightRow = function(xIndex){
 MultiExploration.prototype.getSelectedIds = function(){
   return this.selected.ids;
 };
+
+MultiExploration.prototype.getSelectedRaws = function(){
+  return this.selected.raws;
+};
+
 MultiExploration.prototype.clickHighlightRow = function(xIndex){
   console.log('clickHighlightRow');
   let _this = this;
@@ -389,6 +394,7 @@ MultiExploration.prototype.clickHighlightRow = function(xIndex){
   this.selectedColor.forEach((d, i)=>{
     if(d.color == color){
       this.selected.ids[i] = this.bodyData[xIndex].id;
+      this.selected.raws[i] = this.bodyData[xIndex].raw;
     }
   });
 

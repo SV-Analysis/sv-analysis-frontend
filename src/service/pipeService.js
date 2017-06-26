@@ -33,7 +33,8 @@ var pipeService = new Vue({
     STREETVISHOVER: 'streetvis_hover',
     MULTIPLEREGIONSELECTED: 'multiple_region_selected',
     SELECTREGIONBYDRAG:'select_region_by_drag',
-    COMPARESTREETS: 'compare_streets'
+    COMPARESTREETS: 'compare_streets',
+    SELECTREGIONFROMRANKING: 'select_regions_from_ranking'
   },
 
   methods:{
@@ -46,6 +47,7 @@ var pipeService = new Vue({
       })
     },
     //------------------------------------------------------------
+    //This is for select cities
     emitUpdateSelectedMapView: function(msg){
       this.$emit(this.UPDATEMAPVIEWSELECTION, msg);
     },
@@ -323,6 +325,16 @@ var pipeService = new Vue({
     },
     onCompCurrentStreets: function(callback){
       this.$on(this.COMPARESTREETS,function(msg){
+        callback(msg);
+      })
+    },
+
+
+    emitSelectRegionFromRanking: function(msg){
+      this.$emit(this.SELECTREGIONFROMRANKING, msg);
+    },
+    onSelectRegionFromRanking: function(callback){
+      this.$on(this.SELECTREGIONFROMRANKING,function(msg){
         callback(msg);
       })
     },

@@ -77,11 +77,28 @@
         this.multiExploration = new MulitExploration(container, Config.svFeatures2Color);
         this.multiExploration.on('rowClick', function(row, sign){
           let ids = _this.multiExploration.getSelectedIds();
-          console.log('this', ids);
-          pipeService.emitUpdateSelectedMapView([]);
-          setTimeout(()=>{
-            pipeService.emitUpdateSelectedMapView(ids);
-          }, 200);
+          console.log('this', ids, row);
+          let type = row.raw.dataType == 'adregion'? 'adregion': 'city';
+          if(type == 'city'){
+            pipeService.emitUpdateSelectedMapView([]);
+            setTimeout(()=>{
+              pipeService.emitUpdateSelectedMapView(ids);
+            }, 200);
+          }else{
+
+            let raws = _this.multiExploration.getSelectedRaws()
+            console.log('raw', raws);
+            let confs = [];
+            raws.forEach(conf =>{
+              confs.push({
+                'city':conf.cityId,
+                'subRegion': conf.subRegion,
+                'regionId':conf.id
+              })
+            });
+            pipeService.emitSelectRegionFromRanking(confs);
+          }
+
 
           let record = row.raw;
           record.mSign = sign;
@@ -136,7 +153,7 @@
       });
 
       pipeService.onUpdateSelectItems((record)=>{
-        console.log('record', record);
+
         let streets = this.updateRegionOrStreet(record);
         this.streets = streets;
         if(this.multiExploration)
@@ -177,7 +194,7 @@
           this.streets = streets;
         });
         this.streets = streets;
-        console.log('all', this.streets);
+
         if(this.multiExploration)
           this.multiExploration.update(this.streets);
       });

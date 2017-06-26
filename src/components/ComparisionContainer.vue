@@ -59,13 +59,13 @@
     mounted(){
       let _this = this;
       pipeService.onUpdateSelectedMapView(function(city_id_arr){
-        console.log('city_id_arr', city_id_arr);
+
         _this.cities = [];
         for(var i = 0, ilen = city_id_arr.length; i < ilen; i++){
           let city_id = city_id_arr[i];
           _this.cities.push(_this.candidates[city_id]);
         }
-        console.log('cities', _this.cities);
+
       });
       pipeService.onDisplayPointCloud(function(msg){
         _this.cities.forEach(function(cityObj){
@@ -89,6 +89,19 @@
             cityObj['isConVisActive'] = 'none';
           }
         })
+      });
+      pipeService.onSelectRegionFromRanking(function(confs){
+        _this.cities = [];
+        let candidates = Object.assign({}, _this.candidates);
+        for(var i = 0, ilen = confs.length; i < ilen; i++){
+          let city_id = confs[i].city;
+          let candidate = Object.assign({}, _this.candidates[city_id])
+
+          candidate.regionId = confs[i].regionId;
+          candidate.subRegion = confs[i].subRegion;
+          _this.cities.push(candidate);
+        }
+
       });
     },
     created(){
