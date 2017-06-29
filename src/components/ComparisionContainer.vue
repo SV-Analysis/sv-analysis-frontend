@@ -34,7 +34,7 @@
             'isConVisActive': 'none'},
           'singapore': {
             'name': 'Singapore',
-            'gps':[1.3149014, 103.7769792],
+            'gps':[1.3149014, 103.8769792],
             'id': 'singapore',
             'bound': null,
             'isActive': 'contaienr-display',
@@ -48,7 +48,7 @@
             'isConVisActive': 'none'},
           'london': {
             'name': 'London',
-            'gps':[51.528308,-0.3817765],
+            'gps':[51.528308,-0.1517765],
             'id': 'london',
             'bound': null,
             'isActive': 'contaienr-display',
@@ -90,19 +90,19 @@
           }
         })
       });
-      pipeService.onSelectRegionFromRanking(function(confs){
-        _this.cities = [];
-        let candidates = Object.assign({}, _this.candidates);
-        for(var i = 0, ilen = confs.length; i < ilen; i++){
-          let city_id = confs[i].city;
-          let candidate = Object.assign({}, _this.candidates[city_id])
-
-          candidate.regionId = confs[i].regionId;
-          candidate.subRegion = confs[i].subRegion;
-          _this.cities.push(candidate);
-        }
-
-      });
+//      pipeService.onSelectRegionFromRanking(function(confs){
+//        _this.cities = [];
+//        let candidates = Object.assign({}, _this.candidates);
+//        for(var i = 0, ilen = confs.length; i < ilen; i++){
+//          let city_id = confs[i].city;
+//          let candidate = Object.assign({}, _this.candidates[city_id])
+//
+//          candidate.regionId = confs[i].regionId;
+//          candidate.subRegion = confs[i].subRegion;
+//          _this.cities.push(candidate);
+//        }
+//
+//      });
     },
     created(){
       let _this = this;

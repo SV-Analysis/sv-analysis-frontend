@@ -26,7 +26,7 @@ DetailMap.prototype.init = function(){
 
   this.map = L.map(this.$el, {
     center: this.cityInfo.gps,
-    zoom: 9,
+    zoom: 10,
     layers: [this.grayscaleDark, this.cities],
     zoomControl: false,
     maxZoom: 18,

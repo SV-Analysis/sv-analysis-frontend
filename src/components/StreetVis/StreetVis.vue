@@ -118,7 +118,7 @@
 
   .img-map-container{
     position: relative;
-    height: 45%;
+    height: 49%;
     /*border-width: 1px;*/
     /*border-style: solid;*/
     /*border-color: #9ea0ff;*/

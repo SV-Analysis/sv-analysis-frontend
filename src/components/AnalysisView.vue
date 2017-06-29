@@ -4,26 +4,30 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <!--<div class="">-->
-            <!--<button class="modal-default-button" @click="$emit('close')">-->
-            <!--X-->
-            <!--</button>-->
+          <!--<button class="modal-default-button" @click="$emit('close')">-->
+          <!--X-->
+          <!--</button>-->
           <!--</div>-->
           <div class="modal-body-top">
+
+
+
             <div class="ui-row modal-body">
-              <div class="col-sm-10 col-md-10 col-lg-10 vis-container" >
-                <StreetVis
-                  v-bind:selectItems="selectItems"
-                ></StreetVis>
-              </div>
-
-
-              <div class="col-sm-2 col-md-2 col-lg-2 " >
+              <div class="col-sm-3 col-md-3 col-lg-3 streetlist" >
                 <StreetList v-bind:selectItems="selectItems">
                   <el-button @click="$emit('close')">
                     Close
                   </el-button>
                 </StreetList>
               </div>
+
+              <div class="col-sm-9 col-md-9 col-lg-9 vis-container" >
+                <StreetVis
+                  v-bind:selectItems="selectItems"
+                ></StreetVis>
+              </div>
+
+
 
             </div>
           </div>
@@ -102,11 +106,11 @@
   }
 
   .modal-container {
-    width: 80%;
+    width: 96%;
     height: 95%;
     margin: 0px auto;
     padding: 20px 30px;
-    background-color: #fff;
+
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
@@ -121,16 +125,23 @@
 
   }
   .modal-body-top{
-    height: 115%;
+    height: 100%;
     width: 100%
   }
   .modal-body {
     /*margin: 20px 0;*/
-    height: 90%;
+    height: 100%;
     /*background-color: #5bc0de;*/
     background: rgba(211,211,211, 0.0);
   }
-
+  .streetlist{
+    background-color: #fff;
+    height: 100%;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+  }
   .modal-default-button {
     /*float: right;*/
   }

@@ -123,7 +123,10 @@
         this.showBadge(records.length + " regions selected", 500)
       });
       pipeService.onSelectRegionByDrag(msg=>{
-        this.showBadge(1 + " region selected", 500)
+        this.showBadge(1 + " region selected", 500);
+      });
+      pipeService.onAllCitiesSelected(()=>{
+        this.showBadge(4 + " cities selected", 500);
       });
 
       setTimeout(()=>{
@@ -132,8 +135,8 @@
         let width = node.clientWidth;
         this.badge = d3.select(".selfBadge").attr('left', (width  / 2) + 'px').text('wakaka');
 
-        this.showBadge("4 cities selected", 1000);
-      }, 4000);
+//        this.showBadge("4 cities selected", 1000);
+      }, 1000);
 
     },
     computed:{

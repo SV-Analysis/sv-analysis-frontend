@@ -304,7 +304,8 @@
             console.log('zoomLevel', zoomLevel);
             let level = _this.mapObj.getZoomLevel();
             let _temp_points = _this.mapObj.filterPointsArrInBounds(_this.points_world);
-//            _temp_points = _this.generateSample(_temp_points,14 - level);
+            console.log('points ', _temp_points.length)
+            _temp_points = _this.generateSample(_temp_points,16 - level);
             let current_points = null;
             if(_this.regionSign == 'city')
               current_points = _this.mapObj.worldToContaierPointsArr(_temp_points);

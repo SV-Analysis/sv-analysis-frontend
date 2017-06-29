@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div style="width:100%">
-
-    </div>
     <div class="table-container">
       <table class="street-table">
         <!--<col width="16.67%">-->

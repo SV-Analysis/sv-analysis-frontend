@@ -138,8 +138,8 @@ ScatterPlotMatrix.prototype.draw = function(dataList){
   if(dataList.length > 0){
     legendsContainer.append('text')
       .text(function(){
-        if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
-        else return 'Type: Street'
+        // if(dataList[0]['type'] == 'region') return 'Type: Administrative region';
+        // else return 'Type: Street'
       })
       .attr('x', 22).attr('y', _this.config.margin.height - 80);
   }

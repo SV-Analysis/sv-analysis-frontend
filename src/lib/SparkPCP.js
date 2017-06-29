@@ -12,7 +12,6 @@ let featureMap = {
 };
 
 
-
 let SparkPCP = function(el, attrs, data, featureColor){
   this.selectedColor = [{'color': '#df65b0',  'used': false}, {'color': '#2b8cbe', 'used': false}];
   d3.select(this.$el).selectAll('g').remove();
@@ -21,7 +20,7 @@ let SparkPCP = function(el, attrs, data, featureColor){
   this.height = el.clientHeight;
   this.$el = el;
 
-  this.attrs = attrs;
+  this.attrs = ['green', 'sky', 'building', 'road', 'car', 'others'];
   this.data = [data[0]['record']['aggregatedImages'],data[1]['record']['aggregatedImages']]; // Image list
   this.barNumber = 40;
   this.svFeatures2Color = featureColor;
@@ -75,7 +74,7 @@ SparkPCP.prototype.initData = function(attrs){
 SparkPCP.prototype.initBarData = function(){
   let barNumber = this.barNumber;
   let barR = Math.floor(100 / barNumber);
-  let features = this.svFeatures2Color['allFeatures'];
+  let features = this.attrs;
   let dataMap = {};
   features.forEach((attr, i)=>{
     let arr1 = [];
@@ -92,7 +91,9 @@ SparkPCP.prototype.initBarData = function(){
     dataList.forEach((d, j)=>{
       let attrObj = d.attrObj;
       features.forEach(attr=>{
-        let index = Math.floor(attrObj[attr] / barR);
+        let value = attrObj[attr] >50 ? 49.9: attrObj[attr]
+        let index = Math.floor(value / barR);
+
         maxIndex = maxIndex < index? index: maxIndex
         dataMap[attr][i][index] += 1;
       })
@@ -126,7 +127,17 @@ SparkPCP.prototype.initXScale = function(){
   let middleXScale = d3.scalePoint().range([middleLeft + middleMargin, middleRight - middleMargin]).domain(this.attrs);
 
   this.middleXScale = middleXScale;
-  this.middleYScale = d3.scaleLinear().domain([0, this.largestRatio]).range([this.height - this.margin.bottom, this.margin.top]);
+
+  // this.middleYScale = d3.scaleLinear().domain([0, this.largestRatio]).range([this.height - this.margin.bottom, this.margin.top]);
+
+  this.middleYScaleOriginal = d3.scaleLinear().domain([0, 50]).range([this.height - this.margin.bottom, this.margin.top]);
+
+  this.middleYScale = function(d){
+    return d < 50? this.middleYScaleOriginal(d): this.middleYScaleOriginal(50);
+  }
+
+
+
   this.leftXScale = function(attr, d){
     return d == undefined? middleLeft: d.raw.scalePoint.x;
   };
@@ -172,7 +183,7 @@ SparkPCP.prototype.drawAxis = function(){
     .attr("class", "axis");
   axisContainer.each(function(d){
     let _container = d3.select(this);
-    let t = _container.call(axis.scale(_this.middleYScale));
+    let t = _container.call(axis.scale(_this.middleYScaleOriginal));
     let textContainer = _container.append('g').attr('transform', 'translate(0,'+ (_this.height - _this.margin.top) + ')')
     let rectWidth = 50;
     let rectHeight = 20;

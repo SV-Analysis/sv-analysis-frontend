@@ -4,7 +4,7 @@
 import {Unit} from "../../../src/lib/MultiExploration/BasicElements.js";
 import * as d3 from "d3";
 
-let nameMap = {
+let cityNameMap = {
   'london': 'LON',
   'singapore': 'SIN',
   'nyc': 'NYC',
@@ -552,7 +552,7 @@ MultiExploration.prototype.renderLabel = function(el, d){
   let yIndex = d['yIndex'];
   let xIndex = d['xIndex'];
   let value = d['value'];
-  let label = nameMap[value] == undefined? value : nameMap[value];
+  let label = cityNameMap[value] == undefined? value : cityNameMap[value];
   let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft)
@@ -560,13 +560,18 @@ MultiExploration.prototype.renderLabel = function(el, d){
 
 };
 
+MultiExploration.prototype.getLabelText = function(d){
+  let value = d.value;
+  let label = cityNameMap[value] != undefined? cityNameMap[value]: cityNameMap[d.raw.city] + ' '+ value;
+  return label;
+};
 MultiExploration.prototype.renderKeyLabel = function(el, d){
   let unitConfig = this.unitConfig;
   let yIndex = d['yIndex'];
   let xIndex = d['xIndex'];
   let value = d['value'];
-  let label = nameMap[value] == undefined? value : nameMap[value];
-  label = 'HK ' + label;
+  let label = this.getLabelText(d);
+
   let text = el.append('text').text(label);
   let conf = text.node().getBBox();
   text.attr('x', unitConfig.renderLeft + unitConfig.signBoxWidth + 2)

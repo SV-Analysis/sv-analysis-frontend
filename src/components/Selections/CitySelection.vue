@@ -11,6 +11,7 @@
         </div>
         <NavMapView v-bind:cityInfo="cityInfo.config"></NavMapView>
       </div>
+      <el-button @click="selectAllCities" size="small" style="left:10px;  margin-top: 5px; margin-bottom: 5px" >Select All</el-button>
     </div>
   </div>
 </template>
@@ -93,6 +94,9 @@
       });
     },
     methods:{
+      selectAllCities(){
+        pipeService.emitAllCitiesSelected();
+      },
       generateAndSendSelectedData(){
         let _this = this;
         let sendData = [];
@@ -142,6 +146,7 @@
     max-width: 100%;
     max-height: 80%;
     height: 80%;
+    width: 100%
   }
   .navmap-container{
     margin-left: 20px;

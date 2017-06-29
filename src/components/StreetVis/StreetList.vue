@@ -95,14 +95,14 @@
   .street-list-container{
     margin-top: 0px;
     width: 100%;
-    height: 90%;
+    height: 120%;
     max-height: 820px;
 
   }
   .street-list{
-    margin-top: 0px;
+    margin-top: 20px;
     width: 100%;
-    height: 90%;
+    height: 120%;
     max-height: 800px;
     overflow-y: auto;
     margin-bottom: 10px;

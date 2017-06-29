@@ -104,7 +104,7 @@ SvgImgLayer.prototype.generateOffset = function(){
     let streetVectorY = this.ly - this.fy;
     let streetVectorX = this.lx - this.fx;
     let renderRatio = streetVectorX == 0? 0 : - streetVectorY / streetVectorX;
-    let distance = this.$el.clientHeight / 5;
+    let distance = this.$el.clientHeight / 15;
     this.dy = Math.sqrt(distance * distance / (1 + renderRatio * renderRatio));
     this.dx = this.dy * renderRatio;
   }

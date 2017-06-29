@@ -34,7 +34,8 @@ var pipeService = new Vue({
     MULTIPLEREGIONSELECTED: 'multiple_region_selected',
     SELECTREGIONBYDRAG:'select_region_by_drag',
     COMPARESTREETS: 'compare_streets',
-    SELECTREGIONFROMRANKING: 'select_regions_from_ranking'
+    SELECTREGIONFROMRANKING: 'select_regions_from_ranking',
+    ALLCITIESSELECTED: 'all_cities_selected'
   },
 
   methods:{
@@ -335,6 +336,15 @@ var pipeService = new Vue({
     },
     onSelectRegionFromRanking: function(callback){
       this.$on(this.SELECTREGIONFROMRANKING,function(msg){
+        callback(msg);
+      })
+    },
+
+    emitAllCitiesSelected: function(msg){
+      this.$emit(this.ALLCITIESSELECTED, msg);
+    },
+    onAllCitiesSelected: function(callback){
+      this.$on(this.ALLCITIESSELECTED,function(msg){
         callback(msg);
       })
     },
