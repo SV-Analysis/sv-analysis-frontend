@@ -7,7 +7,7 @@
     </transition>
 
     <!--<div class="selfBadge" id="selfBadge">3</div>-->
-    <el-tabs v-model="activeName" @tab-click="tabClicked">
+    <el-tabs v-model="activeName" @tab-click="tabClicked" style="height: 100%;">
 
       <el-tab-pane label="City" name="city">
         <CitySelection></CitySelection>
@@ -16,11 +16,10 @@
       <el-tab-pane label="Region" name="region" >
         <RegionSelection :selectIdMap="selectIdMap"> </RegionSelection>
       </el-tab-pane>
-      <el-tab-pane label="Street" name="street">
+      <el-tab-pane label="Street" name="street" style = "height:900px; overflow-y: auto;">
         <StreetSelection :selectIdMap="selectIdMap"> </StreetSelection>
       </el-tab-pane>
       <el-tab-pane label="Ranking" name="explore">
-
         <ExploreSelection> </ExploreSelection>
       </el-tab-pane>
     </el-tabs>
@@ -410,7 +409,6 @@
   .region-list{
     height:100%;
     width: 98%;
-    /*overflow-y: auto;*/
   }
   /* css for the table*/
   ul.pagination {
